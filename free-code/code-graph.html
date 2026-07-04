@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Code Graph — free-code</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+    <link rel="stylesheet" href="../assets/project-nav.css" />
+</head>
+  <body>
+  <div id="portfolio-back-nav"><a class="back-link" href="../index.html">← Portfolio</a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span></div>
+    <div class="doc-root">
+      <header class="site-shell-header" role="banner">
+        <div class="site-shell-inner">
+          <a class="site-brand" href="index.html">
+            <span class="site-brand-angles" aria-hidden="true">&lt;</span>
+            <span>free-code</span>
+            <span class="site-brand-angles" aria-hidden="true">&gt;</span>
+          </a>
+          <div class="site-header-actions">
+            <button type="button" class="theme-toggle" id="doc-theme-toggle" aria-label="Color theme">
+              <span class="theme-toggle-label" id="doc-theme-label">System</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="container">
+        <header class="hero">
+          <h1 class="brand">
+            <span class="angle" aria-hidden="true">&lt;</span>
+            <span class="name">free-code</span>
+            <span class="angle" aria-hidden="true">&gt;</span>
+          </h1>
+          <p class="tagline">
+            <span class="prompt" aria-hidden="true">// </span>
+            Code Graph — local symbol index and call-graph navigation.
+          </p>
+
+          <nav class="nav" aria-label="Primary">
+            <a href="index.html">[home]</a>
+            <a href="installation.html">[installation]</a>
+            <a href="webhooks.html">[webhooks]</a>
+            <a href="rag.html">[rag]</a>
+            <a href="code-graph.html" aria-current="page">[code graph]</a>
+            <a href="mcp.html">[mcp]</a>
+            <a href="capabilities.html">[capabilities]</a>
+            <a href="commands.html">[commands]</a>
+            <a href="models.html">[models]</a>
+          </nav>
+        </header>
+
+        <!-- What it is -->
+        <section class="card" aria-labelledby="cg-what">
+          <div class="card-header">
+            <h2 id="cg-what">What is the code graph?</h2>
+            <p>A local, queryable map of every symbol and call edge in your codebase.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              The code graph indexes every TypeScript and JavaScript file in your project. It
+              extracts all symbols — functions, classes, methods, interfaces, types, variables,
+              enums — and records which symbol calls which. The result is stored in
+              <code>.code-graph/</code> at the project root as a set of compact JSON files.
+            </p>
+
+            <p>
+              The agent reads the index in milliseconds. Instead of blindly opening files to find
+              a function definition, it asks the code graph. Instead of grepping for callers, it
+              queries the call edges. The index gives the agent a <em>structural understanding</em>
+              of your project from the very first query.
+            </p>
+
+            <h3>What it indexes</h3>
+            <ul>
+              <li>Functions (top-level and nested)</li>
+              <li>Classes and their methods</li>
+              <li>Interfaces, type aliases, enums</li>
+              <li>Variables and constants</li>
+              <li>Call edges between symbols (who calls whom)</li>
+              <li>Import edges (which file imports which)</li>
+            </ul>
+
+            <h3>Supported languages</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Language</th><th>Extensions</th><th>Symbols</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td>TypeScript / JavaScript</td>
+                    <td>
+                      <code>.ts</code> <code>.tsx</code> <code>.js</code> <code>.jsx</code>
+                      <code>.mts</code> <code>.cts</code> <code>.mjs</code> <code>.cjs</code>
+                    </td>
+                    <td>functions, classes, methods, interfaces, types, enums, variables</td>
+                  </tr>
+                  <tr>
+                    <td>Python</td>
+                    <td><code>.py</code></td>
+                    <td>classes, functions, methods, module-level variables</td>
+                  </tr>
+                  <tr>
+                    <td>Java</td>
+                    <td><code>.java</code></td>
+                    <td>classes, interfaces, enums, methods (incl. abstract)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              TypeScript and JavaScript are parsed with the TypeScript compiler API. Python
+              (indentation-based) and Java (brace-based) use lightweight heuristic extractors —
+              no extra dependencies, no build toolchain.
+            </p>
+
+            <div class="callout info">
+              <strong>Incremental by default</strong><br />
+              Only files that have changed since the last index run are re-parsed.
+              On a large project, incremental updates take a fraction of a second.
+            </div>
+          </div>
+        </section>
+
+        <!-- Video -->
+        <section class="card" aria-labelledby="cg-video">
+          <div class="card-header">
+            <h2 id="cg-video">Watch: Code Graph in free-code</h2>
+            <p>See the symbol index and call-graph navigation in action.</p>
+          </div>
+          <div class="card-body">
+            <div class="video-embed">
+              <iframe
+                src="https://www.youtube.com/embed/Xlya3JARJFw"
+                title="free-code — Code Graph"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </section>
+
+        <!-- How it works -->
+        <section class="card" aria-labelledby="cg-how">
+          <div class="card-header">
+            <h2 id="cg-how">How it works</h2>
+            <p>From source files to a structural index the agent can query.</p>
+          </div>
+          <div class="card-body">
+            <ol>
+              <li>
+                <strong>Parse.</strong> Each source file is parsed into a syntax tree. free-code walks
+                the tree and records every symbol declaration with its kind, file path, and start/end
+                line.
+              </li>
+              <li>
+                <strong>Resolve edges.</strong> Call expressions become <em>call edges</em>
+                (<code>symbol → name</code>) and import statements become <em>import edges</em>
+                (<code>file → file</code>). Together these form the graph.
+              </li>
+              <li>
+                <strong>Hash &amp; store.</strong> Each file is hashed so the next run can skip
+                anything unchanged. Symbols, edges, hashes, and run metadata are written to
+                <code>.code-graph/</code> as JSON.
+              </li>
+              <li>
+                <strong>Query.</strong> The agent (or you, via slash commands) reads the JSON directly —
+                no language server, no compilation, no network. Lookups are near-instant.
+              </li>
+            </ol>
+
+            <div class="callout tip">
+              <strong>One index per repository</strong><br />
+              The graph lives next to the code it describes, at the root of each repo. Open a
+              different project and free-code uses that project's own <code>.code-graph/</code>.
+            </div>
+          </div>
+        </section>
+
+        <!-- Why it matters -->
+        <section class="card" aria-labelledby="cg-why">
+          <div class="card-header">
+            <h2 id="cg-why">Why it's a standout feature</h2>
+            <p>Structural understanding that is local, fast, and free.</p>
+          </div>
+          <div class="card-body">
+            <div class="two-col">
+              <div>
+                <h3>Fewer wasted tokens</h3>
+                <p>
+                  Without a code graph, an agent finds a function by reading whole files into its
+                  context — burning tokens on code it doesn't need. The code graph returns just the
+                  symbol and its callees, so prompts stay small and iterations stay fast.
+                </p>
+                <h3>Real impact analysis</h3>
+                <p>
+                  Before changing a function, ask the graph who calls it. <code>/codeGraph-callers</code>
+                  turns a guess (&ldquo;is this used anywhere?&rdquo;) into a concrete list of call
+                  sites — the foundation for safe refactors.
+                </p>
+              </div>
+              <div>
+                <h3>Local and private</h3>
+                <p>
+                  The index never leaves your machine. No cloud indexing of your repository, no
+                  upload of your source. It is just JSON files under your project root that you
+                  can inspect, diff, or delete at any time.
+                </p>
+                <h3>Zero-config and instant</h3>
+                <p>
+                  No language server to configure, no build step, no daemon. Indexing is incremental
+                  and stale files are refreshed automatically in the background when a session starts.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Agent tools -->
+        <section class="card" aria-labelledby="cg-tools">
+          <div class="card-header">
+            <h2 id="cg-tools">Agent tools</h2>
+            <p>Four tools available automatically in every session once <code>@free/code-graph</code> is installed.</p>
+          </div>
+          <div class="card-body">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Tool</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><code>code_index</code></td>
+                    <td>
+                      Build or incrementally update the project index. Accepts an optional
+                      <code>force</code> flag to re-parse all files from scratch.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>code_symbols</code></td>
+                    <td>
+                      Case-insensitive substring search by name or qualified name.
+                      Accepts an optional <code>kind</code> filter:
+                      <code>function</code> · <code>class</code> · <code>method</code> ·
+                      <code>interface</code> · <code>type</code> · <code>variable</code> · <code>enum</code>.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>code_callers</code></td>
+                    <td>
+                      Returns every call site that invokes a named symbol, with file path and
+                      line number. Useful for impact analysis and refactor planning.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>code_context</code></td>
+                    <td>
+                      Returns the full source of a symbol plus its direct callees. Validates
+                      that the file has not changed since the last index run; warns if stale.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Commands per repository -->
+        <section class="card" aria-labelledby="cg-perrepo">
+          <div class="card-header">
+            <h2 id="cg-perrepo">Commands you can run on any repository</h2>
+            <p>The same four slash commands work in every project you open with free-code.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              Each repository gets its own code graph. Open a project, build the index once, and these
+              commands operate against <em>that</em> repo's symbols and call edges:
+            </p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><code>/codeGraph-index</code></td>
+                    <td>Build or update the repository's index.</td>
+                  </tr>
+                  <tr>
+                    <td><code>/codeGraph-symbols</code></td>
+                    <td>Search the repository's symbols by name.</td>
+                  </tr>
+                  <tr>
+                    <td><code>/codeGraph-callers</code></td>
+                    <td>List every call site of a function or method in the repository.</td>
+                  </tr>
+                  <tr>
+                    <td><code>/codeGraph-context</code></td>
+                    <td>Print a symbol's full source plus its direct callees.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="callout info">
+              <strong>Per-project, automatically</strong><br />
+              There is nothing to point at a repo — free-code reads and writes the
+              <code>.code-graph/</code> folder at the root of whichever project the session is running in.
+            </div>
+          </div>
+        </section>
+
+        <!-- Slash commands -->
+        <section class="card" aria-labelledby="cg-commands">
+          <div class="card-header">
+            <h2 id="cg-commands">Using the commands</h2>
+            <p>Run code graph operations directly from the editor input.</p>
+          </div>
+          <div class="card-body">
+
+            <h3><code>/codeGraph-index [--force]</code></h3>
+            <p>
+              Indexes the project and writes the result to <code>.code-graph/</code>.
+              Without <code>--force</code>, only changed files are re-indexed.
+            </p>
+            <pre><code>/codeGraph-index           # incremental — only changed files
+/codeGraph-index --force   # re-index everything from scratch</code></pre>
+            <p>
+              <strong>When to run:</strong> once after cloning, and with <code>--force</code> after
+              large refactors. Day-to-day, stale files are re-indexed automatically in the background
+              on session startup.
+            </p>
+
+            <hr />
+
+            <h3><code>/codeGraph-symbols &lt;query&gt; [--kind &lt;type&gt;] [--limit &lt;n&gt;]</code></h3>
+            <p>
+              Searches for symbols whose name or qualified name contains the query string
+              (case-insensitive, substring match).
+            </p>
+            <pre><code>/codeGraph-symbols parseArgs
+/codeGraph-symbols handle --kind function
+/codeGraph-symbols User --kind class --limit 10</code></pre>
+
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Kind</th><th>Matches</th></tr></thead>
+                <tbody>
+                  <tr><td><code>function</code></td><td>Top-level and nested functions</td></tr>
+                  <tr><td><code>class</code></td><td>Class declarations</td></tr>
+                  <tr><td><code>method</code></td><td>Class methods</td></tr>
+                  <tr><td><code>interface</code></td><td>Interface declarations</td></tr>
+                  <tr><td><code>type</code></td><td>Type aliases</td></tr>
+                  <tr><td><code>variable</code></td><td>Variables and constants</td></tr>
+                  <tr><td><code>enum</code></td><td>Enum declarations</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <hr />
+
+            <h3><code>/codeGraph-callers &lt;name&gt; [--limit &lt;n&gt;]</code></h3>
+            <p>
+              Finds all locations in the codebase that call a function or method by name.
+              Returns file path, line number, and the enclosing symbol for each call site.
+            </p>
+            <pre><code>/codeGraph-callers syncDefaultExtensions
+/codeGraph-callers render --limit 20</code></pre>
+
+            <div class="callout warning">
+              <strong>Note on common names</strong><br />
+              Names like <code>save</code>, <code>render</code>, or <code>init</code> may match
+              callers from unrelated classes. Use <code>/codeGraph-context</code> to inspect a caller
+              before trusting the result.
+            </div>
+
+            <hr />
+
+            <h3><code>/codeGraph-context &lt;name&gt; [--file &lt;partial-path&gt;]</code></h3>
+            <p>
+              Returns the full source of a symbol and a list of its direct callees.
+              Validates that the file has not been modified since the last index.
+            </p>
+            <pre><code>/codeGraph-context createAgentSessionServices
+/codeGraph-context load --file resource-loader</code></pre>
+            <p>
+              When multiple symbols share the same name, use <code>--file</code> to pick the
+              right one by matching a partial file path.
+            </p>
+          </div>
+        </section>
+
+        <!-- Typical workflow -->
+        <section class="card" aria-labelledby="cg-workflow">
+          <div class="card-header">
+            <h2 id="cg-workflow">Typical workflow</h2>
+            <p>How to use the code graph in a real session.</p>
+          </div>
+          <div class="card-body">
+            <h3>Starting on a new project</h3>
+            <pre><code>/codeGraph-index                     # 1. Index the project once
+
+/codeGraph-symbols parseArgs         # 2. Find a symbol by name
+/codeGraph-callers parseArgs         # 3. See everywhere it is called
+/codeGraph-context parseArgs         # 4. Read its full source + callees</code></pre>
+
+            <h3>After a large refactor</h3>
+            <pre><code>/codeGraph-index --force             # Re-index all files from scratch</code></pre>
+
+            <h3>Automatic background re-indexing</h3>
+            <p>
+              On session startup, free-code checks whether any indexed source files
+              (<code>.ts</code> / <code>.js</code> / <code>.py</code> / <code>.java</code> and
+              friends) have been modified since the last index. If so, it <strong>automatically
+              re-indexes in the background</strong> — no manual action needed. You will see two
+              notifications:
+            </p>
+            <pre><code>⚠️ Code graph index is stale: 5 file(s) modified since last index. Re-indexing in background…
+
+✓ Code graph updated: 3 file(s) re-indexed in 420ms</code></pre>
+            <p>
+              The re-index is incremental (only changed files). Use <code>/codeGraph-index --force</code>
+              after large refactors to re-parse everything from scratch.
+            </p>
+          </div>
+        </section>
+
+        <!-- Installation -->
+        <section class="card" aria-labelledby="cg-install">
+          <div class="card-header">
+            <h2 id="cg-install">Installation</h2>
+            <p>The code graph is a separate package installed once at the global level.</p>
+          </div>
+          <div class="card-body">
+            <pre><code># From the repository root
+npm install -g ./packages/code-graph</code></pre>
+
+            <p>
+              Once installed, the four code graph tools (<code>code_index</code>,
+              <code>code_symbols</code>, <code>code_callers</code>, <code>code_context</code>)
+              and their <code>/codeGraph-*</code> slash commands appear automatically in every
+              free-code session. No configuration needed.
+            </p>
+          </div>
+        </section>
+
+        <!-- Generated files -->
+        <section class="card" aria-labelledby="cg-files">
+          <div class="card-header">
+            <h2 id="cg-files">Generated files</h2>
+            <p>The index is stored in <code>.code-graph/</code> at the project root.</p>
+          </div>
+          <div class="card-body">
+            <pre><code>.code-graph/
+  meta.json      # timestamp of the last index run and aggregate stats
+  files.json     # indexed files with hashes and mtimes
+  symbols.json   # all symbols: name, kind, file, start/end line
+  edges.json     # call edges: from symbol → to name</code></pre>
+
+            <div class="callout tip">
+              <strong>Add to .gitignore</strong><br />
+              The index is regenerated on demand and does not need to be committed.
+              Add <code>.code-graph/</code> to your <code>.gitignore</code>.
+            </div>
+          </div>
+        </section>
+
+        <p class="footer">
+          <a href="capabilities.html">All capabilities →</a> &nbsp;·&nbsp;
+          <a href="commands.html">Commands →</a> &nbsp;·&nbsp;
+          <a href="installation.html">Installation →</a>
+        </p>
+        <p class="footer-credit">Powered by CX — developed by Pablo Castañeda</p>
+      </div>
+    </div>
+    <script src="assets/theme.js" defer></script>
+  </body>
+</html>

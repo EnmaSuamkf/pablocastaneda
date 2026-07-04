@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pablo Castañeda — Developer Portfolio</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#home">Pablo Castañeda</a>
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#about" class="nav-link">About Me</a></li>
+        <li><a href="#wip" class="nav-link">WIP</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HOME -->
+  <section class="section hero-section" id="home">
+    <div class="container">
+      <div class="hero">
+        <div class="hero-eyebrow">Software Developer</div>
+        <h1 class="hero-title">Building tools that<br><span class="accent">make developers faster.</span></h1>
+        <p class="hero-subtitle">
+          I'm Pablo Castañeda — I build AI-powered developer tools, automation systems,
+          and open-source infrastructure. This is a living record of what I've shipped,
+          what I'm learning, and what's coming next.
+        </p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">See my projects</a>
+          <a href="#about" class="btn btn-ghost">About me</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number">3</span>
+            <span class="stat-label">Open source projects</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">AI</span>
+            <span class="stat-label">Focused</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">∞</span>
+            <span class="stat-label">More coming</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">// shipped</span>
+        <h2 class="section-title">Projects</h2>
+        <p class="section-subtitle">A curated collection of the things I've built — with context on what they solve, how they work, and why they matter.</p>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- free-code -->
+        <article class="project-card" id="project-free-code">
+          <div class="project-header">
+            <div class="project-tag">Open Source · AI Tooling</div>
+            <h3 class="project-title">free-code</h3>
+            <p class="project-tagline">A local-first AI coding agent for the terminal, VS Code/Cursor, and macOS.</p>
+          </div>
+          <div class="project-body">
+            <div class="project-block">
+              <h4 class="block-label">What</h4>
+              <p>free-code is a full-featured AI coding agent that reads and edits files, runs shell commands, browses the web, and calls MCP servers — all from inside your editor or terminal. It supports multiple AI providers (Anthropic, Google Vertex, Ollama, LM Studio, and more) and keeps everything local by default.</p>
+            </div>
+            <div class="project-block">
+              <h4 class="block-label">How</h4>
+              <p>Built as a TypeScript monorepo with a plugin architecture. The agent ships with a multi-language code graph for deep code understanding, a local RAG knowledge base powered by vector embeddings, a built-in browser automation layer, and a layered extension system — skills, slash commands, and MCP tool integration.</p>
+            </div>
+            <div class="project-block">
+              <h4 class="block-label">Impact</h4>
+              <p>Gives developers a privacy-first alternative to cloud-only coding assistants. By running entirely on the developer's machine, it eliminates concerns about sending proprietary code to third-party APIs while still delivering the productivity gains of AI pair programming.</p>
+            </div>
+            <div class="project-tech">
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">VS Code Extension</span>
+              <span class="tech-tag">LLM</span>
+              <span class="tech-tag">RAG</span>
+              <span class="tech-tag">MCP</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/EnmaSuamkf/free-code" target="_blank" class="project-link">GitHub →</a>
+            <a href="free-code/index.html" class="project-link project-link-ghost">Docs →</a>
+          </div>
+        </article>
+
+        <!-- mcp-flowise -->
+        <article class="project-card" id="project-mcp-flowise">
+          <div class="project-header">
+            <div class="project-tag">Open Source · MCP / AI Tooling</div>
+            <h3 class="project-title">mcp-flowise</h3>
+            <p class="project-tagline">An MCP server that connects AI agents directly to Flowise chatflows and pipelines.</p>
+          </div>
+          <div class="project-body">
+            <div class="project-block">
+              <h4 class="block-label">What</h4>
+              <p>mcp-flowise exposes Flowise chatflows and pipelines as callable MCP tools, letting any MCP-compatible AI agent invoke them as first-class actions — no custom glue code needed.</p>
+            </div>
+            <div class="project-block">
+              <h4 class="block-label">How</h4>
+              <p>Built as a standard MCP server in TypeScript. It queries the Flowise API to discover available chatflows at startup and registers each one as a named tool with its own input schema. Agents call them like any other MCP tool.</p>
+            </div>
+            <div class="project-block">
+              <h4 class="block-label">Impact</h4>
+              <p>Closes the gap between visual LLM pipeline builders and code-based agent frameworks. Teams can design flows in Flowise's no-code UI and immediately surface them as agent capabilities — without writing a single integration line.</p>
+            </div>
+            <div class="project-tech">
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">MCP</span>
+              <span class="tech-tag">Flowise</span>
+              <span class="tech-tag">LLM Pipelines</span>
+              <span class="tech-tag">AI Agents</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/EnmaSuamkf/mcp-flowise" target="_blank" class="project-link">GitHub &rarr;</a>
+            <a href="mcp-flowise/index.html" class="project-link project-link-ghost">Docs &rarr;</a>
+          </div>
+        </article>
+
+        <!-- agent-webhook-bridge -->
+        <article class="project-card" id="project-webhook">
+          <div class="project-header">
+            <div class="project-tag">Open Source · Automation</div>
+            <h3 class="project-title">agent-webhook-bridge</h3>
+            <p class="project-tagline">A webhook bridge that lets external systems trigger and interact with AI agents.</p>
+          </div>
+          <div class="project-body">
+            <div class="project-block">
+              <h4 class="block-label">What</h4>
+              <p>agent-webhook-bridge is a lightweight server that receives incoming webhooks from any external service and routes them as events to a running AI agent session. It closes the loop between real-world triggers (GitHub, Stripe, custom systems) and autonomous agent workflows.</p>
+            </div>
+            <div class="project-block">
+              <h4 class="block-label">How</h4>
+              <p>An HTTP server registers named webhook endpoints with configurable authentication (shared secret or HMAC-SHA256). Incoming events are queued or delivered immediately to the agent via a well-defined event protocol. The bridge integrates natively with free-code's agent runtime.</p>
+            </div>
+            <div class="project-block">
+              <h4 class="block-label">Impact</h4>
+              <p>Enables event-driven agentic workflows — an agent can now react to a GitHub push, a Slack message, or a payment event without any polling. This unlocks a new class of always-on automation that was previously only possible with heavyweight orchestration platforms.</p>
+            </div>
+            <div class="project-tech">
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">Webhooks</span>
+              <span class="tech-tag">Event-driven</span>
+              <span class="tech-tag">AI Agents</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/EnmaSuamkf/agent-webhook-bridge" target="_blank" class="project-link">GitHub →</a>
+            <a href="agent-webhook-bridge/index.html" class="project-link project-link-ghost">Docs →</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section section-alt" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">// who I am</span>
+        <h2 class="section-title">About Me</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I'm a software developer focused on AI-powered tooling and developer infrastructure. I believe the best tools are the ones that get out of your way — fast, local, composable, and open.</p>
+          <p>My work sits at the intersection of large language models, developer experience, and automation. I build things I actually use every day, which means I care deeply about reliability, performance, and privacy.</p>
+          <p>When I'm not shipping code, I'm exploring new AI models, contributing to open source, and thinking about how software development itself is changing.</p>
+          <div class="about-links">
+            <a href="https://github.com/EnmaSuamkf" target="_blank" class="btn btn-ghost">GitHub</a>
+          </div>
+        </div>
+        <div class="about-skills">
+          <div class="skills-group">
+            <h4 class="skills-label">Languages</h4>
+            <div class="skills-list">
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">Python</span>
+            </div>
+          </div>
+          <div class="skills-group">
+            <h4 class="skills-label">Focus areas</h4>
+            <div class="skills-list">
+              <span class="tech-tag">AI / LLM</span>
+              <span class="tech-tag">Developer tooling</span>
+              <span class="tech-tag">Automation</span>
+              <span class="tech-tag">Open source</span>
+            </div>
+          </div>
+          <div class="skills-group">
+            <h4 class="skills-label">Stack</h4>
+            <div class="skills-list">
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">VS Code API</span>
+              <span class="tech-tag">MCP</span>
+              <span class="tech-tag">RAG</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WIP -->
+  <section class="section" id="wip">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">// in progress</span>
+        <h2 class="section-title">Work in Progress</h2>
+        <p class="section-subtitle">Things I'm currently building or exploring. No promises, no ETAs — just honest signal about where my head is at.</p>
+      </div>
+      <div class="wip-grid">
+        <div class="wip-card wip-card-placeholder">
+          <div class="wip-status wip-status-idea">Idea</div>
+          <h3 class="wip-title">Next project</h3>
+          <p class="wip-desc">Something new is always in the pipeline. Check back soon.</p>
+        </div>
+        <div class="wip-card wip-card-placeholder">
+          <div class="wip-status wip-status-idea">Idea</div>
+          <h3 class="wip-title">Coming soon</h3>
+          <p class="wip-desc">More experiments in AI tooling and developer automation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-name">Pablo Castañeda</span>
+        <span class="footer-copy">Built with HTML & CSS · <a href="https://github.com/EnmaSuamkf" target="_blank">GitHub</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+
+    // Mobile menu
+    function toggleMenu() {
+      document.querySelector('.nav-links').classList.toggle('open');
+    }
+
+    // Sticky nav shadow
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+    });
+  </script>
+</body>
+</html>
