@@ -182,6 +182,26 @@
         padding: 0.25rem 0.55rem;
       }
 
+      .video-embed {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        border-radius: 8px;
+        margin: 0 0 1.1rem;
+        background: #000;
+        border: 1px solid var(--border);
+      }
+      .video-embed iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
       footer{
         margin-top: 3.5rem;
         padding-top: 1.2rem;
@@ -210,6 +230,7 @@
           <img src="https://img.shields.io/npm/v/@suamkf08/mcp-flowise" alt="npm version" />
         </div>
         <nav class="toc" aria-label="Contents">
+          <a href="#watch">Watch</a>
           <a href="#requirements">Requirements</a>
           <a href="#tools">Tools</a>
           <a href="#installation">Installation</a>
@@ -222,6 +243,19 @@
           <a href="#security">Security</a>
         </nav>
       </header>
+
+      <section id="watch">
+        <h2>Watch: mcp-flowise in action</h2>
+        <div class="video-embed">
+          <iframe
+            src="https://www.youtube.com/embed/O6zYAgmeumc"
+            title="mcp-flowise — demo"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>
 
       <section id="requirements">
         <h2>Requirements</h2>
@@ -259,11 +293,17 @@
         <h2>Installation</h2>
 
         <h3>One-command install (any client)</h3>
-        <pre><code>npx -y @suamkf08/mcp-flowise-install --client claude
-npx -y @suamkf08/mcp-flowise-install --client cursor
-npx -y @suamkf08/mcp-flowise-install --client free-code
-npx -y @suamkf08/mcp-flowise-install --client vscode
-npx -y @suamkf08/mcp-flowise-install --client windsurf</code></pre>
+        <pre><code>npx -y -p @suamkf08/mcp-flowise mcp-flowise-install --client claude
+npx -y -p @suamkf08/mcp-flowise mcp-flowise-install --client cursor
+npx -y -p @suamkf08/mcp-flowise mcp-flowise-install --client free-code
+npx -y -p @suamkf08/mcp-flowise mcp-flowise-install --client vscode
+npx -y -p @suamkf08/mcp-flowise mcp-flowise-install --client windsurf</code></pre>
+        <p>
+          <code>-p @suamkf08/mcp-flowise</code> pulls the published package, which ships the
+          <code>mcp-flowise-install</code> binary; <code>npx</code> then runs that binary. There is no
+          separate <code>@suamkf08/mcp-flowise-install</code> package on npm — the installer lives
+          inside <code>@suamkf08/mcp-flowise</code>.
+        </p>
         <p>
           The script prompts for <code>FLOWISE_API_ENDPOINT</code> (defaults to
           <code>http://localhost:3000</code> if you just press enter) and <code>FLOWISE_API_KEY</code>
