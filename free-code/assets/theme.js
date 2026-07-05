@@ -1,15 +1,10 @@
 (function () {
   var storageKey = "free-code-doc-color-theme";
-  var legacyStorageKey = "edo-doc-color-theme";
   var order = ["system", "light", "dark"];
 
   function getStored() {
     try {
-      var value = localStorage.getItem(storageKey);
-      if (value) return value;
-      var legacyValue = localStorage.getItem(legacyStorageKey);
-      if (legacyValue) localStorage.setItem(storageKey, legacyValue);
-      return legacyValue;
+      return localStorage.getItem(storageKey);
     } catch (e) { return null; }
   }
   function setStored(value) {
