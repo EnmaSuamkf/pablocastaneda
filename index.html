@@ -156,6 +156,40 @@
           </div>
         </article>
 
+        <!-- agent-mesh -->
+        <article class="project-card" id="project-agent-mesh">
+          <div class="project-header">
+            <div class="project-tag">Open Source · AI Agents</div>
+            <h3 class="project-title">agent-mesh</h3>
+            <p class="project-tagline">A hub where operators publish AI agents and anyone can send them tasks from a simple web UI.</p>
+          </div>
+          <div class="project-body">
+            <div class="project-block">
+              <h4 class="block-label">What</h4>
+              <p>agent-mesh is the phase-1 implementation of the AgentMesh concept: an agent registry + job queue where each published agent is a Claude Code instance running on its operator's own machine, exposed through an agent-webhook-bridge hook. The hub never runs agents itself — it routes jobs and collects results.</p>
+            </div>
+            <div class="project-block">
+              <h4 class="block-label">How</h4>
+              <p>A single-process Node hub (no build step, no dependencies) serves a web UI and a JSON API. Submitting a task fires the agent's webhook with a per-job callback URL; the bridge spawns the agent headless in a sandbox workdir and POSTs the result back when the run finishes. Jobs can resume previous Claude sessions, so conversations chain across tasks, and publishing/removing/configuring agents happens from the UI, gated by an admin token.</p>
+            </div>
+            <div class="project-block">
+              <h4 class="block-label">Impact</h4>
+              <p>Turns a single machine's idle agent capacity into a shareable service with a complete task loop — submit → run → result — proving out the exposure layer the decentralized AgentMesh network builds on (tunnels, remote nodes and payments come next).</p>
+            </div>
+            <div class="project-tech">
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">SQLite</span>
+              <span class="tech-tag">AI Agents</span>
+              <span class="tech-tag">Claude Code</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/EnmaSuamkf/agent-mesh" target="_blank" class="project-link">GitHub →</a>
+            <a href="agent-mesh/index.html" class="project-link project-link-ghost">Docs →</a>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
@@ -252,10 +286,11 @@
       </div>
       <div class="wip-grid">
         <div class="wip-card">
-          <div class="wip-status">Concept paper</div>
+          <div class="wip-status">Phase 1 shipped</div>
           <h3 class="wip-title">AgentMesh</h3>
-          <p class="wip-desc">A decentralized network where anyone can expose idle AI agent capacity, running sandboxed in local Docker containers, and earn points redeemable for USDT/BTC for the jobs the network routes to them.</p>
+          <p class="wip-desc">A decentralized network where anyone can expose idle AI agent capacity, running sandboxed in local Docker containers, and earn points redeemable for USDT/BTC for the jobs the network routes to them. Phase 1 — the single-operator hub with a complete task loop — is built and open source (see <strong>agent-mesh</strong> under Projects); tunnels, remote nodes and the ledger are next.</p>
           <a href="agentmesh/index.html" class="project-link">Read the paper →</a>
+          <a href="agent-mesh/index.html" class="project-link">Phase-1 docs →</a>
         </div>
         <div class="wip-card wip-card-placeholder">
           <div class="wip-status wip-status-idea">Idea</div>
