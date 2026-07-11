@@ -166,7 +166,7 @@
           <div class="project-body">
             <div class="project-block">
               <h4 class="block-label">What</h4>
-              <p>agent-mesh is the phase-1 implementation of the AgentMesh concept: an agent registry + job queue where each published agent is a Claude Code instance running on its operator's own machine, exposed through an agent-webhook-bridge hook. The hub never runs agents itself — it routes jobs and collects results.</p>
+              <p>agent-mesh is the implementation of the AgentMesh concept: an agent registry + job queue where each published agent is a Claude Code instance running on its operator's own machine, exposed through an agent-webhook-bridge hook. The hub never runs agents itself — it routes jobs and collects results. Phase 1 (the local hub) is complete; phase 2 adds remote access through a cloudflared tunnel with per-user API keys.</p>
             </div>
             <div class="project-block">
               <h4 class="block-label">How</h4>
@@ -174,7 +174,7 @@
             </div>
             <div class="project-block">
               <h4 class="block-label">Impact</h4>
-              <p>Turns a single machine's idle agent capacity into a shareable service with a complete task loop — submit → run → result — proving out the exposure layer the decentralized AgentMesh network builds on (tunnels, remote nodes and payments come next).</p>
+              <p>Turns a single machine's idle agent capacity into a shareable service with a complete task loop — submit → run → result — now reachable from anywhere through a cloudflared tunnel: remote users submit jobs with per-user API keys (expirable, usage-capped, rate-limited), proving out the exposure layer the decentralized AgentMesh network builds on (remote nodes and payments come next).</p>
             </div>
             <div class="project-tech">
               <span class="tech-tag">TypeScript</span>
@@ -286,11 +286,11 @@
       </div>
       <div class="wip-grid">
         <div class="wip-card">
-          <div class="wip-status">Phase 1 shipped</div>
+          <div class="wip-status">Phase 2 in progress</div>
           <h3 class="wip-title">AgentMesh</h3>
-          <p class="wip-desc">A decentralized network where anyone can expose idle AI agent capacity, running sandboxed in local Docker containers, and earn points redeemable for USDT/BTC for the jobs the network routes to them. Phase 1 — the single-operator hub with a complete task loop — is built and open source (see <strong>agent-mesh</strong> under Projects); tunnels, remote nodes and the ledger are next.</p>
+          <p class="wip-desc">A decentralized network where anyone can expose idle AI agent capacity, running sandboxed in local Docker containers, and earn points redeemable for USDT/BTC for the jobs the network routes to them. Phase 1 — the single-operator hub with a complete task loop — is built and open source (see <strong>agent-mesh</strong> under Projects), and phase 2 has started: the hub is shareable through a cloudflared tunnel with per-user API keys and rate limiting; remote nodes and the ledger are next.</p>
           <a href="agentmesh/index.html" class="project-link">Read the paper →</a>
-          <a href="agent-mesh/index.html" class="project-link">Phase-1 docs →</a>
+          <a href="agent-mesh/index.html" class="project-link">Docs →</a>
         </div>
         <div class="wip-card wip-card-placeholder">
           <div class="wip-status wip-status-idea">Idea</div>
