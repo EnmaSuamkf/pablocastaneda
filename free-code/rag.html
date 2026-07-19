@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-title-en="RAG — free-code" data-title-es="RAG — free-code">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,8 +23,10 @@
     <link rel="stylesheet" href="../assets/project-nav.css" />
 </head>
   <body>
-  <div id="portfolio-back-nav"><a class="back-link" href="../index.html">← Portfolio</a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span></div>
+  <div id="portfolio-back-nav"><a class="back-link" href="../index.html"><span lang="en">← Portfolio</span><span lang="es" hidden>← Portafolio</span></a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span><div id="lang-toggle"></div></div>
     <div class="doc-root">
+  <div lang="en">
+
       <header class="site-shell-header" role="banner">
         <div class="site-shell-inner">
           <a class="site-brand" href="index.html">
@@ -320,7 +322,311 @@ free-code-rag</code></pre>
         </p>
         <p class="footer-credit">Developed by Pablo Castañeda</p>
       </div>
-    </div>
+    
+  </div>
+  <div lang="es" hidden>
+
+      <header class="site-shell-header" role="banner">
+        <div class="site-shell-inner">
+          <a class="site-brand" href="index.html">
+            <span class="site-brand-angles" aria-hidden="true">&lt;</span>
+            <span>free-code</span>
+            <span class="site-brand-angles" aria-hidden="true">&gt;</span>
+          </a>
+          <div class="site-header-actions">
+            <button type="button" class="theme-toggle" id="doc-theme-toggle" aria-label="Tema de color">
+              <span class="theme-toggle-label" id="doc-theme-label">Sistema</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="container">
+        <header class="hero">
+          <h1 class="brand">
+            <span class="angle" aria-hidden="true">&lt;</span>
+            <span class="name">free-code</span>
+            <span class="angle" aria-hidden="true">&gt;</span>
+          </h1>
+          <p class="tagline">
+            <span class="prompt" aria-hidden="true">// </span>
+            RAG — una base de conocimiento local que tu agente puede consultar.
+          </p>
+
+          <nav class="nav" aria-label="Primary">
+            <a href="index.html">[inicio]</a>
+            <a href="installation.html">[instalación]</a>
+            <a href="webhooks.html">[webhooks]</a>
+            <a href="rag.html" aria-current="page">[rag]</a>
+            <a href="code-graph.html">[grafo de código]</a>
+            <a href="mcp.html">[mcp]</a>
+            <a href="vision-mode.html">[modo visión]</a>
+            <a href="capabilities.html">[capacidades]</a>
+            <a href="commands.html">[comandos]</a>
+            <a href="models.html">[modelos]</a>
+          </nav>
+        </header>
+
+        <!-- What is RAG -->
+        <section class="card" aria-labelledby="rag-what">
+          <div class="card-header">
+            <h2 id="rag-what">¿Qué es RAG?</h2>
+            <p>Retrieval-Augmented Generation — dale al agente tus propios documentos como contexto consultable.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              RAG permite que free-code responda a partir de <strong>tu</strong> material — documentación, runbooks,
+              ADRs, referencias de API, el manual de una librería de terceros — en lugar de adivinar. Indexas los
+              documentos una vez; durante una sesión el agente recupera los pasajes más relevantes y basa su
+              respuesta en ellos (pudiendo citar la fuente) en vez de alucinar.
+            </p>
+            <p>
+              Todo se ejecuta <strong>localmente</strong>: un pequeño servidor en tu máquina, un modelo de embeddings
+              local y un índice vectorial en disco. Nada se sube a la nube.
+            </p>
+          </div>
+        </section>
+
+        <!-- Video -->
+        <section class="card" aria-labelledby="rag-video">
+          <div class="card-header">
+            <h2 id="rag-video">Mira: RAG en free-code</h2>
+            <p>Observa la base de conocimiento local indexada y consultada de principio a fin.</p>
+          </div>
+          <div class="card-body">
+            <div class="video-embed">
+              <iframe
+                src="https://www.youtube.com/embed/kOcO3Yag7Ec"
+                title="free-code — RAG"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </section>
+
+        <!-- How it works -->
+        <section class="card" aria-labelledby="rag-how">
+          <div class="card-header">
+            <h2 id="rag-how">Cómo funciona</h2>
+            <p>Modelo, base de datos y cómo se encuentran las coincidencias.</p>
+          </div>
+          <div class="card-body">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Elemento</th><th>Qué usa free-code</th></tr></thead>
+                <tbody>
+                  <tr><td>Modelo de embeddings</td><td><code>all-MiniLM-L6-v2</code> (sentence-transformers), se ejecuta localmente — vectores de 384 dimensiones</td></tr>
+                  <tr><td>Base de datos vectorial</td><td><strong>FAISS</strong> (<code>IndexFlatL2</code>), persistida en disco bajo <code>~/.free-code/faiss_store/</code> (<code>faiss.index</code> + <code>metadata.pkl</code>)</td></tr>
+                  <tr><td>Fragmentación (chunking)</td><td>Divisor recursivo — ~1000 caracteres por fragmento con 200 caracteres de solapamiento, dividiendo por párrafos → líneas → palabras</td></tr>
+                  <tr><td>Servidor</td><td>Servidor HTTP local en <code>http://localhost:8085</code></td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Indexación (una vez por documento)</h3>
+            <ol>
+              <li>El archivo se carga y se divide en fragmentos solapados.</li>
+              <li>Cada fragmento se convierte en un vector de 384 dimensiones mediante el modelo de embeddings.</li>
+              <li>Los vectores + metadatos (archivo de origen, texto) se almacenan en el índice FAISS de la base de conocimiento activa.</li>
+            </ol>
+
+            <h3>Búsqueda y coincidencia</h3>
+            <ol>
+              <li>Tu consulta se convierte en embedding con el mismo modelo, dentro del mismo espacio vectorial.</li>
+              <li>FAISS encuentra los vectores de fragmentos más cercanos por <strong>distancia L2 (euclidiana)</strong> — una distancia menor significa mayor similitud semántica (coincide por <em>significado</em>, no por palabras clave).</li>
+              <li>Se devuelven los <strong>5 fragmentos</strong> más cercanos, y los resultados que superan un <strong>umbral de distancia (~1.2)</strong> se descartan para que las coincidencias débiles no añadan ruido.</li>
+              <li>Los fragmentos que sobreviven se inyectan en la conversación como contexto para que el modelo responda a partir de ellos.</li>
+            </ol>
+            <div class="callout info">
+              <strong>Semántico, no literal</strong><br />
+              Como la coincidencia se basa en embeddings, una consulta como "¿cómo autenticamos a los usuarios?"
+              puede coincidir con un fragmento que hable de "flujo de inicio de sesión" o "tokens de sesión"
+              incluso sin compartir las mismas palabras.
+            </div>
+          </div>
+        </section>
+
+        <!-- Flow diagrams -->
+        <section class="card" aria-labelledby="rag-diagrams">
+          <div class="card-header">
+            <h2 id="rag-diagrams">Diagramas de flujo</h2>
+            <p>Dos flujos: cargar documentos y consultarlos de vuelta.</p>
+          </div>
+          <div class="card-body">
+
+            <h3>1 · Indexación — ingresando información</h3>
+            <figure class="wh-fig">
+              <svg viewBox="0 0 760 120" role="img" aria-label="Un documento se carga y se divide en fragmentos solapados, cada fragmento se convierte en un vector de 384 dimensiones, y los vectores más los metadatos se almacenan en el índice FAISS de la base de conocimiento activa.">
+                <defs>
+                  <marker id="rag-arrow-a" markerWidth="10" markerHeight="8" refX="8" refY="3" orient="auto">
+                    <path d="M0,0 L8,3 L0,6 Z" class="wh-ah" />
+                  </marker>
+                </defs>
+                <rect x="8" y="24" width="150" height="72" rx="10" class="wh-b" />
+                <text x="83" y="52" text-anchor="middle" dominant-baseline="central" class="wh-t">Documento</text>
+                <text x="83" y="74" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">.md &#183; .pdf &#183; .docx</text>
+                <line x1="158" y1="60" x2="198" y2="60" class="wh-line" marker-end="url(#rag-arrow-a)" />
+                <rect x="206" y="24" width="150" height="72" rx="10" class="wh-b" />
+                <text x="281" y="52" text-anchor="middle" dominant-baseline="central" class="wh-t">Fragmentar</text>
+                <text x="281" y="74" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">~1000 car., 200 solape</text>
+                <line x1="356" y1="60" x2="396" y2="60" class="wh-line" marker-end="url(#rag-arrow-a)" />
+                <rect x="404" y="24" width="150" height="72" rx="10" class="wh-b" />
+                <text x="479" y="52" text-anchor="middle" dominant-baseline="central" class="wh-t">Embedding</text>
+                <text x="479" y="74" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">MiniLM-L6-v2 &#183; 384-d</text>
+                <line x1="554" y1="60" x2="594" y2="60" class="wh-line" marker-end="url(#rag-arrow-a)" />
+                <rect x="602" y="24" width="150" height="72" rx="10" class="wh-b-accent" />
+                <text x="677" y="52" text-anchor="middle" dominant-baseline="central" class="wh-t">Guardar en FAISS</text>
+                <text x="677" y="74" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">vectores + metadatos</text>
+              </svg>
+              <figcaption>Se ejecuta una vez por documento (<code>/rag addFile</code>, <code>/rag addGroup</code>, <code>/rag addGithubUrl</code>). Todo se almacena localmente bajo <code>~/.free-code/faiss_store/</code> para la base de conocimiento activa.</figcaption>
+            </figure>
+
+            <h3>2 · Consulta — recuperando la información</h3>
+            <figure class="wh-fig">
+              <svg viewBox="0 0 900 120" role="img" aria-label="Tu consulta se convierte en embedding con el mismo modelo, FAISS encuentra los vectores de fragmentos más cercanos por distancia L2, sobreviven los 5 mejores dentro del umbral de distancia, y esos fragmentos se inyectan en la conversación como contexto.">
+                <defs>
+                  <marker id="rag-arrow-b" markerWidth="10" markerHeight="8" refX="8" refY="3" orient="auto">
+                    <path d="M0,0 L8,3 L0,6 Z" class="wh-ah" />
+                  </marker>
+                </defs>
+                <rect x="1" y="24" width="150" height="72" rx="10" class="wh-b-accent" />
+                <text x="76" y="52" text-anchor="middle" dominant-baseline="central" class="wh-t">Tu consulta</text>
+                <text x="76" y="74" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">/rag search "…"</text>
+                <line x1="151" y1="60" x2="182" y2="60" class="wh-line" marker-end="url(#rag-arrow-b)" />
+                <rect x="188" y="24" width="150" height="72" rx="10" class="wh-b" />
+                <text x="263" y="52" text-anchor="middle" dominant-baseline="central" class="wh-t">Embedding de consulta</text>
+                <text x="263" y="74" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">mismo modelo / espacio</text>
+                <line x1="338" y1="60" x2="369" y2="60" class="wh-line" marker-end="url(#rag-arrow-b)" />
+                <rect x="375" y="24" width="150" height="72" rx="10" class="wh-b" />
+                <text x="450" y="52" text-anchor="middle" dominant-baseline="central" class="wh-t">Búsqueda FAISS</text>
+                <text x="450" y="74" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">más cercano por L2</text>
+                <line x1="525" y1="60" x2="556" y2="60" class="wh-line" marker-end="url(#rag-arrow-b)" />
+                <rect x="562" y="24" width="150" height="72" rx="10" class="wh-b" />
+                <text x="637" y="52" text-anchor="middle" dominant-baseline="central" class="wh-t">Top 5</text>
+                <text x="637" y="74" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">descarta dist &#62; ~1.2</text>
+                <line x1="712" y1="60" x2="743" y2="60" class="wh-line" marker-end="url(#rag-arrow-b)" />
+                <rect x="749" y="24" width="150" height="72" rx="10" class="wh-b-accent" />
+                <text x="824" y="52" text-anchor="middle" dominant-baseline="central" class="wh-t">Inyectar contexto</text>
+                <text x="824" y="74" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">el agente responde</text>
+              </svg>
+              <figcaption>La consulta y los documentos se convierten en embeddings con el <strong>mismo</strong> modelo dentro del <strong>mismo</strong> espacio de 384 dimensiones — por eso la coincidencia es por significado, no por palabras clave. Las coincidencias débiles que superan el umbral se descartan para que no añadan ruido.</figcaption>
+            </figure>
+
+          </div>
+        </section>
+
+        <!-- Supported files -->
+        <section class="card" aria-labelledby="rag-files">
+          <div class="card-header">
+            <h2 id="rag-files">Tipos de archivo compatibles</h2>
+            <p>Indexa texto plano y formatos de documento comunes.</p>
+          </div>
+          <div class="card-body">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Tipo</th><th>Extensiones</th></tr></thead>
+                <tbody>
+                  <tr><td>Texto plano</td><td><code>.txt</code></td></tr>
+                  <tr><td>Markdown</td><td><code>.md</code></td></tr>
+                  <tr><td>PDF</td><td><code>.pdf</code></td></tr>
+                  <tr><td>Word</td><td><code>.docx</code>, <code>.doc</code></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="callout tip">
+              <strong>Archivo de metadatos opcional</strong><br />
+              Coloca un <code>&lt;nombre&gt;.knowledge.md</code> junto a un documento para adjuntar notas o
+              descripciones adicionales sobre esa fuente. Se usa como metadato de descubrimiento y se excluye
+              de los fragmentos de búsqueda normales.
+            </div>
+          </div>
+        </section>
+
+        <!-- Commands -->
+        <section class="card" aria-labelledby="rag-commands">
+          <div class="card-header">
+            <h2 id="rag-commands">Cómo usarlo — comandos</h2>
+            <p>Inicia el servidor, crea una base de conocimiento, añade documentos y busca.</p>
+          </div>
+          <div class="card-body">
+            <h3>Iniciar el servidor</h3>
+            <pre><code># Deja esto en ejecución (por defecto http://localhost:8085)
+free-code-rag</code></pre>
+
+            <h3>Inicio rápido en una sesión</h3>
+            <pre><code>/rag-kb create my-docs     # crea una base de conocimiento
+/rag-kb use my-docs        # la convierte en la activa
+/rag addFile ./README.md   # indexa un documento
+/rag search "how does auth work?"   # la consulta</code></pre>
+
+            <h3>Documentos</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Comando</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>/rag addFile &lt;path&gt;</code></td><td>Indexa un único documento</td></tr>
+                  <tr><td><code>/rag addGroup &lt;folder&gt;</code></td><td>Indexa todos los archivos compatibles de una carpeta</td></tr>
+                  <tr><td><code>/rag addGithubUrl &lt;url&gt; [subpath]</code></td><td>Clona un repositorio de GitHub e indexa sus archivos (se guarda como fuente para futuras actualizaciones)</td></tr>
+                  <tr><td><code>/rag search &lt;query&gt;</code></td><td>Consulta la base de conocimiento activa e inyecta las coincidencias como contexto</td></tr>
+                  <tr><td><code>/rag list</code></td><td>Lista los documentos indexados</td></tr>
+                  <tr><td><code>/rag remove &lt;file&gt;</code></td><td>Elimina un documento del índice</td></tr>
+                  <tr><td><code>/rag refresh</code></td><td>Vuelve a obtener y reindexar las fuentes registradas</td></tr>
+                  <tr><td><code>/rag schedule [daily|weekly]</code></td><td>Actualización recurrente automática (requiere una fuente de GitHub)</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Bases de conocimiento</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Comando</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>/rag-kb create &lt;name&gt;</code></td><td>Crea una base de conocimiento con nombre</td></tr>
+                  <tr><td><code>/rag-kb use &lt;name&gt;</code></td><td>Cambia la base de conocimiento activa</td></tr>
+                  <tr><td><code>/rag-kb list</code></td><td>Lista todas las bases de conocimiento</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Why many KBs -->
+        <section class="card" aria-labelledby="rag-kbs">
+          <div class="card-header">
+            <h2 id="rag-kbs">Por qué usar varias bases de conocimiento</h2>
+            <p>Índices separados entre los que cambias con <code>/rag-kb use</code>.</p>
+          </div>
+          <div class="card-body">
+            <p>Cada base de conocimiento es un índice aislado propio. Mantener varias — en lugar de un único gran montón — vale la pena:</p>
+            <ul>
+              <li><strong>Resultados más precisos</strong> — buscar en una base de conocimiento enfocada devuelve más coincidencias relevantes; los documentos no relacionados no pueden desplazar a los correctos.</li>
+              <li><strong>Contexto por proyecto/dominio</strong> — una base de conocimiento para tu backend, otra para el sistema de diseño, otra para la documentación de un cliente. Cambia con <code>/rag-kb use</code>.</li>
+              <li><strong>Sin contaminación cruzada</strong> — el material confidencial o específico de un cliente permanece en su propia base de conocimiento y nunca se filtra en las respuestas de otro proyecto.</li>
+              <li><strong>Más económico y rápido</strong> — un índice más pequeño y relevante implica una búsqueda más rápida y un contexto más ajustado, con menos tokens.</li>
+              <li><strong>Ciclo de vida sencillo</strong> — actualiza, reconstruye o elimina un tema completo gestionando solo su base de conocimiento.</li>
+            </ul>
+            <div class="callout info">
+              <strong>Ejemplo</strong><br />
+              <code>/rag-kb use backend-api</code> antes de trabajar en el servicio, y luego
+              <code>/rag-kb use design-system</code> al cambiar a la interfaz — el agente siempre
+              recupera del cuerpo de conocimiento correcto.
+            </div>
+          </div>
+        </section>
+
+        <p class="footer">
+          <a href="capabilities.html">Todas las capacidades →</a> &nbsp;·&nbsp;
+          <a href="models.html">Modelos →</a> &nbsp;·&nbsp;
+          <a href="commands.html">Comandos →</a>
+        </p>
+        <p class="footer-credit">Desarrollado por Pablo Castañeda</p>
+      </div>
+    
+  </div>
+</div>
+    <script src="../assets/i18n.js" defer></script>
     <script src="assets/theme.js" defer></script>
   </body>
 </html>

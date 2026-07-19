@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-title-en="Vision Mode — free-code" data-title-es="Modo Visión — free-code">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,9 +20,13 @@
       .vm-ah { fill: var(--primary); }
       .vm-ah-mute { fill: var(--ink-muted); }
     </style>
+    <link rel="stylesheet" href="../assets/project-nav.css" />
   </head>
   <body>
+  <div id="portfolio-back-nav"><a class="back-link" href="../index.html"><span lang="en">← Portfolio</span><span lang="es" hidden>← Portafolio</span></a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span><div id="lang-toggle"></div></div>
     <div class="doc-root">
+  <div lang="en">
+
       <header class="site-shell-header" role="banner">
         <div class="site-shell-inner">
           <a class="site-brand" href="index.html">
@@ -609,7 +613,600 @@ sudo apt install espeak
         </p>
         <p class="footer-credit">Powered by CX — developed by Pablo Castañeda</p>
       </div>
-    </div>
+    
+  </div>
+  <div lang="es" hidden>
+
+      <header class="site-shell-header" role="banner">
+        <div class="site-shell-inner">
+          <a class="site-brand" href="index.html">
+            <span class="site-brand-angles" aria-hidden="true">&lt;</span>
+            <span>free-code</span>
+            <span class="site-brand-angles" aria-hidden="true">&gt;</span>
+          </a>
+          <div class="site-header-actions">
+            <button type="button" class="theme-toggle" id="doc-theme-toggle" aria-label="Tema de color">
+              <span class="theme-toggle-label" id="doc-theme-label">Sistema</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="container">
+        <header class="hero">
+          <h1 class="brand">
+            <span class="angle" aria-hidden="true">&lt;</span>
+            <span class="name">free-code</span>
+            <span class="angle" aria-hidden="true">&gt;</span>
+          </h1>
+          <p class="tagline">
+            <span class="prompt" aria-hidden="true">// </span>
+            Modo Visión — Ve la pantalla. Escucha tu voz. Responde con naturalidad.
+          </p>
+
+          <nav class="nav" aria-label="Primary">
+            <a href="index.html">[inicio]</a>
+            <a href="installation.html">[instalación]</a>
+            <a href="webhooks.html">[webhooks]</a>
+            <a href="rag.html">[rag]</a>
+            <a href="code-graph.html">[grafo de código]</a>
+            <a href="mcp.html">[mcp]</a>
+            <a href="vision-mode.html" aria-current="page">[modo visión]</a>
+            <a href="capabilities.html">[capacidades]</a>
+            <a href="commands.html">[comandos]</a>
+            <a href="models.html">[modelos]</a>
+          </nav>
+        </header>
+
+        <!-- What is Vision Mode -->
+        <section class="card" aria-labelledby="vm-what">
+          <div class="card-header">
+            <h2 id="vm-what">¿Qué es el Modo Visión?</h2>
+            <p>Agente de IA multimodal con ojos, oídos y voz — asistencia manos libres impulsada por tu pantalla y tu voz.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              El Modo Visión aporta capacidades multimodales a free-code: <strong>captura de pantalla</strong>,
+              <strong>voz a texto (STT)</strong> y <strong>texto a voz (TTS)</strong>.
+              El agente puede ver lo que hay en tu pantalla, escuchar tu voz y responder en voz alta.
+            </p>
+            <p>
+              Construido sobre un <strong>modelo de captura en el momento de la pregunta</strong> — sin subida continua de video,
+              sin streaming. El agente recibe <strong>una imagen</strong> en el momento en que preguntas,
+              junto con el historial de la conversación. Esto mantiene el costo bajo, la latencia razonable y la privacidad alta.
+            </p>
+            <div class="callout info">
+              <strong>Ejemplo</strong><br />
+              Abre un navegador con una página de error, di "free-code, ¿qué es este error?", y el agente
+              captura la pantalla, lee el stack trace y responde en voz alta — sin necesidad de escribir nada.
+            </div>
+          </div>
+        </section>
+
+        <!-- How it works -->
+        <section class="card" aria-labelledby="vm-how">
+          <div class="card-header">
+            <h2 id="vm-how">Cómo funciona</h2>
+            <p>Tres modos de interacción, un solo flujo continuo.</p>
+          </div>
+          <div class="card-body">
+            <h3>Tres comandos</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Modo</th><th>Comando</th><th>Caso de uso</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Visión bajo demanda</strong></td>
+                    <td><code>/see &lt;question&gt;</code></td>
+                    <td>Captura la pantalla una vez y pregunta sobre ella. Pregunta escrita, captura instantánea.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Pulsar para hablar</strong></td>
+                    <td><code>/voice [context]</code></td>
+                    <td>Graba audio, transcribe, envía. Sin captura de pantalla salvo que se solicite explícitamente.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Manos libres en vivo</strong></td>
+                    <td><code>/vision live on</code></td>
+                    <td>Escucha continua con palabra de activación. Captura automáticamente cuando se detectan palabras clave de visión. Habla las respuestas.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>El flujo</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Paso</th><th>Qué sucede</th><th>Backends configurables</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><strong>1. Captura de pantalla</strong></td>
+                    <td>Toma un único fotograma de la pantalla actual</td>
+                    <td>Portal (Wayland), scrot, gnome-screenshot, spectacle, import, screencapture (macOS), PowerShell</td>
+                  </tr>
+                  <tr>
+                    <td><strong>2. Redimensionado de imagen</strong></td>
+                    <td>Reduce la escala a un máximo de 1568px (configurable) con Photon WASM</td>
+                    <td>Calidad JPEG 85 (por defecto), ~1.1–1.6k tokens por imagen</td>
+                  </tr>
+                  <tr>
+                    <td><strong>3. Grabación de audio</strong></td>
+                    <td>Graba la entrada del micrófono hasta que se detiene (PTT o VAD)</td>
+                    <td>pw-record, arecord, sox, ffmpeg</td>
+                  </tr>
+                  <tr>
+                    <td><strong>4. Voz a texto</strong></td>
+                    <td>Transcribe el audio a texto</td>
+                    <td>OpenAI Whisper, Groq Whisper, whisper.cpp local</td>
+                  </tr>
+                  <tr>
+                    <td><strong>5. Turno del agente</strong></td>
+                    <td>Envía texto + imagen opcional al modelo</td>
+                    <td>Cualquier modelo con capacidad de visión: GPT-4o, Claude 3.5, Gemini 2.0 Flash, etc.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>6. Texto a voz</strong></td>
+                    <td>Habla la respuesta del asistente (solo en modo en vivo)</td>
+                    <td>OpenAI TTS, espeak, macOS say</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout tip">
+              <strong>¿Por qué captura en lugar de video?</strong><br />
+              Un video de 10 segundos a 1 fotograma por segundo = 10 imágenes = 10–15k tokens. Una sola captura en el momento de la pregunta = 1.5k tokens.
+              El agente no necesita ver movimiento continuo — necesita <strong>contexto para la pregunta que hiciste</strong>.
+            </div>
+          </div>
+        </section>
+
+        <!-- Flow diagrams -->
+        <section class="card" aria-labelledby="vm-diagrams">
+          <div class="card-header">
+            <h2 id="vm-diagrams">Diagramas de flujo</h2>
+            <p>Visualizando los tres modos de interacción.</p>
+          </div>
+          <div class="card-body">
+
+            <h3>1 · Visión bajo demanda (<code>/see</code>)</h3>
+            <figure class="vm-fig">
+              <svg viewBox="0 0 800 120" role="img" aria-label="El usuario escribe una pregunta, se captura la pantalla, se redimensiona la imagen y luego se envían texto e imagen al modelo.">
+                <defs>
+                  <marker id="vm-arrow-a" markerWidth="10" markerHeight="8" refX="8" refY="3" orient="auto">
+                    <path d="M0,0 L8,3 L0,6 Z" class="vm-ah" />
+                  </marker>
+                </defs>
+                <rect x="8" y="24" width="140" height="72" rx="10" class="vm-b-accent" />
+                <text x="78" y="52" text-anchor="middle" dominant-baseline="central" class="vm-t">/see &lt;question&gt;</text>
+                <text x="78" y="74" text-anchor="middle" dominant-baseline="central" class="vm-t-sm">Escrito por el usuario</text>
+                <line x1="148" y1="60" x2="180" y2="60" class="vm-line" marker-end="url(#vm-arrow-a)" />
+                <rect x="188" y="24" width="140" height="72" rx="10" class="vm-b" />
+                <text x="258" y="52" text-anchor="middle" dominant-baseline="central" class="vm-t">Captura pantalla</text>
+                <text x="258" y="74" text-anchor="middle" dominant-baseline="central" class="vm-t-sm">Portal / scrot / etc.</text>
+                <line x1="328" y1="60" x2="360" y2="60" class="vm-line" marker-end="url(#vm-arrow-a)" />
+                <rect x="368" y="24" width="140" height="72" rx="10" class="vm-b" />
+                <text x="438" y="52" text-anchor="middle" dominant-baseline="central" class="vm-t">Redimensiona imagen</text>
+                <text x="438" y="74" text-anchor="middle" dominant-baseline="central" class="vm-t-sm">Máx 1568px, JPEG</text>
+                <line x1="508" y1="60" x2="540" y2="60" class="vm-line" marker-end="url(#vm-arrow-a)" />
+                <rect x="548" y="24" width="140" height="72" rx="10" class="vm-b-accent" />
+                <text x="618" y="52" text-anchor="middle" dominant-baseline="central" class="vm-t">Modelo</text>
+                <text x="618" y="74" text-anchor="middle" dominant-baseline="central" class="vm-t-sm">Texto + Imagen</text>
+              </svg>
+              <figcaption>Un solo disparo: pregunta → captura → redimensionado → respuesta del modelo</figcaption>
+            </figure>
+
+            <h3>2 · Pulsar para hablar (<code>/voice</code>)</h3>
+            <figure class="vm-fig">
+              <svg viewBox="0 0 800 120" role="img" aria-label="El usuario presiona una tecla rápida para iniciar la grabación, la detiene con la misma tecla, se transcribe el audio y luego la transcripción se envía al modelo o se coloca en el editor para revisión.">
+                <defs>
+                  <marker id="vm-arrow-b" markerWidth="10" markerHeight="8" refX="8" refY="3" orient="auto">
+                    <path d="M0,0 L8,3 L0,6 Z" class="vm-ah" />
+                  </marker>
+                </defs>
+                <rect x="8" y="24" width="140" height="72" rx="10" class="vm-b-accent" />
+                <text x="78" y="52" text-anchor="middle" dominant-baseline="central" class="vm-t">Pulsación de tecla</text>
+                <text x="78" y="74" text-anchor="middle" dominant-baseline="central" class="vm-t-sm">Iniciar/detener grabación</text>
+                <line x1="148" y1="60" x2="180" y2="60" class="vm-line" marker-end="url(#vm-arrow-b)" />
+                <rect x="188" y="24" width="140" height="72" rx="10" class="vm-b" />
+                <text x="258" y="52" text-anchor="middle" dominant-baseline="central" class="vm-t">Graba audio</text>
+                <text x="258" y="74" text-anchor="middle" dominant-baseline="central" class="vm-t-sm">pw-record / arecord</text>
+                <line x1="328" y1="60" x2="360" y2="60" class="vm-line" marker-end="url(#vm-arrow-b)" />
+                <rect x="368" y="24" width="140" height="72" rx="10" class="vm-b" />
+                <text x="438" y="52" text-anchor="middle" dominant-baseline="central" class="vm-t">Transcribe</text>
+                <text x="438" y="74" text-anchor="middle" dominant-baseline="central" class="vm-t-sm">Whisper / Groq</text>
+                <line x1="508" y1="60" x2="540" y2="60" class="vm-line" marker-end="url(#vm-arrow-b)" />
+                <rect x="548" y="24" width="140" height="72" rx="10" class="vm-b-accent" />
+                <text x="618" y="52" text-anchor="middle" dominant-baseline="central" class="vm-t">Enviar / Revisar</text>
+                <text x="618" y="74" text-anchor="middle" dominant-baseline="central" class="vm-t-sm">config de voiceMode</text>
+              </svg>
+              <figcaption>Pulsar para hablar: grabar → transcribir → enviar (o colocar en el editor para revisión)</figcaption>
+            </figure>
+
+            <h3>3 · Modo manos libres en vivo (<code>/vision live on</code>)</h3>
+            <figure class="vm-fig">
+              <svg viewBox="0 0 900 180" role="img" aria-label="Bucle continuo: escuchar la palabra de activación, detectar palabras clave de visión, capturar la pantalla si es necesario, transcribir, enviar al modelo, hablar la respuesta, repetir el bucle.">
+                <defs>
+                  <marker id="vm-arrow-c" markerWidth="10" markerHeight="8" refX="8" refY="3" orient="auto">
+                    <path d="M0,0 L8,3 L0,6 Z" class="vm-ah" />
+                  </marker>
+                </defs>
+                <!-- Listen -->
+                <rect x="20" y="30" width="130" height="60" rx="10" class="vm-b-accent" />
+                <text x="85" y="52" text-anchor="middle" dominant-baseline="central" class="vm-t">Escuchar</text>
+                <text x="85" y="72" text-anchor="middle" dominant-baseline="central" class="vm-t-sm">Palabra de activación + VAD</text>
+                <line x1="150" y1="60" x2="180" y2="60" class="vm-line" marker-end="url(#vm-arrow-c)" />
+                <!-- Transcribe -->
+                <rect x="188" y="30" width="130" height="60" rx="10" class="vm-b" />
+                <text x="253" y="52" text-anchor="middle" dominant-baseline="central" class="vm-t">Transcribir</text>
+                <text x="253" y="72" text-anchor="middle" dominant-baseline="central" class="vm-t-sm">Backend STT</text>
+                <line x1="318" y1="60" x2="348" y2="60" class="vm-line" marker-end="url(#vm-arrow-c)" />
+                <!-- Check keywords -->
+                <rect x="356" y="30" width="130" height="60" rx="10" class="vm-b" />
+                <text x="421" y="52" text-anchor="middle" dominant-baseline="central" class="vm-t">Verificación visión</text>
+                <text x="421" y="72" text-anchor="middle" dominant-baseline="central" class="vm-t-sm">"mira", "pantalla"</text>
+                <line x1="486" y1="60" x2="516" y2="60" class="vm-line" marker-end="url(#vm-arrow-c)" />
+                <!-- Capture (conditional) -->
+                <rect x="524" y="30" width="130" height="60" rx="10" class="vm-b-mute" />
+                <text x="589" y="52" text-anchor="middle" dominant-baseline="central" class="vm-t">¿Capturar?</text>
+                <text x="589" y="72" text-anchor="middle" dominant-baseline="central" class="vm-t-sm">Si hay coincidencia</text>
+                <line x1="654" y1="60" x2="684" y2="60" class="vm-line" marker-end="url(#vm-arrow-c)" />
+                <!-- Model -->
+                <rect x="692" y="30" width="130" height="60" rx="10" class="vm-b-accent" />
+                <text x="757" y="52" text-anchor="middle" dominant-baseline="central" class="vm-t">Modelo</text>
+                <text x="757" y="72" text-anchor="middle" dominant-baseline="central" class="vm-t-sm">Texto (+ ¿Imagen?)</text>
+                <!-- Speak -->
+                <rect x="692" y="110" width="130" height="60" rx="10" class="vm-b" />
+                <text x="757" y="132" text-anchor="middle" dominant-baseline="central" class="vm-t">Hablar</text>
+                <text x="757" y="152" text-anchor="middle" dominant-baseline="central" class="vm-t-sm">Backend TTS</text>
+                <line x1="757" y1="90" x2="757" y2="110" class="vm-line" marker-end="url(#vm-arrow-c)" />
+                <!-- Loop back -->
+                <path d="M 692,140 L 450,140 L 450,10 L 85,10 L 85,30" class="vm-line-mute" marker-end="url(#vm-arrow-c)" />
+                <text x="450" y="155" text-anchor="middle" class="vm-t-sm">Bucle (agent_end)</text>
+              </svg>
+              <figcaption>Bucle en vivo: escuchar → transcribir → verificar palabras clave → capturar (si es necesario) → modelo → hablar → repetir</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- Commands -->
+        <section class="card" aria-labelledby="vm-commands">
+          <div class="card-header">
+            <h2 id="vm-commands">Comandos</h2>
+            <p>Todos los comandos slash y atajos del modo visión.</p>
+          </div>
+          <div class="card-body">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Comando</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>/see &lt;question&gt;</code></td><td>Captura la pantalla y pregunta sobre ella (visión de un solo disparo)</td></tr>
+                  <tr><td><code>/voice [context]</code></td><td>Pulsar para hablar: graba, transcribe, envía (o revisa)</td></tr>
+                  <tr><td><code>/vision live on</code></td><td>Inicia el modo manos libres continuo con palabra de activación</td></tr>
+                  <tr><td><code>/vision live off</code></td><td>Detiene el modo en vivo</td></tr>
+                  <tr><td><code>/vision status</code></td><td>Muestra los backends actuales, el idioma y la configuración del modo</td></tr>
+                  <tr><td><code>/vision backends</code></td><td>Lista los backends de captura/STT/TTS disponibles e indica si están instalados</td></tr>
+                  <tr><td><code>/vision config</code></td><td>Muestra todos los valores de configuración</td></tr>
+                  <tr><td><code>/vision config &lt;key&gt;</code></td><td>Muestra un único valor de configuración</td></tr>
+                  <tr><td><code>/vision config &lt;key&gt; &lt;value&gt;</code></td><td>Establece un valor de configuración</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Atajo de teclado</h3>
+            <p>
+              Pulsar para hablar está registrado como un atajo global (por defecto: configurable mediante la variable de entorno <code>VISION_SHORTCUT</code> o <code>vision.json</code>).
+              Presiona una vez para empezar a grabar, presiona de nuevo para detener y transcribir.
+            </p>
+            <div class="callout info">
+              <strong>En modo en vivo</strong><br />
+              El atajo PTT interrumpe la captura/grabación actual — útil si el agente está escuchando demasiado tiempo
+              o si quieres interrumpir en medio de un turno.
+            </div>
+          </div>
+        </section>
+
+        <!-- Configuration -->
+        <section class="card" aria-labelledby="vm-config">
+          <div class="card-header">
+            <h2 id="vm-config">Configuración</h2>
+            <p>Todos los ajustes, variables de entorno y ubicación del archivo de configuración.</p>
+          </div>
+          <div class="card-body">
+            <h3>Archivo de configuración</h3>
+            <p>Los ajustes del Modo Visión se guardan en <code>~/.free-code/vision.json</code>. Edítalo directamente o usa <code>/vision config &lt;key&gt; &lt;value&gt;</code>.</p>
+
+            <h3>Variables de entorno (anulan el archivo de configuración)</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Variable</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>VISION_CAPTURE_BACKEND</code></td><td>Método de captura: <code>auto</code>, <code>portal</code>, <code>grim</code>, <code>scrot</code>, <code>import</code>, <code>screencapture</code>, <code>powershell</code></td></tr>
+                  <tr><td><code>VISION_STT_BACKEND</code></td><td>Backend STT: <code>auto</code>, <code>openai</code>, <code>groq</code>, <code>whisper-cpp</code></td></tr>
+                  <tr><td><code>VISION_TTS_BACKEND</code></td><td>Backend TTS: <code>auto</code>, <code>openai</code>, <code>espeak</code>, <code>say</code></td></tr>
+                  <tr><td><code>VISION_LANGUAGE</code></td><td>Código de idioma: <code>es</code>, <code>en</code>, <code>auto</code></td></tr>
+                  <tr><td><code>VISION_VOICE_MODE</code></td><td>Destino de la transcripción: <code>send</code> (automático) o <code>review</code> (colocado en el editor)</td></tr>
+                  <tr><td><code>VISION_SHORTCUT</code></td><td>Tecla rápida PTT (p. ej., <code>ctrl+shift+space</code>)</td></tr>
+                  <tr><td><code>OPENAI_API_KEY</code></td><td>Requerida para STT/TTS de OpenAI</td></tr>
+                  <tr><td><code>GROQ_API_KEY</code></td><td>Requerida para STT de Groq</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Opciones de la CLI (anulan las variables de entorno)</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Opción</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>--vision-capture-backend &lt;id&gt;</code></td><td>Fuerza un backend de captura específico</td></tr>
+                  <tr><td><code>--vision-stt-backend &lt;id&gt;</code></td><td>Fuerza un backend STT específico</td></tr>
+                  <tr><td><code>--vision-tts-backend &lt;id&gt;</code></td><td>Fuerza un backend TTS específico</td></tr>
+                  <tr><td><code>--vision-language &lt;code&gt;</code></td><td>Anula el idioma</td></tr>
+                  <tr><td><code>--vision-voice-mode &lt;mode&gt;</code></td><td>Anula el modo de voz</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Todas las claves de configuración</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Clave</th><th>Por defecto</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>captureBackend</code></td><td><code>"auto"</code></td><td>Método de captura de pantalla</td></tr>
+                  <tr><td><code>captureInteractive</code></td><td><code>true</code></td><td>Permite diálogos de selección de monitor/ventana</td></tr>
+                  <tr><td><code>captureMaxWidth</code></td><td><code>1568</code></td><td>Dimensión máxima de la imagen antes de redimensionar (0 = sin redimensionar)</td></tr>
+                  <tr><td><code>captureJpegQuality</code></td><td><code>85</code></td><td>Calidad de compresión JPEG (0–100)</td></tr>
+                  <tr><td><code>sttBackend</code></td><td><code>"auto"</code></td><td>Backend de voz a texto</td></tr>
+                  <tr><td><code>sttModel</code></td><td><code>"whisper-1"</code></td><td>Nombre del modelo para STT vía API (OpenAI/Groq)</td></tr>
+                  <tr><td><code>ttsBackend</code></td><td><code>"auto"</code></td><td>Backend de texto a voz</td></tr>
+                  <tr><td><code>ttsModel</code></td><td><code>"tts-1"</code></td><td>Modelo TTS (OpenAI)</td></tr>
+                  <tr><td><code>ttsVoice</code></td><td><code>"alloy"</code></td><td>Voz TTS (OpenAI: alloy, echo, fable, onyx, nova, shimmer)</td></tr>
+                  <tr><td><code>language</code></td><td><code>"auto"</code></td><td>Código de idioma para STT</td></tr>
+                  <tr><td><code>voiceMode</code></td><td><code>"review"</code></td><td>Dónde va la transcripción: <code>send</code> o <code>review</code></td></tr>
+                  <tr><td><code>shortcut</code></td><td><code>null</code></td><td>Tecla rápida PTT (p. ej., <code>"ctrl+shift+space"</code>)</td></tr>
+                  <tr><td><code>voiceCommandDuration</code></td><td><code>6000</code></td><td>Duración máxima de grabación para el comando <code>/voice</code> (ms)</td></tr>
+                  <tr><td><code>liveTurnMaxMs</code></td><td><code>8000</code></td><td>Duración máxima de grabación por turno en modo en vivo (ms)</td></tr>
+                  <tr><td><code>liveAlwaysCapture</code></td><td><code>false</code></td><td>Captura la pantalla en cada frase (ignora la detección de palabras clave)</td></tr>
+                  <tr><td><code>liveWakeWord</code></td><td><code>"freecode"</code></td><td>Palabra de activación para procesar (separadas por comas para varias)</td></tr>
+                  <tr><td><code>liveSpeak</code></td><td><code>true</code></td><td>Habla las respuestas del asistente en modo en vivo</td></tr>
+                  <tr><td><code>liveIndicator</code></td><td><code>true</code></td><td>Muestra el indicador de estado cuando el modo en vivo está activo</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout tip">
+              <strong>Ejemplo: configuración en español con STT de Groq</strong><br />
+              <pre><code>export GROQ_API_KEY="gsk_..."
+/vision config language es
+/vision config sttBackend groq
+/vision config liveWakeWord "oye,free-code"
+/vision live on</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Privacy & Cost -->
+        <section class="card" aria-labelledby="vm-privacy">
+          <div class="card-header">
+            <h2 id="vm-privacy">Privacidad y costo</h2>
+            <p>Qué se captura, cuándo y cuánto cuesta.</p>
+          </div>
+          <div class="card-body">
+            <h3>Modelo de privacidad</h3>
+            <ul>
+              <li><strong>Opt-in explícito:</strong> los comandos del Modo Visión deben invocarse manualmente. El modo en vivo requiere <code>/vision live on</code>.</li>
+              <li><strong>Sin subida continua:</strong> la pantalla se captura <strong>únicamente</strong> en el momento en que haces una pregunta (o cuando se detectan palabras clave de visión en modo en vivo).</li>
+              <li><strong>Indicador visible:</strong> el modo en vivo muestra un indicador de estado (<code>👁 live · listening…</code>) para que sepas que está activo.</li>
+              <li><strong>Consentimiento del portal (Wayland):</strong> el XDG Desktop Portal muestra un diálogo de permiso antes de conceder acceso a la pantalla — consentimiento a nivel del sistema operativo.</li>
+              <li><strong>Backends locales:</strong> usa whisper.cpp (STT local) + espeak/say (TTS local) para un modo totalmente privado, sin API.</li>
+            </ul>
+
+            <h3>Costo en tokens</h3>
+            <p>Una imagen reducida (máximo 1568px, calidad JPEG 85) ≈ <strong>1.1–1.6k tokens de entrada</strong>.</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Escenario</th><th>Imágenes enviadas</th><th>Tokens de imagen estimados</th></tr></thead>
+                <tbody>
+                  <tr><td>10 preguntas con <code>/see</code></td><td>10</td><td>~11–16k</td></tr>
+                  <tr><td>Sesión en vivo de 30 preguntas (palabras clave de visión en la mitad)</td><td>15</td><td>~16–24k</td></tr>
+                  <tr><td>Sesión en vivo de 100 preguntas (liveAlwaysCapture=true)</td><td>100</td><td>~110–160k</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              En comparación con solo texto: un archivo de 500 líneas ≈ 3–5k tokens. La visión añade costo, pero el modelo de captura
+              lo mantiene razonable — no estás transmitiendo video a 30fps.
+            </p>
+
+            <h3>Presupuesto de latencia</h3>
+            <p>Objetivo: menos de 5 segundos desde que "dejas de hablar" hasta que "el agente empieza a hablar" (modo en vivo).</p>
+            <ul>
+              <li>Detección de silencio VAD: ~300ms</li>
+              <li>whisper.cpp local (modelo base): ~500–1000ms</li>
+              <li>Captura de pantalla: ~100ms</li>
+              <li>Primer token del modelo: ~1–2s (depende del proveedor/carga)</li>
+              <li>Primer fragmento de audio TTS: ~500ms (streaming)</li>
+            </ul>
+            <p>Total: ~2.4–4s en condiciones ideales. El STT de Groq puede recortar otros ~500ms (más rápido que Whisper local).</p>
+          </div>
+        </section>
+
+        <!-- Installation -->
+        <section class="card" aria-labelledby="vm-install">
+          <div class="card-header">
+            <h2 id="vm-install">Instalación y dependencias</h2>
+            <p>Qué instalar para cada backend.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              El Modo Visión está incluido en la instalación por defecto de free-code. Necesitas instalar
+              las <strong>dependencias del sistema</strong> para los backends que quieras usar.
+            </p>
+
+            <h3>Captura de pantalla</h3>
+            <p>Elige una (o instala varias; <code>auto</code> elegirá la mejor disponible):</p>
+            <ul>
+              <li><strong>Linux/Wayland:</strong> <code>xdg-desktop-portal-gnome</code> (recomendado), o <code>grim</code> / <code>gnome-screenshot</code> / <code>spectacle</code> / <code>scrot</code> / ImageMagick <code>import</code></li>
+              <li><strong>Linux/X11:</strong> <code>scrot</code> o <code>import</code></li>
+              <li><strong>macOS:</strong> <code>screencapture</code> (incorporado, no requiere instalación)</li>
+            </ul>
+            <pre><code># Ubuntu/Debian (Wayland)
+sudo apt install xdg-desktop-portal-gnome
+
+# Fedora (Wayland)
+sudo dnf install xdg-desktop-portal-gnome
+
+# Arch (Wayland)
+sudo pacman -S xdg-desktop-portal-gnome
+
+# Alternativa: scrot (X11)
+sudo apt install scrot</code></pre>
+
+            <h3>Grabación de audio</h3>
+            <p>Uno de estos:</p>
+            <ul>
+              <li><code>pw-record</code> (PipeWire, Linux moderno — normalmente preinstalado en distribuciones recientes)</li>
+              <li><code>arecord</code> (ALSA)</li>
+              <li><code>sox</code> (multiplataforma)</li>
+              <li><code>ffmpeg</code></li>
+            </ul>
+            <pre><code># Verifica si pw-record existe (PipeWire)
+which pw-record
+
+# Instala las utilidades de ALSA (incluye arecord)
+sudo apt install alsa-utils
+
+# O instala SoX
+sudo apt install sox</code></pre>
+
+            <h3>Voz a texto</h3>
+            <p><strong>Basado en API (lo más sencillo):</strong></p>
+            <pre><code># OpenAI Whisper
+export OPENAI_API_KEY="sk-..."
+
+# Groq (más rápido, nivel gratuito disponible)
+export GROQ_API_KEY="gsk_..."</code></pre>
+
+            <p><strong>Local (sin costo de API, totalmente privado):</strong></p>
+            <p>Instala <a href="https://github.com/ggerganov/whisper.cpp" target="_blank" rel="noopener">whisper.cpp</a>:</p>
+            <pre><code>git clone https://github.com/ggerganov/whisper.cpp.git
+cd whisper.cpp
+make
+# Descarga un modelo (base es rápido, small es más pequeño, large es el más preciso)
+bash ./models/download-ggml-model.sh base
+# Asegúrate de que el binario 'whisper' esté en el PATH o especifica la ruta mediante VISION_WHISPER_CPP_PATH</code></pre>
+
+            <h3>Texto a voz</h3>
+            <p><strong>Basado en API:</strong></p>
+            <pre><code>export OPENAI_API_KEY="sk-..."   # para el modelo tts-1</code></pre>
+
+            <p><strong>Local:</strong></p>
+            <pre><code># Linux: espeak
+sudo apt install espeak
+
+# macOS: say (incorporado, no requiere instalación)</code></pre>
+
+            <h3>Verificar backends</h3>
+            <p>Después de instalar las dependencias, revisa qué está disponible:</p>
+            <pre><code>/vision backends</code></pre>
+            <p>La salida muestra ✓ para los backends disponibles, ✗ para los que faltan.</p>
+          </div>
+        </section>
+
+        <!-- Examples -->
+        <section class="card" aria-labelledby="vm-examples">
+          <div class="card-header">
+            <h2 id="vm-examples">Ejemplos</h2>
+            <p>Flujos de trabajo y casos de uso comunes.</p>
+          </div>
+          <div class="card-body">
+            <h3>1. Depurar un error visual</h3>
+            <p>Abre un navegador con un stack trace o una página de error:</p>
+            <pre><code>/see what is this error and how do I fix it?</code></pre>
+            <p>El agente captura la pantalla, lee el stack trace y explica el problema.</p>
+
+            <h3>2. Revisión de código mediante pantalla compartida</h3>
+            <p>Abre un diff o PR en GitHub/GitLab:</p>
+            <pre><code>/see review this diff for potential issues</code></pre>
+
+            <h3>3. Programación en pareja manos libres</h3>
+            <p>Inicia el modo en vivo mientras programas:</p>
+            <pre><code>/vision config liveWakeWord "free-code"
+/vision config language en
+/vision live on
+
+# Ahora di: "free-code, ¿qué hace esta función?"
+# El agente captura la pantalla, ve el código y responde en voz alta.</code></pre>
+
+            <h3>4. Transcribir notas de una reunión</h3>
+            <p>Usa pulsar para hablar para grabar resúmenes sin escribir:</p>
+            <pre><code>/voice
+# Presiona la tecla rápida PTT, di las notas, suelta
+# La transcripción aparece en el editor para revisión antes de enviarla</code></pre>
+
+            <h3>5. Modo local totalmente privado</h3>
+            <p>Sin llamadas a la API, todo el procesamiento en tu máquina:</p>
+            <pre><code>/vision config sttBackend whisper-cpp
+/vision config ttsBackend espeak   # o 'say' en macOS
+/vision config captureBackend portal  # o 'scrot' en X11
+
+# Ahora todos los /see, /voice y el modo en vivo usan solo backends locales</code></pre>
+          </div>
+        </section>
+
+        <!-- Troubleshooting -->
+        <section class="card" aria-labelledby="vm-troubleshooting">
+          <div class="card-header">
+            <h2 id="vm-troubleshooting">Solución de problemas</h2>
+            <p>Problemas comunes y sus soluciones.</p>
+          </div>
+          <div class="card-body">
+            <h3>"No hay backend de captura disponible"</h3>
+            <p>Instala al menos una herramienta de captura de pantalla. Revisa qué está disponible:</p>
+            <pre><code>/vision backends</code></pre>
+            <p>En Wayland, instala <code>xdg-desktop-portal-gnome</code>. En X11, instala <code>scrot</code>.</p>
+
+            <h3>"No se encontró grabador de audio"</h3>
+            <p>Instala uno de: <code>pw-record</code>, <code>arecord</code>, <code>sox</code>, o <code>ffmpeg</code>.</p>
+            <pre><code>which pw-record arecord sox ffmpeg</code></pre>
+
+            <h3>"No se pudo redimensionar la captura (Photon no disponible)"</h3>
+            <p>Falta el recurso Photon WASM. Reinstala free-code o verifica <code>packages/coding-agent/assets/photon_rs_bg.wasm</code>.</p>
+
+            <h3>El modo en vivo no se activa con la voz</h3>
+            <p>Revisa la configuración de la palabra de activación:</p>
+            <pre><code>/vision config liveWakeWord</code></pre>
+            <p>Asegúrate de decir la palabra de activación exacta al comienzo de tu frase. Prueba:</p>
+            <pre><code>/vision config liveWakeWord "hey,oye,freecode"</code></pre>
+            <p>Esto permite que cualquiera de esas tres active el modo.</p>
+
+            <h3>Las imágenes son demasiado grandes / demasiado costosas</h3>
+            <p>Reduce la dimensión máxima o la calidad JPEG:</p>
+            <pre><code>/vision config captureMaxWidth 1200
+/vision config captureJpegQuality 75</code></pre>
+
+            <h3>El STT transcribe incorrectamente</h3>
+            <p>Establece el idioma correcto de forma explícita:</p>
+            <pre><code>/vision config language es   # para español
+/vision config language en   # para inglés</code></pre>
+
+            <h3>El TTS habla demasiado lento / con la voz equivocada</h3>
+            <p>Cambia la voz (TTS de OpenAI):</p>
+            <pre><code>/vision config ttsVoice nova   # o alloy, echo, fable, onyx, shimmer</code></pre>
+          </div>
+        </section>
+
+        <p class="footer">
+          <a href="capabilities.html">Todas las capacidades →</a> &nbsp;·&nbsp;
+          <a href="installation.html#install-vision">Instalación →</a> &nbsp;·&nbsp;
+          <a href="commands.html">Comandos →</a>
+        </p>
+        <p class="footer-credit">Impulsado por CX — desarrollado por Pablo Castañeda</p>
+      </div>
+    
+  </div>
+</div>
+    <script src="../assets/i18n.js" defer></script>
     <script src="assets/theme.js" defer></script>
   </body>
 </html>

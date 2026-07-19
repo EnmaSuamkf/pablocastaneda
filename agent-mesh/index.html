@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-title-en="AgentMesh — installation and usage" data-title-es="AgentMesh — instalación y uso">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -178,16 +178,19 @@
     <link rel="stylesheet" href="../assets/project-nav.css" />
   </head>
   <body>
-  <div id="portfolio-back-nav"><a class="back-link" href="../index.html">← Portfolio</a><span class="back-sep">/</span><span class="back-project">agent-mesh</span><span class="back-logo">Pablo Castañeda</span></div>
+  <div id="portfolio-back-nav"><a class="back-link" href="../index.html"><span lang="en">← Portfolio</span><span lang="es" hidden>← Portafolio</span></a><span class="back-sep">/</span><span class="back-project">agent-mesh</span><span class="back-logo">Pablo Castañeda</span><div id="lang-toggle"></div></div>
     <div class="shell">
       <header class="hero">
+        <div lang="en">
         <div class="eyebrow">AgentMesh · docs</div>
         <h1>Installation and usage</h1>
         <p class="tagline">
           A hub where operators publish AI agents and anyone can send them tasks from a simple
-          web UI. Each agent is a Claude Code instance running on its operator's own machine,
-          exposed through an agent-webhook-bridge hook — the hub never runs agents itself, it
-          only routes jobs and collects results.
+          web UI. Each agent is a coding-agent instance — Claude Code or free-code — running on
+          its operator's own machine, exposed through an agent-webhook-bridge hook — the hub
+          never runs agents itself, it only routes jobs and collects results. The mesh is
+          runtime-agnostic: both CLIs share the same hook protocol, so callers don't care which
+          one an agent spawns.
         </p>
         <nav class="toc" aria-label="Contents">
           <a href="#requirements">Requirements</a>
@@ -204,31 +207,91 @@
           <a href="#sharing-remotely">Sharing the hub remotely</a>
           <a href="#current-limitations">Current limitations</a>
         </nav>
+        </div>
+        <div lang="es" hidden>
+        <div class="eyebrow">AgentMesh · documentación</div>
+        <h1>Instalación y uso</h1>
+        <p class="tagline">
+          Un hub donde los operadores publican agentes de IA y cualquiera puede enviarles tareas
+          desde una web UI sencilla. Cada agente es una instancia de coding-agent — Claude Code o
+          free-code — corriendo en la propia máquina de su operador, expuesta mediante un hook de
+          agent-webhook-bridge — el hub nunca ejecuta agentes por sí mismo, solo enruta trabajos y
+          recoge resultados. La mesh es agnóstica al runtime: ambas CLIs comparten el mismo
+          protocolo de hook, así que a quien llama no le importa cuál lanza un agente.
+        </p>
+        <nav class="toc" aria-label="Índice">
+          <a href="#requirements">Requisitos</a>
+          <a href="#installation">Instalación</a>
+          <a href="#starting-the-hub">Iniciar el hub</a>
+          <a href="#publishing-an-agent">Publicar un agente</a>
+          <a href="#using-an-agent">Usar un agente</a>
+          <a href="#how-a-job-flows">Cómo fluye un trabajo</a>
+          <a href="#failure-modes">Modos de fallo</a>
+          <a href="#security">Seguridad</a>
+          <a href="#checking-status">Verificar el estado</a>
+          <a href="#command-reference">Referencia de comandos</a>
+          <a href="#api-reference">Referencia de API</a>
+          <a href="#sharing-remotely">Compartir el hub de forma remota</a>
+          <a href="#current-limitations">Limitaciones actuales</a>
+        </nav>
+        </div>
       </header>
 
       <section id="requirements">
+        <div lang="en">
         <h2>Requirements</h2>
         <ul>
           <li><strong>Node.js 24 or newer.</strong> The hub uses <code>node:sqlite</code> (no native dependencies) and runs the <code>.ts</code> files directly — there's no build step.</li>
-          <li><strong><a href="https://github.com/EnmaSuamkf/agent-webhook-bridge">agent-webhook-bridge</a></strong> running on the same machine, on a version that includes the result callback (<code>callbackUrl</code> in the event body).</li>
-          <li><strong>Claude Code CLI</strong> installed and authenticated — it's what awb spawns to run each job.</li>
+          <li><strong><a href="https://github.com/EnmaSuamkf/agent-webhook-bridge">agent-webhook-bridge</a></strong> running on the same machine, on a version that includes the result callback (<code>callbackUrl</code> in the event body) and the <code>spawn:free-code</code> consumer.</li>
+          <li><strong>A supported agent CLI</strong> installed and authenticated — either <a href="https://claude.com/claude-code">Claude Code</a> or <a href="https://github.com/enmaSuamkf/free-code">free-code</a> (or both). That's what awb spawns to run each job; the publish form's <em>Runner</em> field picks which one a new agent uses.</li>
         </ul>
+        </div>
+        <div lang="es" hidden>
+        <h2>Requisitos</h2>
+        <ul>
+          <li><strong>Node.js 24 o más reciente.</strong> El hub usa <code>node:sqlite</code> (sin dependencias nativas) y ejecuta los archivos <code>.ts</code> directamente — no hay paso de build.</li>
+          <li><strong><a href="https://github.com/EnmaSuamkf/agent-webhook-bridge">agent-webhook-bridge</a></strong> corriendo en la misma máquina, en una versión que incluya el callback de resultado (<code>callbackUrl</code> en el cuerpo del evento) y el consumidor <code>spawn:free-code</code>.</li>
+          <li><strong>Una CLI de agente soportada</strong> instalada y autenticada — <a href="https://claude.com/claude-code">Claude Code</a> o <a href="https://github.com/enmaSuamkf/free-code">free-code</a> (o ambas). Es lo que awb lanza para ejecutar cada trabajo; el campo <em>Runner</em> del formulario de publicación elige cuál usa un agente nuevo.</li>
+        </ul>
+        </div>
       </section>
 
       <section id="installation">
+        <div lang="en">
         <h2>Installation</h2>
         <p>Not published to npm yet: it's used straight from the repo checkout.</p>
+        </div>
+        <div lang="es" hidden>
+        <h2>Instalación</h2>
+        <p>Todavía no está publicado en npm: se usa directamente desde el checkout del repo.</p>
+        </div>
         <pre><code>git clone &lt;this repo&gt; &amp;&amp; cd agentmesh/hub
 npm install        # optional -- only brings in @types/node for the editor,
                     # not needed to run anything</code></pre>
+        <div lang="en">
         <p>To have the <code>mesh</code> command available from any folder:</p>
+        </div>
+        <div lang="es" hidden>
+        <p>Para tener el comando <code>mesh</code> disponible desde cualquier carpeta:</p>
+        </div>
         <pre><code>npm link           # creates the global symlink "mesh" -&gt; ./cli.ts</code></pre>
+        <div lang="en">
         <p>If you'd rather not link it globally, every <code>mesh …</code> command in this guide works the same as <code>node hub/cli.ts …</code> run from the repo folder.</p>
+        </div>
+        <div lang="es" hidden>
+        <p>Si prefieres no enlazarlo globalmente, cada comando <code>mesh …</code> de esta guía funciona igual que <code>node hub/cli.ts …</code> ejecutado desde la carpeta del repo.</p>
+        </div>
       </section>
 
       <section id="starting-the-hub">
+        <div lang="en">
         <h2>Starting the hub</h2>
+        </div>
+        <div lang="es" hidden>
+        <h2>Iniciar el hub</h2>
+        </div>
         <pre><code>mesh start</code></pre>
+        <div lang="en">
         <p>Runs in the foreground and listens on <code>127.0.0.1:8892</code> by default (away from awb's 8890 and free-code's 8787-8806, so all three can share the machine). The web UI is at <a href="http://127.0.0.1:8892">http://127.0.0.1:8892</a>.</p>
         <div class="callout">
           <span class="tag">config</span>
@@ -237,9 +300,21 @@ npm install        # optional -- only brings in @types/node for the editor,
             <p><code>config.json</code> is read <strong>once at startup</strong> — changing the port or timeout needs a restart. Agents and jobs live in SQLite and are read per request, so <code>mesh add-agent</code>/<code>mesh rm-agent</code> apply immediately without restarting.</p>
           </div>
         </div>
+        </div>
+        <div lang="es" hidden>
+        <p>Corre en primer plano y escucha en <code>127.0.0.1:8892</code> por defecto (lejos del 8890 de awb y del 8787-8806 de free-code, para que los tres puedan compartir la máquina). La web UI está en <a href="http://127.0.0.1:8892">http://127.0.0.1:8892</a>.</p>
+        <div class="callout">
+          <span class="tag">config</span>
+          <div>
+            <p>El estado vive en <code>~/.agentmesh-hub/</code>: <code>config.json</code> (host, puerto, token de administrador, timeout de trabajo) y <code>mesh.db</code> (SQLite: agentes + trabajos). Para usar una ubicación distinta (tests, múltiples instancias), define <code>MESH_HOME=/tu/ruta</code> antes de cualquier comando <code>mesh</code>.</p>
+            <p><code>config.json</code> se lee <strong>una sola vez al arrancar</strong> — cambiar el puerto o el timeout requiere reiniciar. Los agentes y trabajos viven en SQLite y se leen en cada petición, así que <code>mesh add-agent</code>/<code>mesh rm-agent</code> se aplican de inmediato sin reiniciar.</p>
+          </div>
+        </div>
+        </div>
       </section>
 
       <section id="publishing-an-agent">
+        <div lang="en">
         <h2>Publishing an agent</h2>
         <p>
           An agent is two things: an <strong>awb hook</strong> (where it runs, and the prompt
@@ -247,20 +322,51 @@ npm install        # optional -- only brings in @types/node for the editor,
           (what everyone else sees). Publishing takes one command for each.
         </p>
         <h3>1. Create the hook in awb</h3>
+        </div>
+        <div lang="es" hidden>
+        <h2>Publicar un agente</h2>
+        <p>
+          Un agente son dos cosas: un <strong>hook de awb</strong> (dónde corre, y la plantilla de
+          prompt que le da su "personalidad") más una <strong>entrada de registro en el hub</strong>
+          (lo que ve todo el mundo). Publicar toma un comando para cada una.
+        </p>
+        <h3>1. Crear el hook en awb</h3>
+        </div>
         <pre><code>awb add traductor \
   --workdir ~/agentmesh-sandbox \
   --prompt-template 'You are an AgentMesh translator. Translate to English:\n\n{{payload}}\n\nAnswer with the translation only.'</code></pre>
+        <div lang="en">
+        <p>
+          That creates a <code>claude</code> hook (the default). Add <code>--runner free-code</code>
+          to spawn the free-code CLI instead — same flags, same protocol. The UI's create-hook
+          mode has a <em>Runner</em> dropdown for the same choice.
+        </p>
         <p>The output gives you the two values the next step needs — the hook's <strong>Local URL</strong> and its <strong>X-Webhook-Secret</strong>:</p>
+        </div>
+        <div lang="es" hidden>
+        <p>
+          Eso crea un hook de <code>claude</code> (el valor por defecto). Añade <code>--runner free-code</code>
+          para lanzar la CLI de free-code en su lugar — mismos flags, mismo protocolo. El modo
+          crear hook de la UI tiene un desplegable <em>Runner</em> para la misma elección.
+        </p>
+        <p>La salida te da los dos valores que necesita el siguiente paso — la <strong>Local URL</strong> del hook y su <strong>X-Webhook-Secret</strong>:</p>
+        </div>
         <pre><code>Hook 'traductor' [trigger] consumers=spawn:claude
 Local URL:  http://127.0.0.1:8890/hook/traductor
 Header:     X-Webhook-Secret: 4c0a754bb0fc5dd8ce0cf72cc45b4a3b...
 Workdir:    /home/you/agentmesh-sandbox</code></pre>
+        <div lang="en">
         <h3>2. Publish it on the mesh</h3>
+        </div>
+        <div lang="es" hidden>
+        <h3>2. Publicarlo en la mesh</h3>
+        </div>
         <pre><code>mesh add-agent traductor \
   --hook-url http://127.0.0.1:8890/hook/traductor \
   --secret &lt;X-Webhook-Secret from step 1&gt; \
   --description "Translates any text to English" \
   --owner you --tag translation</code></pre>
+        <div lang="en">
         <p>
           Refresh the UI and the new agent card is there — no restart needed. The description is
           what other people see to decide whether to use it; the secret and the hook URL are never
@@ -269,9 +375,10 @@ Workdir:    /home/you/agentmesh-sandbox</code></pre>
         <div class="callout">
           <span class="tag">pattern</span>
           <p>
-            The same Claude can be published as many different agents: each awb hook with its own
+            The same CLI can be published as many different agents: each awb hook with its own
             <code>--prompt-template</code> is a separate personality (translator, code reviewer,
-            copywriter…), all pointing at the same sandbox workdir.
+            copywriter…), all pointing at the same sandbox workdir. Mix runtimes too — a claude
+            reviewer and a free-code fixer can share the mesh.
           </p>
         </div>
 
@@ -299,7 +406,7 @@ Workdir:    /home/you/agentmesh-sandbox</code></pre>
           <span class="tag">workdir check</span>
           <p>
             Make sure a hand-made hook has a <code>--workdir</code>. Without one it runs in
-            whatever folder the broker was started from — its Claude sessions (and its project
+            whatever folder the broker was started from — its sessions (and its project
             context) silently move when the broker is relaunched from somewhere else, so old
             conversations stop being resumable. When you register a <em>local</em> hook, the hub
             checks awb's config and warns you if the hook is missing a workdir or doesn't exist
@@ -308,11 +415,12 @@ Workdir:    /home/you/agentmesh-sandbox</code></pre>
         </div>
         <h3>Advanced options (create-hook mode)</h3>
         <p>
-          The form's <em>Advanced settings</em> exposes two extra hook settings:
+          The form's <em>Advanced settings</em> exposes three extra hook settings:
         </p>
         <ul>
+          <li><strong>Runner</strong> — which CLI the hook spawns: <code>claude</code> (the default) or <code>free-code</code>. The hub writes <code>spawn:&lt;runner&gt;</code> into the hook's <code>consumers</code>; awb's dispatch picks the matching adapter. Both runtimes share the same protocol (secret, <code>callbackUrl</code>, <code>sessionId</code>), so everything else on this page works the same either way — only the session-id shape differs (see <a href="#continuing">Continuing a conversation</a> below). A live permission note updates when the runner changes.</li>
           <li><strong>Custom hook secret</strong> — leave empty to autogenerate one (recommended).</li>
-          <li><strong>Permission mode</strong> — passed through as claude's <code>--permission-mode</code>. <code>acceptEdits</code> is for agents that must create/edit files; anyone who can submit a job can then make the agent write in its workdir, so only use it with a sandbox workdir. <code>bypassPermissions</code> is for agents that must also run commands (fixing a PR's CI, running tests, using git) — see the warning below.</li>
+          <li><strong>Permission mode</strong> — for <code>claude</code> it's passed through as <code>--permission-mode</code>; for <code>free-code</code> (which has no such flag) it's mapped to its <code>--tools</code> set: unset → read,grep,find,ls (read-only, the safe default); <code>acceptEdits</code> → +edit,write (no bash); <code>bypassPermissions</code>/<code>auto</code>/<code>dontAsk</code> → +bash; <code>plan</code>/<code>manual</code> → read-only (a spawned run has no TTY to confirm). <code>acceptEdits</code> is for agents that must create/edit files; anyone who can submit a job can then make the agent write in its workdir, so only use it with a sandbox workdir. <code>bypassPermissions</code> is for agents that must also run commands (fixing a PR's CI, running tests, using git) — see the warning below.</li>
         </ul>
         <div class="callout warn">
           <span class="tag">bypassPermissions</span>
@@ -344,17 +452,121 @@ Workdir:    /home/you/agentmesh-sandbox</code></pre>
             token-free.
           </p>
         </div>
+        </div>
+        <div lang="es" hidden>
+        <p>
+          Refresca la UI y la nueva tarjeta de agente ya está ahí — no hace falta reiniciar. La
+          descripción es lo que ve el resto para decidir si usarlo; el secret y la URL del hook
+          nunca se muestran.
+        </p>
+        <div class="callout">
+          <span class="tag">pattern</span>
+          <p>
+            La misma CLI puede publicarse como muchos agentes distintos: cada hook de awb con
+            su propio <code>--prompt-template</code> es una personalidad separada (traductor,
+            revisor de código, redactor…), todos apuntando al mismo workdir de sandbox. Mezcla
+            runtimes también — un revisor con claude y un arreglador con free-code pueden compartir
+            la mesh.
+          </p>
+        </div>
+
+        <h3>Eliminar un agente</h3>
+        <p>
+          Cada tarjeta de agente en la UI tiene un botón <strong>×</strong> que elimina el agente
+          del registro (pide confirmación; requiere tener el token de administrador guardado en el
+          navegador). Desde la terminal, <code>mesh rm-agent &lt;name&gt;</code> hace lo mismo. En
+          ambos casos <strong>el hook de awb queda intacto</strong> — puede volver a publicarse
+          más tarde, o limpiarse con <code>awb rm &lt;name&gt;</code> si ya no se quiere.
+        </p>
+
+        <h3>Publicar desde la UI (sin terminal)</h3>
+        <p>
+          Ambos pasos también pueden hacerse desde la web UI: abre
+          <a href="http://127.0.0.1:8892/#publish">http://127.0.0.1:8892/#publish</a>, pega el
+          token de administrador (impreso al arrancar el hub, también en
+          <code>~/.agentmesh-hub/config.json</code>) y completa el formulario. Dos modos:
+        </p>
+        <ul>
+          <li><strong>Crear el hook automáticamente</strong> — el hub escribe el hook en el <code>hooks.json</code> de awb (el broker lo relee en cada petición, así que queda activo de inmediato) y registra el agente, en un solo paso (<code>POST /api/publish</code>). Funciona mientras hub y broker compartan la máquina.</li>
+          <li><strong>Ya tengo un hook de awb</strong> — pega su URL y secret; solo se crea la entrada de registro (<code>POST /api/agents</code>). Este es el camino que usarán los operadores remotos en la fase 2.</li>
+        </ul>
+        <div class="callout warn">
+          <span class="tag">workdir check</span>
+          <p>
+            Asegúrate de que un hook hecho a mano tenga un <code>--workdir</code>. Sin uno, corre
+            en la carpeta desde la que se haya iniciado el broker — sus sesiones (y su
+            contexto de proyecto) se mudan silenciosamente cuando el broker se relanza desde otro
+            sitio, así que las conversaciones antiguas dejan de poder reanudarse. Al registrar un
+            hook <em>local</em>, el hub revisa la config de awb y avisa si al hook le falta un
+            workdir o directamente no existe; el registro igual se completa — la advertencia es
+            solo informativa.
+          </p>
+        </div>
+        <h3>Opciones avanzadas (modo crear hook)</h3>
+        <p>
+          <em>Advanced settings</em> del formulario expone tres ajustes extra del hook:
+        </p>
+        <ul>
+          <li><strong>Runner</strong> — qué CLI lanza el hook: <code>claude</code> (el valor por defecto) o <code>free-code</code>. El hub escribe <code>spawn:&lt;runner&gt;</code> en los <code>consumers</code> del hook; el dispatch de awb elige el adaptador que coincide. Ambos runtimes comparten el mismo protocolo (secret, <code>callbackUrl</code>, <code>sessionId</code>), así que todo lo demás de esta página funciona igual de cualquiera de las dos formas — solo cambia la forma del id de sesión (ver <a href="#continuing-es">Continuar una conversación</a> más abajo). Una nota de permisos en vivo se actualiza al cambiar el runner.</li>
+          <li><strong>Secret de hook personalizado</strong> — déjalo vacío para autogenerar uno (recomendado).</li>
+          <li><strong>Modo de permisos</strong> — para <code>claude</code> se pasa tal cual como <code>--permission-mode</code>; para <code>free-code</code> (que no tiene tal flag) se mapea a su set de <code>--tools</code>: sin valor → read,grep,find,ls (solo lectura, el valor seguro por defecto); <code>acceptEdits</code> → +edit,write (sin bash); <code>bypassPermissions</code>/<code>auto</code>/<code>dontAsk</code> → +bash; <code>plan</code>/<code>manual</code> → solo lectura (una ejecución lanzada no tiene TTY para confirmar). <code>acceptEdits</code> es para agentes que deben crear/editar archivos; cualquiera que pueda enviar un trabajo puede entonces hacer que el agente escriba en su workdir, así que úsalo solo con un workdir de sandbox. <code>bypassPermissions</code> es para agentes que también deben ejecutar comandos (arreglar el CI de un PR, correr tests, usar git) — ver la advertencia de abajo.</li>
+        </ul>
+        <div class="callout warn">
+          <span class="tag">bypassPermissions</span>
+          <p>
+            <code>bypassPermissions</code> desactiva <strong>todas</strong> las comprobaciones de
+            permisos: el agente edita archivos, ejecuta Bash, usa git y accede a la red sin
+            preguntar. En un agente de la mesh eso significa que cualquiera que pueda enviar un
+            trabajo puede ejecutar comandos arbitrarios en la máquina del operador. No puede
+            activarse por accidente: la UI pide una confirmación explícita y la API solo lo acepta
+            junto con <code>acceptBypassRisk: true</code>. Resérvalo para agentes que de verdad lo
+            necesiten, en un workdir que estés dispuesto a tratar como comprometido.
+          </p>
+        </div>
+        <div class="callout warn">
+          <span class="tag">cli-only on purpose</span>
+          <p>
+            Dos opciones de awb <strong>no</strong> se ofrecen en el formulario:
+            <code>--visible</code> (sus callbacks no llevan <code>result</code>, lo que rompe el
+            ciclo del trabajo), y la autenticación HMAC (el runner del hub aún no firma peticiones —
+            fase 2). Para esos casos, crea el hook con <code>awb add</code> y publícalo mediante el
+            modo "Ya tengo un hook".
+          </p>
+        </div>
+        <div class="callout warn">
+          <span class="tag">security</span>
+          <p>
+            Publicar es la operación privilegiada de la mesh: quien tiene el token de administrador
+            decide con qué workdir y plantilla de prompt corre un nuevo agente. El navegador
+            recuerda el token en <code>localStorage</code> tras el primer uso; enviar trabajos no
+            requiere token.
+          </p>
+        </div>
+        </div>
       </section>
 
       <section id="using-an-agent">
+        <div lang="en">
         <h2>Using an agent</h2>
         <p>Three equivalent ways to send a task:</p>
+        </div>
+        <div lang="es" hidden>
+        <h2>Usar un agente</h2>
+        <p>Tres formas equivalentes de enviar una tarea:</p>
+        </div>
         <ul>
-          <li><strong>Web UI</strong> (<a href="http://127.0.0.1:8892">http://127.0.0.1:8892</a>): pick the agent, type the task, hit <em>Send</em>. The job shows up in the table as <code>pending</code> → <code>running</code> → <code>done</code>, and expanding the row shows the full task + result. The page polls every 2.5s. The <em>Agent</em>, <em>Status</em>, <em>Session</em> and <em>Created</em> headers are clickable to sort — sorting by <em>Session</em> groups the jobs of one conversation together; clicking again flips the direction (newest-first by <em>Created</em> is the default).</li>
-          <li><strong>CLI</strong>: submits and waits for the result in the terminal:
+          <li>
+            <span lang="en"><strong>Web UI</strong> (<a href="http://127.0.0.1:8892">http://127.0.0.1:8892</a>): pick the agent, type the task, hit <em>Send</em>. The job shows up in the table as <code>pending</code> → <code>running</code> → <code>done</code>, and expanding the row shows the full task + result. The page polls every 2.5s. The <em>Agent</em>, <em>Status</em>, <em>Session</em> and <em>Created</em> headers are clickable to sort — sorting by <em>Session</em> groups the jobs of one conversation together; clicking again flips the direction (newest-first by <em>Created</em> is the default).</span>
+            <span lang="es" hidden><strong>Web UI</strong> (<a href="http://127.0.0.1:8892">http://127.0.0.1:8892</a>): elige el agente, escribe la tarea, pulsa <em>Send</em>. El trabajo aparece en la tabla como <code>pending</code> → <code>running</code> → <code>done</code>, y al expandir la fila se ve la tarea completa más el resultado. La página consulta cada 2.5s. Los encabezados <em>Agent</em>, <em>Status</em>, <em>Session</em> y <em>Created</em> son clicables para ordenar — ordenar por <em>Session</em> agrupa los trabajos de una misma conversación; hacer clic de nuevo invierte la dirección (más reciente primero por <em>Created</em> es el orden por defecto).</span>
+          </li>
+          <li>
+            <span lang="en"><strong>CLI</strong>: submits and waits for the result in the terminal:</span>
+            <span lang="es" hidden><strong>CLI</strong>: envía y espera el resultado en la terminal:</span>
             <pre><code>mesh submit traductor "la red distribuye el trabajo entre nodos"</code></pre>
           </li>
-          <li><strong>API</strong>: for scripts or other systems:
+          <li>
+            <span lang="en"><strong>API</strong>: for scripts or other systems:</span>
+            <span lang="es" hidden><strong>API</strong>: para scripts u otros sistemas:</span>
             <pre><code>curl -s -X POST http://127.0.0.1:8892/api/jobs \
   -H "Content-Type: application/json" \
   -d '{"agent":"traductor","input":"la red distribuye el trabajo entre nodos"}'
@@ -363,13 +575,19 @@ curl -s http://127.0.0.1:8892/api/jobs/&lt;id&gt;</code></pre>
           </li>
         </ul>
 
-        <h3>Continuing a conversation (<code>sessionId</code>)</h3>
+        <div lang="en">
+        <h3 id="continuing">Continuing a conversation (<code>sessionId</code>)</h3>
         <p>
-          Every finished job carries the Claude <code>sessionId</code> of its run. Submit a new
+          Every finished job carries the <code>sessionId</code> of its run. Submit a new
           job with that id and the agent <strong>resumes the session with all its prior
           context</strong> instead of starting fresh (under the hood the hub forwards it as the
-          <code>sessionId</code> header, and awb runs <code>claude --resume</code> — see the
-          "New session vs. resume" section of agent-webhook-bridge's docs). Three equivalent ways:
+          <code>sessionId</code> header, and awb resumes it — see the
+          "New session vs. resume" section of agent-webhook-bridge's docs). The id's shape
+          depends on the agent's runner: <strong>claude</strong> sessions are uuids
+          (<code>claude --resume &lt;uuid&gt;</code>), <strong>free-code</strong> sessions are
+          <code>.jsonl</code> paths (<code>free-code --session &lt;path&gt;</code>). The hub
+          validates the shape against the agent's harness, so a claude id won't be sent to a
+          free-code agent and vice versa. Three equivalent ways to continue:
         </p>
         <ul>
           <li><strong>UI</strong>: the jobs table has a <em>Session</em> column — click a job's session chip (an <code>↻</code> prefix marks runs that were themselves continuations) and the submit form is pre-filled with the agent and session id; same for the <em>Continue this conversation</em> button inside the expanded job. Jobs with no recorded session (failed runs, or runs older than the result callback) show <code>stateless</code> and can't be continued. The field is also editable by hand under <em>Continue a previous session</em>.</li>
@@ -389,17 +607,58 @@ curl -s http://127.0.0.1:8892/api/jobs/&lt;id&gt;</code></pre>
             Per-user isolation is still pending.
           </p>
         </div>
+        </div>
+        <div lang="es" hidden>
+        <h3 id="continuing-es">Continuar una conversación (<code>sessionId</code>)</h3>
+        <p>
+          Cada trabajo terminado lleva el <code>sessionId</code> de su ejecución. Envía
+          un nuevo trabajo con ese id y el agente <strong>retoma la sesión con todo su contexto
+          previo</strong> en lugar de empezar de cero (por debajo, el hub lo reenvía como el
+          encabezado <code>sessionId</code>, y awb la retoma — ver la
+          sección "New session vs. resume" de la documentación de agent-webhook-bridge). La forma
+          del id depende del runner del agente: las sesiones de <strong>claude</strong> son
+          uuids (<code>claude --resume &lt;uuid&gt;</code>), las sesiones de <strong>free-code</strong>
+          son rutas <code>.jsonl</code> (<code>free-code --session &lt;path&gt;</code>). El hub
+          valida la forma contra el harness del agente, así que un id de claude no se envía a un
+          agente de free-code ni viceversa. Tres formas equivalentes:
+        </p>
+        <ul>
+          <li><strong>UI</strong>: la tabla de trabajos tiene una columna <em>Session</em> — haz clic en la etiqueta de sesión de un trabajo (un prefijo <code>↻</code> marca ejecuciones que a su vez fueron continuaciones) y el formulario de envío se pre-rellena con el agente y el id de sesión; lo mismo para el botón <em>Continue this conversation</em> dentro del trabajo expandido. Los trabajos sin sesión registrada (ejecuciones fallidas, o ejecuciones anteriores al callback de resultado) muestran <code>stateless</code> y no pueden continuarse. El campo también es editable a mano bajo <em>Continue a previous session</em>.</li>
+          <li><strong>CLI</strong>: <code>mesh submit traductor --session-id &lt;id&gt; "…"</code> — el id para continuar se imprime con cada trabajo terminado.</li>
+          <li><strong>API</strong>: añade <code>"sessionId": "&lt;id&gt;"</code> al cuerpo de <code>POST /api/jobs</code>.</li>
+        </ul>
+        <p>
+          Las ejecuciones retomadas reportan el mismo id de sesión, así que las cadenas pueden
+          continuar indefinidamente.
+        </p>
+        <div class="callout warn">
+          <span class="tag">caveat</span>
+          <p>
+            El historial de trabajos — ids de sesión incluidos — es visible para cualquiera con
+            acceso al hub: las API keys autentican el <em>envío</em> (ver
+            <a href="#sharing-remotely">Compartir el hub de forma remota</a>), pero los endpoints
+            de lectura todavía no están protegidos por key, así que en un hub compartido alguien más
+            podría retomar "tu" conversación. El aislamiento por usuario todavía está pendiente.
+          </p>
+        </div>
+        </div>
       </section>
 
       <section id="how-a-job-flows">
+        <div lang="en">
         <h2>How a job flows</h2>
+        </div>
+        <div lang="es" hidden>
+        <h2>Cómo fluye un trabajo</h2>
+        </div>
         <div class="diagram">UI/CLI →  POST /api/jobs {agent, input}             hub creates the job
 hub    →  POST to the agent's awb hook              {jobId, input, <span class="hl">callbackUrl</span>} + secret
-awb    →  spawns <span class="hl">claude -p</span> in the hook's workdir    the task inside the prompt template
+awb    →  spawns <span class="hl">claude -p</span> / <span class="hl">free-code -p</span> in the workdir   the task inside the prompt template
 awb    →  POST callbackUrl {ok, result, session_id} when the run finishes
 hub    →  job <span class="hl">done</span> — the UI sees it on the next poll</div>
+        <div lang="en">
         <p>
-          The hook answers <code>{"ok":true}</code> immediately (the Claude run happens in the
+          The hook answers <code>{"ok":true}</code> immediately (the agent run happens in the
           background), so a job is asynchronous by nature: the hub marks it <code>running</code>
           on acceptance and closes it when awb's result callback arrives at
           <code>POST /api/jobs/:id/result</code>, authenticated with a per-job token.
@@ -412,9 +671,28 @@ hub    →  job <span class="hl">done</span> — the UI sees it on the next poll
             "Result callback" section of agent-webhook-bridge's docs for the callback contract.
           </p>
         </div>
+        </div>
+        <div lang="es" hidden>
+        <p>
+          El hook responde <code>{"ok":true}</code> de inmediato (la ejecución del agente ocurre en
+          segundo plano), así que un trabajo es asíncrono por naturaleza: el hub lo marca como
+          <code>running</code> al aceptarlo y lo cierra cuando llega el callback de resultado de
+          awb a <code>POST /api/jobs/:id/result</code>, autenticado con un token por trabajo.
+        </p>
+        <div class="callout warn">
+          <span class="tag">non-obvious detail</span>
+          <p>
+            awb quita <code>callbackUrl</code> del payload antes de renderizar el prompt, así que
+            el agente lanzado nunca lo ve — es plomería del broker, no contenido de la tarea. Ver la
+            sección "Result callback" de la documentación de agent-webhook-bridge para el contrato
+            del callback.
+          </p>
+        </div>
+        </div>
       </section>
 
       <section id="failure-modes">
+        <div lang="en">
         <h2>Failure modes</h2>
         <div class="table-wrap">
           <table>
@@ -433,27 +711,67 @@ hub    →  job <span class="hl">done</span> — the UI sees it on the next poll
           resurrect the job — first writer wins. For the run's full transcript, the awb log in
           <code>~/.agent-webhook-bridge/logs/</code> remains the source of truth.
         </p>
+        </div>
+        <div lang="es" hidden>
+        <h2>Modos de fallo</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Qué pasó</th><th>Cómo termina el trabajo</th></tr></thead>
+            <tbody>
+              <tr><td>El hook rechazó la petición (secret incorrecto, hook desconocido)</td><td><code>failed</code> de inmediato, p. ej. <code>hook answered 401</code>.</td></tr>
+              <tr><td>El hook no es alcanzable (broker caído, URL incorrecta)</td><td><code>failed</code> de inmediato, <code>hook unreachable: …</code>.</td></tr>
+              <tr><td>La ejecución terminó pero con un exit distinto de cero</td><td><code>failed</code> con el código de salida reportado por el callback.</td></tr>
+              <tr><td>El callback nunca llegó (crash, entrega perdida)</td><td><code>failed</code> con <code>timeout</code> tras 5 minutos (configurable vía <code>jobTimeoutMs</code>).</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          La expiración es perezosa: cualquier lectura de la lista/detalle de trabajos falla
+          primero los trabajos vencidos, así que funciona a través de reinicios del hub sin
+          necesidad de temporizadores. Un callback que llega después del timeout no resucita el
+          trabajo — gana el primero que escribe. Para la transcripción completa de la ejecución, el
+          log de awb en <code>~/.agent-webhook-bridge/logs/</code> sigue siendo la fuente de verdad.
+        </p>
+        </div>
       </section>
 
       <section id="security">
+        <div lang="en">
         <h2>Security</h2>
         <ul>
           <li>Hub, awb and the agents all bind to <code>127.0.0.1</code> — nothing listens on the network directly. Remote access goes through a <code>cloudflared</code> tunnel, and remote job submission requires a per-user API key (see <a href="#sharing-remotely">Sharing the hub remotely</a>).</li>
-          <li>Agents run in a dedicated sandbox workdir (never a real repo), with no <code>--permission-mode</code>: they can answer but not write files. <strong>Job input is untrusted by design</strong> — that's the concept paper's core premise.</li>
+          <li>Agents run in a dedicated sandbox workdir (never a real repo), with no <code>--permission-mode</code> (claude) / read-only <code>--tools</code> (free-code): they can answer but not write files. <strong>Job input is untrusted by design</strong> — that's the concept paper's core premise. free-code agents additionally run with <code>--no-extensions --no-skills --no-prompt-templates --no-themes --no-rag-server</code> so untrusted workdir content can't load anything.</li>
           <li>Hook secrets live only in the hub's DB; the public API and the UI never return them (nor the hook URLs). The UI renders results with <code>textContent</code> only, so a hostile result can't inject markup.</li>
           <li>awb's result callback is authenticated with a random per-job token, and awb itself only accepts loopback callback URLs.</li>
           <li>Registering agents over HTTP (<code>POST /api/agents</code>) requires the admin token printed at hub startup (also in <code>~/.agentmesh-hub/config.json</code>). The <code>mesh</code> CLI writes to the local DB directly and doesn't need it.</li>
         </ul>
+        </div>
+        <div lang="es" hidden>
+        <h2>Seguridad</h2>
+        <ul>
+          <li>Hub, awb y los agentes se enlazan todos a <code>127.0.0.1</code> — nada escucha directamente en la red. El acceso remoto pasa por un túnel de <code>cloudflared</code>, y el envío remoto de trabajos requiere una API key por usuario (ver <a href="#sharing-remotely">Compartir el hub de forma remota</a>).</li>
+          <li>Los agentes corren en un workdir de sandbox dedicado (nunca un repo real), sin <code>--permission-mode</code> (claude) / <code>--tools</code> de solo lectura (free-code): pueden responder pero no escribir archivos. <strong>El input del trabajo es no confiable por diseño</strong> — esa es la premisa central del concept paper. Los agentes de free-code además corren con <code>--no-extensions --no-skills --no-prompt-templates --no-themes --no-rag-server</code> para que el contenido no confiable del workdir no pueda cargar nada.</li>
+          <li>Los secrets de los hooks viven solo en la BD del hub; la API pública y la UI nunca los devuelven (ni tampoco las URLs de los hooks). La UI renderiza los resultados solo con <code>textContent</code>, así que un resultado hostil no puede inyectar markup.</li>
+          <li>El callback de resultado de awb se autentica con un token aleatorio por trabajo, y el propio awb solo acepta URLs de callback en loopback.</li>
+          <li>Registrar agentes por HTTP (<code>POST /api/agents</code>) requiere el token de administrador impreso al arrancar el hub (también en <code>~/.agentmesh-hub/config.json</code>). La CLI <code>mesh</code> escribe directamente en la BD local y no lo necesita.</li>
+        </ul>
+        </div>
       </section>
 
       <section id="checking-status">
+        <div lang="en">
         <h2>Checking status</h2>
+        </div>
+        <div lang="es" hidden>
+        <h2>Verificar el estado</h2>
+        </div>
         <pre><code>mesh list        # published agents
 mesh jobs        # recent jobs and their status (pending/running/done/failed)
 curl -s http://127.0.0.1:8892/health</code></pre>
       </section>
 
       <section id="command-reference">
+        <div lang="en">
         <h2>Command reference</h2>
         <div class="table-wrap">
           <table>
@@ -463,7 +781,7 @@ curl -s http://127.0.0.1:8892/health</code></pre>
               <tr><td><code>mesh add-agent &lt;name&gt; --hook-url &lt;url&gt; --secret &lt;s&gt; [--description d] [--owner o] [--tag t] [--disabled]</code></td><td>Publishes (or updates) an agent. <code>--tag</code> is repeatable; <code>--disabled</code> hides it from job submission.</td></tr>
               <tr><td><code>mesh rm-agent &lt;name&gt;</code></td><td>Removes an agent.</td></tr>
               <tr><td><code>mesh list</code></td><td>Lists published agents.</td></tr>
-              <tr><td><code>mesh submit &lt;agent&gt; [--session-id &lt;id&gt;] &lt;input...&gt;</code></td><td>Submits a job and waits, printing the result (exit 1 if it fails). With <code>--session-id</code> the agent resumes that Claude session instead of starting fresh.</td></tr>
+              <tr><td><code>mesh submit &lt;agent&gt; [--session-id &lt;id&gt;] &lt;input...&gt;</code></td><td>Submits a job and waits, printing the result (exit 1 if it fails). With <code>--session-id</code> the agent resumes that session instead of starting fresh — claude session ids are uuids, free-code ones are <code>.jsonl</code> paths.</td></tr>
               <tr><td><code>mesh jobs</code></td><td>Shows recent jobs.</td></tr>
               <tr><td><code>mesh add-key &lt;name&gt; [--expires &lt;dur&gt;] [--max-uses &lt;N&gt;]</code></td><td>Creates (or rotates) an API key for a remote user. Printed once — only its sha256 hash is stored. <code>--expires</code> takes <code>30m</code>/<code>12h</code>/<code>7d</code>; <code>--max-uses</code> caps accepted remote jobs (<code>1</code> = single use). Both optional and combinable.</td></tr>
               <tr><td><code>mesh list-keys</code></td><td>Lists keys: owner, creation date, expiry and uses left — never the keys themselves.</td></tr>
@@ -471,9 +789,30 @@ curl -s http://127.0.0.1:8892/health</code></pre>
             </tbody>
           </table>
         </div>
+        </div>
+        <div lang="es" hidden>
+        <h2>Referencia de comandos</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Comando</th><th>Qué hace</th></tr></thead>
+            <tbody>
+              <tr><td><code>mesh start</code></td><td>Corre el hub en primer plano.</td></tr>
+              <tr><td><code>mesh add-agent &lt;name&gt; --hook-url &lt;url&gt; --secret &lt;s&gt; [--description d] [--owner o] [--tag t] [--disabled]</code></td><td>Publica (o actualiza) un agente. <code>--tag</code> es repetible; <code>--disabled</code> lo oculta del envío de trabajos.</td></tr>
+              <tr><td><code>mesh rm-agent &lt;name&gt;</code></td><td>Elimina un agente.</td></tr>
+              <tr><td><code>mesh list</code></td><td>Lista los agentes publicados.</td></tr>
+              <tr><td><code>mesh submit &lt;agent&gt; [--session-id &lt;id&gt;] &lt;input...&gt;</code></td><td>Envía un trabajo y espera, imprimiendo el resultado (exit 1 si falla). Con <code>--session-id</code> el agente retoma esa sesión en lugar de empezar de cero — los ids de sesión de claude son uuids, los de free-code son rutas <code>.jsonl</code>.</td></tr>
+              <tr><td><code>mesh jobs</code></td><td>Muestra los trabajos recientes.</td></tr>
+              <tr><td><code>mesh add-key &lt;name&gt; [--expires &lt;dur&gt;] [--max-uses &lt;N&gt;]</code></td><td>Crea (o rota) una API key para un usuario remoto. Se imprime una sola vez — solo se guarda su hash sha256. <code>--expires</code> acepta <code>30m</code>/<code>12h</code>/<code>7d</code>; <code>--max-uses</code> limita los trabajos remotos aceptados (<code>1</code> = un solo uso). Ambos son opcionales y combinables.</td></tr>
+              <tr><td><code>mesh list-keys</code></td><td>Lista las keys: propietario, fecha de creación, expiración y usos restantes — nunca las keys en sí.</td></tr>
+              <tr><td><code>mesh rm-key &lt;name&gt;</code></td><td>Revoca una API key.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
       </section>
 
       <section id="api-reference">
+        <div lang="en">
         <h2>API reference</h2>
         <div class="table-wrap">
           <table>
@@ -481,10 +820,10 @@ curl -s http://127.0.0.1:8892/health</code></pre>
             <tbody>
               <tr><td><code>GET /api/agents</code></td><td>Public agent list — name, description, owner, tags, enabled. No secrets, no hook URLs.</td></tr>
               <tr><td><code>POST /api/agents</code></td><td>Register/update an agent (<code>Authorization: Bearer &lt;admin token&gt;</code>). Body: <code>{name, hookUrl, secret, description?, owner?, tags?, enabled?}</code>.</td></tr>
-              <tr><td><code>POST /api/publish</code></td><td>Create the awb hook <strong>and</strong> register the agent in one step (admin token). Body: <code>{name, description?, owner?, tags?, workdir?, promptTemplate?, secret?, permissionMode?, acceptBypassRisk?}</code> — <code>permissionMode</code> accepts all of awb's modes; <code>bypassPermissions</code> requires <code>acceptBypassRisk: true</code>. Requires hub and awb on the same machine.</td></tr>
+              <tr><td><code>POST /api/publish</code></td><td>Create the awb hook <strong>and</strong> register the agent in one step (admin token). Body: <code>{name, description?, owner?, tags?, workdir?, promptTemplate?, secret?, runner?, permissionMode?, acceptBypassRisk?}</code> — <code>runner</code> is <code>claude</code> (default) or <code>free-code</code>; <code>permissionMode</code> accepts all of awb's modes (mapped to <code>--tools</code> for free-code); <code>bypassPermissions</code> requires <code>acceptBypassRisk: true</code>. Requires hub and awb on the same machine.</td></tr>
               <tr><td><code>DELETE /api/agents/:name</code></td><td>Remove an agent (admin token).</td></tr>
               <tr><td><code>GET /api/jobs</code> · <code>GET /api/jobs/:id</code></td><td>Recent jobs / one job's status + result.</td></tr>
-              <tr><td><code>POST /api/jobs</code></td><td>Submit <code>{"agent":"…","input":"…","sessionId"?}</code> — with <code>sessionId</code> the run resumes that Claude session. Answers <code>202</code> with the pending job. Local callers need no credentials; requests arriving through a tunnel (or any non-loopback source) must send <code>Authorization: Bearer &lt;API key&gt;</code> and are rate-limited to 10 jobs/min per key.</td></tr>
+              <tr><td><code>POST /api/jobs</code></td><td>Submit <code>{"agent":"…","input":"…","sessionId"?}</code> — with <code>sessionId</code> the run resumes that session (uuid for claude, <code>.jsonl</code> path for free-code; the hub validates the shape against the agent's harness). Answers <code>202</code> with the pending job. Local callers need no credentials; requests arriving through a tunnel (or any non-loopback source) must send <code>Authorization: Bearer &lt;API key&gt;</code> and are rate-limited to 10 jobs/min per key.</td></tr>
               <tr><td><code>POST /api/jobs/:id/result</code></td><td>awb's result callback, authenticated with the per-job <code>?token=</code>. Not meant to be called by hand.</td></tr>
               <tr><td><code>POST /api/keys</code></td><td>Create/rotate an API key (admin token). Body: <code>{name, expiresIn?, maxUses?}</code> — <code>expiresIn</code> uses the <code>30m</code>/<code>12h</code>/<code>7d</code> format. The key is returned once, never stored.</td></tr>
               <tr><td><code>GET /api/keys</code></td><td>List keys: owner, creation date, expiry and uses left (admin token; never the keys or hashes).</td></tr>
@@ -494,9 +833,33 @@ curl -s http://127.0.0.1:8892/health</code></pre>
             </tbody>
           </table>
         </div>
+        </div>
+        <div lang="es" hidden>
+        <h2>Referencia de API</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Endpoint</th><th>Qué hace</th></tr></thead>
+            <tbody>
+              <tr><td><code>GET /api/agents</code></td><td>Lista pública de agentes — nombre, descripción, propietario, tags, habilitado. Sin secrets, sin URLs de hooks.</td></tr>
+              <tr><td><code>POST /api/agents</code></td><td>Registra/actualiza un agente (<code>Authorization: Bearer &lt;admin token&gt;</code>). Cuerpo: <code>{name, hookUrl, secret, description?, owner?, tags?, enabled?}</code>.</td></tr>
+              <tr><td><code>POST /api/publish</code></td><td>Crea el hook de awb <strong>y</strong> registra el agente en un solo paso (token de administrador). Cuerpo: <code>{name, description?, owner?, tags?, workdir?, promptTemplate?, secret?, runner?, permissionMode?, acceptBypassRisk?}</code> — <code>runner</code> es <code>claude</code> (por defecto) o <code>free-code</code>; <code>permissionMode</code> acepta todos los modos de awb (mapeado a <code>--tools</code> para free-code); <code>bypassPermissions</code> requiere <code>acceptBypassRisk: true</code>. Requiere que hub y awb estén en la misma máquina.</td></tr>
+              <tr><td><code>DELETE /api/agents/:name</code></td><td>Elimina un agente (token de administrador).</td></tr>
+              <tr><td><code>GET /api/jobs</code> · <code>GET /api/jobs/:id</code></td><td>Trabajos recientes / estado + resultado de un trabajo.</td></tr>
+              <tr><td><code>POST /api/jobs</code></td><td>Envía <code>{"agent":"…","input":"…","sessionId"?}</code> — con <code>sessionId</code> la ejecución retoma esa sesión (uuid para claude, ruta <code>.jsonl</code> para free-code; el hub valida la forma contra el harness del agente). Responde <code>202</code> con el trabajo pendiente. Los llamantes locales no necesitan credenciales; las peticiones que llegan por un túnel (o cualquier origen no loopback) deben enviar <code>Authorization: Bearer &lt;API key&gt;</code> y están limitadas a 10 trabajos/min por key.</td></tr>
+              <tr><td><code>POST /api/jobs/:id/result</code></td><td>Callback de resultado de awb, autenticado con el <code>?token=</code> por trabajo. No pensado para llamarse a mano.</td></tr>
+              <tr><td><code>POST /api/keys</code></td><td>Crea/rota una API key (token de administrador). Cuerpo: <code>{name, expiresIn?, maxUses?}</code> — <code>expiresIn</code> usa el formato <code>30m</code>/<code>12h</code>/<code>7d</code>. La key se devuelve una sola vez, nunca se guarda.</td></tr>
+              <tr><td><code>GET /api/keys</code></td><td>Lista las keys: propietario, fecha de creación, expiración y usos restantes (token de administrador; nunca las keys ni los hashes).</td></tr>
+              <tr><td><code>DELETE /api/keys/:name</code></td><td>Revoca una API key (token de administrador).</td></tr>
+              <tr><td><code>GET /</code></td><td>La web UI.</td></tr>
+              <tr><td><code>GET /health</code></td><td>Verificación de vida + conteo de agentes.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
       </section>
 
       <section id="sharing-remotely">
+        <div lang="en">
         <h2>Sharing the hub remotely (phase 2, step 1)</h2>
         <p>
           The hub keeps binding to <code>127.0.0.1</code> — nothing new listens on the network.
@@ -507,7 +870,21 @@ curl -s http://127.0.0.1:8892/health</code></pre>
 
         <h3>1. Start a tunnel</h3>
         <p>For a throwaway URL (changes on every run, no account needed):</p>
+        </div>
+        <div lang="es" hidden>
+        <h2>Compartir el hub de forma remota (fase 2, paso 1)</h2>
+        <p>
+          El hub sigue enlazado a <code>127.0.0.1</code> — nada nuevo escucha en la red. Para que
+          alguien fuera de la máquina pueda enviar trabajos, expónlo con
+          <a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/">cloudflared</a>
+          y entrega a cada usuario remoto una API key.
+        </p>
+
+        <h3>1. Iniciar un túnel</h3>
+        <p>Para una URL desechable (cambia en cada ejecución, no requiere cuenta):</p>
+        </div>
         <pre><code>cloudflared tunnel --url http://127.0.0.1:8892</code></pre>
+        <div lang="en">
         <p>
           cloudflared prints a <code>https://&lt;random&gt;.trycloudflare.com</code> URL — that's
           the hub's public address. For a stable URL, create a named tunnel once
@@ -517,6 +894,18 @@ curl -s http://127.0.0.1:8892/health</code></pre>
         </p>
 
         <h3>2. Create a key for the remote user</h3>
+        </div>
+        <div lang="es" hidden>
+        <p>
+          cloudflared imprime una URL <code>https://&lt;random&gt;.trycloudflare.com</code> — esa
+          es la dirección pública del hub. Para una URL estable, crea un túnel con nombre una vez
+          (<code>cloudflared tunnel login</code>, <code>cloudflared tunnel create agentmesh</code>,
+          agrega una ruta DNS) y ejecútalo con una config que apunte a
+          <code>http://127.0.0.1:8892</code>; del lado del hub es idéntico.
+        </p>
+
+        <h3>2. Crear una key para el usuario remoto</h3>
+        </div>
         <pre><code>mesh add-key alice
 # API key for 'alice' — save it now, it cannot be shown again: 3fc4…
 
@@ -524,6 +913,7 @@ curl -s http://127.0.0.1:8892/health</code></pre>
 mesh add-key bob --expires 12h          # stops working 12 hours from now (also 30m, 7d, …)
 mesh add-key carol --max-uses 1         # single use: exactly one accepted job
 mesh add-key dave --expires 7d --max-uses 20</code></pre>
+        <div lang="en">
         <p>
           The key is printed once; only its sha256 hash is stored. Without flags a key never
           expires and has no usage cap. A <code>--max-uses</code> key spends one use per
@@ -543,10 +933,34 @@ mesh add-key dave --expires 7d --max-uses 20</code></pre>
 
         <h3>3. The remote user submits jobs</h3>
         <p>Through the tunnel, with the key as a Bearer token:</p>
+        </div>
+        <div lang="es" hidden>
+        <p>
+          La key se imprime una sola vez; solo se guarda su hash sha256. Sin flags, una key nunca
+          expira y no tiene tope de uso. Una key con <code>--max-uses</code> gasta un uso por cada
+          trabajo <strong>aceptado</strong> — los envíos rechazados por agente desconocido, input
+          vacío o rate limiting no cuentan — y la cuota persiste a través de reinicios del hub. Una
+          key expirada o agotada se rechaza con 401, igual que una revocada.
+          <code>mesh list-keys</code> muestra el estado de cada key; <code>mesh rm-key alice</code>
+          la revoca.
+        </p>
+        <p>
+          ¿Prefieres la UI? La página del hub tiene una sección <strong>API keys</strong>
+          (<a href="http://127.0.0.1:8892/#keys">http://127.0.0.1:8892/#keys</a>, requiere token de
+          administrador) para crear keys — con los mismos límites opcionales de expiración y usos
+          máximos —, ver el estado de cada key (activa, expirada o agotada) y sus usos restantes, y
+          revocar con un clic. La key en texto plano se muestra una sola vez justo tras crearla, con
+          un botón para copiarla.
+        </p>
+
+        <h3>3. El usuario remoto envía trabajos</h3>
+        <p>A través del túnel, con la key como Bearer token:</p>
+        </div>
         <pre><code>curl -s -X POST https://&lt;tunnel-url&gt;/api/jobs \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer &lt;alice's key&gt;" \
   -d '{"agent": "translator", "input": "hola mundo"}'</code></pre>
+        <div lang="en">
         <p>then polls <code>GET https://&lt;tunnel-url&gt;/api/jobs/&lt;id&gt;</code> for the result.</p>
 
         <div class="callout">
@@ -571,9 +985,38 @@ mesh add-key dave --expires 7d --max-uses 20</code></pre>
             accordingly.
           </p>
         </div>
+        </div>
+        <div lang="es" hidden>
+        <p>luego consulta <code>GET https://&lt;tunnel-url&gt;/api/jobs/&lt;id&gt;</code> para el resultado.</p>
+
+        <div class="callout">
+          <span class="tag">how it works</span>
+          <p>
+            cloudflared hace de proxy desde la propia máquina del hub, así que el tráfico del
+            túnel también llega por el socket loopback — pero siempre lleva encabezados de
+            reenvío (<code>cf-connecting-ip</code> / <code>x-forwarded-for</code>) que un cliente
+            remoto no puede quitar. Las peticiones con esos encabezados (o desde un socket no
+            loopback) deben presentar una API key válida y están limitadas a
+            <strong>10 trabajos por minuto por key</strong> (HTTP 429 por encima de eso). Los
+            llamantes locales normales — la UI, la CLI, integraciones en la misma máquina — siguen
+            funcionando sin credenciales. Los trabajos enviados con una key registran a su
+            propietario en <code>submittedBy</code>, visible en la API de trabajos.
+          </p>
+        </div>
+        <div class="callout warn">
+          <span class="tag">scope</span>
+          <p>
+            Los endpoints de lectura (<code>GET /api/jobs</code>, <code>GET /api/agents</code>, la
+            UI) <strong>todavía no están protegidos por key</strong>: cualquiera con la URL del
+            túnel puede ver el historial de trabajos y los resultados. Las keys autentican el
+            <em>envío</em> — mantén la URL del túnel privada en consecuencia.
+          </p>
+        </div>
+        </div>
       </section>
 
       <section id="current-limitations">
+        <div lang="en">
         <h2>Current limitations</h2>
         <p>Phase 1 (one machine, everything local) is complete; phase 2 is in progress — remote job submission through a tunnel already works.</p>
         <ul>
@@ -581,9 +1024,20 @@ mesh add-key dave --expires 7d --max-uses 20</code></pre>
           <li>No routing/orchestration: a job goes to the one agent you picked. Routing by capability, retries on another node and job splitting are phase 3.</li>
           <li>No <code>systemd</code>/<code>launchd</code> unit or installer: <code>mesh start</code> runs in the foreground and you have to supervise it yourself (or with <code>pm2</code>, <code>tmux</code>, <code>setsid nohup …</code>) if you want it to survive a reboot.</li>
         </ul>
+        </div>
+        <div lang="es" hidden>
+        <h2>Limitaciones actuales</h2>
+        <p>La fase 1 (una sola máquina, todo local) está completa; la fase 2 está en curso — el envío remoto de trabajos a través de un túnel ya funciona.</p>
+        <ul>
+          <li>Los endpoints de lectura y la UI todavía no están protegidos por key, y no hay aislamiento por usuario del historial de trabajos. Los nodos remotos (operadores registrando hooks detrás de sus propios túneles) y un sandbox Docker para nodos son los pasos de fase 2 que faltan.</li>
+          <li>Sin routing/orquestación: un trabajo va al único agente que elegiste. El routing por capacidad, los reintentos en otro nodo y el split de trabajos son de fase 3.</li>
+          <li>Sin unidad <code>systemd</code>/<code>launchd</code> ni instalador: <code>mesh start</code> corre en primer plano y tienes que supervisarlo tú mismo (o con <code>pm2</code>, <code>tmux</code>, <code>setsid nohup …</code>) si quieres que sobreviva a un reinicio.</li>
+        </ul>
+        </div>
       </section>
 
-      <footer>AgentMesh · phase 2 in progress · condensed version: <a href="https://github.com/EnmaSuamkf/agent-mesh/blob/main/README.md" target="_blank">README.md</a> · concept paper: <a href="../agentmesh/index.html">AgentMesh</a></footer>
+      <footer><span lang="en">AgentMesh · phase 2 in progress · condensed version: </span><span lang="es" hidden>AgentMesh · fase 2 en curso · versión condensada: </span><a href="https://github.com/EnmaSuamkf/agent-mesh/blob/main/README.md" target="_blank">README.md</a> · concept paper: <a href="../agentmesh/index.html">AgentMesh</a></footer>
     </div>
+    <script src="../assets/i18n.js" defer></script>
   </body>
 </html>

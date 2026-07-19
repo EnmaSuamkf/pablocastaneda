@@ -66,3 +66,78 @@
   font-size: 0.75rem;
   letter-spacing: 0.05em;
 }
+
+/* Language toggle inside the back-nav bar (segmented EN | ES) */
+#portfolio-back-nav .lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  background: #141820;
+  border: 1px solid #252e3d;
+  border-radius: 999px;
+  padding: 2px;
+  margin-left: 1rem;
+}
+
+#portfolio-back-nav .lang-toggle-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+  color: #7a8fa6;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  cursor: pointer;
+  line-height: 1.4;
+  transition: background 0.15s, color 0.15s;
+}
+
+#portfolio-back-nav .lang-toggle-btn:hover {
+  color: #e2e8f0;
+}
+
+#portfolio-back-nav .lang-toggle-btn.active {
+  background: #4ade80;
+  color: #0a0c0e;
+  font-weight: 600;
+}
+
+/* Also support a standalone lang-toggle outside the back-nav */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  background: #141820;
+  border: 1px solid #252e3d;
+  border-radius: 999px;
+  padding: 2px;
+}
+
+.lang-toggle-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+  color: #7a8fa6;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  cursor: pointer;
+  line-height: 1.4;
+  transition: background 0.15s, color 0.15s;
+}
+
+.lang-toggle-btn:hover {
+  color: #e2e8f0;
+}
+
+.lang-toggle-btn.active {
+  background: #4ade80;
+  color: #0a0c0e;
+  font-weight: 600;
+}

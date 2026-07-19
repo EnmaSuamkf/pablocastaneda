@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-title-en="Models — free-code" data-title-es="Modelos — free-code">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../assets/project-nav.css" />
 </head>
   <body>
-  <div id="portfolio-back-nav"><a class="back-link" href="../index.html">← Portfolio</a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span></div>
+  <div id="portfolio-back-nav"><a class="back-link" href="../index.html">← Portfolio</a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span><div id="lang-toggle"></div></div>
     <div class="doc-root">
       <header class="site-shell-header" role="banner">
         <div class="site-shell-inner">
@@ -33,47 +33,55 @@
             <span class="angle" aria-hidden="true">&gt;</span>
           </h1>
           <p class="tagline">
-            <span class="prompt" aria-hidden="true">// </span>
-            Models — manage which models appear, and add your own.
+            <span class="prompt" aria-hidden="true">// </span><span lang="en">Models — manage which models appear, and add your own.</span><span lang="es" hidden>Modelos — gestiona qué modelos aparecen y añade los tuyos propios.</span>
           </p>
 
           <nav class="nav" aria-label="Primary">
-            <a href="index.html">[home]</a>
-            <a href="installation.html">[installation]</a>
+            <a href="index.html"><span lang="en">[home]</span><span lang="es" hidden>[inicio]</span></a>
+            <a href="installation.html"><span lang="en">[installation]</span><span lang="es" hidden>[instalación]</span></a>
             <a href="webhooks.html">[webhooks]</a>
             <a href="rag.html">[rag]</a>
-            <a href="code-graph.html">[code graph]</a>
+            <a href="code-graph.html"><span lang="en">[code graph]</span><span lang="es" hidden>[grafo de código]</span></a>
             <a href="mcp.html">[mcp]</a>
-            <a href="vision-mode.html">[vision mode]</a>
-            <a href="capabilities.html">[capabilities]</a>
-            <a href="commands.html">[commands]</a>
-            <a href="models.html" aria-current="page">[models]</a>
+            <a href="vision-mode.html"><span lang="en">[vision mode]</span><span lang="es" hidden>[modo visión]</span></a>
+            <a href="capabilities.html"><span lang="en">[capabilities]</span><span lang="es" hidden>[capacidades]</span></a>
+            <a href="commands.html"><span lang="en">[commands]</span><span lang="es" hidden>[comandos]</span></a>
+            <a href="models.html" aria-current="page"><span lang="en">[models]</span><span lang="es" hidden>[modelos]</span></a>
           </nav>
         </header>
 
         <!-- One place to manage models -->
         <section class="card" aria-labelledby="models-manage">
           <div class="card-header">
-            <h2 id="models-manage">One file to manage models</h2>
-            <p>Everything about which models free-code offers lives in <code>~/.free-code/agent/models.json</code>.</p>
+            <h2 id="models-manage"><span lang="en">One file to manage models</span><span lang="es" hidden>Un solo archivo para gestionar los modelos</span></h2>
+            <p><span lang="en">Everything about which models free-code offers lives in <code>~/.free-code/agent/models.json</code>.</span><span lang="es" hidden>Todo lo relacionado con qué modelos ofrece free-code vive en <code>~/.free-code/agent/models.json</code>.</span></p>
           </div>
           <div class="card-body">
             <p>
-              <code>~/.free-code/agent/models.json</code> is the single place you edit to control the
+              <span lang="en"><code>~/.free-code/agent/models.json</code> is the single place you edit to control the
               model list. It is <strong>re-read every time you open <code>/model</code></strong>, so changes
-              apply without restarting. Use it to:
+              apply without restarting. Use it to:</span><span lang="es" hidden><code>~/.free-code/agent/models.json</code> es el único lugar que editas para controlar la
+              lista de modelos. Se <strong>vuelve a leer cada vez que abres <code>/model</code></strong>, así que los cambios
+              se aplican sin reiniciar. Úsalo para:</span>
             </p>
             <ul>
-              <li><strong>Curate</strong> which models show in <code>/model</code> (the <code>only</code> whitelist) — including built-in ones.</li>
-              <li><strong>Add</strong> custom providers and models (Fireworks, proxies, local servers).</li>
-              <li><strong>Override</strong> built-in models (rename, change context window, route through a proxy).</li>
+              <li><span lang="en"><strong>Curate</strong> which models show in <code>/model</code> (the <code>only</code> whitelist) — including built-in ones.</span><span lang="es" hidden><strong>Seleccionar</strong> qué modelos se muestran en <code>/model</code> (la lista blanca <code>only</code>) — incluidos los integrados.</span></li>
+              <li><span lang="en"><strong>Add</strong> custom providers and models (Fireworks, proxies, local servers).</span><span lang="es" hidden><strong>Añadir</strong> proveedores y modelos personalizados (Fireworks, proxies, servidores locales).</span></li>
+              <li><span lang="en"><strong>Override</strong> built-in models (rename, change context window, route through a proxy).</span><span lang="es" hidden><strong>Sobrescribir</strong> modelos integrados (renombrar, cambiar la ventana de contexto, enrutar a través de un proxy).</span></li>
             </ul>
-            <div class="callout info">
+            <div class="callout info" lang="en">
               <strong>Fresh installs start clean</strong><br />
               On first run free-code seeds <code>models.json</code> with an <code>only</code> whitelist
               containing the most-used models (4 per provider) of each provider you can log in to, so
               <code>/model</code> is short out of the box instead of listing the whole factory catalog.
               It is only created if the file doesn't already exist — your edits are never overwritten.
+            </div>
+            <div class="callout info" lang="es" hidden>
+              <strong>Las instalaciones nuevas empiezan limpias</strong><br />
+              En la primera ejecución, free-code inicializa <code>models.json</code> con una lista blanca <code>only</code>
+              que contiene los modelos más usados (4 por proveedor) de cada proveedor en el que puedes iniciar sesión, de modo que
+              <code>/model</code> sea breve desde el principio en lugar de listar todo el catálogo de fábrica.
+              Solo se crea si el archivo aún no existe — tus ediciones nunca se sobrescriben.
             </div>
           </div>
         </section>
@@ -81,11 +89,11 @@
         <!-- Curating the list -->
         <section class="card" aria-labelledby="models-only">
           <div class="card-header">
-            <h2 id="models-only">Curating the list — the <code>only</code> whitelist</h2>
-            <p>Show just the models you use, instead of every factory model.</p>
+            <h2 id="models-only"><span lang="en">Curating the list — the <code>only</code> whitelist</span><span lang="es" hidden>Seleccionar la lista — la lista blanca <code>only</code></span></h2>
+            <p><span lang="en">Show just the models you use, instead of every factory model.</span><span lang="es" hidden>Muestra solo los modelos que usas, en lugar de todos los modelos de fábrica.</span></p>
           </div>
           <div class="card-body">
-            <p>Add a top-level <code>only</code> array. When present and non-empty, <code>/model</code> shows only matching models:</p>
+            <p><span lang="en">Add a top-level <code>only</code> array. When present and non-empty, <code>/model</code> shows only matching models:</span><span lang="es" hidden>Añade un array <code>only</code> de nivel superior. Cuando está presente y no vacío, <code>/model</code> muestra solo los modelos que coincidan:</span></p>
             <pre><code>{
   "only": [
     "anthropic/claude-sonnet-4-6",
@@ -96,17 +104,21 @@
   "providers": {}
 }</code></pre>
             <ul>
-              <li><strong>Add</strong> a model: add its <code>provider/id</code> (list ids with <code>free-code --list-models</code>).</li>
-              <li><strong>Remove</strong> a model: delete its line.</li>
-              <li><strong>Show everything</strong>: remove the <code>only</code> key (or set it to <code>[]</code>).</li>
-              <li><strong>Keep a whole provider</strong>: use a glob such as <code>lmstudio/**</code> or <code>fireworks/**</code>.</li>
+              <li><span lang="en"><strong>Add</strong> a model: add its <code>provider/id</code> (list ids with <code>free-code --list-models</code>).</span><span lang="es" hidden><strong>Añadir</strong> un modelo: añade su <code>provider/id</code> (lista los ids con <code>free-code --list-models</code>).</span></li>
+              <li><span lang="en"><strong>Remove</strong> a model: delete its line.</span><span lang="es" hidden><strong>Quitar</strong> un modelo: elimina su línea.</span></li>
+              <li><span lang="en"><strong>Show everything</strong>: remove the <code>only</code> key (or set it to <code>[]</code>).</span><span lang="es" hidden><strong>Mostrar todo</strong>: elimina la clave <code>only</code> (o ponla en <code>[]</code>).</span></li>
+              <li><span lang="en"><strong>Keep a whole provider</strong>: use a glob such as <code>lmstudio/**</code> or <code>fireworks/**</code>.</span><span lang="es" hidden><strong>Conservar un proveedor completo</strong>: usa un glob como <code>lmstudio/**</code> o <code>fireworks/**</code>.</span></li>
             </ul>
             <p>
-              Matching is lenient: each entry matches by <code>provider/id</code>, <code>id</code>, or name
+              <span lang="en">Matching is lenient: each entry matches by <code>provider/id</code>, <code>id</code>, or name
               (case-insensitive; <code>.</code> <code>-</code> <code>_</code> and spaces treated alike) or as a
               glob. If the whitelist accidentally matches nothing, free-code falls back to showing all
               models so the picker is never empty. Selecting a model explicitly with <code>--model</code>
-              still works even if it isn't in <code>only</code>.
+              still works even if it isn't in <code>only</code>.</span><span lang="es" hidden>La coincidencia es flexible: cada entrada coincide por <code>provider/id</code>, <code>id</code> o nombre
+              (sin distinguir mayúsculas/minúsculas; <code>.</code> <code>-</code> <code>_</code> y espacios se tratan igual) o como
+              glob. Si la lista blanca no coincide accidentalmente con nada, free-code recurre a mostrar todos los
+              modelos para que el selector nunca esté vacío. Seleccionar un modelo explícitamente con <code>--model</code>
+              sigue funcionando aunque no esté en <code>only</code>.</span>
             </p>
           </div>
         </section>
@@ -114,34 +126,34 @@
         <!-- Supported providers -->
         <section class="card" aria-labelledby="models-providers">
           <div class="card-header">
-            <h2 id="models-providers">Supported providers</h2>
-            <p>Built-in providers appear in <code>/model</code> once you authenticate. You can also add any OpenAI-compatible endpoint.</p>
+            <h2 id="models-providers"><span lang="en">Supported providers</span><span lang="es" hidden>Proveedores soportados</span></h2>
+            <p><span lang="en">Built-in providers appear in <code>/model</code> once you authenticate. You can also add any OpenAI-compatible endpoint.</span><span lang="es" hidden>Los proveedores integrados aparecen en <code>/model</code> una vez que te autenticas. También puedes añadir cualquier endpoint compatible con OpenAI.</span></p>
           </div>
           <div class="card-body">
-            <h3>Log in with <code>/login</code> (OAuth)</h3>
+            <h3><span lang="en">Log in with <code>/login</code> (OAuth)</span><span lang="es" hidden>Inicia sesión con <code>/login</code> (OAuth)</span></h3>
             <div class="table-wrap">
               <table>
-                <thead><tr><th>Provider</th><th>Sign-in / token</th></tr></thead>
+                <thead><tr><th><span lang="en">Provider</span><span lang="es" hidden>Proveedor</span></th><th><span lang="en">Sign-in / token</span><span lang="es" hidden>Inicio de sesión / token</span></th></tr></thead>
                 <tbody>
-                  <tr><td><code>anthropic</code></td><td>Claude subscription or <code>ANTHROPIC_API_KEY</code></td></tr>
-                  <tr><td><code>openai-codex</code></td><td>ChatGPT / Codex sign-in</td></tr>
-                  <tr><td><code>github-copilot</code></td><td>Copilot sign-in (or <code>GH_TOKEN</code>)</td></tr>
-                  <tr><td><code>google-gemini-cli</code></td><td>Gemini CLI sign-in</td></tr>
-                  <tr><td><code>google-antigravity</code></td><td>Google Antigravity sign-in</td></tr>
+                  <tr><td><code>anthropic</code></td><td><span lang="en">Claude subscription or <code>ANTHROPIC_API_KEY</code></span><span lang="es" hidden>Suscripción a Claude o <code>ANTHROPIC_API_KEY</code></span></td></tr>
+                  <tr><td><code>openai-codex</code></td><td><span lang="en">ChatGPT / Codex sign-in</span><span lang="es" hidden>Inicio de sesión de ChatGPT / Codex</span></td></tr>
+                  <tr><td><code>github-copilot</code></td><td><span lang="en">Copilot sign-in (or <code>GH_TOKEN</code>)</span><span lang="es" hidden>Inicio de sesión de Copilot (o <code>GH_TOKEN</code>)</span></td></tr>
+                  <tr><td><code>google-gemini-cli</code></td><td><span lang="en">Gemini CLI sign-in</span><span lang="es" hidden>Inicio de sesión de Gemini CLI</span></td></tr>
+                  <tr><td><code>google-antigravity</code></td><td><span lang="en">Google Antigravity sign-in</span><span lang="es" hidden>Inicio de sesión de Google Antigravity</span></td></tr>
                 </tbody>
               </table>
             </div>
 
-            <h3>API key (set the environment variable)</h3>
+            <h3><span lang="en">API key (set the environment variable)</span><span lang="es" hidden>Clave API (define la variable de entorno)</span></h3>
             <div class="table-wrap">
               <table>
-                <thead><tr><th>Provider</th><th>Environment variable</th></tr></thead>
+                <thead><tr><th><span lang="en">Provider</span><span lang="es" hidden>Proveedor</span></th><th><span lang="en">Environment variable</span><span lang="es" hidden>Variable de entorno</span></th></tr></thead>
                 <tbody>
                   <tr><td><code>openai</code></td><td><code>OPENAI_API_KEY</code></td></tr>
-                  <tr><td><code>azure-openai-responses</code></td><td><code>AZURE_OPENAI_API_KEY</code> (+ base URL)</td></tr>
+                  <tr><td><code>azure-openai-responses</code></td><td><code>AZURE_OPENAI_API_KEY</code> <span lang="en">(+ base URL)</span><span lang="es" hidden>(+ URL base)</span></td></tr>
                   <tr><td><code>google</code></td><td><code>GEMINI_API_KEY</code></td></tr>
-                  <tr><td><code>google-vertex</code></td><td><code>GOOGLE_APPLICATION_CREDENTIALS</code> or <code>GOOGLE_CLOUD_API_KEY</code></td></tr>
-                  <tr><td><code>amazon-bedrock</code></td><td>AWS credentials / <code>AWS_BEARER_TOKEN_BEDROCK</code></td></tr>
+                  <tr><td><code>google-vertex</code></td><td><code>GOOGLE_APPLICATION_CREDENTIALS</code> <span lang="en">or</span><span lang="es" hidden>o</span> <code>GOOGLE_CLOUD_API_KEY</code></td></tr>
+                  <tr><td><code>amazon-bedrock</code></td><td><span lang="en">AWS credentials /</span><span lang="es" hidden>Credenciales de AWS /</span> <code>AWS_BEARER_TOKEN_BEDROCK</code></td></tr>
                   <tr><td><code>xai</code></td><td><code>XAI_API_KEY</code></td></tr>
                   <tr><td><code>groq</code></td><td><code>GROQ_API_KEY</code></td></tr>
                   <tr><td><code>cerebras</code></td><td><code>CEREBRAS_API_KEY</code></td></tr>
@@ -157,10 +169,15 @@
               </table>
             </div>
 
-            <div class="callout info">
+            <div class="callout info" lang="en">
               <strong>Local / custom</strong><br />
               Ollama, LM Studio, vLLM, LocalAI, or any corporate proxy — add them as a custom provider
               (see below). Any OpenAI-compatible endpoint works.
+            </div>
+            <div class="callout info" lang="es" hidden>
+              <strong>Local / personalizado</strong><br />
+              Ollama, LM Studio, vLLM, LocalAI o cualquier proxy corporativo — añádelos como proveedor personalizado
+              (ver más abajo). Cualquier endpoint compatible con OpenAI funciona.
             </div>
           </div>
         </section>
@@ -168,11 +185,11 @@
         <!-- Add custom / local models -->
         <section class="card" aria-labelledby="models-custom">
           <div class="card-header">
-            <h2 id="models-custom">Add a custom or local model</h2>
-            <p>Define providers and models under <code>providers</code>. Keys resolve from env vars, a shell command, or a literal value.</p>
+            <h2 id="models-custom"><span lang="en">Add a custom or local model</span><span lang="es" hidden>Añadir un modelo personalizado o local</span></h2>
+            <p><span lang="en">Define providers and models under <code>providers</code>. Keys resolve from env vars, a shell command, or a literal value.</span><span lang="es" hidden>Define proveedores y modelos bajo <code>providers</code>. Las claves se resuelven a partir de variables de entorno, un comando de shell o un valor literal.</span></p>
           </div>
           <div class="card-body">
-            <p><strong>Cloud (e.g. Fireworks) — key from an environment variable:</strong></p>
+            <p><span lang="en"><strong>Cloud (e.g. Fireworks) — key from an environment variable:</strong></span><span lang="es" hidden><strong>Nube (por ejemplo, Fireworks) — clave desde una variable de entorno:</strong></span></p>
             <pre><code>{
   "providers": {
     "fireworks": {
@@ -187,7 +204,7 @@
   }
 }</code></pre>
 
-            <p><strong>Local (LM Studio / Ollama) — any dummy key works:</strong></p>
+            <p><span lang="en"><strong>Local (LM Studio / Ollama) — any dummy key works:</strong></span><span lang="es" hidden><strong>Local (LM Studio / Ollama) — cualquier clave ficticia funciona:</strong></span></p>
             <pre><code>{
   "providers": {
     "ollama": {
@@ -200,25 +217,32 @@
   }
 }</code></pre>
 
-            <div class="callout tip">
+            <div class="callout tip" lang="en">
               <strong>Keys in one place</strong><br />
               free-code loads <code>~/.free-code/agent/.env</code> on startup, so you can keep
               <code>FIREWORKS_API_KEY</code> (and other secrets) there and reference them by name in
               <code>models.json</code>.
             </div>
+            <div class="callout tip" lang="es" hidden>
+              <strong>Claves en un solo lugar</strong><br />
+              free-code carga <code>~/.free-code/agent/.env</code> al arrancar, así que puedes mantener
+              <code>FIREWORKS_API_KEY</code> (y otros secretos) ahí y referenciarlos por nombre en
+              <code>models.json</code>.
+            </div>
 
-            <p>Full schema, value resolution, overriding built-ins, and OpenAI-compat flags: see <code>packages/coding-agent/docs/models.md</code> and <code>docs/local-models-setup.md</code>.</p>
+            <p><span lang="en">Full schema, value resolution, overriding built-ins, and OpenAI-compat flags: see <code>packages/coding-agent/docs/models.md</code> and <code>docs/local-models-setup.md</code>.</span><span lang="es" hidden>Esquema completo, resolución de valores, sobrescritura de modelos integrados y flags de compatibilidad con OpenAI: consulta <code>packages/coding-agent/docs/models.md</code> y <code>docs/local-models-setup.md</code>.</span></p>
           </div>
         </section>
 
         <p class="footer">
-          <a href="capabilities.html">All capabilities →</a> &nbsp;·&nbsp;
-          <a href="commands.html">Commands →</a> &nbsp;·&nbsp;
-          <a href="installation.html">Installation →</a>
+          <a href="capabilities.html"><span lang="en">All capabilities →</span><span lang="es" hidden>Todas las capacidades →</span></a> &nbsp;·&nbsp;
+          <a href="commands.html"><span lang="en">Commands →</span><span lang="es" hidden>Comandos →</span></a> &nbsp;·&nbsp;
+          <a href="installation.html"><span lang="en">Installation →</span><span lang="es" hidden>Instalación →</span></a>
         </p>
-        <p class="footer-credit">Developed by Pablo Castañeda</p>
+        <p class="footer-credit"><span lang="en">Developed by Pablo Castañeda</span><span lang="es" hidden>Desarrollado por Pablo Castañeda</span></p>
       </div>
     </div>
+    <script src="../assets/i18n.js" defer></script>
     <script src="assets/theme.js" defer></script>
   </body>
 </html>

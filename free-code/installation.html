@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-title-en="Installation — free-code" data-title-es="Instalación — free-code">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../assets/project-nav.css" />
 </head>
   <body>
-  <div id="portfolio-back-nav"><a class="back-link" href="../index.html">← Portfolio</a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span></div>
+  <div id="portfolio-back-nav"><a class="back-link" href="../index.html">← Portfolio</a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span><div id="lang-toggle"></div></div>
     <div class="doc-root">
       <header class="site-shell-header" role="banner">
         <div class="site-shell-inner">
@@ -33,103 +33,122 @@
             <span class="angle" aria-hidden="true">&gt;</span>
           </h1>
           <p class="tagline">
-            <span class="prompt" aria-hidden="true">// </span>
-            Installation — Linux &amp; macOS. CLI, VS Code / Cursor plugin, and the macOS desktop app.
+            <span class="prompt" aria-hidden="true">// </span><span lang="en">Installation — Linux &amp; macOS. CLI, VS Code / Cursor plugin, and the macOS desktop app.</span><span lang="es" hidden>Instalación — Linux y macOS. CLI, plugin de VS Code / Cursor, y la app de escritorio para macOS.</span>
           </p>
 
           <nav class="nav" aria-label="Primary">
-            <a href="index.html">[home]</a>
-            <a href="installation.html" aria-current="page">[installation]</a>
+            <a href="index.html"><span lang="en">[home]</span><span lang="es" hidden>[inicio]</span></a>
+            <a href="installation.html" aria-current="page"><span lang="en">[installation]</span><span lang="es" hidden>[instalación]</span></a>
             <a href="webhooks.html">[webhooks]</a>
             <a href="rag.html">[rag]</a>
-            <a href="code-graph.html">[code graph]</a>
+            <a href="code-graph.html"><span lang="en">[code graph]</span><span lang="es" hidden>[grafo de código]</span></a>
             <a href="mcp.html">[mcp]</a>
-            <a href="vision-mode.html">[vision mode]</a>
-            <a href="capabilities.html">[capabilities]</a>
-            <a href="commands.html">[commands]</a>
-            <a href="models.html">[models]</a>
+            <a href="vision-mode.html"><span lang="en">[vision mode]</span><span lang="es" hidden>[modo visión]</span></a>
+            <a href="capabilities.html"><span lang="en">[capabilities]</span><span lang="es" hidden>[capacidades]</span></a>
+            <a href="commands.html"><span lang="en">[commands]</span><span lang="es" hidden>[comandos]</span></a>
+            <a href="models.html"><span lang="en">[models]</span><span lang="es" hidden>[modelos]</span></a>
           </nav>
         </header>
 
         <!-- Platforms overview -->
         <section class="card" aria-labelledby="install-platforms">
           <div class="card-header">
-            <h2 id="install-platforms">Supported platforms</h2>
-            <p>free-code runs on <strong>Linux</strong> and <strong>macOS</strong>.</p>
+            <h2 id="install-platforms"><span lang="en">Supported platforms</span><span lang="es" hidden>Plataformas soportadas</span></h2>
+            <p><span lang="en">free-code runs on <strong>Linux</strong> and <strong>macOS</strong>.</span><span lang="es" hidden>free-code funciona en <strong>Linux</strong> y <strong>macOS</strong>.</span></p>
           </div>
           <div class="card-body">
-            <div class="callout warning">
+            <div class="callout warning" lang="en">
               <strong>Read this first — what the installer does (and doesn't) do</strong><br />
               The install script sets up the <strong>command-line app (CLI)</strong>. On macOS it also
               installs the <strong>desktop app</strong>. The <strong>VS Code / Cursor plugin is NOT
               installed by the script</strong> — it's a short, separate step you do by hand afterwards
               (see <a href="#install-plugin">Install the VS Code / Cursor plugin</a> below).
             </div>
+            <div class="callout warning" lang="es" hidden>
+              <strong>Lee esto primero — qué hace (y qué no hace) el instalador</strong><br />
+              El script de instalación configura la <strong>aplicación de línea de comandos (CLI)</strong>. En macOS también
+              instala la <strong>app de escritorio</strong>. El <strong>plugin de VS Code / Cursor NO se
+              instala con el script</strong> — es un paso corto y separado que haces a mano después
+              (ver <a href="#install-plugin">Instalar el plugin de VS Code / Cursor</a> más abajo).
+            </div>
             <div class="table-wrap">
               <table>
-                <thead><tr><th>Platform</th><th>Installer script</th><th>What the script sets up</th><th>Editor plugin</th></tr></thead>
+                <thead><tr><th><span lang="en">Platform</span><span lang="es" hidden>Plataforma</span></th><th><span lang="en">Installer script</span><span lang="es" hidden>Script instalador</span></th><th><span lang="en">What the script sets up</span><span lang="es" hidden>Qué configura el script</span></th><th><span lang="en">Editor plugin</span><span lang="es" hidden>Plugin del editor</span></th></tr></thead>
                 <tbody>
                   <tr>
                     <td><strong>Linux</strong></td>
                     <td><code>installation/install-free-code-linux.sh</code></td>
-                    <td>CLI + dependencies</td>
-                    <td>Manual — see below</td>
+                    <td><span lang="en">CLI + dependencies</span><span lang="es" hidden>CLI + dependencias</span></td>
+                    <td><span lang="en">Manual — see below</span><span lang="es" hidden>Manual — ver abajo</span></td>
                   </tr>
                   <tr>
                     <td><strong>macOS</strong></td>
                     <td><code>installation/install-free-code-mac.command</code></td>
-                    <td>CLI + desktop app (FreeCodeMac)</td>
-                    <td>Manual — see below</td>
+                    <td><span lang="en">CLI + desktop app (FreeCodeMac)</span><span lang="es" hidden>CLI + app de escritorio (FreeCodeMac)</span></td>
+                    <td><span lang="en">Manual — see below</span><span lang="es" hidden>Manual — ver abajo</span></td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <p>Both scripts live in the <code>installation/</code> folder of the repository.</p>
+            <p><span lang="en">Both scripts live in the <code>installation/</code> folder of the repository.</span><span lang="es" hidden>Ambos scripts están en la carpeta <code>installation/</code> del repositorio.</span></p>
           </div>
         </section>
 
         <!-- Linux -->
         <section class="card" aria-labelledby="install-linux">
           <div class="card-header">
-            <h2 id="install-linux">Linux — install the CLI</h2>
-            <p>One script installs the free-code command-line app and everything it needs.</p>
+            <h2 id="install-linux"><span lang="en">Linux — install the CLI</span><span lang="es" hidden>Linux — instalar la CLI</span></h2>
+            <p><span lang="en">One script installs the free-code command-line app and everything it needs.</span><span lang="es" hidden>Un solo script instala la aplicación de línea de comandos de free-code y todo lo que necesita.</span></p>
           </div>
           <div class="card-body">
-            <div class="callout info">
+            <div class="callout info" lang="en">
               <strong>This installs the CLI only.</strong> Want to use free-code inside VS Code or Cursor?
               Do the quick <a href="#install-plugin">plugin step</a> after this.
             </div>
+            <div class="callout info" lang="es" hidden>
+              <strong>Esto instala solo la CLI.</strong> ¿Quieres usar free-code dentro de VS Code o Cursor?
+              Haz el rápido <a href="#install-plugin">paso del plugin</a> después de esto.
+            </div>
 
-            <h3>Step 1 — Run the install script</h3>
+            <h3><span lang="en">Step 1 — Run the install script</span><span lang="es" hidden>Paso 1 — Ejecuta el script de instalación</span></h3>
             <pre><code>bash /&lt;path/to/repo&gt;/installation/install-free-code-linux.sh</code></pre>
-            <p>The script sets up everything you need to run free-code on Linux:</p>
+            <p><span lang="en">The script sets up everything you need to run free-code on Linux:</span><span lang="es" hidden>El script configura todo lo que necesitas para ejecutar free-code en Linux:</span></p>
             <div class="table-wrap">
               <table>
-                <thead><tr><th>Step</th><th>What it installs</th></tr></thead>
+                <thead><tr><th><span lang="en">Step</span><span lang="es" hidden>Paso</span></th><th><span lang="en">What it installs</span><span lang="es" hidden>Qué instala</span></th></tr></thead>
                 <tbody>
-                  <tr><td>Node.js (LTS)</td><td>nvm + latest LTS; set as default</td></tr>
-                  <tr><td>Dependencies</td><td><code>npm install</code> at repo root</td></tr>
-                  <tr><td>free-code CLI</td><td><code>npm install -g ./packages/coding-agent</code></td></tr>
+                  <tr><td>Node.js (LTS)</td><td><span lang="en">nvm + latest LTS; set as default</span><span lang="es" hidden>nvm + la última LTS; configurada por defecto</span></td></tr>
+                  <tr><td><span lang="en">Dependencies</span><span lang="es" hidden>Dependencias</span></td><td><span lang="en"><code>npm install</code> at repo root</span><span lang="es" hidden><code>npm install</code> en la raíz del repositorio</span></td></tr>
+                  <tr><td><span lang="en">free-code CLI</span><span lang="es" hidden>CLI de free-code</span></td><td><code>npm install -g ./packages/coding-agent</code></td></tr>
                   <tr><td>agent-browser</td><td><code>npm install -g agent-browser</code></td></tr>
-                  <tr><td>RAG (optional)</td><td>Python venv for the local knowledge-base server</td></tr>
+                  <tr><td><span lang="en">RAG (optional)</span><span lang="es" hidden>RAG (opcional)</span></td><td><span lang="en">Python venv for the local knowledge-base server</span><span lang="es" hidden>Entorno virtual de Python para el servidor local de base de conocimiento</span></td></tr>
                 </tbody>
               </table>
             </div>
 
-            <h3>Step 2 — Start free-code</h3>
-            <p>Run the CLI in your terminal:</p>
+            <h3><span lang="en">Step 2 — Start free-code</span><span lang="es" hidden>Paso 2 — Inicia free-code</span></h3>
+            <p><span lang="en">Run the CLI in your terminal:</span><span lang="es" hidden>Ejecuta la CLI en tu terminal:</span></p>
             <pre><code>free-code</code></pre>
 
-            <h3>Step 3 — Configure your AI provider</h3>
-            <p>You only need one provider to get started:</p>
-            <pre><code># Login (Claude, GitHub Copilot, Gemini, and others)
+            <h3><span lang="en">Step 3 — Configure your AI provider</span><span lang="es" hidden>Paso 3 — Configura tu proveedor de IA</span></h3>
+            <p><span lang="en">You only need one provider to get started:</span><span lang="es" hidden>Solo necesitas un proveedor para empezar:</span></p>
+            <pre lang="en"><code># Login (Claude, GitHub Copilot, Gemini, and others)
 /login
 
 # Or set an API key for your provider, e.g.
 export ANTHROPIC_API_KEY=sk-...</code></pre>
-            <div class="callout tip">
+            <pre lang="es" hidden><code># Iniciar sesión (Claude, GitHub Copilot, Gemini, y otros)
+/login
+
+# O configura una clave de API para tu proveedor, por ejemplo
+export ANTHROPIC_API_KEY=sk-...</code></pre>
+            <div class="callout tip" lang="en">
               <strong>Tip</strong><br />
               Add any <code>export</code> line to your <code>~/.bashrc</code> or <code>~/.zshrc</code> so it persists across terminal sessions.
+            </div>
+            <div class="callout tip" lang="es" hidden>
+              <strong>Consejo</strong><br />
+              Agrega cualquier línea de <code>export</code> a tu <code>~/.bashrc</code> o <code>~/.zshrc</code> para que persista entre sesiones de terminal.
             </div>
           </div>
         </section>
@@ -137,52 +156,67 @@ export ANTHROPIC_API_KEY=sk-...</code></pre>
         <!-- macOS -->
         <section class="card" aria-labelledby="install-macos">
           <div class="card-header">
-            <h2 id="install-macos">macOS — install the CLI &amp; desktop app</h2>
-            <p>One script installs everything: Homebrew, Node.js, dependencies, the CLI, and the native desktop app.</p>
+            <h2 id="install-macos"><span lang="en">macOS — install the CLI &amp; desktop app</span><span lang="es" hidden>macOS — instalar la CLI y la app de escritorio</span></h2>
+            <p><span lang="en">One script installs everything: Homebrew, Node.js, dependencies, the CLI, and the native desktop app.</span><span lang="es" hidden>Un solo script instala todo: Homebrew, Node.js, dependencias, la CLI y la app de escritorio nativa.</span></p>
           </div>
           <div class="card-body">
-            <div class="callout warning">
+            <div class="callout warning" lang="en">
               <strong>Before you start</strong><br />
               Close VS Code, Cursor, or any other IDE before running the script.
             </div>
-            <div class="callout info">
+            <div class="callout warning" lang="es" hidden>
+              <strong>Antes de empezar</strong><br />
+              Cierra VS Code, Cursor, o cualquier otro IDE antes de ejecutar el script.
+            </div>
+            <div class="callout info" lang="en">
               <strong>This installs the CLI and the desktop app.</strong> The VS Code / Cursor plugin is a
               separate step — do the quick <a href="#install-plugin">plugin step</a> afterwards if you want it.
             </div>
+            <div class="callout info" lang="es" hidden>
+              <strong>Esto instala la CLI y la app de escritorio.</strong> El plugin de VS Code / Cursor es un
+              paso separado — haz el rápido <a href="#install-plugin">paso del plugin</a> después si lo quieres.
+            </div>
 
-            <h3>Step 1 — Run the install script</h3>
-            <p><strong>Option A</strong> — double-click in Finder:</p>
+            <h3><span lang="en">Step 1 — Run the install script</span><span lang="es" hidden>Paso 1 — Ejecuta el script de instalación</span></h3>
+            <p><span lang="en"><strong>Option A</strong> — double-click in Finder:</span><span lang="es" hidden><strong>Opción A</strong> — doble clic en Finder:</span></p>
             <pre><code>open /&lt;path/to/repo&gt;/installation</code></pre>
-            <p>Double-click <code>install-free-code-mac.command</code> in that folder.</p>
+            <p><span lang="en">Double-click <code>install-free-code-mac.command</code> in that folder.</span><span lang="es" hidden>Haz doble clic en <code>install-free-code-mac.command</code> en esa carpeta.</span></p>
 
-            <p><strong>Option B</strong> — from the terminal:</p>
+            <p><span lang="en"><strong>Option B</strong> — from the terminal:</span><span lang="es" hidden><strong>Opción B</strong> — desde la terminal:</span></p>
             <pre><code>bash /&lt;path/to/repo&gt;/installation/install-free-code-mac.command</code></pre>
 
-            <p>The script handles everything automatically:</p>
+            <p><span lang="en">The script handles everything automatically:</span><span lang="es" hidden>El script se encarga de todo automáticamente:</span></p>
             <div class="table-wrap">
               <table>
-                <thead><tr><th>Step</th><th>What it installs</th></tr></thead>
+                <thead><tr><th><span lang="en">Step</span><span lang="es" hidden>Paso</span></th><th><span lang="en">What it installs</span><span lang="es" hidden>Qué instala</span></th></tr></thead>
                 <tbody>
-                  <tr><td>Homebrew</td><td>Installs if not present</td></tr>
-                  <tr><td>Colima</td><td>Container runtime (via Homebrew)</td></tr>
-                  <tr><td>Node.js (LTS)</td><td>nvm + latest LTS; set as default</td></tr>
-                  <tr><td>Dependencies</td><td><code>npm install</code> at repo root</td></tr>
-                  <tr><td>free-code CLI</td><td><code>npm install -g ./packages/coding-agent</code></td></tr>
+                  <tr><td>Homebrew</td><td><span lang="en">Installs if not present</span><span lang="es" hidden>Se instala si no está presente</span></td></tr>
+                  <tr><td>Colima</td><td><span lang="en">Container runtime (via Homebrew)</span><span lang="es" hidden>Runtime de contenedores (vía Homebrew)</span></td></tr>
+                  <tr><td>Node.js (LTS)</td><td><span lang="en">nvm + latest LTS; set as default</span><span lang="es" hidden>nvm + la última LTS; configurada por defecto</span></td></tr>
+                  <tr><td><span lang="en">Dependencies</span><span lang="es" hidden>Dependencias</span></td><td><span lang="en"><code>npm install</code> at repo root</span><span lang="es" hidden><code>npm install</code> en la raíz del repositorio</span></td></tr>
+                  <tr><td><span lang="en">free-code CLI</span><span lang="es" hidden>CLI de free-code</span></td><td><code>npm install -g ./packages/coding-agent</code></td></tr>
                   <tr><td>agent-browser</td><td><code>npm install -g agent-browser</code></td></tr>
-                  <tr><td>FreeCodeMac.app</td><td>Copies the <code>.app</code> bundle to <code>/Applications</code></td></tr>
+                  <tr><td>FreeCodeMac.app</td><td><span lang="en">Copies the <code>.app</code> bundle to <code>/Applications</code></span><span lang="es" hidden>Copia el paquete <code>.app</code> a <code>/Applications</code></span></td></tr>
                 </tbody>
               </table>
             </div>
 
-            <h3>Step 2 — Start Free-Code</h3>
-            <p>Open <strong>FreeCodeMac</strong> from <code>/Applications</code>, or run in the terminal:</p>
+            <h3><span lang="en">Step 2 — Start Free-Code</span><span lang="es" hidden>Paso 2 — Inicia Free-Code</span></h3>
+            <p><span lang="en">Open <strong>FreeCodeMac</strong> from <code>/Applications</code>, or run in the terminal:</span><span lang="es" hidden>Abre <strong>FreeCodeMac</strong> desde <code>/Applications</code>, o ejecuta en la terminal:</span></p>
             <pre><code>free-code</code></pre>
 
-            <h3>Step 3 — Configure your AI provider</h3>
+            <h3><span lang="en">Step 3 — Configure your AI provider</span><span lang="es" hidden>Paso 3 — Configura tu proveedor de IA</span></h3>
             <p>
-              Set the API key for your chosen provider. You only need one to get started.
+              <span lang="en">Set the API key for your chosen provider. You only need one to get started.</span><span lang="es" hidden>Configura la clave de API para el proveedor que elijas. Solo necesitas uno para empezar.</span>
             </p>
-            <pre><code># Login (Claude, GitHub Copilot, Gemini, and others)
+            <pre lang="en"><code># Login (Claude, GitHub Copilot, Gemini, and others)
+/login
+
+# Google Vertex AI
+export GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json
+
+</code></pre>
+            <pre lang="es" hidden><code># Iniciar sesión (Claude, GitHub Copilot, Gemini, y otros)
 /login
 
 # Google Vertex AI
@@ -190,9 +224,13 @@ export GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json
 
 </code></pre>
 
-            <div class="callout tip">
+            <div class="callout tip" lang="en">
               <strong>Tip</strong><br />
               Add the export line to your <code>~/.zshrc</code> so it persists across terminal sessions.
+            </div>
+            <div class="callout tip" lang="es" hidden>
+              <strong>Consejo</strong><br />
+              Agrega la línea de export a tu <code>~/.zshrc</code> para que persista entre sesiones de terminal.
             </div>
           </div>
         </section>
@@ -200,52 +238,63 @@ export GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json
         <!-- VS Code / Cursor plugin -->
         <section class="card" aria-labelledby="install-plugin">
           <div class="card-header">
-            <h2 id="install-plugin">Install the VS Code / Cursor plugin</h2>
-            <p>Optional. Adds a free-code chat panel inside your editor. Works the same on Linux and macOS.</p>
+            <h2 id="install-plugin"><span lang="en">Install the VS Code / Cursor plugin</span><span lang="es" hidden>Instalar el plugin de VS Code / Cursor</span></h2>
+            <p><span lang="en">Optional. Adds a free-code chat panel inside your editor. Works the same on Linux and macOS.</span><span lang="es" hidden>Opcional. Agrega un panel de chat de free-code dentro de tu editor. Funciona igual en Linux y macOS.</span></p>
           </div>
           <div class="card-body">
-            <div class="callout info">
+            <div class="callout info" lang="en">
               <strong>No terminal needed.</strong> You install the plugin from inside VS Code or Cursor by
               clicking a few buttons. Follow the steps below exactly — you don't need any command line.
             </div>
+            <div class="callout info" lang="es" hidden>
+              <strong>No necesitas terminal.</strong> Instalas el plugin desde dentro de VS Code o Cursor
+              haciendo clic en unos pocos botones. Sigue los pasos de abajo exactamente — no necesitas ninguna línea de comandos.
+            </div>
 
-            <h3>What you need first</h3>
+            <h3><span lang="en">What you need first</span><span lang="es" hidden>Lo que necesitas primero</span></h3>
             <ul>
-              <li>VS Code <em>or</em> Cursor installed on your computer.</li>
-              <li>The <strong>free-code folder</strong> you downloaded (the same one where the install script lives). Inside it there is a plugin file at:
+              <li><span lang="en">VS Code <em>or</em> Cursor installed on your computer.</span><span lang="es" hidden>VS Code <em>o</em> Cursor instalado en tu computadora.</span></li>
+              <li><span lang="en">The <strong>free-code folder</strong> you downloaded (the same one where the install script lives). Inside it there is a plugin file at:
                 <br /><code>packages/vscode-free-code/vscode-free-code-0.66.1.vsix</code>
-                <br />A <code>.vsix</code> file is just the packaged plugin.
+                <br />A <code>.vsix</code> file is just the packaged plugin.</span><span lang="es" hidden>La <strong>carpeta free-code</strong> que descargaste (la misma donde está el script de instalación). Dentro hay un archivo de plugin en:
+                <br /><code>packages/vscode-free-code/vscode-free-code-0.66.1.vsix</code>
+                <br />Un archivo <code>.vsix</code> es simplemente el plugin empaquetado.</span>
               </li>
             </ul>
 
-            <h3>Step 1 — Open the Extensions panel</h3>
-            <p>Open VS Code or Cursor. On the left side bar, click the <strong>Extensions</strong> icon (four little squares). Or press:</p>
+            <h3><span lang="en">Step 1 — Open the Extensions panel</span><span lang="es" hidden>Paso 1 — Abre el panel de Extensiones</span></h3>
+            <p><span lang="en">Open VS Code or Cursor. On the left side bar, click the <strong>Extensions</strong> icon (four little squares). Or press:</span><span lang="es" hidden>Abre VS Code o Cursor. En la barra lateral izquierda, haz clic en el ícono de <strong>Extensiones</strong> (cuatro cuadraditos). O presiona:</span></p>
             <ul>
-              <li><strong>macOS:</strong> <span class="kbd">Cmd</span> + <span class="kbd">Shift</span> + <span class="kbd">X</span></li>
-              <li><strong>Linux:</strong> <span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">X</span></li>
+              <li><span lang="en"><strong>macOS:</strong> <span class="kbd">Cmd</span> + <span class="kbd">Shift</span> + <span class="kbd">X</span></span><span lang="es" hidden><strong>macOS:</strong> <span class="kbd">Cmd</span> + <span class="kbd">Shift</span> + <span class="kbd">X</span></span></li>
+              <li><span lang="en"><strong>Linux:</strong> <span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">X</span></span><span lang="es" hidden><strong>Linux:</strong> <span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">X</span></span></li>
             </ul>
 
-            <h3>Step 2 — Choose “Install from VSIX…”</h3>
+            <h3><span lang="en">Step 2 — Choose “Install from VSIX…”</span><span lang="es" hidden>Paso 2 — Elige “Install from VSIX…”</span></h3>
             <ol>
-              <li>At the top of the Extensions panel, find the small <strong>…</strong> (three dots) menu button and click it.</li>
-              <li>In the menu that opens, click <strong>Install from VSIX…</strong></li>
+              <li><span lang="en">At the top of the Extensions panel, find the small <strong>…</strong> (three dots) menu button and click it.</span><span lang="es" hidden>En la parte superior del panel de Extensiones, busca el pequeño botón de menú <strong>…</strong> (tres puntos) y haz clic en él.</span></li>
+              <li><span lang="en">In the menu that opens, click <strong>Install from VSIX…</strong></span><span lang="es" hidden>En el menú que se abre, haz clic en <strong>Install from VSIX…</strong></span></li>
             </ol>
 
-            <h3>Step 3 — Pick the plugin file</h3>
-            <p>A file picker opens. Go into the free-code folder, then into <code>packages</code> → <code>vscode-free-code</code>, and select:</p>
+            <h3><span lang="en">Step 3 — Pick the plugin file</span><span lang="es" hidden>Paso 3 — Elige el archivo del plugin</span></h3>
+            <p><span lang="en">A file picker opens. Go into the free-code folder, then into <code>packages</code> → <code>vscode-free-code</code>, and select:</span><span lang="es" hidden>Se abre un selector de archivos. Ve a la carpeta free-code, luego a <code>packages</code> → <code>vscode-free-code</code>, y selecciona:</span></p>
             <pre><code>vscode-free-code-0.66.1.vsix</code></pre>
-            <p>Click <strong>Install</strong>. You'll see a small confirmation in the bottom-right corner.</p>
+            <p><span lang="en">Click <strong>Install</strong>. You'll see a small confirmation in the bottom-right corner.</span><span lang="es" hidden>Haz clic en <strong>Install</strong>. Verás una pequeña confirmación en la esquina inferior derecha.</span></p>
 
-            <h3>Step 4 — Reload the editor</h3>
-            <p>If a <strong>Reload</strong> button appears, click it. Otherwise just close and reopen VS Code / Cursor.</p>
+            <h3><span lang="en">Step 4 — Reload the editor</span><span lang="es" hidden>Paso 4 — Recarga el editor</span></h3>
+            <p><span lang="en">If a <strong>Reload</strong> button appears, click it. Otherwise just close and reopen VS Code / Cursor.</span><span lang="es" hidden>Si aparece un botón de <strong>Reload</strong>, haz clic en él. Si no, simplemente cierra y vuelve a abrir VS Code / Cursor.</span></p>
 
-            <h3>Step 5 — Open the free-code chat</h3>
-            <p>Open the Command Palette (<span class="kbd">Cmd</span>/<span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">P</span>), type <strong>free-code</strong>, and choose the command to open the chat panel. Type <code>/</code> in the input to see all commands.</p>
+            <h3><span lang="en">Step 5 — Open the free-code chat</span><span lang="es" hidden>Paso 5 — Abre el chat de free-code</span></h3>
+            <p><span lang="en">Open the Command Palette (<span class="kbd">Cmd</span>/<span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">P</span>), type <strong>free-code</strong>, and choose the command to open the chat panel. Type <code>/</code> in the input to see all commands.</span><span lang="es" hidden>Abre la Paleta de Comandos (<span class="kbd">Cmd</span>/<span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">P</span>), escribe <strong>free-code</strong>, y elige el comando para abrir el panel de chat. Escribe <code>/</code> en el campo de entrada para ver todos los comandos.</span></p>
 
-            <div class="callout tip">
+            <div class="callout tip" lang="en">
               <strong>Prefer the terminal?</strong><br />
               If you're comfortable with the command line, you can install it in one line from inside the
               free-code folder instead:
+            </div>
+            <div class="callout tip" lang="es" hidden>
+              <strong>¿Prefieres la terminal?</strong><br />
+              Si te sientes cómodo con la línea de comandos, puedes instalarlo en una sola línea desde dentro de la
+              carpeta free-code:
             </div>
             <pre><code># VS Code
 code --install-extension packages/vscode-free-code/vscode-free-code-0.66.1.vsix
@@ -258,65 +307,82 @@ cursor --install-extension packages/vscode-free-code/vscode-free-code-0.66.1.vsi
         <!-- CLI only -->
         <section class="card" aria-labelledby="install-cli">
           <div class="card-header">
-            <h2 id="install-cli">CLI only (any platform)</h2>
-            <p>Node.js 20+ required. Works on macOS, Linux, and Windows.</p>
+            <h2 id="install-cli"><span lang="en">CLI only (any platform)</span><span lang="es" hidden>Solo la CLI (cualquier plataforma)</span></h2>
+            <p><span lang="en">Node.js 20+ required. Works on macOS, Linux, and Windows.</span><span lang="es" hidden>Requiere Node.js 20+. Funciona en macOS, Linux y Windows.</span></p>
           </div>
           <div class="card-body">
-            <h3>1. Install Node.js 20+</h3>
-            <pre><code># via nvm (recommended)
+            <h3><span lang="en">1. Install Node.js 20+</span><span lang="es" hidden>1. Instala Node.js 20+</span></h3>
+            <pre lang="en"><code># via nvm (recommended)
+nvm install --lts
+nvm use --lts</code></pre>
+            <pre lang="es" hidden><code># vía nvm (recomendado)
 nvm install --lts
 nvm use --lts</code></pre>
 
-            <h3>2. Install the CLI</h3>
+            <h3><span lang="en">2. Install the CLI</span><span lang="es" hidden>2. Instala la CLI</span></h3>
             <pre><code>npm install -g ./packages/coding-agent</code></pre>
 
-            <h3>3. Verify</h3>
+            <h3><span lang="en">3. Verify</span><span lang="es" hidden>3. Verifica</span></h3>
             <pre><code>free-code --version</code></pre>
 
-            <h3>4. Start</h3>
-            <pre><code>free-code                              # interactive
+            <h3><span lang="en">4. Start</span><span lang="es" hidden>4. Inicia</span></h3>
+            <pre lang="en"><code>free-code                              # interactive
 free-code "Summarize this project"     # one-shot
 cat README.md | free-code -p "Summarize"  # pipe input</code></pre>
+            <pre lang="es" hidden><code>free-code                              # interactivo
+free-code "Summarize this project"     # de una sola vez
+cat README.md | free-code -p "Summarize"  # entrada por tubería (pipe)</code></pre>
           </div>
         </section>
 
         <!-- Code graph -->
         <section class="card" aria-labelledby="install-codegraph">
           <div class="card-header">
-            <h2 id="install-codegraph">Code graph (optional)</h2>
-            <p>Adds symbol indexing and call graph navigation to the agent.</p>
+            <h2 id="install-codegraph"><span lang="en">Code graph (optional)</span><span lang="es" hidden>Grafo de código (opcional)</span></h2>
+            <p><span lang="en">Adds symbol indexing and call graph navigation to the agent.</span><span lang="es" hidden>Agrega indexación de símbolos y navegación del grafo de llamadas al agente.</span></p>
           </div>
           <div class="card-body">
-            <pre><code># From the repository root
+            <pre lang="en"><code># From the repository root
+npm install -g ./packages/code-graph</code></pre>
+            <pre lang="es" hidden><code># Desde la raíz del repositorio
 npm install -g ./packages/code-graph</code></pre>
 
             <p>
-              Once installed, the <code>code_index</code>, <code>code_symbols</code>,
+              <span lang="en">Once installed, the <code>code_index</code>, <code>code_symbols</code>,
               <code>code_callers</code>, and <code>code_context</code> tools become available
-              automatically in every session.
+              automatically in every session.</span><span lang="es" hidden>Una vez instalado, las herramientas <code>code_index</code>, <code>code_symbols</code>,
+              <code>code_callers</code>, y <code>code_context</code> quedan disponibles
+              automáticamente en cada sesión.</span>
             </p>
 
-            <div class="callout info">
+            <div class="callout info" lang="en">
               <strong>First use</strong><br />
               Open a project and run <code>/codeGraph-index</code>. The agent will index all
               <code>.ts</code> / <code>.js</code> files and store the result in
               <code>.code-graph/</code> at the project root.
             </div>
+            <div class="callout info" lang="es" hidden>
+              <strong>Primer uso</strong><br />
+              Abre un proyecto y ejecuta <code>/codeGraph-index</code>. El agente indexará todos los
+              archivos <code>.ts</code> / <code>.js</code> y guardará el resultado en
+              <code>.code-graph/</code> en la raíz del proyecto.
+            </div>
 
-            <p>Add <code>.code-graph/</code> to your <code>.gitignore</code> — the index is regenerated on demand and does not need to be committed.</p>
+            <p><span lang="en">Add <code>.code-graph/</code> to your <code>.gitignore</code> — the index is regenerated on demand and does not need to be committed.</span><span lang="es" hidden>Agrega <code>.code-graph/</code> a tu <code>.gitignore</code> — el índice se regenera bajo demanda y no necesita ser incluido en el control de versiones.</span></p>
 
-            <p><a href="code-graph.html">Code graph full documentation →</a></p>
+            <p><a href="code-graph.html"><span lang="en">Code graph full documentation →</span><span lang="es" hidden>Documentación completa del grafo de código →</span></a></p>
           </div>
         </section>
 
         <p class="footer">
-          <a href="capabilities.html">All capabilities →</a> &nbsp;·&nbsp;
-          <a href="commands.html">Commands →</a> &nbsp;·&nbsp;
-          <a href="code-graph.html">Code graph →</a>
+          <a href="capabilities.html"><span lang="en">All capabilities →</span><span lang="es" hidden>Todas las capacidades →</span></a> &nbsp;·&nbsp;
+          <a href="commands.html"><span lang="en">Commands →</span><span lang="es" hidden>Comandos →</span></a> &nbsp;·&nbsp;
+          <a href="code-graph.html"><span lang="en">Code graph →</span><span lang="es" hidden>Grafo de código →</span></a>
         </p>
-        <p class="footer-credit">Developed by Pablo Castañeda</p>
+        <p class="footer-credit"><span lang="en">Developed by Pablo Castañeda</span><span lang="es" hidden>Desarrollado por Pablo Castañeda</span></p>
       </div>
     </div>
+    <script src="../assets/i18n.js" defer></script>
     <script src="assets/theme.js" defer></script>
   </body>
 </html>

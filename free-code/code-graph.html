@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-title-en="Code Graph — free-code" data-title-es="Grafo de Código — free-code">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="../assets/project-nav.css" />
 </head>
   <body>
-  <div id="portfolio-back-nav"><a class="back-link" href="../index.html">← Portfolio</a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span></div>
+  <div id="portfolio-back-nav"><a class="back-link" href="../index.html"><span lang="en">← Portfolio</span><span lang="es" hidden>← Portafolio</span></a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span><div id="lang-toggle"></div></div>
     <div class="doc-root">
+  <div lang="en">
+
       <header class="site-shell-header" role="banner">
         <div class="site-shell-inner">
           <a class="site-brand" href="index.html">
@@ -468,7 +470,491 @@ npm install -g ./packages/code-graph</code></pre>
         </p>
         <p class="footer-credit">Developed by Pablo Castañeda</p>
       </div>
-    </div>
+    
+  </div>
+  <div lang="es" hidden>
+
+      <header class="site-shell-header" role="banner">
+        <div class="site-shell-inner">
+          <a class="site-brand" href="index.html">
+            <span class="site-brand-angles" aria-hidden="true">&lt;</span>
+            <span>free-code</span>
+            <span class="site-brand-angles" aria-hidden="true">&gt;</span>
+          </a>
+          <div class="site-header-actions">
+            <button type="button" class="theme-toggle" id="doc-theme-toggle" aria-label="Tema de color">
+              <span class="theme-toggle-label" id="doc-theme-label">Sistema</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="container">
+        <header class="hero">
+          <h1 class="brand">
+            <span class="angle" aria-hidden="true">&lt;</span>
+            <span class="name">free-code</span>
+            <span class="angle" aria-hidden="true">&gt;</span>
+          </h1>
+          <p class="tagline">
+            <span class="prompt" aria-hidden="true">// </span>
+            Grafo de Código — índice local de símbolos y navegación por grafo de llamadas.
+          </p>
+
+          <nav class="nav" aria-label="Primary">
+            <a href="index.html">[inicio]</a>
+            <a href="installation.html">[instalación]</a>
+            <a href="webhooks.html">[webhooks]</a>
+            <a href="rag.html">[rag]</a>
+            <a href="code-graph.html" aria-current="page">[grafo de código]</a>
+            <a href="mcp.html">[mcp]</a>
+            <a href="vision-mode.html">[modo visión]</a>
+            <a href="capabilities.html">[capacidades]</a>
+            <a href="commands.html">[comandos]</a>
+            <a href="models.html">[modelos]</a>
+          </nav>
+        </header>
+
+        <!-- What it is -->
+        <section class="card" aria-labelledby="cg-what">
+          <div class="card-header">
+            <h2 id="cg-what">¿Qué es el grafo de código?</h2>
+            <p>Un mapa local y consultable de cada símbolo y arista de llamada en tu base de código.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              El grafo de código indexa cada archivo TypeScript y JavaScript de tu proyecto. Extrae
+              todos los símbolos — funciones, clases, métodos, interfaces, tipos, variables,
+              enumeraciones — y registra qué símbolo llama a cuál. El resultado se almacena en
+              <code>.code-graph/</code> en la raíz del proyecto como un conjunto de archivos JSON
+              compactos.
+            </p>
+
+            <p>
+              El agente lee el índice en milisegundos. En lugar de abrir archivos a ciegas para
+              encontrar la definición de una función, le pregunta al grafo de código. En lugar de
+              hacer grep para buscar quién llama a qué, consulta las aristas de llamada. El índice
+              le da al agente una <em>comprensión estructural</em> de tu proyecto desde la primera
+              consulta.
+            </p>
+
+            <h3>Qué indexa</h3>
+            <ul>
+              <li>Funciones (de nivel superior y anidadas)</li>
+              <li>Clases y sus métodos</li>
+              <li>Interfaces, alias de tipos, enumeraciones</li>
+              <li>Variables y constantes</li>
+              <li>Aristas de llamada entre símbolos (quién llama a quién)</li>
+              <li>Aristas de importación (qué archivo importa a cuál)</li>
+            </ul>
+
+            <h3>Lenguajes admitidos</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Lenguaje</th><th>Extensiones</th><th>Símbolos</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td>TypeScript / JavaScript</td>
+                    <td>
+                      <code>.ts</code> <code>.tsx</code> <code>.js</code> <code>.jsx</code>
+                      <code>.mts</code> <code>.cts</code> <code>.mjs</code> <code>.cjs</code>
+                    </td>
+                    <td>funciones, clases, métodos, interfaces, tipos, enumeraciones, variables</td>
+                  </tr>
+                  <tr>
+                    <td>Python</td>
+                    <td><code>.py</code></td>
+                    <td>clases, funciones, métodos, variables a nivel de módulo</td>
+                  </tr>
+                  <tr>
+                    <td>Java</td>
+                    <td><code>.java</code></td>
+                    <td>clases, interfaces, enumeraciones, métodos (incl. abstractos)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              TypeScript y JavaScript se analizan con la API del compilador de TypeScript. Python
+              (basado en indentación) y Java (basado en llaves) usan extractores heurísticos
+              ligeros — sin dependencias adicionales, sin cadena de compilación.
+            </p>
+
+            <div class="callout info">
+              <strong>Incremental por defecto</strong><br />
+              Solo se vuelven a analizar los archivos que han cambiado desde la última ejecución
+              del índice. En un proyecto grande, las actualizaciones incrementales tardan una
+              fracción de segundo.
+            </div>
+          </div>
+        </section>
+
+        <!-- Video -->
+        <section class="card" aria-labelledby="cg-video">
+          <div class="card-header">
+            <h2 id="cg-video">Mira: Grafo de Código en free-code</h2>
+            <p>Observa el índice de símbolos y la navegación por grafo de llamadas en acción.</p>
+          </div>
+          <div class="card-body">
+            <div class="video-embed">
+              <iframe
+                src="https://www.youtube.com/embed/Xlya3JARJFw"
+                title="free-code — Grafo de Código"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </section>
+
+        <!-- How it works -->
+        <section class="card" aria-labelledby="cg-how">
+          <div class="card-header">
+            <h2 id="cg-how">Cómo funciona</h2>
+            <p>De archivos fuente a un índice estructural que el agente puede consultar.</p>
+          </div>
+          <div class="card-body">
+            <ol>
+              <li>
+                <strong>Analizar.</strong> Cada archivo fuente se analiza y convierte en un árbol
+                de sintaxis. free-code recorre el árbol y registra cada declaración de símbolo con
+                su tipo, ruta de archivo y línea de inicio/fin.
+              </li>
+              <li>
+                <strong>Resolver aristas.</strong> Las expresiones de llamada se convierten en
+                <em>aristas de llamada</em> (<code>símbolo → nombre</code>) y las declaraciones de
+                importación se convierten en <em>aristas de importación</em>
+                (<code>archivo → archivo</code>). Juntas forman el grafo.
+              </li>
+              <li>
+                <strong>Aplicar hash y almacenar.</strong> Cada archivo recibe un hash para que la
+                siguiente ejecución pueda omitir todo lo que no haya cambiado. Los símbolos,
+                aristas, hashes y metadatos de ejecución se escriben en <code>.code-graph/</code>
+                como JSON.
+              </li>
+              <li>
+                <strong>Consultar.</strong> El agente (o tú, mediante comandos slash) lee el JSON
+                directamente — sin servidor de lenguaje, sin compilación, sin red. Las búsquedas
+                son casi instantáneas.
+              </li>
+            </ol>
+
+            <div class="callout tip">
+              <strong>Un índice por repositorio</strong><br />
+              El grafo vive junto al código que describe, en la raíz de cada repositorio. Abre un
+              proyecto distinto y free-code usará el propio <code>.code-graph/</code> de ese
+              proyecto.
+            </div>
+          </div>
+        </section>
+
+        <!-- Why it matters -->
+        <section class="card" aria-labelledby="cg-why">
+          <div class="card-header">
+            <h2 id="cg-why">Por qué es una funcionalidad destacada</h2>
+            <p>Comprensión estructural que es local, rápida y gratuita.</p>
+          </div>
+          <div class="card-body">
+            <div class="two-col">
+              <div>
+                <h3>Menos tokens desperdiciados</h3>
+                <p>
+                  Sin un grafo de código, un agente encuentra una función leyendo archivos
+                  completos dentro de su contexto — gastando tokens en código que no necesita. El
+                  grafo de código devuelve solo el símbolo y sus llamadas salientes, de modo que
+                  los prompts se mantienen pequeños y las iteraciones rápidas.
+                </p>
+                <h3>Análisis de impacto real</h3>
+                <p>
+                  Antes de cambiar una función, pregúntale al grafo quién la llama.
+                  <code>/codeGraph-callers</code> convierte una suposición (&ldquo;¿se usa esto en
+                  algún lado?&rdquo;) en una lista concreta de sitios de llamada — la base para
+                  refactorizaciones seguras.
+                </p>
+              </div>
+              <div>
+                <h3>Local y privado</h3>
+                <p>
+                  El índice nunca sale de tu máquina. Sin indexación en la nube de tu repositorio,
+                  sin subida de tu código fuente. Son solo archivos JSON bajo la raíz de tu
+                  proyecto que puedes inspeccionar, comparar o eliminar en cualquier momento.
+                </p>
+                <h3>Sin configuración e instantáneo</h3>
+                <p>
+                  No hay servidor de lenguaje que configurar, ni paso de compilación, ni daemon. La
+                  indexación es incremental y los archivos desactualizados se refrescan
+                  automáticamente en segundo plano cuando comienza una sesión.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Agent tools -->
+        <section class="card" aria-labelledby="cg-tools">
+          <div class="card-header">
+            <h2 id="cg-tools">Herramientas del agente</h2>
+            <p>Cuatro herramientas disponibles automáticamente en cada sesión una vez instalado <code>@free/code-graph</code>.</p>
+          </div>
+          <div class="card-body">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Herramienta</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><code>code_index</code></td>
+                    <td>
+                      Construye o actualiza incrementalmente el índice del proyecto. Acepta un
+                      indicador opcional <code>force</code> para volver a analizar todos los
+                      archivos desde cero.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>code_symbols</code></td>
+                    <td>
+                      Búsqueda de subcadena sin distinción entre mayúsculas y minúsculas por nombre
+                      o nombre calificado. Acepta un filtro opcional <code>kind</code>:
+                      <code>function</code> · <code>class</code> · <code>method</code> ·
+                      <code>interface</code> · <code>type</code> · <code>variable</code> · <code>enum</code>.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>code_callers</code></td>
+                    <td>
+                      Devuelve cada sitio de llamada que invoca a un símbolo con nombre, con ruta de
+                      archivo y número de línea. Útil para análisis de impacto y planificación de
+                      refactorizaciones.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>code_context</code></td>
+                    <td>
+                      Devuelve el código fuente completo de un símbolo junto con sus llamadas
+                      salientes directas. Valida que el archivo no haya cambiado desde la última
+                      ejecución del índice; advierte si está desactualizado.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Commands per repository -->
+        <section class="card" aria-labelledby="cg-perrepo">
+          <div class="card-header">
+            <h2 id="cg-perrepo">Comandos que puedes ejecutar en cualquier repositorio</h2>
+            <p>Los mismos cuatro comandos slash funcionan en cada proyecto que abras con free-code.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              Cada repositorio obtiene su propio grafo de código. Abre un proyecto, construye el
+              índice una vez, y estos comandos operan sobre los símbolos y aristas de llamada de
+              <em>ese</em> repositorio:
+            </p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Comando</th><th>Qué hace</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><code>/codeGraph-index</code></td>
+                    <td>Construye o actualiza el índice del repositorio.</td>
+                  </tr>
+                  <tr>
+                    <td><code>/codeGraph-symbols</code></td>
+                    <td>Busca los símbolos del repositorio por nombre.</td>
+                  </tr>
+                  <tr>
+                    <td><code>/codeGraph-callers</code></td>
+                    <td>Lista cada sitio de llamada de una función o método en el repositorio.</td>
+                  </tr>
+                  <tr>
+                    <td><code>/codeGraph-context</code></td>
+                    <td>Imprime el código fuente completo de un símbolo junto con sus llamadas salientes directas.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="callout info">
+              <strong>Por proyecto, automáticamente</strong><br />
+              No hay nada que apuntar a un repositorio — free-code lee y escribe la carpeta
+              <code>.code-graph/</code> en la raíz de cualquier proyecto en el que se esté
+              ejecutando la sesión.
+            </div>
+          </div>
+        </section>
+
+        <!-- Slash commands -->
+        <section class="card" aria-labelledby="cg-commands">
+          <div class="card-header">
+            <h2 id="cg-commands">Usando los comandos</h2>
+            <p>Ejecuta operaciones del grafo de código directamente desde el campo de entrada del editor.</p>
+          </div>
+          <div class="card-body">
+
+            <h3><code>/codeGraph-index [--force]</code></h3>
+            <p>
+              Indexa el proyecto y escribe el resultado en <code>.code-graph/</code>.
+              Sin <code>--force</code>, solo se vuelven a indexar los archivos modificados.
+            </p>
+            <pre><code>/codeGraph-index           # incremental — solo archivos modificados
+/codeGraph-index --force   # reindexar todo desde cero</code></pre>
+            <p>
+              <strong>Cuándo ejecutarlo:</strong> una vez después de clonar, y con
+              <code>--force</code> tras grandes refactorizaciones. Día a día, los archivos
+              desactualizados se reindexan automáticamente en segundo plano al iniciar la sesión.
+            </p>
+
+            <hr />
+
+            <h3><code>/codeGraph-symbols &lt;query&gt; [--kind &lt;type&gt;] [--limit &lt;n&gt;]</code></h3>
+            <p>
+              Busca símbolos cuyo nombre o nombre calificado contenga la cadena de consulta
+              (sin distinción entre mayúsculas y minúsculas, coincidencia de subcadena).
+            </p>
+            <pre><code>/codeGraph-symbols parseArgs
+/codeGraph-symbols handle --kind function
+/codeGraph-symbols User --kind class --limit 10</code></pre>
+
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Tipo</th><th>Coincide con</th></tr></thead>
+                <tbody>
+                  <tr><td><code>function</code></td><td>Funciones de nivel superior y anidadas</td></tr>
+                  <tr><td><code>class</code></td><td>Declaraciones de clase</td></tr>
+                  <tr><td><code>method</code></td><td>Métodos de clase</td></tr>
+                  <tr><td><code>interface</code></td><td>Declaraciones de interfaz</td></tr>
+                  <tr><td><code>type</code></td><td>Alias de tipo</td></tr>
+                  <tr><td><code>variable</code></td><td>Variables y constantes</td></tr>
+                  <tr><td><code>enum</code></td><td>Declaraciones de enumeración</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <hr />
+
+            <h3><code>/codeGraph-callers &lt;name&gt; [--limit &lt;n&gt;]</code></h3>
+            <p>
+              Encuentra todas las ubicaciones en la base de código que llaman a una función o
+              método por nombre. Devuelve la ruta del archivo, el número de línea y el símbolo
+              contenedor para cada sitio de llamada.
+            </p>
+            <pre><code>/codeGraph-callers syncDefaultExtensions
+/codeGraph-callers render --limit 20</code></pre>
+
+            <div class="callout warning">
+              <strong>Nota sobre nombres comunes</strong><br />
+              Nombres como <code>save</code>, <code>render</code> o <code>init</code> pueden
+              coincidir con llamadores de clases no relacionadas. Usa
+              <code>/codeGraph-context</code> para inspeccionar un llamador antes de confiar en el
+              resultado.
+            </div>
+
+            <hr />
+
+            <h3><code>/codeGraph-context &lt;name&gt; [--file &lt;partial-path&gt;]</code></h3>
+            <p>
+              Devuelve el código fuente completo de un símbolo y una lista de sus llamadas
+              salientes directas. Valida que el archivo no haya sido modificado desde el último
+              índice.
+            </p>
+            <pre><code>/codeGraph-context createAgentSessionServices
+/codeGraph-context load --file resource-loader</code></pre>
+            <p>
+              Cuando varios símbolos comparten el mismo nombre, usa <code>--file</code> para elegir
+              el correcto haciendo coincidir una ruta de archivo parcial.
+            </p>
+          </div>
+        </section>
+
+        <!-- Typical workflow -->
+        <section class="card" aria-labelledby="cg-workflow">
+          <div class="card-header">
+            <h2 id="cg-workflow">Flujo de trabajo típico</h2>
+            <p>Cómo usar el grafo de código en una sesión real.</p>
+          </div>
+          <div class="card-body">
+            <h3>Empezando en un proyecto nuevo</h3>
+            <pre><code>/codeGraph-index                     # 1. Indexar el proyecto una vez
+
+/codeGraph-symbols parseArgs         # 2. Buscar un símbolo por nombre
+/codeGraph-callers parseArgs         # 3. Ver dónde se llama en todas partes
+/codeGraph-context parseArgs         # 4. Leer su código fuente completo + llamadas salientes</code></pre>
+
+            <h3>Después de una gran refactorización</h3>
+            <pre><code>/codeGraph-index --force             # Reindexar todos los archivos desde cero</code></pre>
+
+            <h3>Reindexación automática en segundo plano</h3>
+            <p>
+              Al iniciar la sesión, free-code verifica si algún archivo fuente indexado
+              (<code>.ts</code> / <code>.js</code> / <code>.py</code> / <code>.java</code> y
+              similares) ha sido modificado desde el último índice. Si es así,
+              <strong>reindexa automáticamente en segundo plano</strong> — sin necesidad de acción
+              manual. Verás dos notificaciones:
+            </p>
+            <pre><code>⚠️ Code graph index is stale: 5 file(s) modified since last index. Re-indexing in background…
+
+✓ Code graph updated: 3 file(s) re-indexed in 420ms</code></pre>
+            <p>
+              La reindexación es incremental (solo los archivos modificados). Usa
+              <code>/codeGraph-index --force</code> después de grandes refactorizaciones para
+              volver a analizar todo desde cero.
+            </p>
+          </div>
+        </section>
+
+        <!-- Installation -->
+        <section class="card" aria-labelledby="cg-install">
+          <div class="card-header">
+            <h2 id="cg-install">Instalación</h2>
+            <p>El grafo de código es un paquete separado que se instala una vez a nivel global.</p>
+          </div>
+          <div class="card-body">
+            <pre><code># Desde la raíz del repositorio
+npm install -g ./packages/code-graph</code></pre>
+
+            <p>
+              Una vez instalado, las cuatro herramientas del grafo de código (<code>code_index</code>,
+              <code>code_symbols</code>, <code>code_callers</code>, <code>code_context</code>)
+              y sus comandos slash <code>/codeGraph-*</code> aparecen automáticamente en cada
+              sesión de free-code. No se necesita configuración.
+            </p>
+          </div>
+        </section>
+
+        <!-- Generated files -->
+        <section class="card" aria-labelledby="cg-files">
+          <div class="card-header">
+            <h2 id="cg-files">Archivos generados</h2>
+            <p>El índice se almacena en <code>.code-graph/</code> en la raíz del proyecto.</p>
+          </div>
+          <div class="card-body">
+            <pre><code>.code-graph/
+  meta.json      # timestamp de la última ejecución del índice y estadísticas agregadas
+  files.json     # archivos indexados con hashes y mtimes
+  symbols.json   # todos los símbolos: nombre, tipo, archivo, línea de inicio/fin
+  edges.json     # aristas de llamada: de símbolo → a nombre</code></pre>
+
+            <div class="callout tip">
+              <strong>Añadir a .gitignore</strong><br />
+              El índice se regenera bajo demanda y no necesita ser incluido en el control de
+              versiones. Añade <code>.code-graph/</code> a tu <code>.gitignore</code>.
+            </div>
+          </div>
+        </section>
+
+        <p class="footer">
+          <a href="capabilities.html">Todas las capacidades →</a> &nbsp;·&nbsp;
+          <a href="commands.html">Comandos →</a> &nbsp;·&nbsp;
+          <a href="installation.html">Instalación →</a>
+        </p>
+        <p class="footer-credit">Desarrollado por Pablo Castañeda</p>
+      </div>
+    
+  </div>
+</div>
+    <script src="../assets/i18n.js" defer></script>
     <script src="assets/theme.js" defer></script>
   </body>
 </html>

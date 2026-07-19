@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-title-en="AgentMesh — a decentralized network for idle AI agents" data-title-es="AgentMesh — una red descentralizada para agentes de IA inactivos">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -198,72 +198,143 @@
     <link rel="stylesheet" href="../assets/project-nav.css" />
 </head>
   <body>
-  <div id="portfolio-back-nav"><a class="back-link" href="../index.html">← Portfolio</a><span class="back-sep">/</span><span class="back-project">AgentMesh</span><span class="back-logo">Pablo Castañeda</span></div>
+  <div id="portfolio-back-nav"><a class="back-link" href="../index.html"><span lang="en">← Portfolio</span><span lang="es" hidden>← Portafolio</span></a><span class="back-sep">/</span><span class="back-project">AgentMesh</span><span class="back-logo">Pablo Castañeda</span><div id="lang-toggle"></div></div>
     <div class="shell">
       <header class="hero">
-        <div class="eyebrow">AgentMesh · concept paper</div>
-        <h1>A decentralized network for idle AI agents</h1>
-        <p class="tagline">
-          A peer-to-peer marketplace where anyone with unused capacity on their AI subscription
-          can run agents locally, expose them to a network, and get paid for the work those agents
-          complete — without ever handing their machine or their API keys to a third party.
-        </p>
-        <span class="status-badge">Status: early concept · not launched</span>
-        <nav class="toc" aria-label="Contents">
-          <a href="#abstract">Abstract</a>
-          <a href="#problem">The problem</a>
-          <a href="#how-it-works">How it works</a>
-          <a href="#architecture">Architecture</a>
-          <a href="#orchestration">Task orchestration</a>
-          <a href="#isolation">Isolation &amp; security</a>
-          <a href="#incentives">Incentives</a>
-          <a href="#principles">Principles</a>
-          <a href="#roadmap">Status &amp; roadmap</a>
-          <a href="#faq">FAQ</a>
-        </nav>
+        <div lang="en">
+          <div class="eyebrow">AgentMesh · concept paper</div>
+          <h1>A decentralized network for idle AI agents</h1>
+          <p class="tagline">
+            A peer-to-peer marketplace where anyone with unused capacity on their AI subscription
+            can run agents locally, expose them to a network, and get paid for the work those agents
+            complete — without ever handing their machine or their API keys to a third party.
+          </p>
+          <span class="status-badge">Status: early concept · not launched</span>
+          <nav class="toc" aria-label="Contents">
+            <a href="#abstract">Abstract</a>
+            <a href="#problem">The problem</a>
+            <a href="#how-it-works">How it works</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#orchestration">Task orchestration</a>
+            <a href="#isolation">Isolation &amp; security</a>
+            <a href="#incentives">Incentives</a>
+            <a href="#principles">Principles</a>
+            <a href="#roadmap">Status &amp; roadmap</a>
+            <a href="#faq">FAQ</a>
+          </nav>
+        </div>
+        <div lang="es" hidden>
+          <div class="eyebrow">AgentMesh · documento conceptual</div>
+          <h1>Una red descentralizada para agentes de IA inactivos</h1>
+          <p class="tagline">
+            Un mercado de igual a igual (peer-to-peer) donde cualquiera que tenga capacidad sin usar
+            en su suscripción de IA puede ejecutar agentes localmente, exponerlos a una red y cobrar
+            por el trabajo que esos agentes completan — sin entregarle jamás su máquina ni sus claves
+            de API a un tercero.
+          </p>
+          <span class="status-badge">Estado: concepto inicial · no lanzado</span>
+          <nav class="toc" aria-label="Índice">
+            <a href="#abstract">Resumen</a>
+            <a href="#problem">El problema</a>
+            <a href="#how-it-works">Cómo funciona</a>
+            <a href="#architecture">Arquitectura</a>
+            <a href="#orchestration">Orquestación de tareas</a>
+            <a href="#isolation">Aislamiento y seguridad</a>
+            <a href="#incentives">Incentivos</a>
+            <a href="#principles">Principios</a>
+            <a href="#roadmap">Estado y hoja de ruta</a>
+            <a href="#faq">Preguntas frecuentes</a>
+          </nav>
+        </div>
       </header>
 
       <section id="abstract">
-        <h2>Abstract</h2>
-        <p>
-          AgentMesh is a proposal for the first decentralized network of AI coding/automation
-          agents. Instead of one company running a farm of agents in its own cloud, AgentMesh lets
-          individual users run agents on hardware they already own, using AI subscriptions they
-          already pay for — and only during the capacity they aren't otherwise using.
-        </p>
-        <p>
-          The network receives jobs, decides how to split and route them across whichever nodes
-          are online and eligible, and waits for results. Node operators who contribute capacity
-          earn points, redeemable for USDT or BTC. Every agent runs inside a local Docker container
-          on the operator's own machine, so the network never touches the operator's real
-          environment, files, or credentials — it only ever talks to a sandboxed process.
-        </p>
+        <div lang="en">
+          <h2>Abstract</h2>
+          <p>
+            AgentMesh is a proposal for the first decentralized network of AI coding/automation
+            agents. Instead of one company running a farm of agents in its own cloud, AgentMesh lets
+            individual users run agents on hardware they already own, using AI subscriptions they
+            already pay for — and only during the capacity they aren't otherwise using.
+          </p>
+          <p>
+            The network receives jobs, decides how to split and route them across whichever nodes
+            are online and eligible, and waits for results. Node operators who contribute capacity
+            earn points, redeemable for USDT or BTC. Every agent runs inside a local Docker container
+            on the operator's own machine, so the network never touches the operator's real
+            environment, files, or credentials — it only ever talks to a sandboxed process.
+          </p>
+        </div>
+        <div lang="es" hidden>
+          <h2>Resumen</h2>
+          <p>
+            AgentMesh es una propuesta para la primera red descentralizada de agentes de IA de
+            programación/automatización. En lugar de que una sola empresa opere una granja de
+            agentes en su propia nube, AgentMesh permite que usuarios individuales ejecuten agentes
+            en el hardware que ya poseen, usando suscripciones de IA que ya pagan — y solo durante la
+            capacidad que de otro modo no estarían usando.
+          </p>
+          <p>
+            La red recibe trabajos, decide cómo dividirlos y enrutarlos entre los nodos que estén en
+            línea y sean elegibles, y espera los resultados. Los operadores de nodos que aportan
+            capacidad ganan puntos, canjeables por USDT o BTC. Cada agente se ejecuta dentro de un
+            contenedor Docker local en la propia máquina del operador, de modo que la red nunca toca
+            el entorno real del operador, ni sus archivos ni sus credenciales — solo se comunica con
+            un proceso en sandbox.
+          </p>
+        </div>
       </section>
 
       <section id="problem">
-        <h2>The problem</h2>
-        <p>
-          Most people on a paid AI/coding-agent subscription (Claude, or similar) don't use their
-          full allotment of tokens every day. That capacity is idle, non-transferable, and
-          worthless to anyone except its owner — even though the underlying compute could be doing
-          useful work for someone else at that exact moment.
-        </p>
-        <p>
-          At the same time, running agentic workloads at scale is expensive if you have to rent it
-          from a single cloud vendor: every job has to be paid for at retail, dedicated capacity has
-          to be provisioned in advance, and there's no way to tap into the enormous amount of
-          spare capacity sitting idle on individual developers' machines around the world.
-        </p>
-        <p>
-          AgentMesh's bet: turn that idle capacity into a liquid, decentralized resource — a
-          network where supply (unused agent capacity) and demand (jobs that need an agent to run)
-          meet directly, with the network itself handling discovery, routing, and payment.
-        </p>
+        <div lang="en">
+          <h2>The problem</h2>
+          <p>
+            Most people on a paid AI/coding-agent subscription (Claude, or similar) don't use their
+            full allotment of tokens every day. That capacity is idle, non-transferable, and
+            worthless to anyone except its owner — even though the underlying compute could be doing
+            useful work for someone else at that exact moment.
+          </p>
+          <p>
+            At the same time, running agentic workloads at scale is expensive if you have to rent it
+            from a single cloud vendor: every job has to be paid for at retail, dedicated capacity has
+            to be provisioned in advance, and there's no way to tap into the enormous amount of
+            spare capacity sitting idle on individual developers' machines around the world.
+          </p>
+          <p>
+            AgentMesh's bet: turn that idle capacity into a liquid, decentralized resource — a
+            network where supply (unused agent capacity) and demand (jobs that need an agent to run)
+            meet directly, with the network itself handling discovery, routing, and payment.
+          </p>
+        </div>
+        <div lang="es" hidden>
+          <h2>El problema</h2>
+          <p>
+            La mayoría de las personas con una suscripción paga a un agente de IA/programación
+            (Claude o similar) no usa todo su cupo de tokens todos los días. Esa capacidad está
+            inactiva, no es transferible y no tiene ningún valor para nadie más que su dueño — aunque
+            el cómputo subyacente podría estar haciendo un trabajo útil para otra persona en ese
+            mismo momento.
+          </p>
+          <p>
+            Al mismo tiempo, ejecutar cargas de trabajo agénticas a gran escala resulta costoso si
+            hay que rentarlas a un único proveedor de nube: cada trabajo se paga a precio de
+            minorista, la capacidad dedicada debe aprovisionarse por adelantado, y no hay forma de
+            aprovechar la enorme cantidad de capacidad libre que permanece inactiva en las máquinas
+            de desarrolladores individuales alrededor del mundo.
+          </p>
+          <p>
+            La apuesta de AgentMesh: convertir esa capacidad inactiva en un recurso líquido y
+            descentralizado — una red donde la oferta (capacidad de agentes sin usar) y la demanda
+            (trabajos que necesitan que un agente los ejecute) se encuentran directamente, y donde la
+            propia red se encarga del descubrimiento, el enrutamiento y el pago.
+          </p>
+        </div>
       </section>
 
       <section id="how-it-works">
-        <h2>How it works</h2>
-        <div class="diagram">1. Operator has <span class="hl">idle tokens</span> on their AI subscription
+        <div lang="en">
+          <h2>How it works</h2>
+          <div class="diagram">1. Operator has <span class="hl">idle tokens</span> on their AI subscription
 2. Operator spins up an agent in a <span class="hl">local Docker sandbox</span>
 3. The agent is exposed to AgentMesh via a local bridge
    (e.g. agent-webhook-bridge, free-code)
@@ -273,146 +344,329 @@
 7. Results flow back to the orchestrator, which assembles and returns them
 8. Operator is credited <span class="hl">points</span> for the work contributed
 9. Points can be redeemed for <span class="hl">USDT or BTC</span></div>
-        <p>
-          From the requester's side, this looks like calling a single API: submit a job, get a
-          result. From the operator's side, it looks like leaving a background service running —
-          the same one they'd use to expose agents to their own tools (webhooks, CI, Flowise
-          flows) — except now some of the requests it serves come from the network instead of
-          from the operator themselves.
-        </p>
+          <p>
+            From the requester's side, this looks like calling a single API: submit a job, get a
+            result. From the operator's side, it looks like leaving a background service running —
+            the same one they'd use to expose agents to their own tools (webhooks, CI, Flowise
+            flows) — except now some of the requests it serves come from the network instead of
+            from the operator themselves.
+          </p>
+          <p>
+            An agent is not implicitly one specific CLI: the operator chooses its runtime when
+            publishing — Claude Code or free-code — and both are first-class. Whichever is picked,
+            a finished run returns the same {result, session_id} envelope, so the hub routes jobs
+            and resumes conversations without knowing or caring which runtime answered. The workdir
+            a job runs in is treated as untrusted input either way; a free-code agent accordingly
+            runs with its skills, extensions, themes, and RAG server disabled, so nothing in that
+            workdir can quietly load code the operator didn't intend to run.
+          </p>
+        </div>
+        <div lang="es" hidden>
+          <h2>Cómo funciona</h2>
+          <div class="diagram">1. El operador tiene <span class="hl">tokens inactivos</span> en su suscripción de IA
+2. El operador levanta un agente en un <span class="hl">sandbox local de Docker</span>
+3. El agente se expone a AgentMesh mediante un bridge local
+   (p. ej., agent-webhook-bridge, free-code)
+4. El <span class="hl">orquestador</span> de AgentMesh recibe un trabajo de la red
+5. El orquestador divide/enruta el trabajo a uno o más <span class="hl">nodos disponibles</span>
+6. El agente en sandbox de cada nodo procesa su parte del trabajo
+7. Los resultados regresan al orquestador, que los ensambla y los devuelve
+8. Al operador se le acreditan <span class="hl">puntos</span> por el trabajo aportado
+9. Los puntos pueden canjearse por <span class="hl">USDT o BTC</span></div>
+          <p>
+            Del lado del solicitante, esto se parece a llamar a una única API: enviar un trabajo,
+            obtener un resultado. Del lado del operador, se parece a dejar un servicio en segundo
+            plano corriendo — el mismo que usaría para exponer agentes a sus propias herramientas
+            (webhooks, CI, flujos de Flowise) — solo que ahora algunas de las solicitudes que atiende
+            provienen de la red en lugar de provenir del propio operador.
+          </p>
+          <p>
+            Un agente no es implícitamente un CLI específico: el operador elige su runtime al
+            publicarlo — Claude Code o free-code — y ambos son de primera clase. Sin importar cuál
+            se elija, una ejecución finalizada devuelve la misma estructura {result, session_id},
+            de modo que el hub enruta trabajos y reanuda conversaciones sin saber ni importarle qué
+            runtime respondió. El workdir donde se ejecuta un trabajo se trata como entrada no
+            confiable en cualquiera de los casos; en consecuencia, un agente de free-code se ejecuta
+            con sus skills, extensiones, temas y servidor RAG deshabilitados, para que nada en ese
+            workdir pueda cargar silenciosamente código que el operador no tuvo intención de
+            ejecutar.
+          </p>
+        </div>
       </section>
 
       <section id="architecture">
-        <h2>Architecture</h2>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Component</th><th>Role</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Node</strong></td><td>An operator's machine: one or more agents running inside an isolated Docker container, plus a bridge process that exposes them to the network over HTTP.</td></tr>
-              <tr><td><strong>Bridge</strong></td><td>The existing building blocks in this portfolio — <a href="../agent-webhook-bridge/index.html">agent-webhook-bridge</a> and <a href="../free-code/index.html">free-code</a> — already solve "wake up an agent from an external event and return its result." AgentMesh reuses that pattern instead of inventing a new one.</td></tr>
-              <tr><td><strong>Orchestrator</strong></td><td>The network-side service. Accepts incoming jobs, maintains a live registry of which nodes are online and what they're capable of, decides how to split a job, and routes each piece to a node.</td></tr>
-              <tr><td><strong>Ledger</strong></td><td>Tracks points earned per node/operator and reconciles them against payouts in USDT/BTC. Needs to be tamper-resistant and auditable, since it's the thing operators are trusting with their compensation.</td></tr>
-              <tr><td><strong>Client/requester</strong></td><td>Whoever submits a job to the network — a developer, a company, another agent — without needing to know or care which physical node ends up running it.</td></tr>
-            </tbody>
-          </table>
+        <div lang="en">
+          <h2>Architecture</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Component</th><th>Role</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Node</strong></td><td>An operator's machine: one or more agents running inside an isolated Docker container, plus a bridge process that exposes them to the network over HTTP.</td></tr>
+                <tr><td><strong>Bridge</strong></td><td>The existing building blocks in this portfolio — <a href="../agent-webhook-bridge/index.html">agent-webhook-bridge</a> and <a href="../free-code/index.html">free-code</a> — already solve "wake up an agent from an external event and return its result." The bridge now spawns either Claude Code or free-code per agent, as first-class peers under the same protocol; AgentMesh reuses that pattern instead of inventing a new one.</td></tr>
+                <tr><td><strong>Orchestrator</strong></td><td>The network-side service. Accepts incoming jobs, maintains a live registry of which nodes are online and what they're capable of, decides how to split a job, and routes each piece to a node.</td></tr>
+                <tr><td><strong>Ledger</strong></td><td>Tracks points earned per node/operator and reconciles them against payouts in USDT/BTC. Needs to be tamper-resistant and auditable, since it's the thing operators are trusting with their compensation.</td></tr>
+                <tr><td><strong>Client/requester</strong></td><td>Whoever submits a job to the network — a developer, a company, another agent — without needing to know or care which physical node ends up running it.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div lang="es" hidden>
+          <h2>Arquitectura</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Componente</th><th>Función</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Nodo</strong></td><td>La máquina de un operador: uno o más agentes ejecutándose dentro de un contenedor Docker aislado, más un proceso bridge que los expone a la red mediante HTTP.</td></tr>
+                <tr><td><strong>Bridge</strong></td><td>Los bloques de construcción ya existentes en este portafolio — <a href="../agent-webhook-bridge/index.html">agent-webhook-bridge</a> y <a href="../free-code/index.html">free-code</a> — ya resuelven el problema de "despertar a un agente a partir de un evento externo y devolver su resultado". Hoy el bridge lanza tanto a Claude Code como a free-code por agente, como pares de primera clase bajo el mismo protocolo; AgentMesh reutiliza ese patrón en lugar de inventar uno nuevo.</td></tr>
+                <tr><td><strong>Orquestador</strong></td><td>El servicio del lado de la red. Acepta los trabajos entrantes, mantiene un registro en vivo de qué nodos están en línea y de qué son capaces, decide cómo dividir un trabajo y enruta cada parte a un nodo.</td></tr>
+                <tr><td><strong>Registro (ledger)</strong></td><td>Lleva el control de los puntos ganados por nodo/operador y los concilia con los pagos en USDT/BTC. Debe ser resistente a manipulaciones y auditable, ya que es aquello en lo que los operadores confían su compensación.</td></tr>
+                <tr><td><strong>Cliente/solicitante</strong></td><td>Quien envíe un trabajo a la red — un desarrollador, una empresa, otro agente — sin necesidad de saber ni de que le importe qué nodo físico termine ejecutándolo.</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
       <section id="orchestration">
-        <h2>Task orchestration</h2>
-        <p>
-          A job submitted to AgentMesh doesn't have to run on a single node. The orchestrator
-          decides, per job, whether to:
-        </p>
-        <ul>
-          <li><strong>Route whole</strong> — send the entire job to one capable node, when the task doesn't parallelize well (e.g. a single coherent coding session).</li>
-          <li><strong>Split and fan out</strong> — break the job into independent sub-tasks (e.g. "review these 8 files", "run these 20 test cases") and distribute them across multiple online nodes in parallel, then reassemble the results.</li>
-          <li><strong>Retry on a different node</strong> — if a node goes offline, times out, or returns a malformed result, reroute that piece of work elsewhere instead of failing the whole job.</li>
-        </ul>
-        <p>
-          This means node operators never see the whole picture of a job unless it's small enough
-          to be routed whole — they only ever receive the slice the orchestrator assigns them,
-          process it, and return the result.
-        </p>
+        <div lang="en">
+          <h2>Task orchestration</h2>
+          <p>
+            A job submitted to AgentMesh doesn't have to run on a single node. The orchestrator
+            decides, per job, whether to:
+          </p>
+          <ul>
+            <li><strong>Route whole</strong> — send the entire job to one capable node, when the task doesn't parallelize well (e.g. a single coherent coding session).</li>
+            <li><strong>Split and fan out</strong> — break the job into independent sub-tasks (e.g. "review these 8 files", "run these 20 test cases") and distribute them across multiple online nodes in parallel, then reassemble the results.</li>
+            <li><strong>Retry on a different node</strong> — if a node goes offline, times out, or returns a malformed result, reroute that piece of work elsewhere instead of failing the whole job.</li>
+          </ul>
+          <p>
+            This means node operators never see the whole picture of a job unless it's small enough
+            to be routed whole — they only ever receive the slice the orchestrator assigns them,
+            process it, and return the result.
+          </p>
+        </div>
+        <div lang="es" hidden>
+          <h2>Orquestación de tareas</h2>
+          <p>
+            Un trabajo enviado a AgentMesh no tiene que ejecutarse en un solo nodo. El orquestador
+            decide, para cada trabajo, si conviene:
+          </p>
+          <ul>
+            <li><strong>Enrutar completo</strong> — enviar el trabajo entero a un solo nodo capaz, cuando la tarea no se paraleliza bien (por ejemplo, una única sesión de programación coherente).</li>
+            <li><strong>Dividir y distribuir</strong> — dividir el trabajo en subtareas independientes (por ejemplo, "revisar estos 8 archivos", "ejecutar estos 20 casos de prueba") y distribuirlas en paralelo entre varios nodos en línea, para luego reensamblar los resultados.</li>
+            <li><strong>Reintentar en otro nodo</strong> — si un nodo se desconecta, agota el tiempo de espera o devuelve un resultado malformado, reenrutar esa parte del trabajo a otro lugar en lugar de hacer fallar el trabajo completo.</li>
+          </ul>
+          <p>
+            Esto significa que los operadores de nodos nunca ven el panorama completo de un trabajo,
+            a menos que sea lo bastante pequeño como para enrutarse completo — solo reciben la parte
+            que el orquestador les asigna, la procesan y devuelven el resultado.
+          </p>
+        </div>
       </section>
 
       <section id="isolation">
-        <h2>Isolation &amp; security</h2>
-        <p>
-          The core safety property of AgentMesh is that <strong>the network never runs on the
-          operator's real machine</strong> — it runs inside a Docker container the operator
-          controls, with no access to the host filesystem, credentials, or processes beyond what's
-          explicitly mounted into that container.
-        </p>
-        <div class="callout">
-          <span class="tag">design goal</span>
+        <div lang="en">
+          <h2>Isolation &amp; security</h2>
           <p>
-            An operator should be able to walk away from their laptop while it serves jobs from
-            the network, with the same confidence they'd have running any other sandboxed,
-            untrusted workload — because that's exactly what it is from the host's point of view.
+            The core safety property of AgentMesh is that <strong>the network never runs on the
+            operator's real machine</strong> — it runs inside a Docker container the operator
+            controls, with no access to the host filesystem, credentials, or processes beyond what's
+            explicitly mounted into that container.
           </p>
+          <div class="callout">
+            <span class="tag">design goal</span>
+            <p>
+              An operator should be able to walk away from their laptop while it serves jobs from
+              the network, with the same confidence they'd have running any other sandboxed,
+              untrusted workload — because that's exactly what it is from the host's point of view.
+            </p>
+          </div>
+          <ul>
+            <li>Each agent instance runs in its own container, torn down or recycled between jobs.</li>
+            <li>No inbound access to the container beyond the bridge's HTTP endpoint.</li>
+            <li>No outbound access beyond what the job legitimately needs (the agent's own model API, and returning results to the orchestrator).</li>
+            <li>Job payloads and prompts are the untrusted input in this model — the sandbox exists specifically so a hostile or malformed job can't do anything to the operator's real environment.</li>
+          </ul>
         </div>
-        <ul>
-          <li>Each agent instance runs in its own container, torn down or recycled between jobs.</li>
-          <li>No inbound access to the container beyond the bridge's HTTP endpoint.</li>
-          <li>No outbound access beyond what the job legitimately needs (the agent's own model API, and returning results to the orchestrator).</li>
-          <li>Job payloads and prompts are the untrusted input in this model — the sandbox exists specifically so a hostile or malformed job can't do anything to the operator's real environment.</li>
-        </ul>
+        <div lang="es" hidden>
+          <h2>Aislamiento y seguridad</h2>
+          <p>
+            La propiedad de seguridad central de AgentMesh es que <strong>la red nunca se ejecuta en
+            la máquina real del operador</strong> — se ejecuta dentro de un contenedor Docker que el
+            operador controla, sin acceso al sistema de archivos del host, a las credenciales ni a
+            los procesos, más allá de lo que se monte explícitamente en ese contenedor.
+          </p>
+          <div class="callout">
+            <span class="tag">objetivo de diseño</span>
+            <p>
+              Un operador debería poder alejarse de su laptop mientras esta atiende trabajos de la
+              red, con la misma confianza que tendría al ejecutar cualquier otra carga de trabajo en
+              sandbox y no confiable — porque eso es exactamente lo que es, desde el punto de vista
+              del host.
+            </p>
+          </div>
+          <ul>
+            <li>Cada instancia de agente se ejecuta en su propio contenedor, que se destruye o recicla entre trabajos.</li>
+            <li>No hay acceso entrante al contenedor más allá del endpoint HTTP del bridge.</li>
+            <li>No hay acceso saliente más allá de lo que el trabajo necesita legítimamente (la API del propio modelo del agente y el envío de resultados al orquestador).</li>
+            <li>Las cargas útiles y los prompts de los trabajos son la entrada no confiable en este modelo — el sandbox existe específicamente para que un trabajo hostil o malformado no pueda hacer nada contra el entorno real del operador.</li>
+          </ul>
+        </div>
       </section>
 
       <section id="incentives">
-        <h2>Incentives</h2>
-        <p>
-          Operators are compensated in points for capacity they contribute, weighted by things
-          like job complexity, tokens consumed, and reliability (uptime, correctness of results).
-          Points accumulate in the ledger and are redeemable for USDT or BTC.
-        </p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Actor</th><th>Gives</th><th>Gets</th></tr></thead>
-            <tbody>
-              <tr><td>Node operator</td><td>Idle subscription capacity + local compute, sandboxed</td><td>Points → USDT/BTC</td></tr>
-              <tr><td>Requester</td><td>Payment for a completed job</td><td>A result, without owning or managing any infrastructure</td></tr>
-              <tr><td>Network</td><td>Orchestration, routing, ledger integrity</td><td>A cut that funds running the orchestrator itself</td></tr>
-            </tbody>
-          </table>
+        <div lang="en">
+          <h2>Incentives</h2>
+          <p>
+            Operators are compensated in points for capacity they contribute, weighted by things
+            like job complexity, tokens consumed, and reliability (uptime, correctness of results).
+            Points accumulate in the ledger and are redeemable for USDT or BTC.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Actor</th><th>Gives</th><th>Gets</th></tr></thead>
+              <tbody>
+                <tr><td>Node operator</td><td>Idle subscription capacity + local compute, sandboxed</td><td>Points → USDT/BTC</td></tr>
+                <tr><td>Requester</td><td>Payment for a completed job</td><td>A result, without owning or managing any infrastructure</td></tr>
+                <tr><td>Network</td><td>Orchestration, routing, ledger integrity</td><td>A cut that funds running the orchestrator itself</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The exact reward curve, exchange rate, and payout mechanics are still open design
+            questions — this section describes the shape of the incentive, not final numbers.
+          </p>
         </div>
-        <p>
-          The exact reward curve, exchange rate, and payout mechanics are still open design
-          questions — this section describes the shape of the incentive, not final numbers.
-        </p>
+        <div lang="es" hidden>
+          <h2>Incentivos</h2>
+          <p>
+            Los operadores reciben compensación en puntos por la capacidad que aportan, ponderada
+            por factores como la complejidad del trabajo, los tokens consumidos y la confiabilidad
+            (tiempo de actividad, corrección de los resultados). Los puntos se acumulan en el
+            registro y pueden canjearse por USDT o BTC.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Actor</th><th>Aporta</th><th>Recibe</th></tr></thead>
+              <tbody>
+                <tr><td>Operador de nodo</td><td>Capacidad inactiva de la suscripción + cómputo local, en sandbox</td><td>Puntos → USDT/BTC</td></tr>
+                <tr><td>Solicitante</td><td>Pago por un trabajo completado</td><td>Un resultado, sin poseer ni administrar infraestructura alguna</td></tr>
+                <tr><td>Red</td><td>Orquestación, enrutamiento, integridad del registro</td><td>Una comisión que financia la operación del propio orquestador</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            La curva exacta de recompensas, el tipo de cambio y la mecánica de los pagos siguen
+            siendo preguntas de diseño abiertas — esta sección describe la forma del incentivo, no
+            cifras definitivas.
+          </p>
+        </div>
       </section>
 
       <section id="principles">
-        <h2>Principles</h2>
-        <ul>
-          <li><strong>Open source.</strong> The orchestrator, bridge, and node software are meant to be auditable by anyone — a network that pays people for compute has to be verifiable, not taken on faith.</li>
-          <li><strong>Decentralized by default.</strong> No single node is required for the network to function; capacity comes from whoever chooses to contribute it, whenever they choose to.</li>
-          <li><strong>Privacy-first.</strong> Operators don't expose their machine, only a sandboxed agent process. Requesters don't need to know which node ran their job.</li>
-          <li><strong>Reuse, don't reinvent.</strong> The exposure layer builds on tools that already work — agent-webhook-bridge, free-code — rather than a bespoke agent runtime.</li>
-        </ul>
+        <div lang="en">
+          <h2>Principles</h2>
+          <ul>
+            <li><strong>Open source.</strong> The orchestrator, bridge, and node software are meant to be auditable by anyone — a network that pays people for compute has to be verifiable, not taken on faith.</li>
+            <li><strong>Decentralized by default.</strong> No single node is required for the network to function; capacity comes from whoever chooses to contribute it, whenever they choose to.</li>
+            <li><strong>Privacy-first.</strong> Operators don't expose their machine, only a sandboxed agent process. Requesters don't need to know which node ran their job.</li>
+            <li><strong>Reuse, don't reinvent.</strong> The exposure layer builds on tools that already work — agent-webhook-bridge, free-code — rather than a bespoke agent runtime. The same principle applied twice: the bridge already knew how to wake one agent CLI, so adding free-code was a second adapter, not a rewrite.</li>
+          </ul>
+        </div>
+        <div lang="es" hidden>
+          <h2>Principios</h2>
+          <ul>
+            <li><strong>Código abierto.</strong> El orquestador, el bridge y el software de los nodos están pensados para que cualquiera pueda auditarlos — una red que paga a las personas por cómputo tiene que ser verificable, no algo que se tome por fe.</li>
+            <li><strong>Descentralizada por defecto.</strong> Ningún nodo individual es imprescindible para que la red funcione; la capacidad proviene de quien elija aportarla, cuando elija hacerlo.</li>
+            <li><strong>Privacidad ante todo.</strong> Los operadores no exponen su máquina, solo un proceso de agente en sandbox. Los solicitantes no necesitan saber qué nodo ejecutó su trabajo.</li>
+            <li><strong>Reutilizar, no reinventar.</strong> La capa de exposición se construye sobre herramientas que ya funcionan — agent-webhook-bridge, free-code — en lugar de un runtime de agentes hecho a medida. El mismo principio aplicado dos veces: el bridge ya sabía despertar un CLI de agente, así que añadir free-code fue un segundo adaptador, no una reescritura.</li>
+          </ul>
+        </div>
       </section>
 
       <section id="roadmap">
-        <h2>Status &amp; roadmap</h2>
-        <div class="callout warn">
-          <span class="tag">honest status</span>
-          <p>
-            AgentMesh is a concept and design in progress, not a running product yet. This page is
-            the paper, not the launch. Details above (the ledger, the exact reward model, the
-            orchestrator's routing algorithm) will change as the design is validated.
-          </p>
+        <div lang="en">
+          <h2>Status &amp; roadmap</h2>
+          <div class="callout warn">
+            <span class="tag">honest status</span>
+            <p>
+              AgentMesh is a concept and design in progress, not a running product yet. This page is
+              the paper, not the launch. Details above (the ledger, the exact reward model, the
+              orchestrator's routing algorithm) will change as the design is validated.
+            </p>
+          </div>
+          <ul>
+            <li><strong>Phase 0 — this paper.</strong> Define the shape of the network, its actors, and its incentive model.</li>
+            <li><strong>Phase 1 — single-operator bridge.</strong> Prove out exposing one local agent to a minimal orchestrator, with claude and free-code as spawn targets, no payments yet.</li>
+            <li><strong>Phase 2 — multi-node orchestration.</strong> Job splitting, routing, retries across more than one node.</li>
+            <li><strong>Phase 3 — ledger &amp; payouts.</strong> Points accounting and redemption for USDT/BTC.</li>
+          </ul>
         </div>
-        <ul>
-          <li><strong>Phase 0 — this paper.</strong> Define the shape of the network, its actors, and its incentive model.</li>
-          <li><strong>Phase 1 — single-operator bridge.</strong> Prove out exposing one local agent (via agent-webhook-bridge/free-code) to a minimal orchestrator, no payments yet.</li>
-          <li><strong>Phase 2 — multi-node orchestration.</strong> Job splitting, routing, retries across more than one node.</li>
-          <li><strong>Phase 3 — ledger &amp; payouts.</strong> Points accounting and redemption for USDT/BTC.</li>
-        </ul>
+        <div lang="es" hidden>
+          <h2>Estado y hoja de ruta</h2>
+          <div class="callout warn">
+            <span class="tag">estado honesto</span>
+            <p>
+              AgentMesh es un concepto y un diseño en curso, todavía no un producto en
+              funcionamiento. Esta página es el documento, no el lanzamiento. Los detalles
+              anteriores (el registro, el modelo exacto de recompensas, el algoritmo de enrutamiento
+              del orquestador) cambiarán a medida que se valide el diseño.
+            </p>
+          </div>
+          <ul>
+            <li><strong>Fase 0 — este documento.</strong> Definir la forma de la red, sus actores y su modelo de incentivos.</li>
+            <li><strong>Fase 1 — bridge de un solo operador.</strong> Probar la exposición de un agente local a un orquestador mínimo, con claude y free-code como destinos de spawn, todavía sin pagos.</li>
+            <li><strong>Fase 2 — orquestación multi-nodo.</strong> División de trabajos, enrutamiento y reintentos entre más de un nodo.</li>
+            <li><strong>Fase 3 — registro y pagos.</strong> Contabilidad de puntos y canje por USDT/BTC.</li>
+          </ul>
+        </div>
       </section>
 
       <section id="faq">
-        <h2>FAQ</h2>
-        <h3>Do I need to expose my own machine to the internet?</h3>
-        <p>
-          No — only the sandboxed container's bridge endpoint is reachable, and only through
-          whatever tunnel/relay the node software sets up, the same model agent-webhook-bridge
-          already uses for exposing local hooks.
-        </p>
-        <h3>What stops someone from sending a malicious job to my node?</h3>
-        <p>
-          The isolation model assumes jobs are untrusted by default: the agent runs in a container
-          with no access to anything outside it, so the worst a hostile job can do is misbehave
-          inside its own sandbox.
-        </p>
-        <h3>Why points instead of paying directly in USDT/BTC per job?</h3>
-        <p>
-          Points let the network batch, net out, and audit compensation before it turns into an
-          actual payout, instead of firing a crypto transaction per job.
-        </p>
+        <div lang="en">
+          <h2>FAQ</h2>
+          <h3>Do I need to expose my own machine to the internet?</h3>
+          <p>
+            No — only the sandboxed container's bridge endpoint is reachable, and only through
+            whatever tunnel/relay the node software sets up, the same model agent-webhook-bridge
+            already uses for exposing local hooks.
+          </p>
+          <h3>What stops someone from sending a malicious job to my node?</h3>
+          <p>
+            The isolation model assumes jobs are untrusted by default: the agent runs in a container
+            with no access to anything outside it, so the worst a hostile job can do is misbehave
+            inside its own sandbox.
+          </p>
+          <h3>Why points instead of paying directly in USDT/BTC per job?</h3>
+          <p>
+            Points let the network batch, net out, and audit compensation before it turns into an
+            actual payout, instead of firing a crypto transaction per job.
+          </p>
+        </div>
+        <div lang="es" hidden>
+          <h2>Preguntas frecuentes</h2>
+          <h3>¿Necesito exponer mi propia máquina a internet?</h3>
+          <p>
+            No — solo es alcanzable el endpoint del bridge del contenedor en sandbox, y únicamente a
+            través del túnel/relay que configure el software del nodo, el mismo modelo que
+            agent-webhook-bridge ya usa para exponer hooks locales.
+          </p>
+          <h3>¿Qué impide que alguien envíe un trabajo malicioso a mi nodo?</h3>
+          <p>
+            El modelo de aislamiento asume que los trabajos no son confiables por defecto: el agente
+            se ejecuta en un contenedor sin acceso a nada fuera de él, de modo que lo peor que puede
+            hacer un trabajo hostil es comportarse mal dentro de su propio sandbox.
+          </p>
+          <h3>¿Por qué puntos en lugar de pagar directamente en USDT/BTC por cada trabajo?</h3>
+          <p>
+            Los puntos permiten que la red agrupe, compense y audite la remuneración antes de que se
+            convierta en un pago real, en lugar de disparar una transacción cripto por cada trabajo.
+          </p>
+        </div>
       </section>
 
-      <footer>AgentMesh · concept paper, phase 0 · design in progress</footer>
+      <footer><span lang="en">AgentMesh · concept paper, phase 0 · design in progress</span><span lang="es" hidden>AgentMesh · documento conceptual, fase 0 · diseño en curso</span></footer>
     </div>
+    <script src="../assets/i18n.js" defer></script>
   </body>
 </html>

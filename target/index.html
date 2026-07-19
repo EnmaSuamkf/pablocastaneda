@@ -1,0 +1,1074 @@
+<!doctype html>
+<html lang="en" data-title-en="target — installation and usage" data-title-es="target — instalación y uso">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>target — installation and usage</title>
+    <style>
+      :root{
+        --bg: #0e1416;
+        --surface: #141c1f;
+        --surface-2: #182124;
+        --border: #253034;
+        --text: #e6edee;
+        --muted: #8ea1a6;
+        --faint: #5d7378;
+        --accent: #5ed6a4;
+        --accent-dim: #2f6b54;
+        --warn: #e7b563;
+        --mono: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        --sans: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+      *{ box-sizing: border-box; }
+      html{ scroll-behavior: smooth; }
+      body{
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        line-height: 1.6;
+      }
+      a{ color: var(--accent); }
+      a:focus-visible, button:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
+      code, kbd{
+        font-family: var(--mono);
+        font-size: 0.88em;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        padding: 0.05em 0.4em;
+        border-radius: 4px;
+        white-space: nowrap;
+      }
+      pre{
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        line-height: 1.6;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem 1.15rem;
+        overflow-x: auto;
+        margin: 0 0 1rem;
+      }
+      pre code{ background: none; border: none; padding: 0; white-space: pre; }
+
+      .shell{ max-width: 860px; margin: 0 auto; padding: 3.2rem 1.5rem 5rem; }
+
+      header.hero{ margin-bottom: 2.6rem; }
+      .eyebrow{
+        font-family: var(--mono);
+        font-size: 0.74rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 0.6em;
+        margin-bottom: 0.6rem;
+      }
+      .eyebrow::before{
+        content: "";
+        width: 6px; height: 6px;
+        background: var(--accent);
+        border-radius: 50%;
+        box-shadow: 0 0 0 3px var(--accent-dim);
+      }
+      h1{
+        font-family: var(--mono);
+        font-size: clamp(1.6rem, 4vw, 2.2rem);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        text-wrap: balance;
+        margin: 0 0 0.6rem;
+      }
+      .tagline{ color: var(--muted); font-size: 1.02rem; max-width: 62ch; margin: 0; }
+
+      nav.toc{
+        margin-top: 1.6rem;
+        padding-top: 1.1rem;
+        border-top: 1px solid var(--border);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 1.3rem;
+        font-family: var(--mono);
+        font-size: 0.8rem;
+      }
+      nav.toc a{ color: var(--muted); text-decoration: none; }
+      nav.toc a:hover{ color: var(--accent); }
+
+      section{ margin-top: 2.8rem; scroll-margin-top: 1.5rem; }
+      h2{
+        font-family: var(--mono);
+        font-size: 0.95rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 600;
+        margin: 0 0 1.1rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 1px solid var(--border);
+      }
+      h3{ font-size: 1.02rem; font-weight: 600; margin: 1.4rem 0 0.6rem; }
+      p{ margin: 0 0 0.9rem; }
+      ol, ul{ margin: 0 0 1rem; padding-left: 1.3rem; }
+      li{ margin-bottom: 0.35rem; }
+
+      .callout{
+        display: flex;
+        gap: 0.85rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+        border-radius: 6px;
+        padding: 1rem 1.2rem;
+        margin: 0 0 1.1rem;
+      }
+      .callout.warn{ border-left-color: var(--warn); }
+      .callout .tag{
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        color: var(--accent);
+      }
+      .callout.warn .tag{ color: var(--warn); }
+      .callout p{ margin: 0; font-size: 0.92rem; }
+      .callout p + p{ margin-top: 0.5rem; }
+
+      .table-wrap{ overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1.1rem; }
+      table{ width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+      th, td{ text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+      tr:last-child td{ border-bottom: none; }
+      th{
+        color: var(--faint);
+        font-weight: 500;
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        background: var(--surface);
+      }
+      td code{ white-space: nowrap; }
+
+      .diagram{
+        font-family: var(--mono);
+        font-size: 0.8rem;
+        line-height: 1.6;
+        color: var(--muted);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem 1.2rem;
+        overflow-x: auto;
+        margin-bottom: 1.1rem;
+        white-space: pre;
+      }
+      .diagram .hl{ color: var(--accent); }
+
+      footer{
+        margin-top: 3.5rem;
+        padding-top: 1.2rem;
+        border-top: 1px solid var(--border);
+        font-family: var(--mono);
+        font-size: 0.76rem;
+        color: var(--faint);
+      }
+    </style>
+    <link rel="stylesheet" href="../assets/project-nav.css" />
+  </head>
+  <body>
+    <div id="portfolio-back-nav"><a class="back-link" href="../index.html"><span lang="en">← Portfolio</span><span lang="es" hidden>← Portafolio</span></a><span class="back-sep">/</span><span class="back-project">target</span><span class="back-logo">Pablo Castañeda</span><div id="lang-toggle"></div></div>
+    <div class="shell">
+      <header class="hero">
+        <div lang="en">
+          <div class="eyebrow">target · docs</div>
+          <h1>Installation and usage</h1>
+          <p class="tagline">
+            A local hub for defining <strong>workflows</strong> made of N sequential
+            <strong>steps</strong> executed by Claude. It reuses agent-webhook-bridge's mechanism
+            (agent = <code>agent-webhook-bridge</code> hook, step = asynchronous job with a
+            callback) but each workflow creates its own dedicated agent + hook, and its steps
+            run one after another on the <strong>same Claude session</strong>
+            (<code>--resume</code> chained) — a single conversation that advances step by step.
+          </p>
+          <nav class="toc" aria-label="Contents">
+            <a href="#overview">Overview</a>
+            <a href="#requirements">Requirements</a>
+            <a href="#installation">Installation</a>
+            <a href="#running-it">Running it</a>
+            <a href="#creating-a-workflow">Creating a workflow</a>
+            <a href="#key-concepts">Key concepts</a>
+            <a href="#judge-and-retries">Judge &amp; retries</a>
+            <a href="#how-a-step-flows">How a step flows</a>
+            <a href="#permissions">Permissions &amp; security</a>
+            <a href="#failure-modes">Failure modes</a>
+            <a href="#configuration">Configuration</a>
+            <a href="#command-reference">Command reference</a>
+            <a href="#api-reference">API reference</a>
+            <a href="#project-structure">Project structure</a>
+            <a href="#current-status">Current status</a>
+          </nav>
+        </div>
+        <div lang="es" hidden>
+          <div class="eyebrow">target · documentación</div>
+          <h1>Instalación y uso</h1>
+          <p class="tagline">
+            Un hub local para definir <strong>flujos de trabajo</strong> compuestos de N
+            <strong>pasos</strong> secuenciales ejecutados por Claude. Reutiliza el mecanismo de
+            agent-webhook-bridge (agente = hook de <code>agent-webhook-bridge</code>, paso = tarea
+            asíncrona con un callback), pero cada flujo de trabajo crea su propio agente y hook
+            dedicados, y sus pasos se ejecutan uno tras otro en la <strong>misma sesión de
+            Claude</strong> (encadenada con <code>--resume</code>) — una única conversación que
+            avanza paso a paso.
+          </p>
+          <nav class="toc" aria-label="Índice">
+            <a href="#overview">Resumen</a>
+            <a href="#requirements">Requisitos</a>
+            <a href="#installation">Instalación</a>
+            <a href="#running-it">Ejecutarlo</a>
+            <a href="#creating-a-workflow">Crear un flujo de trabajo</a>
+            <a href="#key-concepts">Conceptos clave</a>
+            <a href="#judge-and-retries">Evaluador &amp; reintentos</a>
+            <a href="#how-a-step-flows">Cómo fluye un paso</a>
+            <a href="#permissions">Permisos &amp; seguridad</a>
+            <a href="#failure-modes">Modos de fallo</a>
+            <a href="#configuration">Configuración</a>
+            <a href="#command-reference">Referencia de comandos</a>
+            <a href="#api-reference">Referencia de API</a>
+            <a href="#project-structure">Estructura del proyecto</a>
+            <a href="#current-status">Estado actual</a>
+          </nav>
+        </div>
+      </header>
+
+      <section id="overview">
+        <div lang="en">
+          <h2>Overview</h2>
+          <p>
+            <strong>target</strong> is a local hub for defining workflows made of N sequential
+            steps executed by Claude. Instead of a registry of shared, reusable agents with a
+            queue of loose jobs (the agent-mesh model), <strong>each workflow creates its own
+            dedicated agent + awb hook</strong> when it's created, and its steps are dispatched
+            one at a time, always chained onto the previous Claude session, so the whole
+            workflow reads as one continuous conversation rather than N unrelated jobs.
+          </p>
+          <p>
+            The hub exposes an HTTP API, a single-page web UI and a <code>target</code> CLI. For
+            every workflow it also keeps a progress <code>.md</code> file under
+            <code>~/.target/</code>, rewritten on every state change.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>agent-mesh</th><th>target</th></tr></thead>
+              <tbody>
+                <tr><td>Agent = reusable row in a registry</td><td>Agent = 1 per workflow, created automatically when the workflow is created</td></tr>
+                <tr><td>Job = loose task, optional session</td><td>Step = task of a workflow, always chained to the previous session</td></tr>
+                <tr><td>Parallel jobs, no order</td><td>Strictly sequential steps — the next one doesn't fire until the previous one finishes</td></tr>
+                <tr><td>—</td><td>Progress in % (done/total), pause/resume, edit a step + restart the workflow</td></tr>
+                <tr><td>—</td><td>Every step's input appends an instruction to resolve itself with a subagent (Task tool), since the main thread is reused for the whole workflow</td></tr>
+                <tr><td>—</td><td>Status <code>.md</code> in <code>~/.target/&lt;name-slug&gt;-&lt;id&gt;.md</code>, rewritten on every change</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Stack: Node.js ≥ 24, TypeScript run directly by Node (no build step), and
+            <strong>zero runtime dependencies</strong> — <code>node:sqlite</code> (WAL mode) for
+            persistence, <code>node:http</code> for the hand-written server, <code>node:crypto</code>
+            for tokens, and the global <code>fetch</code> to talk to the broker. The only
+            dependencies at all are dev-only: <code>typescript</code> and <code>@types/node</code>.
+            The UI is a single static <code>hub/ui/index.html</code> served by the hub itself, no
+            framework or bundler.
+          </p>
+        </div>
+        <div lang="es" hidden>
+          <h2>Resumen</h2>
+          <p>
+            <strong>target</strong> es un hub local para definir flujos de trabajo compuestos de N
+            pasos secuenciales ejecutados por Claude. En lugar de un registro de agentes
+            compartidos y reutilizables con una cola de tareas sueltas (el modelo de agent-mesh),
+            <strong>cada flujo de trabajo crea su propio agente y hook awb dedicados</strong> al
+            momento de crearse, y sus pasos se despachan de uno en uno, siempre encadenados a la
+            sesión de Claude anterior, de modo que todo el flujo de trabajo se lee como una única
+            conversación continua en lugar de N tareas sin relación entre sí.
+          </p>
+          <p>
+            El hub expone una API HTTP, una interfaz web de una sola página y una CLI
+            <code>target</code>. Para cada flujo de trabajo también mantiene un archivo de
+            progreso <code>.md</code> bajo <code>~/.target/</code>, reescrito en cada cambio de
+            estado.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>agent-mesh</th><th>target</th></tr></thead>
+              <tbody>
+                <tr><td>Agente = fila reutilizable en un registro</td><td>Agente = 1 por flujo de trabajo, creado automáticamente al crear el flujo de trabajo</td></tr>
+                <tr><td>Job = tarea suelta, sesión opcional</td><td>Paso = tarea de un flujo de trabajo, siempre encadenada a la sesión anterior</td></tr>
+                <tr><td>Jobs en paralelo, sin orden</td><td>Pasos estrictamente secuenciales — el siguiente no se dispara hasta que el anterior termina</td></tr>
+                <tr><td>—</td><td>Progreso en % (hechos/total), pausar/reanudar, editar un paso y reiniciar el flujo de trabajo</td></tr>
+                <tr><td>—</td><td>La entrada de cada paso añade una instrucción para resolverse a sí mismo con un subagente (herramienta Task), ya que el hilo principal se reutiliza para todo el flujo de trabajo</td></tr>
+                <tr><td>—</td><td>Estado <code>.md</code> en <code>~/.target/&lt;name-slug&gt;-&lt;id&gt;.md</code>, reescrito en cada cambio</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Stack: Node.js ≥ 24, TypeScript ejecutado directamente por Node (sin paso de build), y
+            <strong>cero dependencias en tiempo de ejecución</strong> — <code>node:sqlite</code>
+            (modo WAL) para la persistencia, <code>node:http</code> para el servidor escrito a
+            mano, <code>node:crypto</code> para los tokens, y el <code>fetch</code> global para
+            hablar con el broker. Las únicas dependencias que existen son solo de desarrollo:
+            <code>typescript</code> y <code>@types/node</code>. La interfaz es una única página
+            estática <code>hub/ui/index.html</code> servida por el propio hub, sin framework ni
+            bundler.
+          </p>
+        </div>
+      </section>
+
+      <section id="requirements">
+        <div lang="en">
+          <h2>Requirements</h2>
+          <ul>
+            <li><strong>Node.js 24 or newer</strong> (pinned in <code>.nvmrc</code>). The hub runs its <code>.ts</code> files directly via Node's built-in TypeScript stripping and <code>node:sqlite</code> — no build step.</li>
+            <li><strong><a href="../agent-webhook-bridge/index.html">agent-webhook-bridge</a> (awb)</strong> running on the same machine — it's what actually spawns <code>claude -p</code> / <code>claude --resume</code> for each step.</li>
+            <li><strong>Claude Code CLI</strong> installed and authenticated, and <strong>git</strong> on <code>PATH</code> (used to clone/update the vendored awb checkout).</li>
+          </ul>
+        </div>
+        <div lang="es" hidden>
+          <h2>Requisitos</h2>
+          <ul>
+            <li><strong>Node.js 24 o más reciente</strong> (fijado en <code>.nvmrc</code>). El hub ejecuta sus archivos <code>.ts</code> directamente mediante el soporte nativo de Node para despojar tipos de TypeScript y <code>node:sqlite</code> — sin paso de build.</li>
+            <li><strong><a href="../agent-webhook-bridge/index.html">agent-webhook-bridge</a> (awb)</strong> ejecutándose en la misma máquina — es lo que realmente lanza <code>claude -p</code> / <code>claude --resume</code> para cada paso.</li>
+            <li><strong>Claude Code CLI</strong> instalado y autenticado, y <strong>git</strong> en el <code>PATH</code> (usado para clonar/actualizar la copia vendorizada de awb).</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="installation">
+        <div lang="en">
+          <h2>Installation</h2>
+          <p>Not published to npm: it's used straight from the repo checkout.</p>
+        </div>
+        <div lang="es" hidden>
+          <h2>Instalación</h2>
+          <p>No se publica en npm: se usa directamente desde la copia clonada del repositorio.</p>
+        </div>
+        <pre><code>git clone https://github.com/EnmaSuamkf/target.git &amp;&amp; cd target
+npm run target:install</code></pre>
+        <div lang="en">
+          <p>
+            <code>target:install</code> runs <code>scripts/bootstrap.mjs</code>, which is
+            deliberately plain JavaScript (every other script in the repo is TypeScript run
+            directly by Node, but that only works from Node 23.6 on): it checks the running
+            Node's version and, if it's older than 24, activates a suitable one via
+            <code>nvm</code> or <code>fnm</code> (installing it first if needed) before handing
+            off to <code>scripts/install.ts</code>, which does the real work:
+          </p>
+          <ol>
+            <li>Installs <code>hub/</code>'s dependencies (<code>npm ci</code>, falling back to <code>npm install</code> if the lockfile is out of sync).</li>
+            <li>Clones <a href="https://github.com/EnmaSuamkf/agent-webhook-bridge">agent-webhook-bridge</a> into <code>vendor/agent-webhook-bridge</code> (gitignored), or fast-forwards it if it's already there.</li>
+            <li>Installs awb's own dependencies the same way.</li>
+          </ol>
+          <p>The whole thing is idempotent — safe to re-run any time, and each step skips work that's already done (a lockfile hash is stamped in <code>node_modules/.target-install-stamp</code> so unchanged dependencies aren't reinstalled).</p>
+          <div class="callout">
+            <span class="tag">override</span>
+            <p>
+              Set <code>AWB_DIR=/path/to/existing/clone</code> before running the installer (or
+              <code>npm start</code>) to reuse an existing agent-webhook-bridge checkout instead
+              of vendoring a second copy.
+            </p>
+          </div>
+        </div>
+        <div lang="es" hidden>
+          <p>
+            <code>target:install</code> ejecuta <code>scripts/bootstrap.mjs</code>, que es
+            deliberadamente JavaScript plano (todos los demás scripts del repositorio son
+            TypeScript ejecutado directamente por Node, pero eso solo funciona desde Node 23.6 en
+            adelante): comprueba la versión de Node en ejecución y, si es anterior a la 24, activa
+            una versión adecuada mediante <code>nvm</code> o <code>fnm</code> (instalándola primero
+            si hace falta) antes de pasar el control a <code>scripts/install.ts</code>, que hace el
+            trabajo real:
+          </p>
+          <ol>
+            <li>Instala las dependencias de <code>hub/</code> (<code>npm ci</code>, recurriendo a <code>npm install</code> si el lockfile está desincronizado).</li>
+            <li>Clona <a href="https://github.com/EnmaSuamkf/agent-webhook-bridge">agent-webhook-bridge</a> en <code>vendor/agent-webhook-bridge</code> (ignorado por git), o lo actualiza (fast-forward) si ya está ahí.</li>
+            <li>Instala las propias dependencias de awb de la misma manera.</li>
+          </ol>
+          <p>Todo el proceso es idempotente — seguro de volver a ejecutar en cualquier momento, y cada paso omite el trabajo que ya está hecho (un hash del lockfile se guarda en <code>node_modules/.target-install-stamp</code> para que las dependencias sin cambios no se reinstalen).</p>
+          <div class="callout">
+            <span class="tag">override</span>
+            <p>
+              Define <code>AWB_DIR=/ruta/a/una/copia/existente</code> antes de ejecutar el
+              instalador (o <code>npm start</code>) para reutilizar una copia existente de
+              agent-webhook-bridge en lugar de vendorizar una segunda copia.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="running-it">
+        <div lang="en"><h2>Running it</h2></div>
+        <div lang="es" hidden><h2>Ejecutarlo</h2></div>
+        <pre><code>npm start</code></pre>
+        <div lang="en">
+          <p>
+            Runs <code>scripts/start.ts</code>, which brings up <strong>both</strong> processes —
+            the awb broker (default <code>127.0.0.1:8890</code>) and the target hub (default
+            <code>127.0.0.1:8893</code>) — polls both ports until they actually answer, opens the
+            UI in your default browser, then holds the foreground with both children attached.
+            <strong>Ctrl-C</strong> (or <code>SIGTERM</code>) tears both down cleanly. If either
+            port is already answering (broker or hub started some other way), that one is reused
+            instead of fought over.
+          </p>
+          <p>To run just the hub (assuming awb is already running separately):</p>
+        </div>
+        <div lang="es" hidden>
+          <p>
+            Ejecuta <code>scripts/start.ts</code>, que levanta <strong>ambos</strong> procesos —
+            el broker de awb (por defecto <code>127.0.0.1:8890</code>) y el hub de target (por
+            defecto <code>127.0.0.1:8893</code>) —, sondea ambos puertos hasta que realmente
+            responden, abre la interfaz en tu navegador predeterminado, y luego mantiene el primer
+            plano con ambos procesos hijos conectados. <strong>Ctrl-C</strong> (o
+            <code>SIGTERM</code>) los detiene a ambos de forma limpia. Si alguno de los puertos ya
+            está respondiendo (broker o hub iniciados de otra forma), ese se reutiliza en lugar de
+            disputarlo.
+          </p>
+          <p>Para ejecutar solo el hub (asumiendo que awb ya se está ejecutando por separado):</p>
+        </div>
+        <pre lang="en"><code>cd hub &amp;&amp; node daemon.ts
+# or: node hub/cli.ts start</code></pre>
+        <pre lang="es" hidden><code>cd hub &amp;&amp; node daemon.ts
+# o: node hub/cli.ts start</code></pre>
+        <div lang="en">
+          <div class="callout">
+            <span class="tag">config</span>
+            <div>
+              <p>
+                State lives in <code>~/.target/</code>: <code>config.json</code> (host, port,
+                admin token, step timeout, max input size), <code>target.db</code> (SQLite:
+                workflows + steps), a sandbox dir per agent
+                (<code>sandboxes/&lt;agent&gt;/</code>) and a <code>&lt;slug&gt;-&lt;id&gt;.md</code>
+                progress file per workflow. Set <code>TARGET_HOME=/your/path</code> before any
+                command to use a different location (tests, multiple instances).
+              </p>
+              <p>
+                The admin token is generated on first run and written into
+                <code>config.json</code>; it's printed to the console every time the hub starts.
+                The web UI asks for it once and remembers it; the <code>target</code> CLI reads it
+                straight from the config file, so there's nothing to type locally.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div lang="es" hidden>
+          <div class="callout">
+            <span class="tag">config</span>
+            <div>
+              <p>
+                El estado vive en <code>~/.target/</code>: <code>config.json</code> (host,
+                puerto, token de administrador, timeout de paso, tamaño máximo de entrada),
+                <code>target.db</code> (SQLite: flujos de trabajo + pasos), un directorio sandbox
+                por agente (<code>sandboxes/&lt;agent&gt;/</code>) y un archivo de progreso
+                <code>&lt;slug&gt;-&lt;id&gt;.md</code> por flujo de trabajo. Define
+                <code>TARGET_HOME=/tu/ruta</code> antes de cualquier comando para usar una
+                ubicación distinta (pruebas, múltiples instancias).
+              </p>
+              <p>
+                El token de administrador se genera en la primera ejecución y se escribe en
+                <code>config.json</code>; se imprime en la consola cada vez que el hub se inicia.
+                La interfaz web lo pide una vez y lo recuerda; la CLI <code>target</code> lo lee
+                directamente del archivo de configuración, así que no hay nada que escribir
+                manualmente.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="creating-a-workflow">
+        <div lang="en">
+          <h2>Creating a workflow</h2>
+          <p>
+            A workflow is created with a name and, behind the scenes, an awb hook +
+            dedicated agent are created for it automatically (<code>hub/awb.ts</code> writes the
+            hook into <code>~/.agent-webhook-bridge/hooks.json</code>, which the broker re-reads
+            per request — no restart needed). Steps are appended afterwards, then dispatch is
+            started.
+          </p>
+        </div>
+        <div lang="es" hidden>
+          <h2>Crear un flujo de trabajo</h2>
+          <p>
+            Un flujo de trabajo se crea con un nombre y, entre bastidores, se crean
+            automáticamente un hook de awb y un agente dedicado para él
+            (<code>hub/awb.ts</code> escribe el hook en
+            <code>~/.agent-webhook-bridge/hooks.json</code>, que el broker vuelve a leer en cada
+            solicitud — no hace falta reiniciar). Los pasos se añaden después, y luego se inicia el
+            despacho.
+          </p>
+        </div>
+        <pre><code>node hub/cli.ts create "release-notes" [--workdir &lt;dir&gt;] [--permission-mode acceptEdits]
+node hub/cli.ts add-step &lt;workflowId&gt; "Read the CHANGELOG and put together a summary"
+node hub/cli.ts add-step &lt;workflowId&gt; "Publish the summary to docs/release-notes.md"
+node hub/cli.ts run &lt;workflowId&gt;       # start / continue</code></pre>
+        <div lang="en">
+          <p>
+            Or from the UI at <code>http://127.0.0.1:8893</code> (the <em>Workflow</em> section):
+            create a workflow, add steps with the <strong>+ Add step</strong> button, watch the
+            progress bar, Start/Pause/Resume/Restart, and edit a pending step before restarting.
+          </p>
+          <div class="callout warn">
+            <span class="tag">permissions</span>
+            <p>
+              By default a workflow's agent can answer but <strong>cannot</strong> write files or
+              run commands — the same conservative default as agent-webhook-bridge's own hooks. To
+              let steps actually write files in their dedicated sandbox
+              (<code>~/.target/sandboxes/&lt;agent&gt;/</code>), create the workflow with
+              <code>--permission-mode acceptEdits</code> (or pick it in the UI form).
+              <code>bypassPermissions</code> also exists but enables unrestricted command
+              execution on the operator's machine, so it requires an explicit
+              <code>--yes-bypass-risk</code> flag on the CLI (<code>acceptBypassRisk: true</code>
+              in the API body) — it can't be enabled by accident.
+            </p>
+          </div>
+        </div>
+        <div lang="es" hidden>
+          <p>
+            O desde la interfaz en <code>http://127.0.0.1:8893</code> (la sección
+            <em>Workflow</em>): crea un flujo de trabajo, añade pasos con el botón
+            <strong>+ Add step</strong>, observa la barra de progreso, Start/Pause/Resume/Restart,
+            y edita un paso pendiente antes de reiniciar.
+          </p>
+          <div class="callout warn">
+            <span class="tag">permissions</span>
+            <p>
+              Por defecto, el agente de un flujo de trabajo puede responder pero
+              <strong>no puede</strong> escribir archivos ni ejecutar comandos — el mismo valor por
+              defecto conservador que usan los propios hooks de agent-webhook-bridge. Para permitir
+              que los pasos realmente escriban archivos en su sandbox dedicado
+              (<code>~/.target/sandboxes/&lt;agent&gt;/</code>), crea el flujo de trabajo con
+              <code>--permission-mode acceptEdits</code> (o selecciónalo en el formulario de la
+              interfaz). También existe <code>bypassPermissions</code>, pero habilita la ejecución
+              sin restricciones de comandos en la máquina del operador, así que requiere un flag
+              explícito <code>--yes-bypass-risk</code> en la CLI (<code>acceptBypassRisk: true</code>
+              en el cuerpo de la API) — no se puede habilitar por accidente.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="key-concepts">
+        <div lang="en">
+          <h2>Key concepts</h2>
+          <h3>Steps run on one chained session</h3>
+          <p>
+            Unlike a job queue, a workflow's steps are strictly sequential: the next step
+            doesn't fire until the previous one is <code>done</code>, and each dispatch resumes
+            the same Claude <code>sessionId</code> as the last one (<code>claude --resume</code>
+            under the hood), so the agent keeps the full context of everything the workflow has
+            done so far.
+          </p>
+          <h3>Subagent delegation</h3>
+          <p>
+            Because the session is reused turn after turn, each step's input appends an explicit
+            instruction to do the work with the <strong>Task tool</strong> (a subagent) instead
+            of inline. That keeps each step's working context out of the resumed session, which
+            only accumulates the subagent's final summaries instead of every intermediate tool
+            call.
+          </p>
+          <h3>On-demand runs (▶)</h3>
+          <p>
+            Any step can also be run out of order, via <code>POST /api/workflows/:id/steps/:stepId/run</code>
+            or the ▶ button in the UI. That run uses the same agent/hook but <strong>always
+            starts a fresh session</strong> — it never resumes and never becomes the workflow's
+            new <code>lastSessionId</code>. It stays outside the sequential engine and doesn't
+            touch the workflow's status directly; instead, the workflow's status is
+            <strong>reconciled</strong> from the current state of its steps (all <code>done</code>
+            → <code>completed</code>, any <code>failed</code> → <code>failed</code>, something
+            left to run → <code>draft</code>) — which is what lets retrying a single failed step
+            until it passes take the whole workflow back out of <code>failed</code>.
+          </p>
+          <h3>Selecting which steps run</h3>
+          <p>
+            Every step has a <code>selected</code> flag (on by default). Start, Resume and
+            Restart all accept an optional list of step ids in the request body
+            (<code>{"stepIds": [...]}</code>) to run only that subset — the UI exposes this as a
+            checkbox per step. An empty/omitted selection deselects every step for that call, so
+            nothing is dispatched until at least one step is selected again.
+          </p>
+        </div>
+        <div lang="es" hidden>
+          <h2>Conceptos clave</h2>
+          <h3>Los pasos se ejecutan en una sesión encadenada</h3>
+          <p>
+            A diferencia de una cola de tareas, los pasos de un flujo de trabajo son estrictamente
+            secuenciales: el siguiente paso no se dispara hasta que el anterior está
+            <code>done</code>, y cada despacho reanuda el mismo <code>sessionId</code> de Claude
+            que el anterior (<code>claude --resume</code> por debajo), de modo que el agente
+            conserva el contexto completo de todo lo que el flujo de trabajo ha hecho hasta el
+            momento.
+          </p>
+          <h3>Delegación a subagentes</h3>
+          <p>
+            Como la sesión se reutiliza turno tras turno, la entrada de cada paso añade una
+            instrucción explícita para hacer el trabajo con la <strong>herramienta Task</strong>
+            (un subagente) en lugar de hacerlo en línea. Eso mantiene el contexto de trabajo de
+            cada paso fuera de la sesión reanudada, que solo acumula los resúmenes finales del
+            subagente en lugar de cada llamada intermedia a herramientas.
+          </p>
+          <h3>Ejecuciones bajo demanda (▶)</h3>
+          <p>
+            Cualquier paso también puede ejecutarse fuera de orden, mediante
+            <code>POST /api/workflows/:id/steps/:stepId/run</code> o el botón ▶ en la interfaz.
+            Esa ejecución usa el mismo agente/hook pero <strong>siempre inicia una sesión
+            nueva</strong> — nunca reanuda ni se convierte en el nuevo <code>lastSessionId</code>
+            del flujo de trabajo. Queda fuera del motor secuencial y no toca directamente el estado
+            del flujo de trabajo; en su lugar, el estado del flujo de trabajo se
+            <strong>reconcilia</strong> a partir del estado actual de sus pasos (todos
+            <code>done</code> → <code>completed</code>; alguno <code>failed</code> →
+            <code>failed</code>; algo pendiente de ejecutar → <code>draft</code>) — lo que permite
+            que reintentar un único paso fallido hasta que pase saque a todo el flujo de trabajo
+            del estado <code>failed</code>.
+          </p>
+          <h3>Seleccionar qué pasos se ejecutan</h3>
+          <p>
+            Cada paso tiene un indicador <code>selected</code> (activado por defecto). Start,
+            Resume y Restart aceptan todos una lista opcional de ids de paso en el cuerpo de la
+            solicitud (<code>{"stepIds": [...]}</code>) para ejecutar solo ese subconjunto — la
+            interfaz expone esto como una casilla por paso. Una selección vacía u omitida
+            deselecciona todos los pasos para esa llamada, así que no se despacha nada hasta que se
+            seleccione al menos un paso de nuevo.
+          </p>
+        </div>
+      </section>
+
+      <section id="judge-and-retries">
+        <div lang="en">
+          <h2>Judge &amp; retries</h2>
+          <p>
+            A step can optionally carry an <strong>acceptance criterion</strong>. If it has one,
+            finishing the step's execution (the <code>exec</code> phase) doesn't mark it
+            <code>done</code>: the step enters a <code>judge</code> phase and a second run is
+            dispatched, on the same session, asking the agent to evaluate its own result and
+            answer a JSON verdict — <code>{"ok": bool, "reason": string}</code>.
+          </p>
+          <ul>
+            <li>If the verdict <strong>accepts</strong>, the step becomes <code>done</code> and the engine advances to the next step.</li>
+            <li>If it <strong>rejects</strong>, the same step is retried with the judge's feedback until <code>maxRetries</code> is exhausted, and only then does the workflow fail.</li>
+            <li>A verdict that doesn't parse as JSON also fails the workflow, deliberately, rather than guessing at intent.</li>
+            <li>With no acceptance criterion set, there is no judge phase and the step behaves like a plain one-shot step.</li>
+          </ul>
+          <p>
+            Steps also carry <code>retryCount</code> and an optional
+            <code>retryIntervalSeconds</code> (a wait before the next retry attempt), both
+            settable when a step is created or edited.
+          </p>
+        </div>
+        <div lang="es" hidden>
+          <h2>Evaluador &amp; reintentos</h2>
+          <p>
+            Un paso puede llevar opcionalmente un <strong>criterio de aceptación</strong>. Si lo
+            tiene, terminar la ejecución del paso (la fase <code>exec</code>) no lo marca
+            <code>done</code>: el paso entra en una fase <code>judge</code> y se despacha una
+            segunda ejecución, en la misma sesión, pidiéndole al agente que evalúe su propio
+            resultado y responda con un veredicto en JSON — <code>{"ok": bool, "reason": string}</code>.
+          </p>
+          <ul>
+            <li>Si el veredicto <strong>acepta</strong>, el paso pasa a <code>done</code> y el motor avanza al siguiente paso.</li>
+            <li>Si <strong>rechaza</strong>, el mismo paso se reintenta con la retroalimentación del evaluador hasta agotar <code>maxRetries</code>, y solo entonces falla el flujo de trabajo.</li>
+            <li>Un veredicto que no se pueda interpretar como JSON también hace fallar el flujo de trabajo, deliberadamente, en lugar de adivinar la intención.</li>
+            <li>Sin un criterio de aceptación definido, no hay fase de evaluación y el paso se comporta como un paso simple de una sola pasada.</li>
+          </ul>
+          <p>
+            Los pasos también llevan <code>retryCount</code> y un
+            <code>retryIntervalSeconds</code> opcional (una espera antes del siguiente intento de
+            reintento), ambos configurables al crear o editar un paso.
+          </p>
+        </div>
+      </section>
+
+      <section id="how-a-step-flows">
+        <div lang="en">
+          <h2>How a step flows</h2>
+          <div class="diagram">hub    →  POST to the workflow's awb hook          {stepId, input, <span class="hl">callbackUrl</span>} + secret, sessionId to resume
+awb    →  spawns <span class="hl">claude -p</span> / <span class="hl">claude --resume</span>       the step's description, appended with the subagent instruction
+awb    →  POST callbackUrl {ok, result, session_id}  when the run finishes
+hub    →  step <span class="hl">done</span> or <span class="hl">judge</span>            done if no acceptance criteria; otherwise a self-evaluation run follows
+hub    →  next pending, selected step dispatched     until none remain, then the workflow is <span class="hl">completed</span></div>
+          <p>
+            Like agent-webhook-bridge itself, the flow is asynchronous end to end: the hook answers
+            <code>{"ok":true}</code> immediately (meaning only "accepted"), and the hub marks the
+            step <code>running</code> on acceptance. The real result arrives later on
+            <code>POST /api/steps/:id/result</code>, authenticated with a per-step token compared
+            with <code>crypto.timingSafeEqual</code>.
+          </p>
+        </div>
+        <div lang="es" hidden>
+          <h2>Cómo fluye un paso</h2>
+          <div class="diagram">hub    →  POST al hook awb del flujo de trabajo          {stepId, input, <span class="hl">callbackUrl</span>} + secret, sessionId a reanudar
+awb    →  lanza <span class="hl">claude -p</span> / <span class="hl">claude --resume</span>       la descripción del paso, con la instrucción de subagente añadida
+awb    →  POST callbackUrl {ok, result, session_id}  cuando la ejecución termina
+hub    →  paso <span class="hl">done</span> o <span class="hl">judge</span>            done si no hay criterios de aceptación; si no, sigue una ejecución de autoevaluación
+hub    →  siguiente paso pendiente y seleccionado, despachado     hasta que no quede ninguno, y entonces el flujo de trabajo queda <span class="hl">completed</span></div>
+          <p>
+            Igual que agent-webhook-bridge, el flujo es asíncrono de principio a fin: el hook
+            responde <code>{"ok":true}</code> de inmediato (lo que solo significa "aceptado"), y
+            el hub marca el paso como <code>running</code> al aceptarlo. El resultado real llega
+            más tarde mediante <code>POST /api/steps/:id/result</code>, autenticado con un token
+            por paso comparado con <code>crypto.timingSafeEqual</code>.
+          </p>
+        </div>
+      </section>
+
+      <section id="permissions">
+        <div lang="en">
+          <h2>Permissions &amp; security</h2>
+          <ul>
+            <li>The hub binds to <code>127.0.0.1</code> — nothing listens on the network directly.</li>
+            <li>Every mutating <code>/api</code> route (create/edit/delete workflows and steps, start/pause/resume/restart, on-demand run) requires the admin token as a Bearer header, checked with a timing-safe comparison.</li>
+            <li>awb's result callback (<code>POST /api/steps/:id/result</code>) is authenticated instead with a random per-step token passed as <code>?token=</code>, never the admin token.</li>
+            <li>By default a workflow's agent can answer but cannot write files or run commands. Writing requires <code>--permission-mode acceptEdits</code> at creation, scoped to that agent's own sandbox (<code>~/.target/sandboxes/&lt;agent&gt;/</code>), never a real repo.</li>
+            <li><code>bypassPermissions</code> disables every permission check (arbitrary Bash, git, network) for that workflow's steps. It demands an explicit <code>acceptBypassRisk: true</code> (<code>--yes-bypass-risk</code> on the CLI) — it can't be turned on by accident.</li>
+          </ul>
+        </div>
+        <div lang="es" hidden>
+          <h2>Permisos &amp; seguridad</h2>
+          <ul>
+            <li>El hub se enlaza a <code>127.0.0.1</code> — nada escucha directamente en la red.</li>
+            <li>Toda ruta <code>/api</code> que modifica datos (crear/editar/eliminar flujos de trabajo y pasos, start/pause/resume/restart, ejecución bajo demanda) requiere el token de administrador como cabecera Bearer, verificado con una comparación resistente a ataques de temporización.</li>
+            <li>El callback de resultado de awb (<code>POST /api/steps/:id/result</code>) se autentica en cambio con un token aleatorio por paso pasado como <code>?token=</code>, nunca con el token de administrador.</li>
+            <li>Por defecto, el agente de un flujo de trabajo puede responder pero no puede escribir archivos ni ejecutar comandos. Escribir requiere <code>--permission-mode acceptEdits</code> al crearlo, limitado al sandbox propio de ese agente (<code>~/.target/sandboxes/&lt;agent&gt;/</code>), nunca un repositorio real.</li>
+            <li><code>bypassPermissions</code> desactiva toda verificación de permisos (Bash, git, red arbitrarios) para los pasos de ese flujo de trabajo. Exige un <code>acceptBypassRisk: true</code> explícito (<code>--yes-bypass-risk</code> en la CLI) — no se puede activar por accidente.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="failure-modes">
+        <div lang="en">
+          <h2>Failure modes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>What happened</th><th>How the step ends</th></tr></thead>
+              <tbody>
+                <tr><td>The step's still <code>pending</code>/<code>running</code> longer than the step timeout</td><td><code>failed</code> with a timeout error, once anything reads the workflow/step list.</td></tr>
+                <tr><td>The judge's verdict rejects the result</td><td>Retried on the same step, with feedback, until <code>maxRetries</code> is exhausted — then the workflow fails.</td></tr>
+                <tr><td>The judge's verdict doesn't parse as JSON</td><td>The workflow fails immediately (deliberately, rather than guessing at the intended verdict).</td></tr>
+                <tr><td>awb's result callback reports a non-zero exit</td><td><code>failed</code>, with the reported error/exit code.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Expiry is <strong>lazy</strong> — implemented in <code>db.ts</code>/<code>workflow.ts</code>'s
+            <code>expireStale</code>: any read of the workflow list or a workflow's detail first
+            fails any <code>running</code> step older than <code>stepTimeoutMs</code>, so timeouts
+            are enforced without a timer and survive hub restarts for free. A callback that
+            arrives after the timeout does not resurrect the step.
+          </p>
+        </div>
+        <div lang="es" hidden>
+          <h2>Modos de fallo</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Qué pasó</th><th>Cómo termina el paso</th></tr></thead>
+              <tbody>
+                <tr><td>El paso sigue <code>pending</code>/<code>running</code> más tiempo que el timeout de paso</td><td><code>failed</code> con un error de timeout, en cuanto algo lee la lista de flujos de trabajo/pasos.</td></tr>
+                <tr><td>El veredicto del evaluador rechaza el resultado</td><td>Se reintenta el mismo paso, con retroalimentación, hasta agotar <code>maxRetries</code> — entonces falla el flujo de trabajo.</td></tr>
+                <tr><td>El veredicto del evaluador no se puede interpretar como JSON</td><td>El flujo de trabajo falla de inmediato (deliberadamente, en lugar de adivinar el veredicto pretendido).</td></tr>
+                <tr><td>El callback de resultado de awb reporta un código de salida distinto de cero</td><td><code>failed</code>, con el error/código de salida reportado.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            La expiración es <strong>perezosa</strong> — implementada en el
+            <code>expireStale</code> de <code>db.ts</code>/<code>workflow.ts</code>: cualquier
+            lectura de la lista de flujos de trabajo o del detalle de un flujo de trabajo primero
+            falla cualquier paso <code>running</code> más antiguo que <code>stepTimeoutMs</code>,
+            de modo que los timeouts se aplican sin un temporizador y sobreviven a los reinicios
+            del hub sin costo adicional. Un callback que llega después del timeout no resucita el
+            paso.
+          </p>
+        </div>
+      </section>
+
+      <section id="configuration">
+        <div lang="en">
+          <h2>Configuration</h2>
+          <p>
+            Persisted at <code>~/.target/config.json</code> (override the directory with
+            <code>TARGET_HOME</code>), read by <code>hub/config.ts</code>. Created with defaults on
+            first run; the admin token is generated once and then kept.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Field</th><th>Default</th><th>Meaning</th></tr></thead>
+              <tbody>
+                <tr><td><code>host</code></td><td><code>127.0.0.1</code></td><td>Bind address for the hub's HTTP server.</td></tr>
+                <tr><td><code>port</code></td><td><code>8893</code></td><td>Chosen away from awb's default (<code>8890</code>) and agent-mesh-hub's (<code>8892</code>) so all three can share a machine.</td></tr>
+                <tr><td><code>adminToken</code></td><td>random, generated on first load</td><td>Bearer token required by every mutating <code>/api</code> route. Printed at hub startup.</td></tr>
+                <tr><td><code>stepTimeoutMs</code></td><td><code>600000</code> (10 minutes)</td><td>A step still pending/running longer than this is lazily marked <code>failed</code>.</td></tr>
+                <tr><td><code>maxInputBytes</code></td><td><code>65536</code> (64 KiB)</td><td>Request body size cap enforced while reading JSON bodies; oversized bodies get <code>413</code>.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The awb broker it depends on is configured separately, under
+            <code>~/.agent-webhook-bridge/</code> (or <code>AWB_HOME</code>) — its own port
+            defaults to <code>8890</code> and is read from that install's <code>hooks.json</code>.
+          </p>
+        </div>
+        <div lang="es" hidden>
+          <h2>Configuración</h2>
+          <p>
+            Persistida en <code>~/.target/config.json</code> (redefine el directorio con
+            <code>TARGET_HOME</code>), leída por <code>hub/config.ts</code>. Se crea con valores
+            por defecto en la primera ejecución; el token de administrador se genera una vez y
+            luego se conserva.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Campo</th><th>Por defecto</th><th>Significado</th></tr></thead>
+              <tbody>
+                <tr><td><code>host</code></td><td><code>127.0.0.1</code></td><td>Dirección de enlace del servidor HTTP del hub.</td></tr>
+                <tr><td><code>port</code></td><td><code>8893</code></td><td>Elegido para diferir del valor por defecto de awb (<code>8890</code>) y del de agent-mesh-hub (<code>8892</code>), de modo que los tres puedan compartir una misma máquina.</td></tr>
+                <tr><td><code>adminToken</code></td><td>aleatorio, generado en la primera carga</td><td>Token Bearer requerido por toda ruta <code>/api</code> que modifica datos. Se imprime al iniciar el hub.</td></tr>
+                <tr><td><code>stepTimeoutMs</code></td><td><code>600000</code> (10 minutos)</td><td>Un paso que sigue pendiente/en ejecución más tiempo que esto se marca perezosamente como <code>failed</code>.</td></tr>
+                <tr><td><code>maxInputBytes</code></td><td><code>65536</code> (64 KiB)</td><td>Límite de tamaño del cuerpo de la solicitud aplicado al leer cuerpos JSON; los cuerpos demasiado grandes reciben <code>413</code>.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            El broker de awb del que depende se configura por separado, bajo
+            <code>~/.agent-webhook-bridge/</code> (o <code>AWB_HOME</code>) — su propio puerto por
+            defecto es <code>8890</code> y se lee del <code>hooks.json</code> de esa instalación.
+          </p>
+        </div>
+      </section>
+
+      <section id="command-reference">
+        <div lang="en">
+          <h2>Command reference</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+              <tbody>
+                <tr><td><code>npm run target:install</code></td><td>One-command bootstrap: hub dependencies, vendors/updates <code>agent-webhook-bridge</code>, installs its dependencies. Idempotent.</td></tr>
+                <tr><td><code>npm start</code></td><td>Boots the awb broker and the target hub together, waits for both ports, opens the UI, holds the foreground until Ctrl-C.</td></tr>
+                <tr><td><code>npm test</code></td><td>Runs the hub's tests (<code>node --test</code>, from <code>hub/workflow.test.ts</code>) against a throwaway <code>TARGET_HOME</code>.</td></tr>
+                <tr><td><code>npm run typecheck</code></td><td>Type-checks the hub with <code>tsc --noEmit</code>.</td></tr>
+                <tr><td><code>target start</code></td><td>Runs the hub in the foreground (equivalent to <code>node hub/daemon.ts</code>).</td></tr>
+                <tr><td><code>target create &lt;name&gt; [--workdir &lt;dir&gt;] [--permission-mode &lt;mode&gt;] [--yes-bypass-risk]</code></td><td>Creates a workflow — and its dedicated awb hook + agent. Modes: <code>acceptEdits</code>, <code>auto</code>, <code>manual</code>, <code>dontAsk</code>, <code>plan</code>, <code>bypassPermissions</code> (needs <code>--yes-bypass-risk</code>).</td></tr>
+                <tr><td><code>target add-step &lt;workflowId&gt; &lt;description...&gt;</code></td><td>Appends a step to a workflow.</td></tr>
+                <tr><td><code>target list</code></td><td>Lists workflows with their status and progress %.</td></tr>
+                <tr><td><code>target show &lt;workflowId&gt;</code></td><td>Shows a workflow's steps and their status.</td></tr>
+                <tr><td><code>target run &lt;workflowId&gt;</code></td><td>Starts (or continues) sequential dispatch.</td></tr>
+                <tr><td><code>target pause &lt;workflowId&gt;</code></td><td>Stops dispatching further steps.</td></tr>
+                <tr><td><code>target resume &lt;workflowId&gt;</code></td><td>Undoes pause.</td></tr>
+                <tr><td><code>target restart &lt;workflowId&gt;</code></td><td>Resets every step to pending (dropping session chaining) and starts over.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            If <code>target</code> isn't linked globally, every command above works the same as
+            <code>node hub/cli.ts …</code> run from the repo root.
+          </p>
+        </div>
+        <div lang="es" hidden>
+          <h2>Referencia de comandos</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Comando</th><th>Qué hace</th></tr></thead>
+              <tbody>
+                <tr><td><code>npm run target:install</code></td><td>Bootstrap en un solo comando: dependencias del hub, vendoriza/actualiza <code>agent-webhook-bridge</code>, instala sus dependencias. Idempotente.</td></tr>
+                <tr><td><code>npm start</code></td><td>Arranca juntos el broker de awb y el hub de target, espera a que ambos puertos respondan, abre la interfaz, mantiene el primer plano hasta Ctrl-C.</td></tr>
+                <tr><td><code>npm test</code></td><td>Ejecuta las pruebas del hub (<code>node --test</code>, desde <code>hub/workflow.test.ts</code>) contra un <code>TARGET_HOME</code> desechable.</td></tr>
+                <tr><td><code>npm run typecheck</code></td><td>Verifica los tipos del hub con <code>tsc --noEmit</code>.</td></tr>
+                <tr><td><code>target start</code></td><td>Ejecuta el hub en primer plano (equivalente a <code>node hub/daemon.ts</code>).</td></tr>
+                <tr><td><code>target create &lt;name&gt; [--workdir &lt;dir&gt;] [--permission-mode &lt;mode&gt;] [--yes-bypass-risk]</code></td><td>Crea un flujo de trabajo — y su hook + agente de awb dedicados. Modos: <code>acceptEdits</code>, <code>auto</code>, <code>manual</code>, <code>dontAsk</code>, <code>plan</code>, <code>bypassPermissions</code> (necesita <code>--yes-bypass-risk</code>).</td></tr>
+                <tr><td><code>target add-step &lt;workflowId&gt; &lt;description...&gt;</code></td><td>Añade un paso a un flujo de trabajo.</td></tr>
+                <tr><td><code>target list</code></td><td>Lista los flujos de trabajo con su estado y % de progreso.</td></tr>
+                <tr><td><code>target show &lt;workflowId&gt;</code></td><td>Muestra los pasos de un flujo de trabajo y su estado.</td></tr>
+                <tr><td><code>target run &lt;workflowId&gt;</code></td><td>Inicia (o continúa) el despacho secuencial.</td></tr>
+                <tr><td><code>target pause &lt;workflowId&gt;</code></td><td>Detiene el despacho de más pasos.</td></tr>
+                <tr><td><code>target resume &lt;workflowId&gt;</code></td><td>Deshace la pausa.</td></tr>
+                <tr><td><code>target restart &lt;workflowId&gt;</code></td><td>Reinicia todos los pasos a pendiente (descartando el encadenamiento de sesión) y empieza de nuevo.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Si <code>target</code> no está enlazado globalmente, todos los comandos anteriores
+            funcionan igual que <code>node hub/cli.ts …</code> ejecutado desde la raíz del
+            repositorio.
+          </p>
+        </div>
+      </section>
+
+      <section id="api-reference">
+        <div lang="en">
+          <h2>API reference</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Endpoint</th><th>What it does</th></tr></thead>
+              <tbody>
+                <tr><td><code>GET /health</code></td><td>Liveness + workflow count.</td></tr>
+                <tr><td><code>GET /api/workflows</code></td><td>List workflows with progress % (also expires stale steps first).</td></tr>
+                <tr><td><code>POST /api/workflows</code></td><td>Create a workflow (admin token) — also creates its awb hook. Body: <code>{name, workdir?, permissionMode?, acceptBypassRisk?}</code>.</td></tr>
+                <tr><td><code>GET /api/workflows/:id</code></td><td>Workflow detail + its steps.</td></tr>
+                <tr><td><code>GET /api/workflows/:id/transcript</code></td><td>The harness + live conversation of the current/most-recently-run session, read from Claude Code's own <code>.jsonl</code> transcript.</td></tr>
+                <tr><td><code>DELETE /api/workflows/:id</code></td><td>Removes a workflow: deletes its awb hook, its <code>.md</code> file and its DB rows (admin token).</td></tr>
+                <tr><td><code>POST /api/workflows/:id/steps</code></td><td>Adds a step (admin token). Body: <code>{description, acceptanceCriteria?, maxRetries?, retryIntervalSeconds?}</code>.</td></tr>
+                <tr><td><code>PATCH /api/workflows/:id/steps/:stepId</code></td><td>Edits a step's description / judge settings (admin token).</td></tr>
+                <tr><td><code>DELETE /api/workflows/:id/steps/:stepId</code></td><td>Removes a pending step (admin token).</td></tr>
+                <tr><td><code>POST /api/workflows/:id/steps/:stepId/run</code></td><td>Runs one step now, outside the sequential order, always on a fresh session (admin token).</td></tr>
+                <tr><td><code>POST /api/workflows/:id/start</code></td><td>Begins/continues sequential dispatch (admin token). Body: <code>{stepIds?: string[]}</code> to restrict which steps run.</td></tr>
+                <tr><td><code>POST /api/workflows/:id/pause</code></td><td>Stops dispatching further steps (admin token).</td></tr>
+                <tr><td><code>POST /api/workflows/:id/resume</code></td><td>Undoes pause (admin token). Same optional <code>stepIds</code> body as start.</td></tr>
+                <tr><td><code>POST /api/workflows/:id/restart</code></td><td>Resets selected steps to pending and starts over (admin token). Same optional <code>stepIds</code> body.</td></tr>
+                <tr><td><code>POST /api/steps/:id/result</code></td><td>awb's result callback, authenticated with the per-step <code>?token=</code>. Not meant to be called by hand.</td></tr>
+                <tr><td><code>GET /</code></td><td>The web UI.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div lang="es" hidden>
+          <h2>Referencia de API</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Endpoint</th><th>Qué hace</th></tr></thead>
+              <tbody>
+                <tr><td><code>GET /health</code></td><td>Estado de actividad + número de flujos de trabajo.</td></tr>
+                <tr><td><code>GET /api/workflows</code></td><td>Lista los flujos de trabajo con % de progreso (también expira antes los pasos obsoletos).</td></tr>
+                <tr><td><code>POST /api/workflows</code></td><td>Crea un flujo de trabajo (token de administrador) — también crea su hook de awb. Cuerpo: <code>{name, workdir?, permissionMode?, acceptBypassRisk?}</code>.</td></tr>
+                <tr><td><code>GET /api/workflows/:id</code></td><td>Detalle del flujo de trabajo + sus pasos.</td></tr>
+                <tr><td><code>GET /api/workflows/:id/transcript</code></td><td>El harness y la conversación en vivo de la sesión actual/más reciente, leídos directamente del transcript <code>.jsonl</code> propio de Claude Code.</td></tr>
+                <tr><td><code>DELETE /api/workflows/:id</code></td><td>Elimina un flujo de trabajo: borra su hook de awb, su archivo <code>.md</code> y sus filas en la base de datos (token de administrador).</td></tr>
+                <tr><td><code>POST /api/workflows/:id/steps</code></td><td>Añade un paso (token de administrador). Cuerpo: <code>{description, acceptanceCriteria?, maxRetries?, retryIntervalSeconds?}</code>.</td></tr>
+                <tr><td><code>PATCH /api/workflows/:id/steps/:stepId</code></td><td>Edita la descripción de un paso / la configuración del evaluador (token de administrador).</td></tr>
+                <tr><td><code>DELETE /api/workflows/:id/steps/:stepId</code></td><td>Elimina un paso pendiente (token de administrador).</td></tr>
+                <tr><td><code>POST /api/workflows/:id/steps/:stepId/run</code></td><td>Ejecuta un paso ahora mismo, fuera del orden secuencial, siempre en una sesión nueva (token de administrador).</td></tr>
+                <tr><td><code>POST /api/workflows/:id/start</code></td><td>Inicia/continúa el despacho secuencial (token de administrador). Cuerpo: <code>{stepIds?: string[]}</code> para restringir qué pasos se ejecutan.</td></tr>
+                <tr><td><code>POST /api/workflows/:id/pause</code></td><td>Detiene el despacho de más pasos (token de administrador).</td></tr>
+                <tr><td><code>POST /api/workflows/:id/resume</code></td><td>Deshace la pausa (token de administrador). Mismo cuerpo opcional <code>stepIds</code> que start.</td></tr>
+                <tr><td><code>POST /api/workflows/:id/restart</code></td><td>Reinicia los pasos seleccionados a pendiente y empieza de nuevo (token de administrador). Mismo cuerpo opcional <code>stepIds</code>.</td></tr>
+                <tr><td><code>POST /api/steps/:id/result</code></td><td>Callback de resultado de awb, autenticado con el <code>?token=</code> por paso. No está pensado para llamarse a mano.</td></tr>
+                <tr><td><code>GET /</code></td><td>La interfaz web.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="project-structure">
+        <div lang="en">
+          <h2>Project structure</h2>
+          <div class="diagram">/
+├── README.md              Main documentation (usage, differences with agent-mesh)
+├── PROJECT_SUMMARY.md     Architecture write-up (modules, design details, status)
+├── package.json           Root scripts: target:install, start, test, typecheck
+├── .nvmrc                 Pins Node 24
+├── .claude/               settings.local.json (permission allowlist for this repo)
+├── scripts/
+│   ├── bootstrap.mjs      Plain-JS entry for `npm run target:install`; activates Node 24+ via nvm/fnm if needed
+│   ├── install.ts         Installs hub deps, vendors/updates agent-webhook-bridge
+│   └── start.ts           Boots the awb broker + hub together for `npm start`
+└── hub/                   All the hub's code
+    ├── daemon.ts          Entry point: loads config, starts the HTTP server, prints the admin token
+    ├── server.ts          HTTP API + serves the UI
+    ├── workflow.ts         Engine: state machine, judge/retry logic, progress .md rewriting
+    ├── runner.ts          Dispatches a step (or its judge evaluation) to the awb hook
+    ├── db.ts              SQLite storage layer: workflows + steps tables, lazy expiry
+    ├── awb.ts             Bridge to the local awb install (creates/inspects/deletes hooks)
+    ├── transcript.ts      Best-effort, read-only reader of Claude Code's session .jsonl
+    ├── config.ts          Config persisted in ~/.target/config.json
+    ├── cli.ts             The `target` CLI
+    ├── workflow.test.ts   Tests (node --test) over a throwaway TARGET_HOME
+    └── ui/index.html      Web UI (single static page, no build)</div>
+          <p>
+            At runtime the hub uses <code>~/.target/</code>: <code>config.json</code>,
+            <code>target.db</code>, <code>sandboxes/&lt;agent&gt;/</code> and a
+            <code>&lt;slug&gt;-&lt;id&gt;.md</code> progress file per workflow. The
+            <code>agent-webhook-bridge</code> checkout used by <code>npm start</code> lives in
+            <code>vendor/agent-webhook-bridge</code> (gitignored) unless <code>AWB_DIR</code>
+            points elsewhere.
+          </p>
+        </div>
+        <div lang="es" hidden>
+          <h2>Estructura del proyecto</h2>
+          <div class="diagram">/
+├── README.md              Documentación principal (uso, diferencias con agent-mesh)
+├── PROJECT_SUMMARY.md     Descripción de la arquitectura (módulos, detalles de diseño, estado)
+├── package.json           Scripts raíz: target:install, start, test, typecheck
+├── .nvmrc                 Fija Node 24
+├── .claude/               settings.local.json (lista de permisos para este repositorio)
+├── scripts/
+│   ├── bootstrap.mjs      Punto de entrada en JS plano para `npm run target:install`; activa Node 24+ vía nvm/fnm si hace falta
+│   ├── install.ts         Instala las dependencias del hub, vendoriza/actualiza agent-webhook-bridge
+│   └── start.ts           Arranca juntos el broker de awb + el hub para `npm start`
+└── hub/                   Todo el código del hub
+    ├── daemon.ts          Punto de entrada: carga la configuración, inicia el servidor HTTP, imprime el token de administrador
+    ├── server.ts          API HTTP + sirve la interfaz
+    ├── workflow.ts         Motor: máquina de estados, lógica de evaluador/reintento, reescritura del .md de progreso
+    ├── runner.ts          Despacha un paso (o su ejecución de evaluación) al hook de awb
+    ├── db.ts              Capa de almacenamiento SQLite: tablas de flujos de trabajo + pasos, expiración perezosa
+    ├── awb.ts             Puente hacia la instalación local de awb (crea/inspecciona/elimina hooks)
+    ├── transcript.ts      Lector de solo lectura, de mejor esfuerzo, del .jsonl de sesión de Claude Code
+    ├── config.ts          Configuración persistida en ~/.target/config.json
+    ├── cli.ts             La CLI `target`
+    ├── workflow.test.ts   Pruebas (node --test) sobre un TARGET_HOME desechable
+    └── ui/index.html      Interfaz web (página estática única, sin build)</div>
+          <p>
+            En tiempo de ejecución el hub usa <code>~/.target/</code>: <code>config.json</code>,
+            <code>target.db</code>, <code>sandboxes/&lt;agent&gt;/</code> y un archivo de progreso
+            <code>&lt;slug&gt;-&lt;id&gt;.md</code> por flujo de trabajo. La copia de
+            <code>agent-webhook-bridge</code> que usa <code>npm start</code> vive en
+            <code>vendor/agent-webhook-bridge</code> (ignorada por git) a menos que
+            <code>AWB_DIR</code> apunte a otro lugar.
+          </p>
+        </div>
+      </section>
+
+      <section id="current-status">
+        <div lang="en">
+          <h2>Current status</h2>
+          <p>
+            The README describes the project as being <strong>in its early stages</strong>:
+            GitHub issues track bugs and pending features, and PRs target <code>main</code>. The
+            repo is small and young, with several comments referring to the current, local-only
+            setup as "phase 1" and a planned phase 2 for remote nodes that register their own
+            hooks.
+          </p>
+          <p>Recent focus, per the project's own history, has been on fine-grained control over individual steps:</p>
+          <ul>
+            <li>Full deletion of workflows, and isolated (on-demand) execution of a single step.</li>
+            <li>A simplification of that mechanism: separate "isolated run" columns/callback were replaced with a simple <code>manualRun</code> flag reusing the step's normal <code>status</code>/<code>result</code>/<code>error</code>, plus <code>reconcileStatus()</code> deriving the workflow's status from its steps' current state.</li>
+            <li>Self-evaluation of steps against an acceptance criterion, with judge-driven retries.</li>
+            <li>Per-step selection of which steps run on Start/Resume/Restart, surfaced in the UI as checkboxes.</li>
+          </ul>
+          <p>There is no CI in the repo, and no build step — Node runs the <code>.ts</code> files directly.</p>
+        </div>
+        <div lang="es" hidden>
+          <h2>Estado actual</h2>
+          <p>
+            El README describe el proyecto como estando <strong>en sus primeras etapas</strong>:
+            los issues de GitHub siguen el rastro de errores y funcionalidades pendientes, y los
+            PRs apuntan a <code>main</code>. El repositorio es pequeño y joven, con varios
+            comentarios que se refieren a la configuración actual, solo local, como "fase 1" y una
+            fase 2 planeada para nodos remotos que registren sus propios hooks.
+          </p>
+          <p>El enfoque reciente, según la propia historia del proyecto, ha sido el control detallado sobre pasos individuales:</p>
+          <ul>
+            <li>Eliminación completa de flujos de trabajo, y ejecución aislada (bajo demanda) de un único paso.</li>
+            <li>Una simplificación de ese mecanismo: las columnas/callback separados de "ejecución aislada" se reemplazaron por un simple flag <code>manualRun</code> que reutiliza el <code>status</code>/<code>result</code>/<code>error</code> normal del paso, además de <code>reconcileStatus()</code>, que deriva el estado del flujo de trabajo a partir del estado actual de sus pasos.</li>
+            <li>Autoevaluación de los pasos frente a un criterio de aceptación, con reintentos guiados por el evaluador.</li>
+            <li>Selección por paso de qué pasos se ejecutan en Start/Resume/Restart, expuesta en la interfaz como casillas.</li>
+          </ul>
+          <p>No hay CI en el repositorio, ni paso de build — Node ejecuta los archivos <code>.ts</code> directamente.</p>
+        </div>
+      </section>
+
+      <footer>
+        <span lang="en">target · early stage · full source and docs on <a href="https://github.com/EnmaSuamkf/target" target="_blank">GitHub</a></span>
+        <span lang="es" hidden>target · etapa temprana · código fuente y documentación completos en <a href="https://github.com/EnmaSuamkf/target" target="_blank">GitHub</a></span>
+      </footer>
+    </div>
+    <script src="../assets/i18n.js" defer></script>
+  </body>
+</html>
