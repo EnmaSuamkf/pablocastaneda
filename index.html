@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-title-en="Pablo Castañeda — Developer Portfolio" data-title-es="Pablo Castañeda — Portafolio de Desarrollador">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,12 +11,19 @@
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a class="nav-logo" href="#home">Pablo Castañeda</a>
-      <ul class="nav-links">
+      <ul class="nav-links" lang="en">
         <li><a href="#home" class="nav-link active">Home</a></li>
         <li><a href="#projects" class="nav-link">Projects</a></li>
         <li><a href="#about" class="nav-link">About Me</a></li>
         <li><a href="#wip" class="nav-link">WIP</a></li>
       </ul>
+      <ul class="nav-links" lang="es" hidden>
+        <li><a href="#home" class="nav-link active">Inicio</a></li>
+        <li><a href="#projects" class="nav-link">Proyectos</a></li>
+        <li><a href="#about" class="nav-link">Sobre mí</a></li>
+        <li><a href="#wip" class="nav-link">En curso</a></li>
+      </ul>
+      <div id="lang-toggle"></div>
       <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMenu()">
         <span></span><span></span><span></span>
       </button>
@@ -25,18 +32,100 @@
 
   <!-- HOME -->
   <section class="section hero-section" id="home">
-    <div class="container">
-      <div class="hero">
-        <div class="hero-eyebrow">Software Developer</div>
-        <h1 class="hero-title">Building tools that<br><span class="accent">make developers faster.</span></h1>
-        <p class="hero-subtitle">
-          I'm Pablo Castañeda — I build AI-powered developer tools, automation systems,
-          and open-source infrastructure. This is a living record of what I've shipped,
-          what I'm learning, and what's coming next.
-        </p>
-        <div class="hero-cta">
-          <a href="#projects" class="btn btn-primary">See my projects</a>
-          <a href="#about" class="btn btn-ghost">About me</a>
+    <div lang="en">
+      <div class="container">
+        <div class="hero">
+          <div class="hero-eyebrow">Software Developer</div>
+          <h1 class="hero-title">Building tools that <span class="accent">accelerate development, one agent at a time.</span></h1>
+          <div class="hero-grid">
+          <div class="hero-text">
+          <p class="hero-subtitle">
+            I'm Pablo Castañeda, a senior developer with 10+ years of experience, a lover of good coffee
+            and new technologies. Through this blog I document the open-source AI projects I'm building —
+            always with the goal of creating tools that improve development processes within companies and
+            bring devs closer to a more friendly, easy-to-adopt agentic environment. These systems and
+            projects seek to positively impact Customer Lead Time and Local Lead Time.
+          </p>
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary">See my projects</a>
+            <a href="#about" class="btn btn-ghost">About me</a>
+          </div>
+          </div>
+        <div class="hero-visual">
+          <div class="agent-card">
+            <div class="agent-bar">
+              <span class="agent-dot red"></span>
+              <span class="agent-dot amber"></span>
+              <span class="agent-dot green"></span>
+              <span class="agent-bar-title">pablo@dev — agent session</span>
+            </div>
+            <div class="agent-body">
+              <span class="agent-line"><span class="agent-prompt">$</span> agent run --goal "cut lead time"</span>
+              <span class="agent-line"><span class="agent-ok">✓</span> generating opportunity analysis</span>
+              <span class="agent-line"><span class="agent-ok">✓</span> detecting potential improvements</span>
+              <span class="agent-line"><span class="agent-ok">✓</span> brainstorming</span>
+              <span class="agent-line"><span class="agent-ok">✓</span> generating solution</span>
+              <span class="agent-line"><span class="agent-ok">✓</span> testing solution</span>
+              <span class="agent-line"><span class="agent-ok">✓</span> releasing solution to the community</span>
+              <span class="agent-line"><span class="agent-prompt">$</span> <span class="agent-cursor"></span></span>
+            </div>
+            <div class="agent-foot">
+              <div><span class="stat-number">10+</span><span class="stat-label">years exp.</span></div>
+              <div><span class="stat-number">OSS</span><span class="stat-label">open source</span></div>
+              <div><span class="stat-number">↓</span><span class="stat-label">lead time</span></div>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div lang="es" hidden>
+      <div class="container">
+        <div class="hero">
+          <div class="hero-eyebrow">Desarrollador de Software</div>
+          <h1 class="hero-title">Construyendo herramientas que <span class="accent">aceleran el desarrollo, un agente a la vez.</span></h1>
+          <div class="hero-grid">
+          <div class="hero-text">
+          <p class="hero-subtitle">
+            Soy Pablo Castañeda, un desarrollador senior con más de 10 años de experiencia, amante del buen café
+            y de las nuevas tecnologías. A través de este blog registro los desarrollos open source de IA que voy
+            haciendo, siempre con el objetivo de desarrollar herramientas que mejoren los procesos de desarrollo
+            dentro de las empresas y acerquen a los devs a un entorno agéntico más amigable y fácil de adoptar.
+            El desarrollo de estos sistemas y proyectos busca impactar de forma positiva el Customer Lead Time
+            y el Local Lead Time.
+          </p>
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary">Ver mis proyectos</a>
+            <a href="#about" class="btn btn-ghost">Sobre mí</a>
+          </div>
+          </div>
+        <div class="hero-visual">
+          <div class="agent-card">
+            <div class="agent-bar">
+              <span class="agent-dot red"></span>
+              <span class="agent-dot amber"></span>
+              <span class="agent-dot green"></span>
+              <span class="agent-bar-title">pablo@dev — sesión agente</span>
+            </div>
+            <div class="agent-body">
+              <span class="agent-line"><span class="agent-prompt">$</span> agente ejecutar --objetivo "reducir lead time"</span>
+              <span class="agent-line"><span class="agent-ok">✓</span> generando opportunity analysis</span>
+              <span class="agent-line"><span class="agent-ok">✓</span> detectando posibles improvements</span>
+              <span class="agent-line"><span class="agent-ok">✓</span> brainstorming</span>
+              <span class="agent-line"><span class="agent-ok">✓</span> generando solución</span>
+              <span class="agent-line"><span class="agent-ok">✓</span> testeando solución</span>
+              <span class="agent-line"><span class="agent-ok">✓</span> liberando solución a la comunidad</span>
+              <span class="agent-line"><span class="agent-prompt">$</span> <span class="agent-cursor"></span></span>
+            </div>
+            <div class="agent-foot">
+              <div><span class="stat-number">10+</span><span class="stat-label">años exp.</span></div>
+              <div><span class="stat-number">OSS</span><span class="stat-label">código abierto</span></div>
+              <div><span class="stat-number">↓</span><span class="stat-label">lead time</span></div>
+            </div>
+          </div>
+        </div>
+        </div>
         </div>
       </div>
     </div>
@@ -44,216 +133,641 @@
 
   <!-- PROJECTS -->
   <section class="section" id="projects">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-eyebrow">// shipped</span>
-        <h2 class="section-title">Projects</h2>
-        <p class="section-subtitle">A curated collection of the things I've built — with context on what they solve, how they work, and why they matter.</p>
+    <div lang="en">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">// shipped</span>
+          <h2 class="section-title">Projects</h2>
+          <p class="section-subtitle">A curated collection of the things I've built — with context on what they solve, how they work, and why they matter.</p>
+        </div>
+
+        <div class="projects-grid">
+
+          <!-- free-code -->
+          <article class="project-card" id="project-free-code">
+            <div class="project-header">
+              <div class="project-tag">Open Source · AI Tooling</div>
+              <h3 class="project-title">free-code</h3>
+              <p class="project-tagline">The first agent designed and built for development — flexible and open source.</p>
+            </div>
+            <div class="project-body">
+              <p class="project-desc">The first agent to natively ship tools that accelerate development and bring value to devs and companies every day. Designed to accelerate every stage of a project: it doesn't just focus on understanding the codebase, writing and testing code — it's also flexible for organizations, with the ability for every company to modify it to fit their needs.</p>
+              <ul class="project-highlights">
+                <li><strong>Any model</strong> — Anthropic, Google Vertex, or open-source models like Qwen Coder, Llama, and DeepSeek via LM Studio, Ollama, or any OpenAI-compatible endpoint</li>
+                <li><strong>Vision Mode</strong> — free-code is the first agent with augmented reality: it can understand what you say and respond back. It can help you understand your surroundings — for example, taking screenshots of what you're looking at and giving you solutions or advice, something no other agent is capable of today.</li>
+                <li><strong>Code graph</strong> — as you already know, context is everything. With native code-graph, free-code can generate code graphs of the project and understand it far better, in less time and spending fewer tokens. This takes the agent to the next level.</li>
+                <li><strong>Agent browser</strong> — navigates the web natively over CDP: browsing, searching, and fetching whatever the task needs</li>
+                <li><strong>Subagents</strong> — parallel agent sessions, each with its own context and tools, working on independent subtasks</li>
+                <li><strong>Local RAG</strong> — today an agent needs more information in a secure and reliable way; with its local RAG, free-code can manage private knowledge bases, letting the agent extend its knowledge without retraining a model.</li>
+                <li><strong>Skills &amp; MCP</strong> — reusable behaviors, slash commands, and any MCP server plugged in as new tools</li>
+                <li><strong>Webhooks</strong> — free-code is the first open-source agent able to receive external events as webhooks, something unthinkable not long ago.</li>
+              </ul>
+              <div class="video-slider" data-slider>
+                <div class="video-slider-frame">
+                  <div class="video-slider-track">
+                    <div class="video-slide active" data-video="CRS96H4Q0Oc" data-title="Getting started">
+                      <div class="video-embed">
+                        <iframe src="https://www.youtube.com/embed/CRS96H4Q0Oc" title="free-code — Getting started" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      </div>
+                    </div>
+                    <div class="video-slide" data-video="BT9y8ztHMhc" data-title="Agent browser">
+                      <button class="video-slide-thumb" type="button" data-thumb="https://img.youtube.com/vi/BT9y8ztHMhc/hqdefault.jpg" aria-label="Play: Agent browser">
+                        <span class="play-icon" aria-hidden="true">▶</span>
+                      </button>
+                    </div>
+                    <div class="video-slide" data-video="Xlya3JARJFw" data-title="Code graph">
+                      <button class="video-slide-thumb" type="button" data-thumb="https://img.youtube.com/vi/Xlya3JARJFw/hqdefault.jpg" aria-label="Play: Code graph">
+                        <span class="play-icon" aria-hidden="true">▶</span>
+                      </button>
+                    </div>
+                    <div class="video-slide" data-video="kOcO3Yag7Ec" data-title="Local RAG">
+                      <button class="video-slide-thumb" type="button" data-thumb="https://img.youtube.com/vi/kOcO3Yag7Ec/hqdefault.jpg" aria-label="Play: Local RAG">
+                        <span class="play-icon" aria-hidden="true">▶</span>
+                      </button>
+                    </div>
+                    <div class="video-slide" data-video="2RMqHTpmS-s" data-title="Webhooks">
+                      <button class="video-slide-thumb" type="button" data-thumb="https://img.youtube.com/vi/2RMqHTpmS-s/hqdefault.jpg" aria-label="Play: Webhooks">
+                        <span class="play-icon" aria-hidden="true">▶</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="video-slider-bar">
+                  <button class="slider-arrow slider-prev" type="button" aria-label="Previous video">‹</button>
+                  <div class="slider-info"><span class="slider-title">Getting started</span></div>
+                  <div class="slider-dots">
+                    <button class="slider-dot active" type="button" data-index="0" aria-label="Go to video 1"></button>
+                    <button class="slider-dot" type="button" data-index="1" aria-label="Go to video 2"></button>
+                    <button class="slider-dot" type="button" data-index="2" aria-label="Go to video 3"></button>
+                    <button class="slider-dot" type="button" data-index="3" aria-label="Go to video 4"></button>
+                    <button class="slider-dot" type="button" data-index="4" aria-label="Go to video 5"></button>
+                  </div>
+                  <button class="slider-arrow slider-next" type="button" aria-label="Next video">›</button>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">VS Code Extension</span>
+                <span class="tech-tag">LLM</span>
+                <span class="tech-tag">RAG</span>
+                <span class="tech-tag">MCP</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <a href="https://github.com/EnmaSuamkf/free-code" target="_blank" class="project-link">GitHub →</a>
+              <a href="free-code/index.html" class="project-link project-link-ghost">Docs →</a>
+            </div>
+          </article>
+
+          <!-- agent-webhook-bridge -->
+          <article class="project-card" id="project-webhook">
+            <div class="project-header">
+              <div class="project-tag">Open Source · Automation</div>
+              <h3 class="project-title">agent-webhook-bridge</h3>
+              <p class="project-tagline">Until today, Claude could easily communicate with the outside world through MCPs or by making curl calls. But it couldn't receive events from the outside — that has changed with agent-webhook-bridge (AWB).</p>
+            </div>
+            <div class="project-body">
+              <p class="project-desc">AWB gives Claude (I'm working on adding Cursor, Codex, and Copilot) an inbound door: an external event — a GitHub push, a CI failure, a Flowise flow, a plain curl — wakes the agent, with no polling and no need for the agent to be running beforehand. All of it secure: nobody can trigger it without your secret.</p>
+              <ul class="project-highlights">
+                <li><strong>HTTP-triggered</strong> — one POST spawns the agent headless, as a fresh session or resuming a previous conversation</li>
+                <li><strong>Secure by default</strong> — nothing is exposed unless you decide to; every hook gets its own secret, without it the webhook won't fire</li>
+                <li><strong>Configurable per hook</strong> — <code>--workdir</code>, <code>--prompt-template</code>, <code>--permission-mode</code>, <code>--trigger</code>/<code>--queue</code>, <code>--consumer</code>, <code>--visible</code>: each endpoint defines how its agent runs</li>
+                <li><strong>Event protocol</strong> — events fire the agent the moment they arrive, or persist in SQLite as a queue for later consumption</li>
+              </ul>
+              <div class="video-slider" data-slider>
+                <div class="video-slider-frame">
+                  <div class="video-slider-track">
+                    <div class="video-slide active" data-video="pl8agNzsxRI" data-title="Demo">
+                      <div class="video-embed">
+                        <iframe src="https://www.youtube.com/embed/pl8agNzsxRI" title="agent-webhook-bridge — demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="video-slider-bar">
+                  <button class="slider-arrow slider-prev" type="button" aria-label="Previous video">‹</button>
+                  <div class="slider-info"><span class="slider-title">Demo</span></div>
+                  <div class="slider-dots">
+                    <button class="slider-dot active" type="button" data-index="0" aria-label="Go to video 1"></button>
+                  </div>
+                  <button class="slider-arrow slider-next" type="button" aria-label="Next video">›</button>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">Webhooks</span>
+                <span class="tech-tag">Event-driven</span>
+                <span class="tech-tag">AI Agents</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <a href="https://github.com/EnmaSuamkf/agent-webhook-bridge" target="_blank" class="project-link">GitHub →</a>
+              <a href="agent-webhook-bridge/index.html" class="project-link project-link-ghost">Docs →</a>
+            </div>
+          </article>
+
+          <!-- agent-mesh -->
+          <article class="project-card" id="project-agent-mesh">
+            <div class="project-header">
+              <div class="project-tag">Open Source · First AI Botnet</div>
+              <h3 class="project-title">agent-mesh</h3>
+              <p class="project-tagline">A hub where operators publish AI agents and anyone can send them tasks from a simple web UI.</p>
+            </div>
+            <div class="project-body">
+              <p class="project-desc">The first working piece of the AgentMesh vision: operators publish AI agents running on their own machines, and anyone can send them tasks from a web UI. The hub never runs agents itself — it routes jobs and collects results, turning idle agent capacity into a shareable service.</p>
+              <ul class="project-highlights">
+                <li><strong>Complete task loop</strong> — submit → run → result, with agents spawned headless in sandboxed workdirs</li>
+                <li><strong>Session chaining</strong> — jobs can resume previous Claude sessions, so conversations continue across tasks</li>
+                <li><strong>Remote access</strong> — shareable through a cloudflared tunnel, with per-user API keys that expire, rate-limit, and cap usage</li>
+                <li><strong>Zero dependencies</strong> — a single-process Node hub: no build step, nothing to install</li>
+              </ul>
+              <div class="project-tech">
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">SQLite</span>
+                <span class="tech-tag">AI Agents</span>
+                <span class="tech-tag">Claude Code</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <a href="https://github.com/EnmaSuamkf/agent-mesh" target="_blank" class="project-link">GitHub →</a>
+              <a href="agent-mesh/index.html" class="project-link project-link-ghost">Docs →</a>
+            </div>
+          </article>
+
+          <!-- mcp-flowise -->
+          <article class="project-card" id="project-mcp-flowise">
+            <div class="project-header">
+              <div class="project-tag">Open Source · MCP / AI Tooling</div>
+              <h3 class="project-title">mcp-flowise</h3>
+              <p class="project-tagline">An MCP server that connects AI agents directly to Flowise chatflows and pipelines.</p>
+            </div>
+            <div class="project-body">
+              <p class="project-desc">Turns your Flowise chatflows into tools any MCP-compatible agent can call: design a pipeline in Flowise's no-code UI and it immediately becomes an agent capability — no glue code in between.</p>
+              <ul class="project-highlights">
+                <li><strong>Auto-discovery</strong> — queries the Flowise API and registers each chatflow as a named MCP tool</li>
+                <li><strong>Typed inputs</strong> — every tool gets its own input schema, so agents call flows like native actions</li>
+                <li><strong>Drop-in</strong> — a standard MCP server; works with any agent framework that speaks MCP</li>
+              </ul>
+              <div class="project-tech">
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">MCP</span>
+                <span class="tech-tag">Flowise</span>
+                <span class="tech-tag">LLM Pipelines</span>
+                <span class="tech-tag">AI Agents</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <a href="https://github.com/EnmaSuamkf/mcp-flowise" target="_blank" class="project-link">GitHub →</a>
+              <a href="mcp-flowise/index.html" class="project-link project-link-ghost">Docs →</a>
+            </div>
+          </article>
+
+          <!-- target -->
+          <article class="project-card" id="project-target">
+            <div class="project-header">
+              <div class="project-tag">Open Source · AI Orchestration</div>
+              <h3 class="project-title">target</h3>
+              <p class="project-tagline">A local hub that runs multi-step Claude Code workflows as one continuous, self-checking conversation.</p>
+            </div>
+            <div class="project-body">
+              <p class="project-desc">Instead of a registry of loose, parallel jobs, target creates one dedicated agent per workflow: its steps run strictly in order, always resuming the same Claude session, so the whole workflow reads as a single conversation that advances step by step — with each step able to judge its own result before moving on.</p>
+              <ul class="project-highlights">
+                <li><strong>Chained sessions</strong> — every step in a workflow resumes the previous Claude session, keeping full context from start to finish</li>
+                <li><strong>Subagent delegation</strong> — each step is dispatched to a Task-tool subagent, so intermediate tool calls never bloat the resumed session</li>
+                <li><strong>Judge-driven retries</strong> — steps with an acceptance criterion get a self-evaluation pass, and are automatically retried with feedback until it passes or retries run out</li>
+                <li><strong>On-demand reruns</strong> — any step can be re-run in isolation on a fresh session, with the workflow's status reconciled from its steps afterward</li>
+                <li><strong>Per-step run selection</strong> — Start/Resume/Restart each accept a subset of step ids, exposed in the UI as checkboxes</li>
+              </ul>
+              <div class="project-tech">
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">node:sqlite</span>
+                <span class="tech-tag">Claude Code</span>
+                <span class="tech-tag">AI Agents</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <a href="https://github.com/EnmaSuamkf/target" target="_blank" class="project-link">GitHub →</a>
+              <a href="target/index.html" class="project-link project-link-ghost">Docs →</a>
+            </div>
+          </article>
+
+        </div>
       </div>
+    </div>
+    <div lang="es" hidden>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">// publicado</span>
+          <h2 class="section-title">Proyectos</h2>
+          <p class="section-subtitle">Una colección curada de las cosas que he construido — con contexto sobre qué resuelven, cómo funcionan y por qué importan.</p>
+        </div>
 
-      <div class="projects-grid">
+        <div class="projects-grid">
 
-        <!-- free-code -->
-        <article class="project-card" id="project-free-code">
-          <div class="project-header">
-            <div class="project-tag">Open Source · AI Tooling</div>
-            <h3 class="project-title">free-code</h3>
-            <p class="project-tagline">A local-first AI coding agent for the terminal, VS Code/Cursor, and macOS.</p>
-          </div>
-          <div class="project-body">
-            <p class="project-desc">The first agent harness to ship with all of these capabilities built in — designed to accelerate every stage of a project: understanding the codebase, writing and testing code, automating workflows, and keeping everything auditable.</p>
-            <ul class="project-highlights">
-              <li><strong>Any model</strong> — Anthropic, Google Vertex, or open-source models like Qwen Coder, Llama, and DeepSeek via LM Studio, Ollama, or any OpenAI-compatible endpoint</li>
-              <li><strong>Vision Mode</strong> — multimodal agent with screen capture, speech-to-text, and text-to-speech: hands-free coding via voice and visual context</li>
-              <li><strong>Code graph</strong> — a multi-language map of your project: the model gets only the code that matters, fewer tokens, faster iterations</li>
-              <li><strong>Agent browser</strong> — navigates the web natively over CDP: browsing, searching, and fetching whatever the task needs</li>
-              <li><strong>Subagents</strong> — parallel agent sessions, each with its own context and tools, working on independent subtasks</li>
-              <li><strong>Local RAG</strong> — a knowledge base on disk that grows with your project and never leaves your machine</li>
-              <li><strong>Skills &amp; MCP</strong> — reusable behaviors, slash commands, and any MCP server plugged in as new tools</li>
-              <li><strong>Webhooks</strong> — external systems (GitHub, CI, Flowise) trigger the agent with inbound events</li>
-              <li><strong>Guardrails</strong> — bash/file firewall, real-time confirmation of risky commands, exportable audit logs</li>
-            </ul>
-            <div class="project-tech">
-              <span class="tech-tag">TypeScript</span>
-              <span class="tech-tag">Node.js</span>
-              <span class="tech-tag">VS Code Extension</span>
-              <span class="tech-tag">LLM</span>
-              <span class="tech-tag">RAG</span>
-              <span class="tech-tag">MCP</span>
+          <!-- free-code -->
+          <article class="project-card" id="project-free-code-es">
+            <div class="project-header">
+              <div class="project-tag">Código abierto · Herramientas de IA</div>
+              <h3 class="project-title">free-code</h3>
+              <p class="project-tagline">Primer agente pensado y hecho para el desarrollo, flexible y de código abierto.</p>
             </div>
-          </div>
-          <div class="project-footer">
-            <a href="https://github.com/EnmaSuamkf/free-code" target="_blank" class="project-link">GitHub →</a>
-            <a href="free-code/index.html" class="project-link project-link-ghost">Docs →</a>
-          </div>
-        </article>
-
-        <!-- agent-webhook-bridge -->
-        <article class="project-card" id="project-webhook">
-          <div class="project-header">
-            <div class="project-tag">Open Source · Automation</div>
-            <h3 class="project-title">agent-webhook-bridge</h3>
-            <p class="project-tagline">An open-source bridge that activates AI agent CLIs with a single HTTP request.</p>
-          </div>
-          <div class="project-body">
-            <p class="project-desc">Agent harness CLIs can call out to the world, but nothing can call them. This broker gives any of them an inbound door: an external event — a GitHub push, a CI failure, a Flowise flow, a plain curl — wakes up the agent, with no polling and no agent running beforehand.</p>
-            <ul class="project-highlights">
-              <li><strong>HTTP-triggered</strong> — one POST spawns the agent headless, as a fresh session or resuming a previous conversation</li>
-              <li><strong>Secure by default</strong> — binds to localhost, so nothing is exposed unless you decide to; and every hook gets its own secret (shared or HMAC-SHA256) — without it, the webhook won't fire</li>
-              <li><strong>Configurable per hook</strong> — <code>--workdir</code>, <code>--prompt-template</code>, <code>--permission-mode</code>, <code>--trigger</code>/<code>--queue</code>, <code>--consumer</code>, <code>--visible</code>: each endpoint defines how its agent runs</li>
-              <li><strong>Event protocol</strong> — events fire the agent the moment they arrive, or persist in SQLite as a queue for later consumption</li>
-              <li><strong>Any agent harness</strong> — agnostic by design: Claude Code today, with the spawn adapter built to plug in Codex, Cursor, and other CLIs</li>
-            </ul>
-            <div class="project-tech">
-              <span class="tech-tag">TypeScript</span>
-              <span class="tech-tag">Node.js</span>
-              <span class="tech-tag">Webhooks</span>
-              <span class="tech-tag">Event-driven</span>
-              <span class="tech-tag">AI Agents</span>
+            <div class="project-body">
+              <p class="project-desc">Es el primer agente en incorporar en forma nativa herramientas que aceleran el desarrollo y dan valor al dev y la empresa en el día a día. Diseñado para acelerar cada etapa de un proyecto: no solo se centra en entender el código base, escribir y probar código, sino en ser flexible para las organizaciones y con la capacidad de que cada empresa pueda modificarlo según sus necesidades.</p>
+              <ul class="project-highlights">
+                <li><strong>Cualquier modelo</strong> — Anthropic, Google Vertex, o modelos de código abierto como Qwen Coder, Llama y DeepSeek a través de LM Studio, Ollama, o cualquier endpoint compatible con OpenAI</li>
+                <li><strong>Vision Mode</strong> — free-code es el primer agente con realidad aumentada, puede entender lo que hablas y también responderte. Puede ayudarte a entender tu entorno, por ejemplo haciendo capturas de pantalla de lo que estás viendo y darte soluciones o consejos, algo que hoy en día ningún agente es capaz de hacer.</li>
+                <li><strong>Code graph</strong> — como ya sabes el contexto es lo más importante. Con code-graph nativo free-code puede generar grafos de código del proyecto y entenderlo mucho mejor, en menos tiempo y gastando menos tokens. Esto lleva al agente al próximo nivel.</li>
+                <li><strong>Agent browser</strong> — navega la web de forma nativa sobre CDP: navegar, buscar y obtener lo que la tarea necesite</li>
+                <li><strong>Subagents</strong> — sesiones de agentes en paralelo, cada una con su propio contexto y herramientas, trabajando en subtareas independientes</li>
+                <li><strong>Local RAG</strong> — hoy en día el agente necesita más información en forma segura y fiable, con su RAG local free-code puede gestionar bases de conocimientos propias permitiendo al agente extender su conocimiento sin necesidad de reentrenar un modelo.</li>
+                <li><strong>Skills &amp; MCP</strong> — comportamientos reutilizables, comandos slash, y cualquier servidor MCP conectado como nuevas herramientas</li>
+                <li><strong>Webhooks</strong> — free-code es el primer agente open-source en poder recibir eventos externos en forma de webhooks, algo impensado hace tiempo atrás.</li>
+              </ul>
+              <div class="video-slider" data-slider>
+                <div class="video-slider-frame">
+                  <div class="video-slider-track">
+                    <div class="video-slide active" data-video="CRS96H4Q0Oc" data-title="Primeros pasos">
+                      <div class="video-embed">
+                        <iframe src="https://www.youtube.com/embed/CRS96H4Q0Oc" title="free-code — Primeros pasos" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      </div>
+                    </div>
+                    <div class="video-slide" data-video="BT9y8ztHMhc" data-title="Agent browser">
+                      <button class="video-slide-thumb" type="button" data-thumb="https://img.youtube.com/vi/BT9y8ztHMhc/hqdefault.jpg" aria-label="Reproducir: Agent browser">
+                        <span class="play-icon" aria-hidden="true">▶</span>
+                      </button>
+                    </div>
+                    <div class="video-slide" data-video="Xlya3JARJFw" data-title="Code graph">
+                      <button class="video-slide-thumb" type="button" data-thumb="https://img.youtube.com/vi/Xlya3JARJFw/hqdefault.jpg" aria-label="Reproducir: Code graph">
+                        <span class="play-icon" aria-hidden="true">▶</span>
+                      </button>
+                    </div>
+                    <div class="video-slide" data-video="kOcO3Yag7Ec" data-title="Local RAG">
+                      <button class="video-slide-thumb" type="button" data-thumb="https://img.youtube.com/vi/kOcO3Yag7Ec/hqdefault.jpg" aria-label="Reproducir: Local RAG">
+                        <span class="play-icon" aria-hidden="true">▶</span>
+                      </button>
+                    </div>
+                    <div class="video-slide" data-video="2RMqHTpmS-s" data-title="Webhooks">
+                      <button class="video-slide-thumb" type="button" data-thumb="https://img.youtube.com/vi/2RMqHTpmS-s/hqdefault.jpg" aria-label="Reproducir: Webhooks">
+                        <span class="play-icon" aria-hidden="true">▶</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="video-slider-bar">
+                  <button class="slider-arrow slider-prev" type="button" aria-label="Video anterior">‹</button>
+                  <div class="slider-info"><span class="slider-title">Primeros pasos</span></div>
+                  <div class="slider-dots">
+                    <button class="slider-dot active" type="button" data-index="0" aria-label="Ir al video 1"></button>
+                    <button class="slider-dot" type="button" data-index="1" aria-label="Ir al video 2"></button>
+                    <button class="slider-dot" type="button" data-index="2" aria-label="Ir al video 3"></button>
+                    <button class="slider-dot" type="button" data-index="3" aria-label="Ir al video 4"></button>
+                    <button class="slider-dot" type="button" data-index="4" aria-label="Ir al video 5"></button>
+                  </div>
+                  <button class="slider-arrow slider-next" type="button" aria-label="Video siguiente">›</button>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">VS Code Extension</span>
+                <span class="tech-tag">LLM</span>
+                <span class="tech-tag">RAG</span>
+                <span class="tech-tag">MCP</span>
+              </div>
             </div>
-          </div>
-          <div class="project-footer">
-            <a href="https://github.com/EnmaSuamkf/agent-webhook-bridge" target="_blank" class="project-link">GitHub →</a>
-            <a href="agent-webhook-bridge/index.html" class="project-link project-link-ghost">Docs →</a>
-          </div>
-        </article>
-
-        <!-- agent-mesh -->
-        <article class="project-card" id="project-agent-mesh">
-          <div class="project-header">
-            <div class="project-tag">Open Source · First AI Botnet</div>
-            <h3 class="project-title">agent-mesh</h3>
-            <p class="project-tagline">A hub where operators publish AI agents and anyone can send them tasks from a simple web UI.</p>
-          </div>
-          <div class="project-body">
-            <p class="project-desc">The first working piece of the AgentMesh vision: operators publish AI agents running on their own machines, and anyone can send them tasks from a web UI. The hub never runs agents itself — it routes jobs and collects results, turning idle agent capacity into a shareable service.</p>
-            <ul class="project-highlights">
-              <li><strong>Complete task loop</strong> — submit → run → result, with agents spawned headless in sandboxed workdirs</li>
-              <li><strong>Session chaining</strong> — jobs can resume previous Claude sessions, so conversations continue across tasks</li>
-              <li><strong>Remote access</strong> — shareable through a cloudflared tunnel, with per-user API keys that expire, rate-limit, and cap usage</li>
-              <li><strong>Zero dependencies</strong> — a single-process Node hub: no build step, nothing to install</li>
-            </ul>
-            <div class="project-tech">
-              <span class="tech-tag">TypeScript</span>
-              <span class="tech-tag">Node.js</span>
-              <span class="tech-tag">SQLite</span>
-              <span class="tech-tag">AI Agents</span>
-              <span class="tech-tag">Claude Code</span>
+            <div class="project-footer">
+              <a href="https://github.com/EnmaSuamkf/free-code" target="_blank" class="project-link">GitHub →</a>
+              <a href="free-code/index.html" class="project-link project-link-ghost">Documentación →</a>
             </div>
-          </div>
-          <div class="project-footer">
-            <a href="https://github.com/EnmaSuamkf/agent-mesh" target="_blank" class="project-link">GitHub →</a>
-            <a href="agent-mesh/index.html" class="project-link project-link-ghost">Docs →</a>
-          </div>
-        </article>
+          </article>
 
-        <!-- mcp-flowise -->
-        <article class="project-card" id="project-mcp-flowise">
-          <div class="project-header">
-            <div class="project-tag">Open Source · MCP / AI Tooling</div>
-            <h3 class="project-title">mcp-flowise</h3>
-            <p class="project-tagline">An MCP server that connects AI agents directly to Flowise chatflows and pipelines.</p>
-          </div>
-          <div class="project-body">
-            <p class="project-desc">Turns your Flowise chatflows into tools any MCP-compatible agent can call: design a pipeline in Flowise's no-code UI and it immediately becomes an agent capability — no glue code in between.</p>
-            <ul class="project-highlights">
-              <li><strong>Auto-discovery</strong> — queries the Flowise API and registers each chatflow as a named MCP tool</li>
-              <li><strong>Typed inputs</strong> — every tool gets its own input schema, so agents call flows like native actions</li>
-              <li><strong>Drop-in</strong> — a standard MCP server; works with any agent framework that speaks MCP</li>
-            </ul>
-            <div class="project-tech">
-              <span class="tech-tag">TypeScript</span>
-              <span class="tech-tag">MCP</span>
-              <span class="tech-tag">Flowise</span>
-              <span class="tech-tag">LLM Pipelines</span>
-              <span class="tech-tag">AI Agents</span>
+          <!-- agent-webhook-bridge -->
+          <article class="project-card" id="project-webhook-es">
+            <div class="project-header">
+              <div class="project-tag">Código abierto · Automatización</div>
+              <h3 class="project-title">agent-webhook-bridge</h3>
+              <p class="project-tagline">Hasta hoy en día Claude podía fácilmente comunicarse con el mundo exterior a través de MCPs o haciendo llamadas curl. Pero no podía recibir eventos desde afuera; esto ha cambiado con agent-webhook-bridge (AWB).</p>
             </div>
-          </div>
-          <div class="project-footer">
-            <a href="https://github.com/EnmaSuamkf/mcp-flowise" target="_blank" class="project-link">GitHub →</a>
-            <a href="mcp-flowise/index.html" class="project-link project-link-ghost">Docs →</a>
-          </div>
-        </article>
+            <div class="project-body">
+              <p class="project-desc">AWB le da a Claude (estoy trabajando para agregar Cursor, Codex y Copilot) una puerta de entrada: un evento externo — un push de GitHub, un fallo de CI, un flujo de Flowise, un curl simple — despierta al agente, sin polling y sin necesidad de que el agente esté corriendo de antemano. Todo de forma segura: nadie puede dispararlo sin tu secreto.</p>
+              <ul class="project-highlights">
+                <li><strong>Activado por HTTP</strong> — un solo POST lanza al agente en modo headless, como una sesión nueva o retomando una conversación anterior</li>
+                <li><strong>Seguro por defecto</strong> — nada queda expuesto a menos que tú lo decidas; cada hook tiene su propio secreto, sin él el webhook no se dispara</li>
+                <li><strong>Configurable por hook</strong> — <code>--workdir</code>, <code>--prompt-template</code>, <code>--permission-mode</code>, <code>--trigger</code>/<code>--queue</code>, <code>--consumer</code>, <code>--visible</code>: cada endpoint define cómo se ejecuta su agente</li>
+                <li><strong>Protocolo de eventos</strong> — los eventos disparan al agente en el momento en que llegan, o se persisten en SQLite como una cola para consumo posterior</li>
+              </ul>
+              <div class="video-slider" data-slider>
+                <div class="video-slider-frame">
+                  <div class="video-slider-track">
+                    <div class="video-slide active" data-video="pl8agNzsxRI" data-title="Demo">
+                      <div class="video-embed">
+                        <iframe src="https://www.youtube.com/embed/pl8agNzsxRI" title="agent-webhook-bridge — demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="video-slider-bar">
+                  <button class="slider-arrow slider-prev" type="button" aria-label="Video anterior">‹</button>
+                  <div class="slider-info"><span class="slider-title">Demo</span></div>
+                  <div class="slider-dots">
+                    <button class="slider-dot active" type="button" data-index="0" aria-label="Ir al video 1"></button>
+                  </div>
+                  <button class="slider-arrow slider-next" type="button" aria-label="Video siguiente">›</button>
+                </div>
+              </div>
+              <div class="project-tech">
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">Webhooks</span>
+                <span class="tech-tag">Event-driven</span>
+                <span class="tech-tag">AI Agents</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <a href="https://github.com/EnmaSuamkf/agent-webhook-bridge" target="_blank" class="project-link">GitHub →</a>
+              <a href="agent-webhook-bridge/index.html" class="project-link project-link-ghost">Documentación →</a>
+            </div>
+          </article>
 
+          <!-- agent-mesh -->
+          <article class="project-card" id="project-agent-mesh-es">
+            <div class="project-header">
+              <div class="project-tag">Código abierto · Primera Botnet de IA</div>
+              <h3 class="project-title">agent-mesh</h3>
+              <p class="project-tagline">Un hub donde los operadores publican agentes de IA y cualquiera puede enviarles tareas desde una interfaz web simple.</p>
+            </div>
+            <div class="project-body">
+              <p class="project-desc">La primera pieza funcional de la visión de AgentMesh: los operadores publican agentes de IA que corren en sus propias máquinas, y cualquiera puede enviarles tareas desde una interfaz web. El hub nunca ejecuta agentes por sí mismo — enruta trabajos y recopila resultados, convirtiendo la capacidad ociosa de agentes en un servicio compartible.</p>
+              <ul class="project-highlights">
+                <li><strong>Ciclo de tareas completo</strong> — enviar → ejecutar → resultado, con agentes lanzados en modo headless en workdirs aislados</li>
+                <li><strong>Encadenamiento de sesiones</strong> — los trabajos pueden retomar sesiones anteriores de Claude, así las conversaciones continúan a través de las tareas</li>
+                <li><strong>Acceso remoto</strong> — compartible mediante un túnel de cloudflared, con claves de API por usuario que expiran, limitan la tasa y acotan el uso</li>
+                <li><strong>Cero dependencias</strong> — un hub de Node de un solo proceso: sin paso de compilación, nada que instalar</li>
+              </ul>
+              <div class="project-tech">
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">SQLite</span>
+                <span class="tech-tag">AI Agents</span>
+                <span class="tech-tag">Claude Code</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <a href="https://github.com/EnmaSuamkf/agent-mesh" target="_blank" class="project-link">GitHub →</a>
+              <a href="agent-mesh/index.html" class="project-link project-link-ghost">Documentación →</a>
+            </div>
+          </article>
+
+          <!-- mcp-flowise -->
+          <article class="project-card" id="project-mcp-flowise-es">
+            <div class="project-header">
+              <div class="project-tag">Código abierto · MCP / Herramientas de IA</div>
+              <h3 class="project-title">mcp-flowise</h3>
+              <p class="project-tagline">Un servidor MCP que conecta agentes de IA directamente con chatflows y pipelines de Flowise.</p>
+            </div>
+            <div class="project-body">
+              <p class="project-desc">Convierte tus chatflows de Flowise en herramientas que cualquier agente compatible con MCP puede invocar: diseña un pipeline en la interfaz no-code de Flowise y se convierte de inmediato en una capacidad del agente — sin código de conexión de por medio.</p>
+              <ul class="project-highlights">
+                <li><strong>Autodescubrimiento</strong> — consulta la API de Flowise y registra cada chatflow como una herramienta MCP con nombre</li>
+                <li><strong>Entradas tipadas</strong> — cada herramienta obtiene su propio esquema de entrada, así los agentes invocan los flujos como acciones nativas</li>
+                <li><strong>Listo para usar</strong> — un servidor MCP estándar; funciona con cualquier framework de agentes que hable MCP</li>
+              </ul>
+              <div class="project-tech">
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">MCP</span>
+                <span class="tech-tag">Flowise</span>
+                <span class="tech-tag">LLM Pipelines</span>
+                <span class="tech-tag">AI Agents</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <a href="https://github.com/EnmaSuamkf/mcp-flowise" target="_blank" class="project-link">GitHub →</a>
+              <a href="mcp-flowise/index.html" class="project-link project-link-ghost">Documentación →</a>
+            </div>
+          </article>
+
+          <!-- target -->
+          <article class="project-card" id="project-target-es">
+            <div class="project-header">
+              <div class="project-tag">Código abierto · Orquestación de IA</div>
+              <h3 class="project-title">target</h3>
+              <p class="project-tagline">Un hub local que ejecuta flujos de trabajo de Claude Code de varios pasos como una única conversación continua y autoverificada.</p>
+            </div>
+            <div class="project-body">
+              <p class="project-desc">En lugar de un registro de trabajos sueltos y paralelos, target crea un agente dedicado por flujo de trabajo: sus pasos se ejecutan estrictamente en orden, retomando siempre la misma sesión de Claude, de modo que todo el flujo de trabajo se lee como una única conversación que avanza paso a paso — con cada paso capaz de evaluar su propio resultado antes de continuar.</p>
+              <ul class="project-highlights">
+                <li><strong>Sesiones encadenadas</strong> — cada paso de un flujo de trabajo retoma la sesión anterior de Claude, manteniendo el contexto completo de principio a fin</li>
+                <li><strong>Delegación en subagentes</strong> — cada paso se despacha a un subagente de la herramienta Task, así las llamadas a herramientas intermedias nunca inflan la sesión retomada</li>
+                <li><strong>Reintentos guiados por un juez</strong> — los pasos con un criterio de aceptación reciben una pasada de autoevaluación, y se reintentan automáticamente con retroalimentación hasta que pasan o se agotan los reintentos</li>
+                <li><strong>Reejecuciones bajo demanda</strong> — cualquier paso puede volver a ejecutarse de forma aislada en una sesión nueva, y el estado del flujo de trabajo se reconcilia después a partir de sus pasos</li>
+                <li><strong>Selección de ejecución por paso</strong> — Start/Resume/Restart aceptan cada uno un subconjunto de ids de pasos, expuesto en la interfaz como casillas de verificación</li>
+              </ul>
+              <div class="project-tech">
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">node:sqlite</span>
+                <span class="tech-tag">Claude Code</span>
+                <span class="tech-tag">AI Agents</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <a href="https://github.com/EnmaSuamkf/target" target="_blank" class="project-link">GitHub →</a>
+              <a href="target/index.html" class="project-link project-link-ghost">Documentación →</a>
+            </div>
+          </article>
+
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ABOUT -->
   <section class="section section-alt" id="about">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-eyebrow">// who I am</span>
-        <h2 class="section-title">About Me</h2>
-      </div>
-      <div class="about-grid">
-        <div class="about-text">
-          <p>I'm a software developer focused on AI-powered tooling and developer infrastructure. I believe the best tools are the ones that get out of your way — fast, local, composable, and open.</p>
-          <p>My work sits at the intersection of large language models, developer experience, and automation. I build things I actually use every day, which means I care deeply about reliability, performance, and privacy.</p>
-          <p>When I'm not shipping code, I'm exploring new AI models, contributing to open source, and thinking about how software development itself is changing.</p>
-          <div class="about-links">
-            <a href="assets/Pablo-Castaneda-CV.pdf" download class="btn btn-primary">Download CV</a>
-            <a href="https://github.com/EnmaSuamkf" target="_blank" class="btn btn-ghost">GitHub</a>
-            <a href="https://www.linkedin.com/in/pabloacastaneda" target="_blank" class="btn btn-ghost">LinkedIn</a>
+    <div lang="en">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">// who I am</span>
+          <h2 class="section-title">About Me</h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>I'm a fullstack developer, a lover of frontend and backend technologies like React, Next, microfrontends, microservices, Node, Express, Java, .NET, Python, and Docker. I'm currently focused on AI-powered tools designed for developers. I believe the best tools are the ones that are easy to use, but also easy to adopt and that bring value.</p>
+            <p>My work centers on combining large language models, developer experience, and automation. I build things I actually use every day, which means I care deeply about reliability, performance, and security.</p>
+            <p>I look to positively impact KPIs and OKRs. I firmly believe that simply adopting tools isn't enough — they have to generate a positive impact on the metrics that matter to the business, like Customer Lead Time and Local Lead Time.</p>
+            <p>When I'm not shipping code, I'm exploring new AI models, contributing to open source, and thinking about how software development itself is changing.</p>
+            <div class="about-highlights">
+              <div class="highlights-label">// highlights</div>
+              <ul class="highlights-list">
+                <li>Double-digit reductions in CLT and LLT</li>
+                <li>Creator of skills, MCPs, and agents</li>
+                <li>Role model within the company</li>
+                <li>Early AI adopter</li>
+                <li>Expert in Claude, Cursor, Codex, and Copilot</li>
+                <li>Creator of free-code</li>
+                <li>Metric-first approach</li>
+              </ul>
+            </div>
+            <div class="about-links">
+              <a href="assets/Pablo-Castaneda-CV.pdf" download class="btn btn-primary">Download CV</a>
+              <a href="https://github.com/EnmaSuamkf" target="_blank" class="btn btn-ghost">GitHub</a>
+              <a href="https://www.linkedin.com/in/pabloacastaneda" target="_blank" class="btn btn-ghost">LinkedIn</a>
+            </div>
+          </div>
+          <div class="about-skills">
+            <div class="skills-group">
+              <h4 class="skills-label">Frontend</h4>
+              <div class="skills-list">
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Next.js</span>
+                <span class="tech-tag">Microfrontends</span>
+                <span class="tech-tag">Context API</span>
+                <span class="tech-tag">HTML/CSS</span>
+              </div>
+            </div>
+            <div class="skills-group">
+              <h4 class="skills-label">Backend & data</h4>
+              <div class="skills-list">
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">MongoDB</span>
+                <span class="tech-tag">GraphQL</span>
+                <span class="tech-tag">RESTful APIs</span>
+              </div>
+            </div>
+            <div class="skills-group">
+              <h4 class="skills-label">AI</h4>
+              <div class="skills-list">
+                <span class="tech-tag">Custom AI Agents</span>
+                <span class="tech-tag">MCP</span>
+                <span class="tech-tag">Token Optimization</span>
+                <span class="tech-tag">Prompt Architecture</span>
+                <span class="tech-tag">Agent Orchestration</span>
+                <span class="tech-tag">Looping</span>
+                <span class="tech-tag">Flowise</span>
+              </div>
+            </div>
+            <div class="skills-group">
+              <h4 class="skills-label">AI-assisted tools</h4>
+              <div class="skills-list">
+                <span class="tech-tag">Cursor</span>
+                <span class="tech-tag">Claude Code</span>
+                <span class="tech-tag">GitHub Copilot CLI</span>
+              </div>
+            </div>
+            <div class="skills-group">
+              <h4 class="skills-label">Testing & QA</h4>
+              <div class="skills-list">
+                <span class="tech-tag">Cypress</span>
+                <span class="tech-tag">React Testing Library</span>
+                <span class="tech-tag">Unit/Integration/E2E</span>
+                <span class="tech-tag">A/B Testing</span>
+              </div>
+            </div>
+            <div class="skills-group">
+              <h4 class="skills-label">Methodologies</h4>
+              <div class="skills-list">
+                <span class="tech-tag">Agile</span>
+                <span class="tech-tag">Code Reviews</span>
+                <span class="tech-tag">CI/CD</span>
+                <span class="tech-tag">Mentorship</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="about-skills">
-          <div class="skills-group">
-            <h4 class="skills-label">Frontend</h4>
-            <div class="skills-list">
-              <span class="tech-tag">JavaScript</span>
-              <span class="tech-tag">React</span>
-              <span class="tech-tag">Next.js</span>
-              <span class="tech-tag">Microfrontends</span>
-              <span class="tech-tag">Context API</span>
-              <span class="tech-tag">HTML/CSS</span>
+      </div>
+    </div>
+    <div lang="es" hidden>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">// quién soy</span>
+          <h2 class="section-title">Sobre mí</h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>Soy un desarrollador fullstack, amante de tecnologías de frontend y backend como React, Next, microfrontend, microservicios, Node, Express, Java, .NET, Python y Docker. Actualmente estoy enfocado en herramientas impulsadas por IA pensadas para desarrolladores. Creo que las mejores herramientas son aquellas que son fáciles de usar, pero también de adoptar y que aporten valor.</p>
+            <p>Mi trabajo se centra en combinar modelos de lenguaje de gran escala, la experiencia de desarrollador y la automatización. Construyo cosas que realmente uso todos los días, lo que significa que me importa profundamente la fiabilidad, el rendimiento y la seguridad.</p>
+            <p>Busco impactar positivamente los KPI y OKR. Soy un firme creyente de que simplemente adoptar herramientas no es suficiente; tienen que generar un impacto positivo en las métricas que importan al negocio, como el Customer Lead Time y el Local Lead Time.</p>
+            <p>Cuando no estoy publicando código, estoy explorando nuevos modelos de IA, contribuyendo a proyectos de código abierto, y pensando en cómo está cambiando el propio desarrollo de software.</p>
+            <div class="about-highlights">
+              <div class="highlights-label">// highlights</div>
+              <ul class="highlights-list">
+                <li>Reducciones de dos dígitos en CLT y LLT</li>
+                <li>Creador de skills, MCPs y agentes</li>
+                <li>Role model dentro de la empresa</li>
+                <li>Early AI adopter</li>
+                <li>Experto en Claude, Cursor, Codex y Copilot</li>
+                <li>Creador de free-code</li>
+                <li>Enfoque metric-first</li>
+              </ul>
+            </div>
+            <div class="about-links">
+              <a href="assets/Pablo-Castaneda-CV.pdf" download class="btn btn-primary">Descargar CV</a>
+              <a href="https://github.com/EnmaSuamkf" target="_blank" class="btn btn-ghost">GitHub</a>
+              <a href="https://www.linkedin.com/in/pabloacastaneda" target="_blank" class="btn btn-ghost">LinkedIn</a>
             </div>
           </div>
-          <div class="skills-group">
-            <h4 class="skills-label">Backend & data</h4>
-            <div class="skills-list">
-              <span class="tech-tag">Node.js</span>
-              <span class="tech-tag">MongoDB</span>
-              <span class="tech-tag">GraphQL</span>
-              <span class="tech-tag">RESTful APIs</span>
+          <div class="about-skills">
+            <div class="skills-group">
+              <h4 class="skills-label">Frontend</h4>
+              <div class="skills-list">
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Next.js</span>
+                <span class="tech-tag">Microfrontends</span>
+                <span class="tech-tag">Context API</span>
+                <span class="tech-tag">HTML/CSS</span>
+              </div>
             </div>
-          </div>
-          <div class="skills-group">
-            <h4 class="skills-label">AI</h4>
-            <div class="skills-list">
-              <span class="tech-tag">Custom AI Agents</span>
-              <span class="tech-tag">MCP</span>
-              <span class="tech-tag">Token Optimization</span>
-              <span class="tech-tag">Prompt Architecture</span>
-              <span class="tech-tag">Agent Orchestration</span>
-              <span class="tech-tag">Looping</span>
-              <span class="tech-tag">Flowise</span>
+            <div class="skills-group">
+              <h4 class="skills-label">Backend y datos</h4>
+              <div class="skills-list">
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">MongoDB</span>
+                <span class="tech-tag">GraphQL</span>
+                <span class="tech-tag">RESTful APIs</span>
+              </div>
             </div>
-          </div>
-          <div class="skills-group">
-            <h4 class="skills-label">AI-assisted tools</h4>
-            <div class="skills-list">
-              <span class="tech-tag">Cursor</span>
-              <span class="tech-tag">Claude Code</span>
-              <span class="tech-tag">GitHub Copilot CLI</span>
+            <div class="skills-group">
+              <h4 class="skills-label">IA</h4>
+              <div class="skills-list">
+                <span class="tech-tag">Custom AI Agents</span>
+                <span class="tech-tag">MCP</span>
+                <span class="tech-tag">Token Optimization</span>
+                <span class="tech-tag">Prompt Architecture</span>
+                <span class="tech-tag">Agent Orchestration</span>
+                <span class="tech-tag">Looping</span>
+                <span class="tech-tag">Flowise</span>
+              </div>
             </div>
-          </div>
-          <div class="skills-group">
-            <h4 class="skills-label">Testing & QA</h4>
-            <div class="skills-list">
-              <span class="tech-tag">Cypress</span>
-              <span class="tech-tag">React Testing Library</span>
-              <span class="tech-tag">Unit/Integration/E2E</span>
-              <span class="tech-tag">A/B Testing</span>
+            <div class="skills-group">
+              <h4 class="skills-label">Herramientas asistidas por IA</h4>
+              <div class="skills-list">
+                <span class="tech-tag">Cursor</span>
+                <span class="tech-tag">Claude Code</span>
+                <span class="tech-tag">GitHub Copilot CLI</span>
+              </div>
             </div>
-          </div>
-          <div class="skills-group">
-            <h4 class="skills-label">Methodologies</h4>
-            <div class="skills-list">
-              <span class="tech-tag">Agile</span>
-              <span class="tech-tag">Code Reviews</span>
-              <span class="tech-tag">CI/CD</span>
-              <span class="tech-tag">Mentorship</span>
+            <div class="skills-group">
+              <h4 class="skills-label">Pruebas y QA</h4>
+              <div class="skills-list">
+                <span class="tech-tag">Cypress</span>
+                <span class="tech-tag">React Testing Library</span>
+                <span class="tech-tag">Unit/Integration/E2E</span>
+                <span class="tech-tag">A/B Testing</span>
+              </div>
+            </div>
+            <div class="skills-group">
+              <h4 class="skills-label">Metodologías</h4>
+              <div class="skills-list">
+                <span class="tech-tag">Agile</span>
+                <span class="tech-tag">Code Reviews</span>
+                <span class="tech-tag">CI/CD</span>
+                <span class="tech-tag">Mentorship</span>
+              </div>
             </div>
           </div>
         </div>
@@ -263,24 +777,49 @@
 
   <!-- WIP -->
   <section class="section" id="wip">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-eyebrow">// in progress</span>
-        <h2 class="section-title">Work in Progress</h2>
-        <p class="section-subtitle">Things I'm currently building or exploring. No promises, no ETAs — just honest signal about where my head is at.</p>
-      </div>
-      <div class="wip-grid">
-        <div class="wip-card">
-          <div class="wip-status">Phase 2 in progress</div>
-          <h3 class="wip-title">AgentMesh</h3>
-          <p class="wip-desc">A decentralized network where anyone can expose idle AI agent capacity, running sandboxed in local Docker containers, and earn points redeemable for USDT/BTC for the jobs the network routes to them. Phase 1 — the single-operator hub with a complete task loop — is built and open source (see <strong>agent-mesh</strong> under Projects), and phase 2 has started: the hub is shareable through a cloudflared tunnel with per-user API keys and rate limiting; remote nodes and the ledger are next.</p>
-          <a href="agentmesh/index.html" class="project-link">Read the paper →</a>
-          <a href="agent-mesh/index.html" class="project-link">Docs →</a>
+    <div lang="en">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">// in progress</span>
+          <h2 class="section-title">Work in Progress</h2>
+          <p class="section-subtitle">Things I'm currently building or exploring. No promises, no ETAs — just honest signal about where my head is at.</p>
         </div>
-        <div class="wip-card wip-card-placeholder">
-          <div class="wip-status wip-status-idea">Idea</div>
-          <h3 class="wip-title">Coming soon</h3>
-          <p class="wip-desc">More experiments in AI tooling and developer automation.</p>
+        <div class="wip-grid">
+          <div class="wip-card">
+            <div class="wip-status">Phase 2 in progress</div>
+            <h3 class="wip-title">AgentMesh</h3>
+            <p class="wip-desc">A decentralized network where anyone can expose idle AI agent capacity, running sandboxed in local Docker containers, and earn points redeemable for USDT/BTC for the jobs the network routes to them. Phase 1 — the single-operator hub with a complete task loop — is built and open source (see <strong>agent-mesh</strong> under Projects), and phase 2 has started: the hub is shareable through a cloudflared tunnel with per-user API keys and rate limiting; remote nodes and the ledger are next.</p>
+            <a href="agentmesh/index.html" class="project-link">Read the paper →</a>
+            <a href="agent-mesh/index.html" class="project-link">Docs →</a>
+          </div>
+          <div class="wip-card wip-card-placeholder">
+            <div class="wip-status wip-status-idea">Idea</div>
+            <h3 class="wip-title">Coming soon</h3>
+            <p class="wip-desc">More experiments in AI tooling and developer automation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div lang="es" hidden>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">// en progreso</span>
+          <h2 class="section-title">Trabajo en progreso</h2>
+          <p class="section-subtitle">Cosas que estoy construyendo o explorando actualmente. Sin promesas, sin fechas estimadas — solo una señal honesta de en qué estoy pensando.</p>
+        </div>
+        <div class="wip-grid">
+          <div class="wip-card">
+            <div class="wip-status">Fase 2 en progreso</div>
+            <h3 class="wip-title">AgentMesh</h3>
+            <p class="wip-desc">Una red descentralizada donde cualquiera puede exponer capacidad ociosa de agentes de IA, ejecutándose de forma aislada en contenedores Docker locales, y ganar puntos canjeables por USDT/BTC por los trabajos que la red les enrute. La fase 1 — el hub de un solo operador con un ciclo de tareas completo — está construida y es de código abierto (ver <strong>agent-mesh</strong> en Proyectos), y la fase 2 ya comenzó: el hub es compartible mediante un túnel de cloudflared con claves de API por usuario y limitación de tasa; los nodos remotos y el ledger de puntos son lo siguiente.</p>
+            <a href="agentmesh/index.html" class="project-link">Leer el documento →</a>
+            <a href="agent-mesh/index.html" class="project-link">Documentación →</a>
+          </div>
+          <div class="wip-card wip-card-placeholder">
+            <div class="wip-status wip-status-idea">Idea</div>
+            <h3 class="wip-title">Próximamente</h3>
+            <p class="wip-desc">Más experimentos en herramientas de IA y automatización para desarrolladores.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -295,6 +834,7 @@
     </div>
   </footer>
 
+  <script src="assets/i18n.js" defer></script>
   <script>
     // Active nav link on scroll
     const sections = document.querySelectorAll('section[id]');
@@ -312,14 +852,80 @@
 
     sections.forEach(s => observer.observe(s));
 
-    // Mobile menu
+    // Mobile menu — toggle every nav-links (EN + ES copies)
     function toggleMenu() {
-      document.querySelector('.nav-links').classList.toggle('open');
+      document.querySelectorAll('.nav-links').forEach(n => n.classList.toggle('open'));
     }
 
     // Sticky nav shadow
     window.addEventListener('scroll', () => {
       document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // Video slider (lazy-load: only the active slide loads its iframe)
+    document.querySelectorAll('[data-slider]').forEach(slider => {
+      const track = slider.querySelector('.video-slider-track');
+      const slides = Array.from(slider.querySelectorAll('.video-slide'));
+      const dots = Array.from(slider.querySelectorAll('.slider-dot'));
+      const prev = slider.querySelector('.slider-prev');
+      const next = slider.querySelector('.slider-next');
+      const titleEl = slider.querySelector('.slider-title');
+      let index = 0;
+
+      function loadIframe(slide) {
+        if (slide.querySelector('iframe')) return;
+        const id = slide.dataset.video;
+        const title = slide.dataset.title;
+        const thumb = slide.querySelector('.video-slide-thumb');
+        if (!id || !thumb) return;
+        const embed = document.createElement('div');
+        embed.className = 'video-embed';
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0';
+        iframe.title = 'free-code — ' + title;
+        iframe.setAttribute('loading', 'lazy');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        iframe.allowFullscreen = true;
+        embed.appendChild(iframe);
+        thumb.replaceWith(embed);
+      }
+
+      function render() {
+        const frameWidth = slider.querySelector('.video-slider-frame').clientWidth;
+        track.style.transform = 'translateX(-' + (index * frameWidth) + 'px)';
+        slides.forEach((s, i) => s.classList.toggle('active', i === index));
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        if (titleEl) titleEl.textContent = slides[index].dataset.title;
+      }
+
+      function goTo(i, autoplay) {
+        index = (i + slides.length) % slides.length;
+        render();
+        if (autoplay) loadIframe(slides[index]);
+      }
+
+      prev.addEventListener('click', () => goTo(index - 1, false));
+      next.addEventListener('click', () => goTo(index + 1, false));
+      dots.forEach(d => d.addEventListener('click', () => goTo(parseInt(d.dataset.index, 10), false)));
+      slides.forEach((s, i) => {
+        const thumb = s.querySelector('.video-slide-thumb');
+        if (thumb) thumb.addEventListener('click', () => goTo(i, true));
+      });
+
+      // Touch swipe
+      let startX = 0, deltaX = 0, swiping = false;
+      const frame = slider.querySelector('.video-slider-frame');
+      frame.addEventListener('touchstart', e => { startX = e.touches[0].clientX; deltaX = 0; swiping = true; }, { passive: true });
+      frame.addEventListener('touchmove', e => { if (swiping) deltaX = e.touches[0].clientX - startX; }, { passive: true });
+      frame.addEventListener('touchend', () => {
+        if (!swiping) return;
+        swiping = false;
+        if (Math.abs(deltaX) > 45) goTo(deltaX < 0 ? index + 1 : index - 1, false);
+      });
+
+      // Recompute on language change (a previously hidden slider becomes visible)
+      window.addEventListener('langchange', render);
+      window.addEventListener('resize', render);
     });
   </script>
 </body>

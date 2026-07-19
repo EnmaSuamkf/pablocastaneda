@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-title-en="Inbound Webhooks — free-code" data-title-es="Webhooks entrantes — free-code">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,8 +23,10 @@
     <link rel="stylesheet" href="../assets/project-nav.css" />
 </head>
   <body>
-  <div id="portfolio-back-nav"><a class="back-link" href="../index.html">← Portfolio</a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span></div>
+  <div id="portfolio-back-nav"><a class="back-link" href="../index.html"><span lang="en">← Portfolio</span><span lang="es" hidden>← Portafolio</span></a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span><div id="lang-toggle"></div></div>
     <div class="doc-root">
+  <div lang="en">
+
       <header class="site-shell-header" role="banner">
         <div class="site-shell-inner">
           <a class="site-brand" href="index.html">
@@ -458,7 +460,451 @@ FREECODE_WEBHOOK_PORT=8790 free-code</code></pre>
         </p>
         <p class="footer-credit">Developed by Pablo Castañeda</p>
       </div>
-    </div>
+    
+  </div>
+  <div lang="es" hidden>
+
+      <header class="site-shell-header" role="banner">
+        <div class="site-shell-inner">
+          <a class="site-brand" href="index.html">
+            <span class="site-brand-angles" aria-hidden="true">&lt;</span>
+            <span>free-code</span>
+            <span class="site-brand-angles" aria-hidden="true">&gt;</span>
+          </a>
+          <div class="site-header-actions">
+            <button type="button" class="theme-toggle" id="doc-theme-toggle" aria-label="Tema de color">
+              <span class="theme-toggle-label" id="doc-theme-label">Sistema</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="container">
+        <header class="hero">
+          <h1 class="brand">
+            <span class="angle" aria-hidden="true">&lt;</span>
+            <span class="name">free-code</span>
+            <span class="angle" aria-hidden="true">&gt;</span>
+          </h1>
+          <p class="tagline">
+            <span class="prompt" aria-hidden="true">// </span>
+            Webhooks entrantes — deja que sistemas externos (Flowise, CI, GitHub) activen a tu agente.
+          </p>
+
+          <nav class="nav" aria-label="Primary">
+            <a href="index.html">[inicio]</a>
+            <a href="installation.html">[instalación]</a>
+            <a href="webhooks.html" aria-current="page">[webhooks]</a>
+            <a href="rag.html">[rag]</a>
+            <a href="code-graph.html">[grafo de código]</a>
+            <a href="mcp.html">[mcp]</a>
+            <a href="vision-mode.html">[modo visión]</a>
+            <a href="capabilities.html">[capacidades]</a>
+            <a href="commands.html">[comandos]</a>
+            <a href="models.html">[modelos]</a>
+          </nav>
+        </header>
+
+        <!-- What it is -->
+        <section class="card" aria-labelledby="wh-what">
+          <div class="card-header">
+            <h2 id="wh-what">¿Qué son los webhooks entrantes?</h2>
+            <p>free-code abre un pequeño endpoint HTTP local para que sistemas externos puedan enviar eventos a una sesión de agente en ejecución.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              MCP permite que free-code <em>llame hacia afuera</em> a herramientas externas. Los
+              webhooks entrantes son la dirección opuesta: un sistema externo — un flujo de
+              <strong>Flowise</strong>, un job de CI, un evento de
+              GitHub — hace un <code>POST</code> HTTP a free-code, y ese evento o bien
+              llega a una cola que el agente puede leer, o <strong>despierta al agente</strong> para que
+              actúe sobre él de inmediato.
+            </p>
+            <div class="callout info">
+              <strong>Por qué esto es una extensión y no un servidor MCP</strong><br />
+              Un servidor MCP no puede iniciar un turno del agente — solo responde cuando se lo llama.
+              Despertar al agente a partir de un evento entrante requiere la API de extensiones
+              (<code>sendUserMessage()</code>), por eso esto se distribuye como la extensión
+              integrada <code>webhook-receiver</code>, cargada automáticamente en cada sesión.
+            </div>
+          </div>
+        </section>
+
+        <!-- Video -->
+        <section class="card" aria-labelledby="wh-video">
+          <div class="card-header">
+            <h2 id="wh-video">Mira: Webhooks entrantes en free-code</h2>
+            <p>Observa cómo un sistema externo activa una sesión de agente en ejecución.</p>
+          </div>
+          <div class="card-body">
+            <div class="video-embed">
+              <iframe
+                src="https://www.youtube.com/embed/2RMqHTpmS-s"
+                title="free-code — Webhooks"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </section>
+
+        <!-- How it works -->
+        <section class="card" aria-labelledby="wh-how">
+          <div class="card-header">
+            <h2 id="wh-how">Cómo funciona</h2>
+            <p>Registra un hook con nombre, entrega su URL al sistema externo, recibe sus POSTs.</p>
+          </div>
+          <div class="card-body">
+            <ol>
+              <li>Registras un <strong>hook con nombre</strong> (por ejemplo <code>flowise</code>) desde dentro de free-code.</li>
+              <li>free-code lo expone en <code>POST http://127.0.0.1:&lt;port&gt;/hook/&lt;name&gt;</code> y devuelve un secreto.</li>
+              <li>Configuras el sistema externo (Flowise, GitHub, …) para hacer POST a esa URL con el secreto.</li>
+              <li>Cuando llega una solicitud y pasa la autenticación, el evento se entrega al agente.</li>
+            </ol>
+            <p>Cada hook tiene un <strong>modo de entrega</strong>:</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Modo</th><th>Comportamiento</th><th>Ideal para</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><code>queue</code></td>
+                    <td>El evento se almacena en un búfer. El agente lo consume con <code>poll_webhook_events</code> o hace long-polling con <code>wait_for_webhook_event</code>.</td>
+                    <td>Consumo predecible y bajo demanda; fuentes ruidosas.</td>
+                  </tr>
+                  <tr>
+                    <td><code>trigger</code></td>
+                    <td>El evento se inyecta como un mensaje que inicia un turno de inmediato (se encola como seguimiento si el agente está en medio de una respuesta).</td>
+                    <td>Eventos que requieren reacción inmediata: falló un build, terminó un flujo.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="callout tip">
+              <strong>El endpoint solo existe mientras free-code se ejecuta</strong><br />
+              Los hooks registrados persisten en un archivo de configuración, pero el listener solo
+              está activo mientras una sesión está abierta. Los eventos en búfer se guardan en
+              memoria, no en disco — para un receptor siempre activo necesitarías anteponerle un
+              proceso broker dedicado.
+            </div>
+          </div>
+        </section>
+
+        <!-- Flow diagrams -->
+        <section class="card" aria-labelledby="wh-diagrams">
+          <div class="card-header">
+            <h2 id="wh-diagrams">Diagramas de flujo</h2>
+            <p>La dirección de los datos, el ciclo de vida completo, y qué le pasa a cada evento.</p>
+          </div>
+          <div class="card-body">
+
+            <h3>1 · Dirección — lo inverso de MCP</h3>
+            <figure class="wh-fig">
+              <svg viewBox="0 0 720 190" role="img" aria-label="Con MCP, free-code llama hacia afuera a un servidor; con webhooks, un sistema externo llama hacia adentro a free-code.">
+                <defs>
+                  <marker id="wh-arrow-1" markerWidth="10" markerHeight="8" refX="8" refY="3" orient="auto">
+                    <path d="M0,0 L8,3 L0,6 Z" class="wh-ah" />
+                  </marker>
+                </defs>
+                <!-- MCP row: free-code calls out -->
+                <text x="40" y="22" class="wh-t-sm">MCP — free-code llama hacia afuera</text>
+                <rect x="40" y="32" width="160" height="52" rx="10" class="wh-b-accent" />
+                <text x="120" y="58" text-anchor="middle" dominant-baseline="central" class="wh-t">free-code</text>
+                <line x1="204" y1="58" x2="512" y2="58" class="wh-line" marker-end="url(#wh-arrow-1)" />
+                <text x="358" y="48" text-anchor="middle" class="wh-t-sm">llamada a herramienta &#8594;</text>
+                <rect x="520" y="32" width="160" height="52" rx="10" class="wh-b" />
+                <text x="600" y="58" text-anchor="middle" dominant-baseline="central" class="wh-t">servidor MCP</text>
+                <!-- Webhook row: external system calls in -->
+                <text x="40" y="110" class="wh-t-sm">Webhook — un sistema externo llama hacia adentro</text>
+                <rect x="40" y="120" width="220" height="52" rx="10" class="wh-b" />
+                <text x="150" y="146" text-anchor="middle" dominant-baseline="central" class="wh-t">Sistema externo</text>
+                <line x1="264" y1="146" x2="512" y2="146" class="wh-line" marker-end="url(#wh-arrow-1)" />
+                <text x="388" y="136" text-anchor="middle" class="wh-t-sm">evento POST &#8594;</text>
+                <rect x="520" y="120" width="160" height="52" rx="10" class="wh-b-accent" />
+                <text x="600" y="146" text-anchor="middle" dominant-baseline="central" class="wh-t">free-code</text>
+              </svg>
+              <figcaption>Las herramientas MCP salen desde free-code; los webhooks traen eventos hacia adentro. Solo una extensión (no un servidor MCP) puede despertar al agente a partir de un evento entrante.</figcaption>
+            </figure>
+
+            <h3>2 · Ciclo de vida — del registro al agente</h3>
+            <figure class="wh-fig">
+              <svg viewBox="0 0 760 132" role="img" aria-label="Registra un hook, comparte su URL y secreto, el sistema externo hace POST de un evento, free-code lo autentica y lo entrega al agente.">
+                <defs>
+                  <marker id="wh-arrow-2" markerWidth="10" markerHeight="8" refX="8" refY="3" orient="auto">
+                    <path d="M0,0 L8,3 L0,6 Z" class="wh-ah" />
+                  </marker>
+                </defs>
+                <!-- step 1 -->
+                <text x="83" y="20" text-anchor="middle" class="wh-t-sm">1</text>
+                <rect x="8" y="28" width="150" height="72" rx="10" class="wh-b" />
+                <text x="83" y="56" text-anchor="middle" dominant-baseline="central" class="wh-t">Registrar hook</text>
+                <text x="83" y="78" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">/webhook add name</text>
+                <line x1="158" y1="64" x2="198" y2="64" class="wh-line" marker-end="url(#wh-arrow-2)" />
+                <!-- step 2 -->
+                <text x="281" y="20" text-anchor="middle" class="wh-t-sm">2</text>
+                <rect x="206" y="28" width="150" height="72" rx="10" class="wh-b" />
+                <text x="281" y="56" text-anchor="middle" dominant-baseline="central" class="wh-t">Compartir URL</text>
+                <text x="281" y="78" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">+ secreto al sistema</text>
+                <line x1="356" y1="64" x2="396" y2="64" class="wh-line" marker-end="url(#wh-arrow-2)" />
+                <!-- step 3 -->
+                <text x="479" y="20" text-anchor="middle" class="wh-t-sm">3</text>
+                <rect x="404" y="28" width="150" height="72" rx="10" class="wh-b" />
+                <text x="479" y="56" text-anchor="middle" dominant-baseline="central" class="wh-t">El sistema hace POST</text>
+                <text x="479" y="78" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">a /hook/name</text>
+                <line x1="554" y1="64" x2="594" y2="64" class="wh-line" marker-end="url(#wh-arrow-2)" />
+                <!-- step 4 -->
+                <text x="677" y="20" text-anchor="middle" class="wh-t-sm">4</text>
+                <rect x="602" y="28" width="150" height="72" rx="10" class="wh-b-accent" />
+                <text x="677" y="56" text-anchor="middle" dominant-baseline="central" class="wh-t">Autenticar</text>
+                <text x="677" y="78" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">y entregar al agente</text>
+              </svg>
+              <figcaption>Los pasos 1–2 ocurren una sola vez. Los pasos 3–4 se repiten con cada evento entrante mientras una sesión está abierta.</figcaption>
+            </figure>
+
+            <h3>3 · Entrega — qué le pasa a cada evento</h3>
+            <figure class="wh-fig">
+              <svg viewBox="0 0 760 250" role="img" aria-label="Un POST entrante se autentica; un secreto incorrecto devuelve 401; uno válido se entrega ya sea almacenándolo en búfer para sondeo (modo queue) o inyectando un mensaje que despierta al agente (modo trigger).">
+                <defs>
+                  <marker id="wh-arrow-3" markerWidth="10" markerHeight="8" refX="8" refY="3" orient="auto">
+                    <path d="M0,0 L8,3 L0,6 Z" class="wh-ah" />
+                  </marker>
+                  <marker id="wh-arrow-3m" markerWidth="10" markerHeight="8" refX="8" refY="3" orient="auto">
+                    <path d="M0,0 L8,3 L0,6 Z" class="wh-ah-mute" />
+                  </marker>
+                </defs>
+                <!-- incoming -->
+                <rect x="10" y="99" width="150" height="52" rx="10" class="wh-b-accent" />
+                <text x="85" y="120" text-anchor="middle" dominant-baseline="central" class="wh-t">POST</text>
+                <text x="85" y="138" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">/hook/:name</text>
+                <line x1="160" y1="125" x2="198" y2="125" class="wh-line" marker-end="url(#wh-arrow-3)" />
+                <!-- auth -->
+                <rect x="204" y="99" width="150" height="52" rx="10" class="wh-b" />
+                <text x="279" y="120" text-anchor="middle" dominant-baseline="central" class="wh-t">Autenticar</text>
+                <text x="279" y="138" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">secreto / HMAC</text>
+                <!-- 401 branch -->
+                <path d="M279,151 L279,205 L404,205" class="wh-line-mute" marker-end="url(#wh-arrow-3m)" />
+                <rect x="410" y="181" width="120" height="46" rx="10" class="wh-b-mute" />
+                <text x="470" y="204" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">401 rechazado</text>
+                <!-- ok to queue lane -->
+                <path d="M354,113 L384,113 L384,44 L404,44" class="wh-line" marker-end="url(#wh-arrow-3)" />
+                <text x="470" y="24" text-anchor="middle" class="wh-t-sm">modo queue</text>
+                <rect x="404" y="30" width="150" height="52" rx="10" class="wh-b" />
+                <text x="479" y="51" text-anchor="middle" dominant-baseline="central" class="wh-t">Evento en búfer</text>
+                <text x="479" y="69" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">en la cola</text>
+                <line x1="554" y1="56" x2="594" y2="56" class="wh-line" marker-end="url(#wh-arrow-3)" />
+                <rect x="600" y="30" width="150" height="52" rx="10" class="wh-b" />
+                <text x="675" y="51" text-anchor="middle" dominant-baseline="central" class="wh-t">El agente consume</text>
+                <text x="675" y="69" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">herramienta poll / wait</text>
+                <!-- ok to trigger lane -->
+                <path d="M354,137 L384,137 L384,131 L404,131" class="wh-line" marker-end="url(#wh-arrow-3)" />
+                <text x="470" y="98" text-anchor="middle" class="wh-t-sm">modo trigger</text>
+                <rect x="404" y="105" width="150" height="52" rx="10" class="wh-b-accent" />
+                <text x="479" y="126" text-anchor="middle" dominant-baseline="central" class="wh-t">sendUserMessage</text>
+                <text x="479" y="144" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">inicia un turno</text>
+                <line x1="554" y1="131" x2="594" y2="131" class="wh-line" marker-end="url(#wh-arrow-3)" />
+                <rect x="600" y="105" width="150" height="52" rx="10" class="wh-b-accent" />
+                <text x="675" y="126" text-anchor="middle" dominant-baseline="central" class="wh-t">El agente despierta</text>
+                <text x="675" y="144" text-anchor="middle" dominant-baseline="central" class="wh-t-sm">de inmediato</text>
+              </svg>
+              <figcaption>La autenticación es obligatoria. Un evento válido sigue entonces el modo de su hook: <code>queue</code> lo almacena en búfer para después, <code>trigger</code> despierta al agente de inmediato.</figcaption>
+            </figure>
+
+          </div>
+        </section>
+
+        <!-- What you can do -->
+        <section class="card" aria-labelledby="wh-do">
+          <div class="card-header">
+            <h2 id="wh-do">Qué puedes hacer con esto</h2>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li><strong>Dejar que un flujo de Flowise conduzca al agente</strong> — el nodo HTTP de un flujo llama de vuelta a free-code cuando termina.</li>
+              <li><strong>Reaccionar a CI/CD</strong> — un build fallido hace POST de su log y el agente empieza a investigar.</li>
+              <li><strong>Conectar eventos de SaaS</strong> — GitHub, Stripe, o cualquier servicio que emita webhooks (mediante un túnel, ver abajo).</li>
+              <li><strong>Recolectar callbacks asíncronos</strong> — inicia un trabajo externo de larga duración, luego usa <code>wait_for_webhook_event</code> para el resultado.</li>
+              <li><strong>Registrar el callback por ti</strong> — el agente puede hacer POST de la URL de free-code hacia la propia API del sistema externo.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Using it -->
+        <section class="card" aria-labelledby="wh-use">
+          <div class="card-header">
+            <h2 id="wh-use">Usándolo</h2>
+            <p>Regístralo desde la línea de comandos, o simplemente pídeselo al agente.</p>
+          </div>
+          <div class="card-body">
+            <h3>Con el comando <code>/webhook</code> (CLI)</h3>
+            <pre><code># Registra un hook que despierta al agente en cada evento
+/webhook add flowise --trigger
+
+# Muestra de nuevo su URL de callback + secreto
+/webhook url flowise
+
+# Lista los hooks y el estado del servidor
+/webhook list
+
+# Revisa los eventos en búfer (modo queue)
+/webhook events
+
+# Fuerza un puerto específico para esta sesión
+/webhook port 8790
+
+# Elimina un hook
+/webhook rm flowise</code></pre>
+            <p>Omite <code>--trigger</code> para crear un hook <code>queue</code>. Se genera un secreto automáticamente.</p>
+
+            <h3>Pidiéndoselo al agente (funciona en todas partes, incluido el plugin)</h3>
+            <p>
+              Las mismas acciones se exponen como herramientas, así que en el CLI, el plugin del IDE,
+              o la aplicación de escritorio puedes simplemente decir: <em>"registra un webhook llamado
+              flowise en modo trigger y dame la URL."</em>
+            </p>
+            <div class="callout info">
+              <strong>Plugin y escritorio</strong><br />
+              Las herramientas funcionan en todas las superficies. El comando escrito
+              <code>/webhook</code> también aparece listado en los catálogos de comandos del plugin y
+              del escritorio.
+            </div>
+          </div>
+        </section>
+
+        <!-- Testing it -->
+        <section class="card" aria-labelledby="wh-test">
+          <div class="card-header">
+            <h2 id="wh-test">Probándolo</h2>
+            <p>Envía una solicitud con <code>curl</code> y observa cómo el agente la recibe.</p>
+          </div>
+          <div class="card-body">
+            <p>Después de <code>/webhook add test --trigger</code>, toma la URL y el secreto que imprimió, luego:</p>
+            <pre><code># Reemplaza el puerto y el secreto con lo que mostró /webhook url test
+curl -X POST http://127.0.0.1:8788/hook/test \
+  -H 'content-type: application/json' \
+  -H 'X-Webhook-Secret: &lt;your-secret&gt;' \
+  -d '{"msg":"hello from curl"}'</code></pre>
+            <p>Esperado: la solicitud devuelve <code>{"ok":true}</code>, y en un hook <code>trigger</code> el agente despierta y reacciona al payload.</p>
+            <p>Para un hook <code>queue</code>, consume lo que llegó:</p>
+            <pre><code>/webhook events        # o pídele al agente que consulte los eventos del webhook</code></pre>
+            <p>La autenticación es obligatoria — un secreto incorrecto o ausente se rechaza con <code>401</code>:</p>
+            <pre><code>curl -i -X POST http://127.0.0.1:8788/hook/test \
+  -H 'X-Webhook-Secret: wrong' -d '{}'
+# HTTP/1.1 401 Unauthorized</code></pre>
+            <p>También hay un endpoint de disponibilidad:</p>
+            <pre><code>curl http://127.0.0.1:8788/health
+# {"ok":true,"hooks":["test"]}</code></pre>
+          </div>
+        </section>
+
+        <!-- Security -->
+        <section class="card" aria-labelledby="wh-security">
+          <div class="card-header">
+            <h2 id="wh-security">Seguridad</h2>
+            <p>Local por defecto; cada hook está autenticado.</p>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li><strong>Se vincula a <code>127.0.0.1</code></strong> por defecto — no es alcanzable desde la red.</li>
+              <li><strong>Cada hook requiere una credencial.</strong> Un hook sin secreto nunca se autentica.</li>
+              <li><strong>Secreto compartido</strong> — envíalo en el encabezado <code>X-Webhook-Secret</code> (se compara en tiempo constante).</li>
+              <li><strong>HMAC</strong> — configura un <code>hmacSecret</code> y firma el cuerpo crudo: <code>X-Signature: sha256=&lt;hex&gt;</code>.</li>
+              <li><strong>El tamaño del cuerpo tiene un límite</strong> (1&nbsp;MB por defecto) para rechazar payloads demasiado grandes.</li>
+            </ul>
+            <div class="callout tip">
+              <strong>Exponiéndolo a servicios en la nube</strong><br />
+              Para fuentes que no están en tu máquina (GitHub, Stripe, …), antepón al endpoint un
+              túnel como <code>cloudflared tunnel --url http://127.0.0.1:8787</code> o
+              <code>ngrok</code>, configura <code>publicBaseUrl</code>, y exige HMAC.
+            </div>
+          </div>
+        </section>
+
+        <!-- Multiple sessions / ports -->
+        <section class="card" aria-labelledby="wh-ports">
+          <div class="card-header">
+            <h2 id="wh-ports">Múltiples sesiones y puertos</h2>
+            <p>Cada ventana de free-code obtiene su propio puerto automáticamente.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              Cada sesión se vincula al primer puerto libre a partir de <code>8787</code>
+              (<code>8787</code>, <code>8788</code>, <code>8789</code>, …), de modo que varias
+              ventanas de free-code coexisten sin chocar entre sí. La URL de callback siempre refleja
+              el puerto que una sesión efectivamente vinculó — compruébalo con
+              <code>/webhook url &lt;name&gt;</code>.
+            </p>
+            <p>Para fijar un puerto conocido:</p>
+            <pre><code># Por sesión, en vivo:
+/webhook port 8790
+
+# O configúralo antes de iniciar:
+FREECODE_WEBHOOK_PORT=8790 free-code</code></pre>
+          </div>
+        </section>
+
+        <!-- Reference -->
+        <section class="card" aria-labelledby="wh-ref">
+          <div class="card-header">
+            <h2 id="wh-ref">Referencia</h2>
+            <p>Herramientas, archivo de configuración y variables de entorno.</p>
+          </div>
+          <div class="card-body">
+            <h3>Herramientas</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Herramienta</th><th>Qué hace</th></tr></thead>
+                <tbody>
+                  <tr><td><code>register_webhook</code></td><td>Crea un hook con nombre y devuelve su URL de callback + secreto.</td></tr>
+                  <tr><td><code>unregister_webhook</code></td><td>Elimina un hook.</td></tr>
+                  <tr><td><code>get_webhook_url</code></td><td>Muestra la URL de callback de un hook y una pista de autenticación.</td></tr>
+                  <tr><td><code>list_webhooks</code></td><td>Lista los hooks, el estado del servidor, y el conteo de eventos en cola.</td></tr>
+                  <tr><td><code>poll_webhook_events</code></td><td>Devuelve (y por defecto vacía) los eventos en búfer.</td></tr>
+                  <tr><td><code>wait_for_webhook_event</code></td><td>Hace long-polling hasta el próximo evento o un tiempo de espera agotado.</td></tr>
+                  <tr><td><code>register_external_webhook</code></td><td>Hace POST de la URL de callback de free-code hacia la API de un sistema externo.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Archivo de configuración — <code>~/.free-code/agent/webhook-receiver.json</code></h3>
+            <pre><code>{
+  "enabled": true,
+  "host": "127.0.0.1",
+  "port": 8787,
+  "portRange": 20,
+  "publicBaseUrl": null,
+  "defaultMode": "queue",
+  "maxBodyBytes": 1048576,
+  "hooks": {
+    "flowise": { "mode": "trigger", "secret": "…" }
+  }
+}</code></pre>
+
+            <h3>Variables de entorno</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Variable</th><th>Efecto</th></tr></thead>
+                <tbody>
+                  <tr><td><code>FREECODE_WEBHOOK_ENABLED</code></td><td>Activa o desactiva el receptor.</td></tr>
+                  <tr><td><code>FREECODE_WEBHOOK_PORT</code></td><td>Puerto base al que vincularse.</td></tr>
+                  <tr><td><code>FREECODE_WEBHOOK_HOST</code></td><td>Host de vinculación (por defecto <code>127.0.0.1</code>).</td></tr>
+                  <tr><td><code>FREECODE_WEBHOOK_PUBLIC_URL</code></td><td>URL base pública usada en las URLs de callback (detrás de un túnel).</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <p class="footer">
+          <a href="mcp.html">Servidores MCP →</a> &nbsp;·&nbsp;
+          <a href="commands.html">Comandos →</a> &nbsp;·&nbsp;
+          <a href="capabilities.html">Todas las capacidades →</a>
+        </p>
+        <p class="footer-credit">Desarrollado por Pablo Castañeda</p>
+      </div>
+    
+  </div>
+</div>
+    <script src="../assets/i18n.js" defer></script>
     <script src="assets/theme.js" defer></script>
   </body>
 </html>

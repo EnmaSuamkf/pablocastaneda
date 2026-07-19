@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-title-en="FreeCodeMac — interactive demo" data-title-es="FreeCodeMac — demo interactiva">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -635,7 +635,8 @@
   <link rel="stylesheet" href="../assets/project-nav.css" />
 </head>
 <body>
-  <div id="portfolio-back-nav"><a class="back-link" href="../index.html">← Portfolio</a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span></div>
+<div id="portfolio-back-nav"><a class="back-link" href="../index.html"><span lang="en">← Portfolio</span><span lang="es" hidden>← Portafolio</span></a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span><div id="lang-toggle"></div></div>
+<div lang="en">
 
 <div class="mac-window">
   <!-- macOS titlebar -->
@@ -815,7 +816,188 @@
     </div>
   </div>
 </div>
+</div>
+<div lang="es" hidden>
 
+<div class="mac-window">
+  <!-- macOS titlebar -->
+  <div class="mac-titlebar">
+    <div class="mac-traffic">
+      <span class="mac-dot red" title="Cerrar"></span>
+      <span class="mac-dot yellow" title="Minimizar"></span>
+      <span class="mac-dot green" title="Maximizar"></span>
+    </div>
+    <span class="mac-title">FreeCodeMac</span>
+  </div>
+
+  <!-- app body -->
+  <div class="mac-body" id="appBody">
+
+    <!-- splash -->
+    <div class="splash" id="splash">
+      <div class="splash-content">
+        <div class="splash-logo">free<span class="splash-logo-accent">code</span></div>
+        <div class="splash-features" id="splashFeatures">
+          <div class="splash-feature"><span class="splash-icon">👤</span><span>Experiencia fácil de usar</span></div>
+          <div class="splash-feature"><span class="splash-icon">🎛</span><span>Crea tus propios perfiles</span></div>
+          <div class="splash-feature"><span class="splash-icon">🧠</span><span>Base de conocimiento RAG integrada</span></div>
+          <div class="splash-feature"><span class="splash-icon">⚡</span><span>Contexto optimizado en tokens</span></div>
+          <div class="splash-feature"><span class="splash-icon">📊</span><span>Monitoreo de sesión en vivo</span></div>
+          <div class="splash-feature"><span class="splash-icon">🔧</span><span>Configuración de MCP sencilla</span></div>
+          <div class="splash-feature"><span class="splash-icon">🌐</span><span>Agente de navegador integrado</span></div>
+          <div class="splash-feature"><span class="splash-icon">🔀</span><span>Agnóstico de proveedor — cualquier modelo</span></div>
+        </div>
+        <div class="splash-tagline" id="splashTagline"></div>
+        <button class="splash-dismiss" id="splashDismiss">Comenzar</button>
+      </div>
+    </div>
+
+    <!-- nav -->
+    <div class="chat-nav">
+      <button class="chat-nav-toggle" id="drawerToggle" aria-expanded="false" title="Conversaciones">☰</button>
+      <span class="chat-nav-title" id="sessionTitle">Nueva conversación</span>
+      <button class="chat-nav-btn" id="monitorBtn" title="Monitor de sesión (📊)">📊</button>
+      <button class="chat-nav-btn" id="themeBtn" title="Cambiar modo claro/oscuro">☀</button>
+      <button class="chat-nav-btn" id="newChatBtn" title="Nueva conversación">＋</button>
+    </div>
+
+    <div class="chat-layout">
+      <div class="chat-list-backdrop" id="backdrop"></div>
+
+      <!-- sidebar -->
+      <div class="chat-list-panel floating" id="drawer">
+        <div class="chat-list-header">
+          <span class="chat-list-header-title">Conversaciones <span class="chat-list-count" id="drawerCount">3</span></span>
+          <button class="chat-list-pin-btn" id="pinBtn" aria-pressed="false" title="Fijar barra lateral">
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.189A5.921 5.921 0 0 1 5 6.708V2.277a2.77 2.77 0 0 1-.354-.298C4.342 1.674 4 1.179 4 .5a.5.5 0 0 1 .146-.354z"/></svg>
+          </button>
+        </div>
+        <div class="chat-list-body" id="drawerList"></div>
+        <div class="chat-list-footer">
+          <button class="chat-list-new-btn" id="drawerNewBtn">
+            <span style="font-size:15px;font-weight:300;opacity:.8;">＋</span>
+            Nueva conversación
+          </button>
+        </div>
+      </div>
+
+      <!-- main -->
+      <div class="main-content">
+
+        <!-- browser overlay -->
+        <div class="browser-overlay" id="browserOverlay">
+          <div class="browser-bar">
+            <button class="browser-nav-btn" id="browserBack" disabled title="Atrás">&#8592;</button>
+            <button class="browser-nav-btn" id="browserFwd" disabled title="Adelante">&#8594;</button>
+            <button class="browser-nav-btn" id="browserRefresh" title="Actualizar">&#8635;</button>
+            <input class="browser-url-bar" id="browserUrl" value="" placeholder="Escribe una URL y presiona Enter…" />
+            <button class="browser-nav-btn" id="browserClose" title="Cerrar navegador">&#x2715;</button>
+          </div>
+          <div class="browser-content-wrap">
+            <div class="browser-spinner-overlay" id="browserSpinner">
+              <div class="browser-spin"></div>
+              <span style="font-size:12px;color:#5f6368;">Cargando…</span>
+            </div>
+            <div class="browser-page-frame" id="browserPage" style="display:none;"></div>
+          </div>
+        </div>
+
+        <div id="messages"></div>
+
+        <!-- session monitor -->
+        <div class="session-monitor" id="sessionMonitor" hidden>
+          <div class="session-monitor-header">
+            <span>📊 Sesión</span>
+            <button class="session-monitor-close" id="monitorClose">×</button>
+          </div>
+          <div class="session-monitor-body">
+            <div class="session-monitor-section">
+              <div class="session-monitor-title-row">
+                <span class="session-monitor-section-title">📦 Ventana de contexto</span>
+                <span class="session-monitor-context-total" id="ctxTotal">12,430 / 200k</span>
+              </div>
+              <div class="session-monitor-bar-track">
+                <div class="session-monitor-bar-fill" id="ctxBar" style="width:6.2%"></div>
+              </div>
+            </div>
+            <div class="session-monitor-grid">
+              <div class="session-monitor-cell"><div class="session-monitor-cell-label">Mensajes</div><div class="session-monitor-cell-value" id="smMessages">7</div></div>
+              <div class="session-monitor-cell"><div class="session-monitor-cell-label">Llamadas a herramientas</div><div class="session-monitor-cell-value" id="smTools">4</div></div>
+              <div class="session-monitor-cell"><div class="session-monitor-cell-label">Herramientas MCP</div><div class="session-monitor-cell-value">3</div></div>
+              <div class="session-monitor-cell"><div class="session-monitor-cell-label">Habilidades</div><div class="session-monitor-cell-value">2</div></div>
+              <div class="session-monitor-cell"><div class="session-monitor-cell-label">Agentes</div><div class="session-monitor-cell-value">1</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="chat-form">
+          <div class="slash-menu" id="slashMenu"></div>
+          <textarea id="input" rows="1" placeholder="Pregúntale a free-code… (Enter para enviar, Shift+Enter salto de línea)"></textarea>
+          <div class="chat-actions">
+            <div class="chat-actions-context">
+              <div class="indicator" id="workspaceIndicator" title="Espacio de trabajo">
+                <span style="font-size:11px;opacity:.85;">📁</span>
+                <span class="indicator-label">my-project</span>
+              </div>
+              <div class="indicator no-arrow" title="Perfil">
+                <span class="indicator-label">default</span>
+              </div>
+              <div class="indicator" id="modelIndicator" title="Modelo (haz clic para cambiar)">
+                <span class="indicator-dot"></span>
+                <span class="indicator-label">gemini-2.5-pro</span>
+              </div>
+            </div>
+            <div class="chat-actions-tools">
+              <button class="chat-icon-btn" title="Adjuntar archivo">📎</button>
+              <button class="chat-icon-btn" title="Exportar conversación">📨</button>
+              <button class="chat-icon-btn" id="browserBtn" title="Abrir navegador">🌐</button>
+              <button class="chat-actions-send" id="sendBtn" title="Enviar (Enter)">▲</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.main-content -->
+    </div><!-- /.chat-layout -->
+  </div><!-- /.mac-body -->
+</div><!-- /.mac-window -->
+
+<!-- workspace picker -->
+<div class="modal-overlay" id="workspaceModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <p class="modal-title">Abrir carpeta</p>
+      <p class="modal-subtitle">Selecciona una carpeta de espacio de trabajo para esta sesión.</p>
+    </div>
+    <input class="modal-search" id="wsSearch" placeholder="Filtrar carpetas…" autocomplete="off" />
+    <div class="modal-list" id="wsList"></div>
+    <div class="modal-footer">
+      <span class="modal-footer-info" id="wsFooter">~/Documents/my-project</span>
+      <div class="modal-btn-row">
+        <button class="modal-btn" id="wsCancelBtn">Cancelar</button>
+        <button class="modal-btn primary" id="wsApplyBtn">Abrir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- model picker -->
+<div class="modal-overlay" id="modelModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <p class="modal-title">Seleccionar modelo</p>
+      <p class="modal-subtitle">Solo se muestran los modelos con claves de API configuradas (ver README). Escribe para filtrar, haz clic en una fila o presiona Enter para aplicar.</p>
+    </div>
+    <input class="modal-search" id="modelSearch" placeholder="Filtrar modelos (proveedor, id, nombre)…" autocomplete="off" />
+    <div class="modal-list" id="modelList"></div>
+    <div class="modal-footer">
+      <span class="modal-footer-info" id="modelFooter">Nombre del modelo: —</span>
+      <div class="modal-btn-row">
+        <button class="modal-btn" id="modelCancelBtn">Cancelar</button>
+        <button class="modal-btn primary" id="modelApplyBtn">Aplicar</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 <script>
 (function(){
   const COMMANDS = [
@@ -1256,5 +1438,7 @@
   renderDrawer();
 })();
 </script>
+  <script src="../assets/i18n.js" defer></script>
+</body>
 </body>
 </html>

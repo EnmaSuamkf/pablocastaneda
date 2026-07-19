@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-title-en="Capabilities — free-code" data-title-es="Capacidades — free-code">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="../assets/project-nav.css" />
 </head>
   <body>
-  <div id="portfolio-back-nav"><a class="back-link" href="../index.html">← Portfolio</a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span></div>
+  <div id="portfolio-back-nav"><a class="back-link" href="../index.html"><span lang="en">← Portfolio</span><span lang="es" hidden>← Portafolio</span></a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span><div id="lang-toggle"></div></div>
     <div class="doc-root">
+  <div lang="en">
+
       <header class="site-shell-header" role="banner">
         <div class="site-shell-inner">
           <a class="site-brand" href="index.html">
@@ -523,7 +525,527 @@ free-code install https://example.com/pkg  # from a URL</code></pre>
         </p>
         <p class="footer-credit">Developed by Pablo Castañeda</p>
       </div>
-    </div>
+    
+  </div>
+  <div lang="es" hidden>
+
+      <header class="site-shell-header" role="banner">
+        <div class="site-shell-inner">
+          <a class="site-brand" href="index.html">
+            <span class="site-brand-angles" aria-hidden="true">&lt;</span>
+            <span>free-code</span>
+            <span class="site-brand-angles" aria-hidden="true">&gt;</span>
+          </a>
+          <div class="site-header-actions">
+            <button type="button" class="theme-toggle" id="doc-theme-toggle" aria-label="Tema de color">
+              <span class="theme-toggle-label" id="doc-theme-label">Sistema</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="container">
+        <header class="hero">
+          <h1 class="brand">
+            <span class="angle" aria-hidden="true">&lt;</span>
+            <span class="name">free-code</span>
+            <span class="angle" aria-hidden="true">&gt;</span>
+          </h1>
+          <p class="tagline">
+            <span class="prompt" aria-hidden="true">// </span>
+            Cada capacidad, explicada.
+          </p>
+
+          <nav class="nav" aria-label="Primary">
+            <a href="index.html">[inicio]</a>
+            <a href="installation.html">[instalación]</a>
+            <a href="webhooks.html">[webhooks]</a>
+            <a href="rag.html">[rag]</a>
+            <a href="code-graph.html">[grafo de código]</a>
+            <a href="mcp.html">[mcp]</a>
+            <a href="vision-mode.html">[modo visión]</a>
+            <a href="capabilities.html" aria-current="page">[capacidades]</a>
+            <a href="commands.html">[comandos]</a>
+            <a href="models.html">[modelos]</a>
+          </nav>
+        </header>
+
+        <!-- Code Graph -->
+        <section class="card" aria-labelledby="cap-codegraph">
+          <div class="card-header">
+            <h2 id="cap-codegraph">Grafo de código — Índice de símbolos y navegación</h2>
+            <p>Índice estructural local de todo tu código base. Sin nube. Sin subida de archivos. Consultas en menos de un segundo.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              El grafo de código indexa cada archivo TypeScript, JavaScript, Python y Java de tu
+              proyecto, construyendo un mapa consultable de símbolos (funciones, clases, métodos, interfaces,
+              tipos, enums) y las relaciones de llamada entre ellos. El resultado se almacena en
+              <code>.code-graph/</code> en la raíz del proyecto — un conjunto de archivos JSON que el agente lee
+              en milisegundos.
+            </p>
+
+            <h3>Qué significa esto en la práctica</h3>
+            <ul>
+              <li>El agente nunca tiene que leer un archivo de 2000 líneas para encontrar una función de 10 líneas.</li>
+              <li>Puede responder "¿quién llama a <code>parseArgs</code>?" en 500 archivos al instante.</li>
+              <li>Ve el árbol de llamadas exacto: a qué funciones delega un símbolo.</li>
+              <li>Reindexación incremental — solo se reanalizan los archivos modificados.</li>
+            </ul>
+
+            <h3>Cuatro herramientas del agente</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Herramienta</th><th>Qué hace</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>code_index</code></td>
+                    <td>Construye o actualiza incrementalmente el índice. Se ejecuta automáticamente cuando está desactualizado.</td>
+                  </tr>
+                  <tr>
+                    <td><code>code_symbols</code></td>
+                    <td>Búsqueda de subcadena sin distinción entre mayúsculas y minúsculas por nombre o nombre calificado, con filtro opcional por tipo.</td>
+                  </tr>
+                  <tr>
+                    <td><code>code_callers</code></td>
+                    <td>Devuelve cada punto de llamada que invoca una función o método específico, con archivo y línea.</td>
+                  </tr>
+                  <tr>
+                    <td><code>code_context</code></td>
+                    <td>Código fuente completo de un símbolo más sus llamadas directas. Valida la vigencia contra el índice.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Detección de índice desactualizado</h3>
+            <p>
+              En cada inicio de sesión, free-code comprueba si algún archivo fuente indexado
+              (<code>.ts</code> / <code>.js</code> / <code>.py</code> / <code>.java</code> y similares)
+              se ha modificado desde la última ejecución del índice. Si es así, muestra una advertencia
+              y sugiere ejecutar <code>code_index</code> antes de usar las demás herramientas.
+            </p>
+
+            <div class="callout tip">
+              <strong>Consejo</strong><br />
+              Ejecuta <code>/codeGraph-index</code> una vez después de clonar un repositorio, y luego <code>/codeGraph-index --force</code>
+              tras refactorizaciones grandes. Las actualizaciones incrementales del día a día ocurren automáticamente.
+            </div>
+
+            <p><a href="code-graph.html">Documentación completa del grafo de código →</a></p>
+          </div>
+        </section>
+
+        <!-- RAG -->
+        <section class="card" aria-labelledby="cap-rag">
+          <div class="card-header">
+            <h2 id="cap-rag">RAG — Base de conocimiento local</h2>
+            <p>Añade cualquier documento como contexto permanente del proyecto. Búsqueda vectorial, sin necesidad de nube.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              La extensión RAG (Retrieval-Augmented Generation) provee una base de conocimiento vectorial local
+              servida en el puerto 8085. Indexa documentación, runbooks, notas de arquitectura o cualquier
+              archivo de texto. El agente recupera automáticamente los fragmentos más relevantes durante una sesión.
+            </p>
+
+            <h3>Inicia el servidor</h3>
+            <p>La base de conocimiento es servida por un pequeño servidor local (puerto predeterminado 8085). Inícialo y luego crea y selecciona una base de conocimiento:</p>
+            <pre><code># 1. Start the RAG server (keep it running)
+free-code-rag            # default http://localhost:8085
+
+# 2. In a free-code session, create and select a knowledge base
+/rag-kb create my-docs
+/rag-kb use my-docs
+
+# 3. Add documents
+/rag addFile ./README.md</code></pre>
+
+            <h3>Comandos clave</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Comando</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>/rag addFile &lt;path&gt;</code></td><td>Indexa un solo documento</td></tr>
+                  <tr><td><code>/rag addGroup &lt;folder&gt;</code></td><td>Indexa todos los archivos compatibles de una carpeta</td></tr>
+                  <tr><td><code>/rag addGithubUrl &lt;url&gt; [subpath]</code></td><td>Clona un repositorio de GitHub e indexa sus archivos. Opcionalmente apunta a un subdirectorio. La fuente se guarda en <code>sources.json</code> para futuras actualizaciones.</td></tr>
+                  <tr><td><code>/rag search &lt;query&gt;</code></td><td>Consulta la base de conocimiento e inyecta el resultado como contexto</td></tr>
+                  <tr><td><code>/rag list</code></td><td>Lista todos los documentos indexados</td></tr>
+                  <tr><td><code>/rag remove &lt;file&gt;</code></td><td>Elimina un documento del índice</td></tr>
+                  <tr><td><code>/rag refresh</code></td><td>Vuelve a obtener y reindexar todas las fuentes registradas mediante <code>addFile</code> y <code>addGithubUrl</code></td></tr>
+                  <tr><td><code>/rag schedule [daily|weekly]</code></td><td>Configura una actualización recurrente automática (requiere al menos una fuente de GitHub)</td></tr>
+                  <tr><td><code>/rag-kb create &lt;name&gt;</code></td><td>Crea una base de conocimiento con nombre</td></tr>
+                  <tr><td><code>/rag-kb use &lt;name&gt;</code></td><td>Cambia la base de conocimiento activa</td></tr>
+                  <tr><td><code>/rag-kb list</code></td><td>Lista todas las bases de conocimiento</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout info">
+              <strong>Caso de uso</strong><br />
+              Indexa los ADR de tu equipo, la documentación interna de tu API, o la documentación de una
+              librería de terceros. El agente citará tu base de conocimiento en lugar de inventar información sobre ella.
+            </div>
+          </div>
+        </section>
+
+        <!-- Browser -->
+        <section class="card" aria-labelledby="cap-browser">
+          <div class="card-header">
+            <h2 id="cap-browser">Automatización del navegador</h2>
+            <p>El agente controla un navegador real. Sin Selenium. Sin simulaciones.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              free-code incluye una herramienta de navegador integrada respaldada por el protocolo Chrome DevTools (CDP).
+              El agente puede navegar páginas, hacer clic, rellenar formularios, tomar capturas de pantalla y extraer
+              contenido estructurado — tratando las interfaces web como cualquier otra herramienta.
+            </p>
+
+            <h3>Comandos del navegador</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Comando / herramienta</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>/browse [url] [goal]</code></td><td>Abre una URL en el navegador visible y describe el objetivo</td></tr>
+                  <tr><td>Herramienta <code>agent_browser</code></td><td>Control programático completo: navegar, capturar pantalla, interactuar</td></tr>
+                  <tr><td><code>/gemini ask &lt;message&gt;</code></td><td>Envía un mensaje a Gemini mediante el flujo CDP del navegador</td></tr>
+                  <tr><td><code>/gemini download &lt;file&gt;</code></td><td>Descarga un artefacto generado por Gemini</td></tr>
+                  <tr><td><code>/gemini open [chat_id]</code></td><td>Abre una conversación de Gemini en el navegador</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout info">
+              <strong>Caso de uso</strong><br />
+              Pide al agente que investigue la API de un competidor, extraiga documentación que no tiene
+              descarga oficial, o complete un formulario web de varios pasos en tu nombre.
+            </div>
+
+            <h3>Mira: Automatización del navegador</h3>
+            <div class="video-embed">
+              <iframe
+                src="https://www.youtube.com/embed/BT9y8ztHMhc"
+                title="free-code — Automatización del navegador del agente"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </section>
+
+        <!-- MCP -->
+        <section class="card" aria-labelledby="cap-mcp">
+          <div class="card-header">
+            <h2 id="cap-mcp">Servidores MCP — Extensibilidad ilimitada</h2>
+            <p>Conecta cualquier servidor Model Context Protocol y sus herramientas aparecen automáticamente.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              Model Context Protocol (MCP) es un estándar abierto para conectar agentes de IA a herramientas
+              y servicios externos. free-code es compatible con cualquier servidor MCP: bases de datos, APIs,
+              herramientas de diseño, paneles de monitoreo, sistemas de CI — si habla MCP, funciona.
+            </p>
+
+            <h3>Añadir un servidor MCP</h3>
+            <pre><code>/mcp-import                     # guided import from a URL or file
+# or edit directly:
+~/.free-code/agent/mcp.json</code></pre>
+
+            <p>
+              Después de importar, reinicia la sesión. Las nuevas herramientas aparecen automáticamente en la
+              lista de herramientas del agente — no se requieren cambios de código.
+            </p>
+
+            <div class="callout tip">
+              <strong>Ejemplos</strong><br />
+              Conecta un servidor MCP de Postgres para que el agente consulte tu base de datos. Añade un MCP
+              de Figma para leer tokens de diseño. Conecta un MCP de GitHub para gestionar PRs e incidencias.
+            </div>
+          </div>
+        </section>
+
+        <!-- Security -->
+        <section class="card" aria-labelledby="cap-security">
+          <div class="card-header">
+            <h2 id="cap-security">Seguridad — Salvaguardas por capas para el agente</h2>
+            <p>Audita sesiones, aprueba acciones riesgosas y controla lo que el agente puede alcanzar — de forma local o en la nube.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              free-code está construido para entornos donde un agente tiene poder real sobre archivos, shells y
+              sistemas externos. La seguridad no es un único interruptor: es una pila de visibilidad, políticas
+              y confirmación del usuario que puedes ajustar para tu equipo.
+            </p>
+
+            <h3>Reportar y exportar conversaciones</h3>
+            <p>
+              Cada sesión se persiste en <code>~/.free-code/</code>. Exporta o comparte las transcripciones
+              para revisión, cumplimiento o traspaso:
+            </p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Comando</th><th>Uso</th></tr></thead>
+                <tbody>
+                  <tr><td><code>/export [file]</code></td><td>Archivo HTML, Markdown o JSONL de la sesión</td></tr>
+                  <tr><td><code>/share</code></td><td>Sube un gist privado de GitHub y obtén un enlace</td></tr>
+                  <tr><td><code>/session</code></td><td>Ruta, uso de tokens y costo de la sesión activa</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Damage-Control — firewall de bash y archivos</h3>
+            <p>
+              La extensión integrada <strong>Damage-Control</strong> aplica reglas YAML antes de que el agente
+              ejecute comandos bash o toque rutas sensibles. Patrones peligrosos (por ejemplo
+              <code>rm -rf /</code> o canalizar <code>curl</code> hacia <code>bash</code>) pueden ser
+              <strong>bloqueados</strong> o requerir un diálogo de confirmación explícito en tiempo real — de modo que
+              el usuario decida antes de que se ejecute un comando potencialmente dañino.
+            </p>
+            <ul>
+              <li><strong>Patrones de bash</strong> — reglas regex con una razón legible para humanos</li>
+              <li><strong>Políticas de rutas</strong> — rutas sin acceso, de solo lectura y sin eliminación</li>
+              <li><strong>Autorización MCP</strong> — la primera llamada a una herramienta MCP por sesión solicita permitir/denegar para el resto de la sesión</li>
+              <li><strong>Registro de auditoría</strong> — los bloqueos y denegaciones se registran en la sesión como entradas <code>damage-control-log</code></li>
+            </ul>
+            <pre><code># Toggle enforcement for the current session
+/damage-control [on|off|toggle|status]
+
+# Customize rules (copy the sample next to your extension, or edit the bundled file)
+damage-control-rules.yaml</code></pre>
+            <p>
+              El agente incluye reglas de muestra (bloqueando <code>~/.ssh/</code>, <code>/etc/</code>,
+              y modismos de bash destructivos comunes). Los equipos pueden ampliar el archivo con sus propias políticas.
+            </p>
+
+            <h3>Visibilidad — skills, MCP y agentes en uso</h3>
+            <p>
+              Antes de confiar en lo que el agente puede hacer, necesitas ver qué está cargado en la máquina:
+            </p>
+            <ul>
+              <li><code>/tools</code> y <code>/commands</code> — herramientas activas y comandos slash para esta sesión</li>
+              <li><code>/reload</code> — refresca extensiones, skills, prompts y archivos de contexto tras cambios de instalación</li>
+              <li><strong>Monitor de sesión</strong> (plugin de VS Code / Cursor y app de macOS) — conteos en vivo de mensajes, llamadas a herramientas, herramientas MCP, skills y subagentes, además del uso de contexto</li>
+              <li><code>~/.free-code/agent/mcp.json</code> — servidores MCP configurados para el usuario</li>
+            </ul>
+            <p>
+              Esto deja claro qué sistemas externos (Jira, GitHub, bases de datos, etc.) puede alcanzar el agente
+              a través de MCP, y qué skills reutilizables moldean su comportamiento.
+            </p>
+
+            <h3>Local primero, con despliegue en la nube</h3>
+            <p>
+              Ejecuta todo en una laptop de desarrollo con modelos locales o basados en API. Cuando tu organización
+              lo requiera, usa el mismo agente con proveedores de LLM en la nube (Anthropic, Vertex, endpoints
+              compatibles con OpenAI) o aloja sesiones en entornos administrados — siempre con las mismas políticas
+              de Damage-Control y MCP disponibles en la CLI, el plugin y la app de macOS.
+            </p>
+
+            <div class="callout tip">
+              <strong>Consejo</strong><br />
+              Empieza con el <code>damage-control-rules.yaml</code> incluido, activa la aplicación con
+              <code>/damage-control on</code>, y exporta una sesión de prueba con <code>/export</code> para
+              validar tu flujo de auditoría antes de implementarlo en el equipo.
+            </div>
+          </div>
+        </section>
+
+        <!-- Subagents -->
+        <section class="card" aria-labelledby="cap-subagents">
+          <div class="card-header">
+            <h2 id="cap-subagents">Subagentes — Flujos de trabajo multiagente</h2>
+            <p>Delega tareas a agentes en paralelo desde dentro de una sola sesión.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              Un subagente es una sesión de agente completa que se ejecuta junto a tu sesión principal. Crea
+              tantos como necesites. Cada uno tiene su propia ventana de contexto, acceso a herramientas y
+              hilo de conversación. Coordínalos para que trabajen en subtareas independientes en paralelo.
+            </p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Comando</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>/sub &lt;task&gt;</code></td><td>Inicia un nuevo subagente con una descripción de la tarea</td></tr>
+                  <tr><td><code>/subcont &lt;n&gt; &lt;prompt&gt;</code></td><td>Continúa hablando con el subagente #n</td></tr>
+                  <tr><td><code>/subrm &lt;n&gt;</code></td><td>Elimina el subagente #n</td></tr>
+                  <tr><td><code>/subclear</code></td><td>Borra todos los widgets de subagentes</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout info">
+              <strong>Caso de uso</strong><br />
+              Ejecuta una auditoría de seguridad en un subagente mientras un segundo escribe pruebas y un tercero
+              redacta el changelog. Los tres se ejecutan en paralelo, cada uno con acceso completo a herramientas.
+            </div>
+          </div>
+        </section>
+
+        <!-- Project context files -->
+        <section class="card" aria-labelledby="cap-context-files">
+          <div class="card-header">
+            <h2 id="cap-context-files">Archivos de contexto del proyecto</h2>
+            <p>Coloca un archivo en la raíz del repositorio y el agente lo detecta automáticamente — sin configuración necesaria.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              En cada inicio de sesión, free-code recorre el directorio del proyecto y sus directorios padre
+              buscando archivos de contexto. Cualquier archivo que encuentre se inyecta en el prompt del sistema
+              del agente, dándole instrucciones permanentes específicas para ese proyecto.
+            </p>
+
+            <p>Nombres de archivo compatibles (en orden de descubrimiento):</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Archivo</th><th>Uso típico</th></tr></thead>
+                <tbody>
+                  <tr><td><code>FREE_CODE.md</code></td><td>Guía de proyecto específica de free-code (notas de arquitectura, reglas de flujo de trabajo del agente, convenciones de archivos)</td></tr>
+                  <tr><td><code>CLAUDE.md</code></td><td>Compatible con proyectos de Claude Code — mismo archivo, detectado automáticamente</td></tr>
+                  <tr><td><code>AGENTS.md</code></td><td>Compatible con OpenAI Codex y otras herramientas de agentes que usan esta convención</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Qué incluir en un archivo de contexto</h3>
+            <ul>
+              <li>Decisiones de arquitectura que el agente debería conocer</li>
+              <li>Convenciones de código y reglas de estilo del proyecto</li>
+              <li>Qué comandos ejecutar antes de hacer commit (<code>npm run check</code>, etc.)</li>
+              <li>Reglas de flujo de trabajo del agente (por ejemplo, usar subagentes para exploración amplia, actualizar siempre <code>web-docs/</code> junto con <code>docs/</code>)</li>
+              <li>Rutas que el agente no debe tocar</li>
+            </ul>
+
+            <div class="callout tip">
+              <strong>Compatibilidad</strong><br />
+              Si tu equipo ya usa <code>CLAUDE.md</code> para Claude Code o <code>AGENTS.md</code>
+              para otra herramienta, free-code lee esos archivos tal cual. No se necesita migración.
+            </div>
+          </div>
+        </section>
+
+        <!-- Skills & Extensions -->
+        <section class="card" aria-labelledby="cap-skills">
+          <div class="card-header">
+            <h2 id="cap-skills">Skills y extensiones — Comportamientos reutilizables del agente</h2>
+            <p>Registra el conocimiento del dominio junto a tu código. Comparte flujos de trabajo con tu equipo.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              Las <strong>skills</strong> son archivos markdown con frontmatter YAML. Inyectan
+              instrucciones, contexto y personalidad en el agente para una tarea específica.
+              Una skill puede describir cómo ejecutar tu pipeline de CI, cómo escribir mensajes de commit,
+              o cómo seguir las pautas de revisión de código de tu equipo.
+            </p>
+            <pre><code>---
+name: code-review
+description: Follow our team's code review conventions
+---
+When reviewing code, always check for...
+</code></pre>
+
+            <p>
+              Las <strong>extensiones</strong> son módulos TypeScript que añaden nuevas herramientas, comandos slash
+              e integraciones. Las extensiones se descubren automáticamente desde
+              <code>~/.free-code/agent/extensions/</code> y se cargan en cada inicio de sesión.
+            </p>
+
+            <h3>Instalar un paquete</h3>
+            <pre><code>free-code install npm:@scope/package       # from npm
+free-code install git:github.com/org/pkg   # from a git repo
+free-code install https://example.com/pkg  # from a URL</code></pre>
+
+            <div class="callout tip">
+              <strong>Consejo</strong><br />
+              Las skills son archivos markdown versionados. Distribúyelas en tu monorepo y
+              cada ingeniero del equipo obtiene automáticamente el mismo comportamiento del agente.
+            </div>
+          </div>
+        </section>
+
+        <!-- Multi-provider -->
+        <section class="card" aria-labelledby="cap-providers">
+          <div class="card-header">
+            <h2 id="cap-providers">IA multiproveedor</h2>
+            <p>Un solo agente, todos los modelos. Cambia sin alterar tu flujo de trabajo.</p>
+          </div>
+          <div class="card-body">
+            <p>
+              free-code es agnóstico respecto al modelo. Configura tantos proveedores como necesites. Recorre
+              tu lista curada con una sola combinación de teclas. Cambia a un modelo diferente en medio de la
+              sesión en cualquier momento.
+            </p>
+
+            <p>
+              Los proveedores integrados (Anthropic, OpenAI, Google y más) aparecen en <code>/model</code>
+              una vez que te autenticas, y puedes añadir cualquier endpoint compatible con OpenAI o elegir exactamente
+              qué modelos se muestran — todo desde <code>~/.free-code/agent/models.json</code>.
+              <a href="models.html">Consulta la pestaña de Modelos →</a> para ver la lista completa de proveedores y la
+              lista blanca (<code>only</code>).
+            </p>
+
+            <h3>Cambiar de modelo</h3>
+            <ul>
+              <li><span class="kbd">Ctrl+L</span> — abre el selector de modelos</li>
+              <li><span class="kbd">Ctrl+P</span> / <span class="kbd">Shift+Ctrl+P</span> — recorre tu lista acotada hacia adelante / hacia atrás</li>
+              <li><code>/model</code> — cambia mediante comando</li>
+              <li><span class="kbd">Shift+Tab</span> — recorre el nivel de razonamiento (off → mínimo → bajo → medio → alto → xalto)</li>
+            </ul>
+
+          </div>
+        </section>
+
+        <!-- Session management -->
+        <section class="card" aria-labelledby="cap-sessions">
+          <div class="card-header">
+            <h2 id="cap-sessions">Gestión de sesiones</h2>
+            <p>Sesiones que sobreviven a los límites de contexto, reinicios y pausas largas.</p>
+          </div>
+          <div class="card-body">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Comando / opción</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>/resume</code></td><td>Explora y elige una sesión anterior</td></tr>
+                  <tr><td><code>/fork</code></td><td>Bifurca la sesión actual en una nueva independiente</td></tr>
+                  <tr><td><code>/compact [instructions]</code></td><td>Resume el contexto para liberar espacio en la ventana de contexto</td></tr>
+                  <tr><td><code>/tree</code></td><td>Navega el historial de la sesión como un árbol ramificado; salta a cualquier punto de control</td></tr>
+                  <tr><td><code>/name &lt;name&gt;</code></td><td>Asigna a la sesión un nombre legible para humanos</td></tr>
+                  <tr><td><code>/export [file]</code></td><td>Exporta a HTML, Markdown (.md) o JSONL</td></tr>
+                  <tr><td><code>/share</code></td><td>Sube un gist privado de GitHub y obtén un enlace</td></tr>
+                  <tr><td><code>free-code -c</code></td><td>CLI: continúa la sesión más reciente</td></tr>
+                  <tr><td><code>free-code --fork &lt;id&gt;</code></td><td>CLI: bifurca una sesión específica</td></tr>
+                  <tr><td><code>free-code --no-session</code></td><td>CLI: modo efímero, no se guarda nada</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <p class="footer">
+          <a href="commands.html">Referencia completa de comandos →</a> &nbsp;·&nbsp;
+          <a href="code-graph.html">Grafo de código →</a> &nbsp;·&nbsp;
+          <a href="index.html#qualities-heading">Cualidades del producto</a> &nbsp;·&nbsp;
+          <a href="installation.html">Instalación →</a>
+        </p>
+        <p class="footer-credit">Desarrollado por Pablo Castañeda</p>
+      </div>
+    
+  </div>
+</div>
+    <script src="../assets/i18n.js" defer></script>
     <script src="assets/theme.js" defer></script>
   </body>
 </html>

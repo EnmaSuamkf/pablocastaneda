@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-title-en="free-code plugin — interactive demo" data-title-es="plugin de free-code — demo interactiva">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -890,7 +890,8 @@
   <link rel="stylesheet" href="../assets/project-nav.css" />
 </head>
 <body>
-  <div id="portfolio-back-nav"><a class="back-link" href="../index.html">← Portfolio</a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span></div>
+<div id="portfolio-back-nav"><a class="back-link" href="../index.html"><span lang="en">← Portfolio</span><span lang="es" hidden>← Portafolio</span></a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span><div id="lang-toggle"></div></div>
+<div lang="en">
 
   <!-- nav bar -->
   <div class="chat-nav">
@@ -1013,7 +1014,131 @@
     </div>
   </div>
 </div>
+</div>
+<div lang="es" hidden>
 
+  <!-- nav bar -->
+  <div class="chat-nav">
+    <button class="chat-nav-toggle" id="drawerToggle" aria-expanded="false" title="Conversaciones">☰</button>
+    <span class="chat-nav-title" id="sessionTitle">Nuevo chat</span>
+    <button class="chat-nav-btn" id="themeBtn" title="Cambiar claro/oscuro">◐</button>
+    <button class="chat-nav-btn" id="newChatBtn" title="Nuevo chat">＋</button>
+  </div>
+
+  <div class="chat-layout">
+
+    <!-- drawer -->
+    <div class="chat-list-panel" id="drawer">
+      <div class="chat-list-header">
+        <span class="chat-list-header-title">Conversaciones</span>
+        <span class="chat-list-count" id="drawerCount">3</span>
+        <button class="chat-list-pin-btn" id="pinBtn" aria-pressed="false" title="Mantener panel abierto">📌</button>
+      </div>
+      <div class="chat-list-body" id="drawerList"></div>
+      <div class="chat-list-footer">
+        <button class="chat-list-new-btn" id="drawerNewBtn">
+          <span style="font-size:15px;font-weight:300;opacity:.8;">+</span>
+          Nuevo chat
+        </button>
+      </div>
+    </div>
+    <div class="chat-list-backdrop" id="backdrop"></div>
+
+    <!-- main -->
+    <div class="main-content">
+
+      <!-- browser overlay -->
+      <div class="browser-overlay" id="browserOverlay">
+        <div class="browser-bar">
+          <button class="browser-nav-btn" id="browserBack" disabled title="Atrás">&#8592;</button>
+          <button class="browser-nav-btn" id="browserFwd" disabled title="Adelante">&#8594;</button>
+          <button class="browser-nav-btn" id="browserRefresh" title="Recargar">&#8635;</button>
+          <input class="browser-url-bar" id="browserUrl" value="" placeholder="Escribe una URL y presiona Enter…" />
+          <button class="browser-nav-btn" id="browserClose" title="Cerrar navegador">&#x2715;</button>
+        </div>
+        <div class="browser-content-wrap">
+          <div class="browser-spinner-overlay" id="browserSpinner">
+            <div class="browser-spin"></div>
+            <span style="font-size:12px;color:#5f6368;">Cargando…</span>
+          </div>
+          <div class="browser-page-frame" id="browserPage" style="display:none;"></div>
+        </div>
+      </div>
+
+      <div id="messages"></div>
+
+      <div id="chat-form">
+        <!-- slash menu -->
+        <div class="slash-menu" id="slashMenu"></div>
+        <textarea
+          id="input"
+          rows="1"
+          placeholder="Pregúntale a free-code… (Enter para enviar, Shift+Enter salto de línea)"
+        ></textarea>
+        <div class="chat-actions">
+          <div class="chat-actions-context">
+            <div class="indicator" id="workspaceIndicator" title="Espacio de trabajo">
+              <span style="font-size:11px;opacity:.85;">📁</span>
+              <span class="indicator-label">my-project</span>
+            </div>
+            <div class="indicator no-arrow" id="profileIndicator" title="Perfil">
+              <span class="indicator-label">default</span>
+            </div>
+            <div class="indicator" id="modelIndicator" title="Modelo (Ctrl+L para cambiar)">
+              <span class="indicator-dot"></span>
+              <span class="indicator-label">gemini-2.5-pro</span>
+            </div>
+          </div>
+          <div class="chat-actions-tools">
+            <button class="chat-icon-btn" title="Adjuntar archivo (@)">📎</button>
+            <button class="chat-icon-btn" id="browserBtn" title="Abrir navegador">🌐</button>
+            <button class="chat-icon-btn" title="Herramientas (/tools)">⚙</button>
+            <button class="chat-actions-send" id="sendBtn" title="Enviar (Enter)">▲</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<!-- workspace picker modal -->
+<div class="modal-overlay" id="workspaceModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <p class="modal-title">Abrir carpeta</p>
+      <p class="modal-subtitle">Selecciona una carpeta de espacio de trabajo para esta sesión.</p>
+    </div>
+    <input class="modal-search" id="wsSearch" placeholder="Filtrar carpetas…" autocomplete="off" />
+    <div class="modal-list" id="wsList"></div>
+    <div class="modal-footer">
+      <span class="modal-footer-info" id="wsFooter">~/Documents/my-project</span>
+      <div class="modal-btn-row">
+        <button class="modal-btn" id="wsCancelBtn">Cancelar</button>
+        <button class="modal-btn primary" id="wsApplyBtn">Abrir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- model picker modal -->
+<div class="modal-overlay" id="modelModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <p class="modal-title">Seleccionar modelo</p>
+      <p class="modal-subtitle">Solo se muestran los modelos con claves de API configuradas (ver README). Escribe para filtrar, haz clic en una fila o presiona Enter para aplicar.</p>
+    </div>
+    <input class="modal-search" id="modelSearch" placeholder="Filtrar modelos (proveedor, id, nombre)…" autocomplete="off" />
+    <div class="modal-list" id="modelList"></div>
+    <div class="modal-footer">
+      <span class="modal-footer-info" id="modelFooter">Nombre del modelo: —</span>
+      <div class="modal-btn-row">
+        <button class="modal-btn" id="modelCancelBtn">Cancelar</button>
+        <button class="modal-btn primary" id="modelApplyBtn">Aplicar</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 <script>
 (function () {
   // ── slash commands ──────────────────────────────────────
@@ -1678,5 +1803,7 @@
   inputEl.focus();
 })();
 </script>
+  <script src="../assets/i18n.js" defer></script>
+</body>
 </body>
 </html>

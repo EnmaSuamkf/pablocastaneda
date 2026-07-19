@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-title-en="MCP Servers — free-code" data-title-es="Servidores MCP — free-code">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../assets/project-nav.css" />
 </head>
   <body>
-  <div id="portfolio-back-nav"><a class="back-link" href="../index.html">← Portfolio</a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span></div>
+  <div id="portfolio-back-nav"><a class="back-link" href="../index.html"><span lang="en">← Portfolio</span><span lang="es" hidden>← Portafolio</span></a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span><div id="lang-toggle"></div></div>
     <div class="doc-root">
       <header class="site-shell-header" role="banner">
         <div class="site-shell-inner">
@@ -33,49 +33,57 @@
             <span class="angle" aria-hidden="true">&gt;</span>
           </h1>
           <p class="tagline">
-            <span class="prompt" aria-hidden="true">// </span>
-            MCP — connect external tools, with credentials kept out of your config.
+            <span class="prompt" aria-hidden="true">// </span><span lang="en">MCP — connect external tools, with credentials kept out of your config.</span><span lang="es" hidden>MCP — conecta herramientas externas, manteniendo las credenciales fuera de tu configuración.</span>
           </p>
 
           <nav class="nav" aria-label="Primary">
-            <a href="index.html">[home]</a>
-            <a href="installation.html">[installation]</a>
+            <a href="index.html"><span lang="en">[home]</span><span lang="es" hidden>[inicio]</span></a>
+            <a href="installation.html"><span lang="en">[installation]</span><span lang="es" hidden>[instalación]</span></a>
             <a href="webhooks.html">[webhooks]</a>
             <a href="rag.html">[rag]</a>
-            <a href="code-graph.html">[code graph]</a>
+            <a href="code-graph.html"><span lang="en">[code graph]</span><span lang="es" hidden>[grafo de código]</span></a>
             <a href="mcp.html" aria-current="page">[mcp]</a>
-            <a href="vision-mode.html">[vision mode]</a>
-            <a href="capabilities.html">[capabilities]</a>
-            <a href="commands.html">[commands]</a>
-            <a href="models.html">[models]</a>
+            <a href="vision-mode.html"><span lang="en">[vision mode]</span><span lang="es" hidden>[modo visión]</span></a>
+            <a href="capabilities.html"><span lang="en">[capabilities]</span><span lang="es" hidden>[capacidades]</span></a>
+            <a href="commands.html"><span lang="en">[commands]</span><span lang="es" hidden>[comandos]</span></a>
+            <a href="models.html"><span lang="en">[models]</span><span lang="es" hidden>[modelos]</span></a>
           </nav>
         </header>
 
         <!-- What it is -->
         <section class="card" aria-labelledby="mcp-what">
           <div class="card-header">
-            <h2 id="mcp-what">What is MCP?</h2>
-            <p>The Model Context Protocol lets free-code talk to external tool servers — databases, APIs, CI systems, design tools.</p>
+            <h2 id="mcp-what"><span lang="en">What is MCP?</span><span lang="es" hidden>¿Qué es MCP?</span></h2>
+            <p><span lang="en">The Model Context Protocol lets free-code talk to external tool servers — databases, APIs, CI systems, design tools.</span><span lang="es" hidden>El Model Context Protocol permite que free-code hable con servidores de herramientas externas — bases de datos, APIs, sistemas de CI, herramientas de diseño.</span></p>
           </div>
           <div class="card-body">
             <p>
-              An <strong>MCP server</strong> exposes a set of tools over a standard protocol. Once a
+              <span lang="en">An <strong>MCP server</strong> exposes a set of tools over a standard protocol. Once a
               server is configured and enabled, its tools appear in your next free-code session
               automatically — alongside the built-in <code>read</code>, <code>bash</code>, and code
-              graph tools — and the agent can call them like any other tool.
+              graph tools — and the agent can call them like any other tool.</span><span lang="es" hidden>Un <strong>servidor MCP</strong> expone un conjunto de herramientas mediante un protocolo estándar. Una vez que un
+              servidor está configurado y habilitado, sus herramientas aparecen automáticamente en tu siguiente sesión de free-code
+              — junto con las herramientas integradas <code>read</code>, <code>bash</code> y el grafo
+              de código — y el agente puede invocarlas como a cualquier otra herramienta.</span>
             </p>
             <p>
-              free-code supports two kinds of server:
+              <span lang="en">free-code supports two kinds of server:</span><span lang="es" hidden>free-code admite dos tipos de servidor:</span>
             </p>
             <ul>
-              <li><strong>stdio</strong> — a local process free-code launches (defined with <code>command</code> + <code>args</code>). Most servers, including Docker- and <code>npx</code>-based ones.</li>
-              <li><strong>HTTP</strong> — a remote endpoint free-code connects to (defined with <code>url</code>).</li>
+              <li><span lang="en"><strong>stdio</strong> — a local process free-code launches (defined with <code>command</code> + <code>args</code>). Most servers, including Docker- and <code>npx</code>-based ones.</span><span lang="es" hidden><strong>stdio</strong> — un proceso local que free-code lanza (definido con <code>command</code> + <code>args</code>). La mayoría de los servidores, incluidos los basados en Docker y en <code>npx</code>.</span></li>
+              <li><span lang="en"><strong>HTTP</strong> — a remote endpoint free-code connects to (defined with <code>url</code>).</span><span lang="es" hidden><strong>HTTP</strong> — un endpoint remoto al que free-code se conecta (definido con <code>url</code>).</span></li>
             </ul>
-            <div class="callout info">
+            <div class="callout info" lang="en">
               <strong>Newly added servers start disabled</strong><br />
               Adding a server to <code>mcp.json</code> does <em>not</em> auto-start it. You opt in
               explicitly with <code>/mcp enable &lt;name&gt;</code> — so importing a config never
               silently runs code. See <a href="#mcp-enable">Enabling servers</a>.
+            </div>
+            <div class="callout info" lang="es" hidden>
+              <strong>Los servidores recién añadidos inician deshabilitados</strong><br />
+              Añadir un servidor a <code>mcp.json</code> <em>no</em> lo inicia automáticamente. Debes activarlo
+              explícitamente con <code>/mcp enable &lt;name&gt;</code> — así, importar una configuración nunca
+              ejecuta código en silencio. Consulta <a href="#mcp-enable">Habilitar servidores</a>.
             </div>
           </div>
         </section>
@@ -83,41 +91,46 @@
         <!-- Where config lives -->
         <section class="card" aria-labelledby="mcp-files">
           <div class="card-header">
-            <h2 id="mcp-files">Where the configuration lives</h2>
-            <p>Server definitions and secrets are plain files under <code>.free-code/</code>.</p>
+            <h2 id="mcp-files"><span lang="en">Where the configuration lives</span><span lang="es" hidden>Dónde vive la configuración</span></h2>
+            <p><span lang="en">Server definitions and secrets are plain files under <code>.free-code/</code>.</span><span lang="es" hidden>Las definiciones de servidores y los secretos son archivos planos bajo <code>.free-code/</code>.</span></p>
           </div>
           <div class="card-body">
             <div class="table-wrap">
               <table>
-                <thead><tr><th>File</th><th>Purpose</th></tr></thead>
+                <thead><tr><th><span lang="en">File</span><span lang="es" hidden>Archivo</span></th><th><span lang="en">Purpose</span><span lang="es" hidden>Propósito</span></th></tr></thead>
                 <tbody>
                   <tr>
                     <td><code>~/.free-code/agent/mcp.json</code></td>
-                    <td>Global server definitions — available in every project.</td>
+                    <td><span lang="en">Global server definitions — available in every project.</span><span lang="es" hidden>Definiciones globales de servidores — disponibles en todos los proyectos.</span></td>
                   </tr>
                   <tr>
                     <td><code>&lt;project&gt;/.free-code/mcp.json</code></td>
-                    <td>Project-local server definitions. Merged over the global file; on a name clash the project copy wins.</td>
+                    <td><span lang="en">Project-local server definitions. Merged over the global file; on a name clash the project copy wins.</span><span lang="es" hidden>Definiciones de servidores locales al proyecto. Se combinan con el archivo global; ante un conflicto de nombre, gana la copia del proyecto.</span></td>
                   </tr>
                   <tr>
                     <td><code>~/.free-code/agent/.env</code></td>
-                    <td>Global secrets (tokens, API keys) as <code>KEY=VALUE</code>.</td>
+                    <td><span lang="en">Global secrets (tokens, API keys) as <code>KEY=VALUE</code>.</span><span lang="es" hidden>Secretos globales (tokens, claves de API) como <code>KEY=VALUE</code>.</span></td>
                   </tr>
                   <tr>
                     <td><code>&lt;project&gt;/.free-code/.env</code></td>
-                    <td>Project-local secrets. Override the global <code>.env</code> for that project.</td>
+                    <td><span lang="en">Project-local secrets. Override the global <code>.env</code> for that project.</span><span lang="es" hidden>Secretos locales al proyecto. Sobrescriben el <code>.env</code> global para ese proyecto.</span></td>
                   </tr>
                   <tr>
                     <td><code>~/.free-code/agent/mcp-status.json</code></td>
-                    <td>Which servers are enabled/disabled. Managed by the <code>/mcp</code> command — you normally don't edit it by hand.</td>
+                    <td><span lang="en">Which servers are enabled/disabled. Managed by the <code>/mcp</code> command — you normally don't edit it by hand.</span><span lang="es" hidden>Qué servidores están habilitados/deshabilitados. Gestionado por el comando <code>/mcp</code> — normalmente no lo editas a mano.</span></td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div class="callout tip">
+            <div class="callout tip" lang="en">
               <strong>Server definitions and activation are separate on purpose</strong><br />
               You can edit <code>mcp.json</code> freely without changing which servers start —
               that state lives in <code>mcp-status.json</code>.
+            </div>
+            <div class="callout tip" lang="es" hidden>
+              <strong>Las definiciones de servidores y la activación son cosas separadas a propósito</strong><br />
+              Puedes editar <code>mcp.json</code> libremente sin cambiar qué servidores se inician —
+              ese estado vive en <code>mcp-status.json</code>.
             </div>
           </div>
         </section>
@@ -125,11 +138,11 @@
         <!-- Adding a server -->
         <section class="card" aria-labelledby="mcp-add">
           <div class="card-header">
-            <h2 id="mcp-add">Adding a server</h2>
-            <p>Edit <code>mcp.json</code> — global or project-local — under the <code>mcpServers</code> key.</p>
+            <h2 id="mcp-add"><span lang="en">Adding a server</span><span lang="es" hidden>Añadir un servidor</span></h2>
+            <p><span lang="en">Edit <code>mcp.json</code> — global or project-local — under the <code>mcpServers</code> key.</span><span lang="es" hidden>Edita <code>mcp.json</code> — global o local al proyecto — bajo la clave <code>mcpServers</code>.</span></p>
           </div>
           <div class="card-body">
-            <h3>stdio server (a local command)</h3>
+            <h3><span lang="en">stdio server (a local command)</span><span lang="es" hidden>Servidor stdio (un comando local)</span></h3>
             <pre><code>{
   "mcpServers": {
     "github": {
@@ -140,11 +153,12 @@
   }
 }</code></pre>
             <p>
-              Paths in <code>command</code> and <code>args</code> may use <code>~</code>,
-              <code>$HOME</code>, or <code>${HOME}</code> — they are expanded without needing a shell.
+              <span lang="en">Paths in <code>command</code> and <code>args</code> may use <code>~</code>,
+              <code>$HOME</code>, or <code>${HOME}</code> — they are expanded without needing a shell.</span><span lang="es" hidden>Las rutas en <code>command</code> y <code>args</code> pueden usar <code>~</code>,
+              <code>$HOME</code> o <code>${HOME}</code> — se expanden sin necesitar un shell.</span>
             </p>
 
-            <h3>HTTP server (a remote endpoint)</h3>
+            <h3><span lang="en">HTTP server (a remote endpoint)</span><span lang="es" hidden>Servidor HTTP (un endpoint remoto)</span></h3>
             <pre><code>{
   "mcpServers": {
     "my-remote": {
@@ -155,8 +169,9 @@
 }</code></pre>
 
             <p>
-              After editing, run <code>/mcp enable &lt;name&gt;</code> and then <code>/reload</code>
-              (or start a new session) for the tools to appear.
+              <span lang="en">After editing, run <code>/mcp enable &lt;name&gt;</code> and then <code>/reload</code>
+              (or start a new session) for the tools to appear.</span><span lang="es" hidden>Después de editar, ejecuta <code>/mcp enable &lt;name&gt;</code> y luego <code>/reload</code>
+              (o inicia una sesión nueva) para que las herramientas aparezcan.</span>
             </p>
           </div>
         </section>
@@ -164,29 +179,32 @@
         <!-- Tokens & API keys -->
         <section class="card" aria-labelledby="mcp-secrets">
           <div class="card-header">
-            <h2 id="mcp-secrets">Tokens &amp; API keys</h2>
-            <p>Keep credentials in <code>.env</code>, out of <code>mcp.json</code>.</p>
+            <h2 id="mcp-secrets"><span lang="en">Tokens &amp; API keys</span><span lang="es" hidden>Tokens y claves de API</span></h2>
+            <p><span lang="en">Keep credentials in <code>.env</code>, out of <code>mcp.json</code>.</span><span lang="es" hidden>Mantén las credenciales en <code>.env</code>, fuera de <code>mcp.json</code>.</span></p>
           </div>
           <div class="card-body">
             <p>
-              For stdio servers, free-code injects environment variables into the server process
-              from, in increasing priority:
+              <span lang="en">For stdio servers, free-code injects environment variables into the server process
+              from, in increasing priority:</span><span lang="es" hidden>Para los servidores stdio, free-code inyecta variables de entorno en el proceso del servidor
+              en este orden de prioridad creciente:</span>
             </p>
             <ol>
-              <li>the global <code>~/.free-code/agent/.env</code></li>
-              <li>the project-local <code>&lt;project&gt;/.free-code/.env</code></li>
-              <li>any <code>env</code> block written directly in the server's <code>mcp.json</code> entry (wins on conflict)</li>
+              <li><span lang="en">the global <code>~/.free-code/agent/.env</code></span><span lang="es" hidden>el <code>~/.free-code/agent/.env</code> global</span></li>
+              <li><span lang="en">the project-local <code>&lt;project&gt;/.free-code/.env</code></span><span lang="es" hidden>el <code>&lt;project&gt;/.free-code/.env</code> local al proyecto</span></li>
+              <li><span lang="en">any <code>env</code> block written directly in the server's <code>mcp.json</code> entry (wins on conflict)</span><span lang="es" hidden>cualquier bloque <code>env</code> escrito directamente en la entrada <code>mcp.json</code> del servidor (gana en caso de conflicto)</span></li>
             </ol>
 
-            <h3>Recommended: put the secret in <code>.env</code></h3>
-            <p>Add the credential as a <code>KEY=VALUE</code> line:</p>
+            <h3><span lang="en">Recommended: put the secret in <code>.env</code></span><span lang="es" hidden>Recomendado: pon el secreto en <code>.env</code></span></h3>
+            <p><span lang="en">Add the credential as a <code>KEY=VALUE</code> line:</span><span lang="es" hidden>Añade la credencial como una línea <code>KEY=VALUE</code>:</span></p>
             <pre><code># ~/.free-code/agent/.env
 GITHUB_PERSONAL_ACCESS_TOKEN=ghp_xxxxxxxxxxxxxxxx
 OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxx</code></pre>
             <p>
-              The server process inherits these in its environment, so a server that reads
+              <span lang="en">The server process inherits these in its environment, so a server that reads
               <code>GITHUB_PERSONAL_ACCESS_TOKEN</code> just works. For Docker-based servers, forward
-              the variable with <code>-e</code>:
+              the variable with <code>-e</code>:</span><span lang="es" hidden>El proceso del servidor las hereda en su entorno, así que un servidor que lee
+              <code>GITHUB_PERSONAL_ACCESS_TOKEN</code> simplemente funciona. Para servidores basados en Docker,
+              reenvía la variable con <code>-e</code>:</span>
             </p>
             <pre><code>{
   "mcpServers": {
@@ -197,17 +215,24 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxx</code></pre>
   }
 }</code></pre>
 
-            <div class="callout warning">
+            <div class="callout warning" lang="en">
               <strong>Prefer <code>.env</code> over inline <code>env</code></strong><br />
               Writing secrets inside <code>mcp.json</code> works, but that file is the one you copy,
               import, and share. Keeping tokens in <code>.env</code> avoids leaking them. Add
               <code>.free-code/.env</code> to your <code>.gitignore</code>.
             </div>
+            <div class="callout warning" lang="es" hidden>
+              <strong>Prefiere <code>.env</code> antes que <code>env</code> en línea</strong><br />
+              Escribir secretos dentro de <code>mcp.json</code> funciona, pero ese es el archivo que copias,
+              importas y compartes. Mantener los tokens en <code>.env</code> evita filtrarlos. Añade
+              <code>.free-code/.env</code> a tu <code>.gitignore</code>.
+            </div>
 
-            <h3>OAuth servers (browser login)</h3>
+            <h3><span lang="en">OAuth servers (browser login)</span><span lang="es" hidden>Servidores OAuth (inicio de sesión en el navegador)</span></h3>
             <p>
-              Some remote servers authenticate via OAuth instead of a static token. Run them through
-              the <code>mcp-remote</code> bridge as a stdio server:
+              <span lang="en">Some remote servers authenticate via OAuth instead of a static token. Run them through
+              the <code>mcp-remote</code> bridge as a stdio server:</span><span lang="es" hidden>Algunos servidores remotos se autentican mediante OAuth en lugar de un token estático. Ejecútalos a través
+              del puente <code>mcp-remote</code> como un servidor stdio:</span>
             </p>
             <pre><code>{
   "mcpServers": {
@@ -218,8 +243,9 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxx</code></pre>
   }
 }</code></pre>
             <p>
-              On first connect, free-code detects the authorization URL the server prints and surfaces
-              it in the UI — open it in your browser to complete the login. No token to copy by hand.
+              <span lang="en">On first connect, free-code detects the authorization URL the server prints and surfaces
+              it in the UI — open it in your browser to complete the login. No token to copy by hand.</span><span lang="es" hidden>En la primera conexión, free-code detecta la URL de autorización que imprime el servidor y la muestra
+              en la interfaz — ábrela en tu navegador para completar el inicio de sesión. No hay ningún token que copiar a mano.</span>
             </p>
           </div>
         </section>
@@ -227,42 +253,46 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxx</code></pre>
         <!-- Enabling servers + commands -->
         <section class="card" aria-labelledby="mcp-enable">
           <div class="card-header">
-            <h2 id="mcp-enable">Enabling servers &amp; the <code>/mcp</code> commands</h2>
-            <p>Control which servers start, and import configs from other tools.</p>
+            <h2 id="mcp-enable"><span lang="en">Enabling servers &amp; the <code>/mcp</code> commands</span><span lang="es" hidden>Habilitar servidores y los comandos <code>/mcp</code></span></h2>
+            <p><span lang="en">Control which servers start, and import configs from other tools.</span><span lang="es" hidden>Controla qué servidores se inician e importa configuraciones de otras herramientas.</span></p>
           </div>
           <div class="card-body">
             <div class="table-wrap">
               <table>
-                <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+                <thead><tr><th><span lang="en">Command</span><span lang="es" hidden>Comando</span></th><th><span lang="en">What it does</span><span lang="es" hidden>Qué hace</span></th></tr></thead>
                 <tbody>
                   <tr>
                     <td><code>/mcp list</code></td>
-                    <td>List every configured server with its state — <code>[on]</code> (enabled) or <code>[off]</code> (disabled).</td>
+                    <td><span lang="en">List every configured server with its state — <code>[on]</code> (enabled) or <code>[off]</code> (disabled).</span><span lang="es" hidden>Lista todos los servidores configurados con su estado — <code>[on]</code> (habilitado) o <code>[off]</code> (deshabilitado).</span></td>
                   </tr>
                   <tr>
                     <td><code>/mcp enable &lt;name&gt;</code></td>
-                    <td>Mark a server to start automatically. Takes effect after <code>/reload</code> or a new session.</td>
+                    <td><span lang="en">Mark a server to start automatically. Takes effect after <code>/reload</code> or a new session.</span><span lang="es" hidden>Marca un servidor para que se inicie automáticamente. Tiene efecto después de <code>/reload</code> o de una sesión nueva.</span></td>
                   </tr>
                   <tr>
                     <td><code>/mcp disable &lt;name&gt;</code></td>
-                    <td>Stop a server from starting automatically.</td>
+                    <td><span lang="en">Stop a server from starting automatically.</span><span lang="es" hidden>Evita que un servidor se inicie automáticamente.</span></td>
                   </tr>
                   <tr>
                     <td><code>/mcp-import</code></td>
-                    <td>Import MCP server definitions from another tool (see below).</td>
+                    <td><span lang="en">Import MCP server definitions from another tool (see below).</span><span lang="es" hidden>Importa definiciones de servidores MCP desde otra herramienta (ver más abajo).</span></td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <pre><code>/mcp list                 # see what's configured and what's on
+            <pre lang="en"><code>/mcp list                 # see what's configured and what's on
 /mcp enable github        # opt a server in
 /reload                   # apply — github's tools appear next turn</code></pre>
+            <pre lang="es" hidden><code>/mcp list                 # ver qué está configurado y qué está activo
+/mcp enable github        # activar un servidor
+/reload                   # aplicar — las herramientas de github aparecen en el siguiente turno</code></pre>
 
-            <h3><code>/mcp-import</code> — bring in existing servers</h3>
+            <h3><span lang="en"><code>/mcp-import</code> — bring in existing servers</span><span lang="es" hidden><code>/mcp-import</code> — traer servidores existentes</span></h3>
             <p>
-              If you already use MCP in another tool, import its servers instead of writing
-              <code>mcp.json</code> by hand. <code>/mcp-import</code> reads from:
+              <span lang="en">If you already use MCP in another tool, import its servers instead of writing
+              <code>mcp.json</code> by hand. <code>/mcp-import</code> reads from:</span><span lang="es" hidden>Si ya usas MCP en otra herramienta, importa sus servidores en lugar de escribir
+              <code>mcp.json</code> a mano. <code>/mcp-import</code> lee desde:</span>
             </p>
             <ul>
               <li><strong>Claude</strong> (Claude Code / Desktop)</li>
@@ -271,10 +301,13 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxx</code></pre>
               <li><strong>IntelliJ</strong> (GitHub Copilot)</li>
             </ul>
             <p>
-              It merges the chosen servers into <code>~/.free-code/agent/mcp.json</code> and extracts
+              <span lang="en">It merges the chosen servers into <code>~/.free-code/agent/mcp.json</code> and extracts
               any <code>env</code> values it finds into <code>~/.free-code/agent/.env</code>. Imported
               servers arrive <strong>disabled</strong> — enable the ones you want, then
-              <code>/reload</code>.
+              <code>/reload</code>.</span><span lang="es" hidden>Combina los servidores elegidos en <code>~/.free-code/agent/mcp.json</code> y extrae
+              cualquier valor <code>env</code> que encuentra hacia <code>~/.free-code/agent/.env</code>. Los servidores
+              importados llegan <strong>deshabilitados</strong> — habilita los que quieras y luego
+              <code>/reload</code>.</span>
             </p>
           </div>
         </section>
@@ -282,11 +315,11 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxx</code></pre>
         <!-- Typical workflow -->
         <section class="card" aria-labelledby="mcp-workflow">
           <div class="card-header">
-            <h2 id="mcp-workflow">Typical workflow</h2>
-            <p>From zero to a working MCP server.</p>
+            <h2 id="mcp-workflow"><span lang="en">Typical workflow</span><span lang="es" hidden>Flujo de trabajo típico</span></h2>
+            <p><span lang="en">From zero to a working MCP server.</span><span lang="es" hidden>De cero a un servidor MCP funcionando.</span></p>
           </div>
           <div class="card-body">
-            <pre><code># 1. Add the server definition to ~/.free-code/agent/mcp.json
+            <pre lang="en"><code># 1. Add the server definition to ~/.free-code/agent/mcp.json
 #    (or run /mcp-import to bring one in)
 
 # 2. Put any token/API key in ~/.free-code/agent/.env
@@ -298,17 +331,30 @@ echo 'GITHUB_PERSONAL_ACCESS_TOKEN=ghp_xxx' &gt;&gt; ~/.free-code/agent/.env
 
 # 4. Confirm it's on
 /mcp list</code></pre>
+            <pre lang="es" hidden><code># 1. Añade la definición del servidor a ~/.free-code/agent/mcp.json
+#    (o ejecuta /mcp-import para traer una)
+
+# 2. Pon cualquier token/clave de API en ~/.free-code/agent/.env
+echo 'GITHUB_PERSONAL_ACCESS_TOKEN=ghp_xxx' &gt;&gt; ~/.free-code/agent/.env
+
+# 3. Habilítalo y recarga
+/mcp enable github
+/reload
+
+# 4. Confirma que está activo
+/mcp list</code></pre>
           </div>
         </section>
 
         <p class="footer">
-          <a href="capabilities.html">All capabilities →</a> &nbsp;·&nbsp;
-          <a href="commands.html">Commands →</a> &nbsp;·&nbsp;
-          <a href="installation.html">Installation →</a>
+          <a href="capabilities.html"><span lang="en">All capabilities →</span><span lang="es" hidden>Todas las capacidades →</span></a> &nbsp;·&nbsp;
+          <a href="commands.html"><span lang="en">Commands →</span><span lang="es" hidden>Comandos →</span></a> &nbsp;·&nbsp;
+          <a href="installation.html"><span lang="en">Installation →</span><span lang="es" hidden>Instalación →</span></a>
         </p>
-        <p class="footer-credit">Developed by Pablo Castañeda</p>
+        <p class="footer-credit"><span lang="en">Developed by Pablo Castañeda</span><span lang="es" hidden>Desarrollado por Pablo Castañeda</span></p>
       </div>
     </div>
+    <script src="../assets/i18n.js" defer></script>
     <script src="assets/theme.js" defer></script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-title-en="Commands — free-code" data-title-es="Comandos — free-code">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="../assets/project-nav.css" />
 </head>
   <body>
-  <div id="portfolio-back-nav"><a class="back-link" href="../index.html">← Portfolio</a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span></div>
+  <div id="portfolio-back-nav"><a class="back-link" href="../index.html"><span lang="en">← Portfolio</span><span lang="es" hidden>← Portafolio</span></a><span class="back-sep">/</span><span class="back-project">free-code</span><span class="back-logo">Pablo Castañeda</span><div id="lang-toggle"></div></div>
     <div class="doc-root">
+  <div lang="en">
+
       <header class="site-shell-header" role="banner">
         <div class="site-shell-inner">
           <a class="site-brand" href="index.html">
@@ -322,7 +324,326 @@
         </p>
         <p class="footer-credit">Developed by Pablo Castañeda</p>
       </div>
-    </div>
+    
+  </div>
+  <div lang="es" hidden>
+
+      <header class="site-shell-header" role="banner">
+        <div class="site-shell-inner">
+          <a class="site-brand" href="index.html">
+            <span class="site-brand-angles" aria-hidden="true">&lt;</span>
+            <span>free-code</span>
+            <span class="site-brand-angles" aria-hidden="true">&gt;</span>
+          </a>
+          <div class="site-header-actions">
+            <button type="button" class="theme-toggle" id="doc-theme-toggle" aria-label="Tema de color">
+              <span class="theme-toggle-label" id="doc-theme-label">Sistema</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="container">
+        <header class="hero">
+          <h1 class="brand">
+            <span class="angle" aria-hidden="true">&lt;</span>
+            <span class="name">free-code</span>
+            <span class="angle" aria-hidden="true">&gt;</span>
+          </h1>
+          <p class="tagline">
+            <span class="prompt" aria-hidden="true">// </span>
+            Referencia de comandos — todos los slash commands, atajos de teclado y flags de la CLI.
+          </p>
+
+          <nav class="nav" aria-label="Primary">
+            <a href="index.html">[inicio]</a>
+            <a href="installation.html">[instalación]</a>
+            <a href="webhooks.html">[webhooks]</a>
+            <a href="rag.html">[rag]</a>
+            <a href="code-graph.html">[grafo de código]</a>
+            <a href="mcp.html">[mcp]</a>
+            <a href="vision-mode.html">[modo visión]</a>
+            <a href="capabilities.html">[capacidades]</a>
+            <a href="commands.html" aria-current="page">[comandos]</a>
+            <a href="models.html">[modelos]</a>
+          </nav>
+        </header>
+
+        <!-- Editor commands -->
+        <section class="card" aria-labelledby="editor-cmds">
+          <div class="card-header">
+            <h2 id="editor-cmds">Comandos del editor ( <code>/</code> )</h2>
+            <p>Escribe <code>/</code> en el campo de entrada para abrir el menú de comandos. Las extensiones y skills agregan más.</p>
+          </div>
+          <div class="card-body">
+
+            <h3>Sesión</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Comando</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>/login</code> · <code>/logout</code></td><td>Autenticación OAuth</td></tr>
+                  <tr><td><code>/new</code></td><td>Nueva sesión</td></tr>
+                  <tr><td><code>/resume</code></td><td>Explorar y elegir una sesión anterior</td></tr>
+                  <tr><td><code>/name &lt;name&gt;</code></td><td>Establecer un nombre visible para la sesión actual</td></tr>
+                  <tr><td><code>/session</code></td><td>Mostrar información de la sesión: ruta, cantidad de tokens, costo</td></tr>
+                  <tr><td><code>/fork</code></td><td>Ramificar la sesión actual en una nueva independiente</td></tr>
+                  <tr><td><code>/tree</code></td><td>Navegar el historial como un árbol y saltar a cualquier checkpoint</td></tr>
+                  <tr><td><code>/compact [instructions]</code></td><td>Resumir el contexto; instrucciones opcionales para el resumen</td></tr>
+                  <tr><td><code>/copy</code></td><td>Copiar la última respuesta del asistente al portapapeles</td></tr>
+                  <tr><td><code>/export [file]</code></td><td><code>.md</code> → Markdown; <code>.jsonl</code> → JSONL; otro/ninguno → HTML interactivo</td></tr>
+                  <tr><td><code>/share</code></td><td>Subir como gist privado de GitHub con un enlace HTML</td></tr>
+                  <tr><td><code>/quit</code></td><td>Salir de la sesión</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Modelo y configuración</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Comando</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>/model</code></td><td>Cambiar de modelo de forma interactiva</td></tr>
+                  <tr><td><code>/scoped-models</code></td><td>Habilitar o deshabilitar modelos para el ciclo con Ctrl+P</td></tr>
+                  <tr><td><code>/settings</code></td><td>Nivel de razonamiento, tema, entrega de mensajes, transporte</td></tr>
+                  <tr><td><code>/pick-theme</code></td><td>Cambiar el tema de la interfaz</td></tr>
+                  <tr><td><code>/reload</code></td><td>Recargar atajos, extensiones, skills, prompts y archivos de contexto</td></tr>
+                  <tr><td><code>/hotkeys</code></td><td>Listar todos los atajos de teclado</td></tr>
+                  <tr><td><code>/changelog</code></td><td>Ver el historial de versiones</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Herramientas</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Comando</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>/tools</code></td><td>Listar herramientas activas</td></tr>
+                  <tr><td><code>/pick-tools</code></td><td>Habilitar o deshabilitar herramientas individuales</td></tr>
+                  <tr><td><code>/files</code></td><td>Explorar y adjuntar archivos como contexto</td></tr>
+                  <tr><td><code>/pick-agent</code></td><td>Cambiar el preset de agente</td></tr>
+                  <tr><td><code>/pick-skill</code></td><td>Activar una skill de forma interactiva</td></tr>
+                  <tr><td><code>/commands</code></td><td>Listar todos los slash commands disponibles</td></tr>
+                  <tr><td><code>/mcp-import</code></td><td>Importar la configuración de un servidor MCP</td></tr>
+                  <tr><td><code>/damage-control [on|off|toggle|status]</code></td><td>Activar o desactivar la aplicación del firewall Damage-Control para bash, rutas y MCP (las reglas permanecen cargadas)</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Subagentes</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Comando</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>/sub &lt;task&gt;</code></td><td>Iniciar un nuevo subagente con una tarea</td></tr>
+                  <tr><td><code>/subcont &lt;n&gt; &lt;prompt&gt;</code></td><td>Continuar hablando con el subagente #n</td></tr>
+                  <tr><td><code>/subrm &lt;n&gt;</code></td><td>Eliminar el subagente #n</td></tr>
+                  <tr><td><code>/subclear</code></td><td>Limpiar todos los widgets de subagentes</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>RAG — Base de conocimiento</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Comando</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>/rag addFile &lt;path&gt;</code></td><td>Indexar un documento</td></tr>
+                  <tr><td><code>/rag addGroup &lt;folder&gt;</code></td><td>Indexar todos los archivos compatibles de una carpeta</td></tr>
+                  <tr><td><code>/rag addGithubUrl &lt;url&gt; [subpath]</code></td><td>Clonar un repositorio de GitHub e indexar sus archivos; el subpath opcional apunta a un subdirectorio. Se guarda en <code>sources.json</code> para futuras actualizaciones.</td></tr>
+                  <tr><td><code>/rag addDrive &lt;google_drive_url&gt;</code></td><td>Descargar un documento de Google Drive mediante <code>agent_browser</code> e indexarlo en la base de conocimiento activa (PDF, DOCX o TXT)</td></tr>
+                  <tr><td><code>/rag search &lt;query&gt;</code></td><td>Consultar la base de conocimiento y usar el resultado como contexto</td></tr>
+                  <tr><td><code>/rag list</code></td><td>Listar documentos indexados</td></tr>
+                  <tr><td><code>/rag remove &lt;file&gt;</code></td><td>Quitar un documento del índice</td></tr>
+                  <tr><td><code>/rag refresh</code></td><td>Volver a obtener e indexar todas las fuentes registradas mediante <code>addFile</code> y <code>addGithubUrl</code></td></tr>
+                  <tr><td><code>/rag schedule [daily|weekly]</code></td><td>Configurar una actualización automática recurrente (requiere al menos una fuente de GitHub)</td></tr>
+                  <tr><td><code>/rag-kb create &lt;name&gt;</code></td><td>Crear una base de conocimiento con nombre</td></tr>
+                  <tr><td><code>/rag-kb delete &lt;name&gt;</code></td><td>Eliminar una base de conocimiento</td></tr>
+                  <tr><td><code>/rag-kb use &lt;name&gt;</code></td><td>Cambiar la base de conocimiento activa</td></tr>
+                  <tr><td><code>/rag-kb list</code></td><td>Listar todas las bases de conocimiento</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Navegador y Gemini</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Comando</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>/drive download &lt;url&gt;</code></td><td>Descargar un documento de Google Drive al directorio del proyecto mediante <code>agent_browser</code> (PDF, DOCX o TXT)</td></tr>
+                  <tr><td><code>/browse [url] [goal]</code></td><td>Abrir una URL en un navegador visible; usa Google por defecto si no hay URL</td></tr>
+                  <tr><td><code>/gemini ask &lt;message&gt;</code></td><td>Enviar un mensaje a Gemini mediante CDP</td></tr>
+                  <tr><td><code>/gemini download &lt;file&gt;</code></td><td>Descargar un artefacto generado por Gemini</td></tr>
+                  <tr><td><code>/gemini open [chat_id]</code></td><td>Abrir una conversación de Gemini en el navegador</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Grafo de código</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Comando</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>/codeGraph-index [--force]</code></td><td>Indexar o reindexar el proyecto. <code>--force</code> reindexa todos los archivos.</td></tr>
+                  <tr><td><code>/codeGraph-symbols &lt;query&gt; [--kind &lt;type&gt;] [--limit &lt;n&gt;]</code></td><td>Buscar símbolos por nombre. Tipos: function, class, method, interface, type, variable, enum.</td></tr>
+                  <tr><td><code>/codeGraph-callers &lt;name&gt; [--limit &lt;n&gt;]</code></td><td>Encontrar todos los puntos de llamada de una función o método</td></tr>
+                  <tr><td><code>/codeGraph-context &lt;name&gt; [--file &lt;partial-path&gt;]</code></td><td>Código fuente completo y llamadas directas de un símbolo</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p><a href="code-graph.html">Documentación completa del grafo de código →</a></p>
+          </div>
+        </section>
+
+        <!-- Keyboard shortcuts -->
+        <section class="card" aria-labelledby="keyboard">
+          <div class="card-header">
+            <h2 id="keyboard">Atajos de teclado</h2>
+            <p>Personalizables mediante <code>keybindings.json</code>. Ejecuta <code>/reload</code> después de editar.</p>
+          </div>
+          <div class="card-body">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Tecla</th><th>Acción</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="kbd">Ctrl+C</span></td><td>Limpiar el editor</td></tr>
+                  <tr><td><span class="kbd">Ctrl+C</span> dos veces</td><td>Salir</td></tr>
+                  <tr><td><span class="kbd">Escape</span></td><td>Cancelar / interrumpir la operación actual</td></tr>
+                  <tr><td><span class="kbd">Escape</span> dos veces</td><td>Abrir <code>/tree</code></td></tr>
+                  <tr><td><span class="kbd">Ctrl+L</span></td><td>Abrir el selector de modelo</td></tr>
+                  <tr><td><span class="kbd">Ctrl+P</span></td><td>Recorrer los modelos con alcance hacia adelante</td></tr>
+                  <tr><td><span class="kbd">Shift+Ctrl+P</span></td><td>Recorrer los modelos con alcance hacia atrás</td></tr>
+                  <tr><td><span class="kbd">Shift+Tab</span></td><td>Recorrer el nivel de razonamiento (off → minimal → … → xhigh)</td></tr>
+                  <tr><td><span class="kbd">Ctrl+O</span></td><td>Contraer / expandir la salida de herramientas</td></tr>
+                  <tr><td><span class="kbd">Ctrl+T</span></td><td>Contraer / expandir los bloques de pensamiento</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout tip">
+              <strong>Atajos del editor</strong><br />
+              En el campo de entrada: escribe <code>@</code> para adjuntar archivos, <code>!command</code> para ejecutar un comando de shell
+              en línea, <code>!!command</code> para ejecutarlo y adjuntar la salida como contexto.
+            </div>
+          </div>
+        </section>
+
+        <!-- CLI flags -->
+        <section class="card" aria-labelledby="cli-flags">
+          <div class="card-header">
+            <h2 id="cli-flags">Flags de la CLI</h2>
+            <p><code>free-code [options] [@files...] [message...]</code></p>
+          </div>
+          <div class="card-body">
+
+            <h3>Sesiones</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Flag</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>-c</code>, <code>--continue</code></td><td>Continuar la sesión más reciente</td></tr>
+                  <tr><td><code>-r</code>, <code>--resume</code></td><td>Explorar y elegir una sesión</td></tr>
+                  <tr><td><code>--session &lt;path|id&gt;</code></td><td>Abrir una sesión específica por ruta de archivo o UUID parcial</td></tr>
+                  <tr><td><code>--fork &lt;path|id&gt;</code></td><td>Ramificar una sesión en una nueva</td></tr>
+                  <tr><td><code>--session-dir &lt;dir&gt;</code></td><td>Directorio personalizado de almacenamiento de sesiones</td></tr>
+                  <tr><td><code>--no-session</code></td><td>Modo efímero — no se guarda nada</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Modelo y salida</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Flag</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>--provider &lt;name&gt;</code></td><td>Seleccionar proveedor</td></tr>
+                  <tr><td><code>--model &lt;pattern&gt;</code></td><td>ID del modelo o <code>provider/id</code>, opcionalmente con <code>:&lt;thinking&gt;</code></td></tr>
+                  <tr><td><code>--api-key &lt;key&gt;</code></td><td>Sobrescribir la API key</td></tr>
+                  <tr><td><code>--thinking &lt;level&gt;</code></td><td>Nivel de razonamiento: off, minimal, low, medium, high, xhigh</td></tr>
+                  <tr><td><code>--models &lt;patterns&gt;</code></td><td>Lista separada por comas para el ciclo con Ctrl+P</td></tr>
+                  <tr><td><code>--list-models [search]</code></td><td>Listar modelos disponibles; filtro de búsqueda opcional</td></tr>
+                  <tr><td><code>-p</code>, <code>--print</code></td><td>Una sola respuesta y salir; lee stdin por pipe</td></tr>
+                  <tr><td><code>--mode json</code></td><td>Salida en JSON línea por línea</td></tr>
+                  <tr><td><code>--mode rpc</code></td><td>Modo RPC (usado por el plugin de VS Code y la app de macOS)</td></tr>
+                  <tr><td><code>--export &lt;session&gt; [output]</code></td><td>Exportar la sesión a HTML, Markdown o JSONL sin abrir la TUI</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Herramientas y extensiones</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Flag</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>--tools &lt;list&gt;</code></td><td>Herramientas integradas a habilitar (por defecto: read,bash,edit,write,grep,find,ls)</td></tr>
+                  <tr><td><code>--no-tools</code></td><td>Deshabilitar herramientas integradas (las herramientas de extensiones se siguen cargando)</td></tr>
+                  <tr><td><code>-e &lt;source&gt;</code>, <code>--extension &lt;source&gt;</code></td><td>Cargar una extensión (repetible)</td></tr>
+                  <tr><td><code>--no-extensions</code></td><td>Deshabilitar el autodescubrimiento de extensiones</td></tr>
+                  <tr><td><code>--skill &lt;path&gt;</code></td><td>Cargar un archivo de skill (repetible)</td></tr>
+                  <tr><td><code>--no-skills</code></td><td>Deshabilitar la carga de skills</td></tr>
+                  <tr><td><code>--system-prompt &lt;text&gt;</code></td><td>Reemplazar el system prompt por defecto</td></tr>
+                  <tr><td><code>--append-system-prompt &lt;text&gt;</code></td><td>Agregar contenido al system prompt por defecto</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Gestión de paquetes</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Comando</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>free-code install &lt;source&gt; [-l]</code></td><td>Instalar un paquete. <code>-l</code> = local al proyecto</td></tr>
+                  <tr><td><code>free-code remove &lt;source&gt;</code></td><td>Desinstalar un paquete</td></tr>
+                  <tr><td><code>free-code update [source]</code></td><td>Actualizar los paquetes instalados (omite versiones fijadas)</td></tr>
+                  <tr><td><code>free-code list</code></td><td>Listar paquetes instalados</td></tr>
+                  <tr><td><code>free-code config</code></td><td>Habilitar o deshabilitar recursos del paquete</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Built-in tools -->
+        <section class="card" aria-labelledby="builtin-tools">
+          <div class="card-header">
+            <h2 id="builtin-tools">Herramientas integradas del agente</h2>
+            <p>Disponibles por defecto en cada sesión. Habilítalas o deshabilítalas con <code>--tools</code>.</p>
+          </div>
+          <div class="card-body">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Herramienta</th><th>Descripción</th></tr></thead>
+                <tbody>
+                  <tr><td><code>read</code></td><td>Leer archivos del sistema de archivos</td></tr>
+                  <tr><td><code>bash</code></td><td>Ejecutar comandos de shell</td></tr>
+                  <tr><td><code>edit</code></td><td>Hacer reemplazos exactos de texto en archivos</td></tr>
+                  <tr><td><code>write</code></td><td>Escribir o sobrescribir archivos</td></tr>
+                  <tr><td><code>grep</code></td><td>Buscar contenido de archivos con regex</td></tr>
+                  <tr><td><code>find</code></td><td>Buscar archivos por nombre o patrón</td></tr>
+                  <tr><td><code>ls</code></td><td>Listar el contenido de un directorio</td></tr>
+                  <tr><td><code>code_index</code></td><td>Construir o actualizar el índice del grafo de código</td></tr>
+                  <tr><td><code>code_symbols</code></td><td>Buscar símbolos en el grafo de código</td></tr>
+                  <tr><td><code>code_callers</code></td><td>Encontrar quién llama a una función en el grafo de código</td></tr>
+                  <tr><td><code>code_context</code></td><td>Obtener el código fuente y las llamadas de un símbolo desde el grafo de código</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <p class="footer">
+          <a href="capabilities.html">Capacidades completas →</a> &nbsp;·&nbsp;
+          <a href="code-graph.html">Grafo de código →</a> &nbsp;·&nbsp;
+          <a href="installation.html">Instalación →</a>
+        </p>
+        <p class="footer-credit">Desarrollado por Pablo Castañeda</p>
+      </div>
+    
+  </div>
+</div>
+    <script src="../assets/i18n.js" defer></script>
     <script src="assets/theme.js" defer></script>
   </body>
 </html>
