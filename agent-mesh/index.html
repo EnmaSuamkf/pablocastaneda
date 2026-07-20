@@ -166,6 +166,24 @@
       }
       .diagram .hl{ color: var(--accent); }
 
+      .video-grid{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.2rem;
+        margin-bottom: 1.1rem;
+      }
+      .video-frame{
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .video-frame iframe{ position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+      .video-caption{ font-size: 0.86rem; color: var(--muted); margin: 0.5rem 0 0; }
+
       footer{
         margin-top: 3.5rem;
         padding-top: 1.2rem;
@@ -193,6 +211,7 @@
           one an agent spawns.
         </p>
         <nav class="toc" aria-label="Contents">
+          <a href="#video-walkthrough">Video walkthrough</a>
           <a href="#requirements">Requirements</a>
           <a href="#installation">Installation</a>
           <a href="#starting-the-hub">Starting the hub</a>
@@ -220,6 +239,7 @@
           protocolo de hook, así que a quien llama no le importa cuál lanza un agente.
         </p>
         <nav class="toc" aria-label="Índice">
+          <a href="#video-walkthrough">Video tutorial</a>
           <a href="#requirements">Requisitos</a>
           <a href="#installation">Instalación</a>
           <a href="#starting-the-hub">Iniciar el hub</a>
@@ -236,6 +256,31 @@
         </nav>
         </div>
       </header>
+
+      <section id="video-walkthrough">
+        <div lang="en">
+        <h2>Video walkthrough</h2>
+        </div>
+        <div lang="es" hidden>
+        <h2>Video tutorial</h2>
+        </div>
+        <div class="video-grid">
+          <div class="video-item">
+            <div class="video-frame">
+              <iframe src="https://www.youtube.com/embed/w7Aav3sPXXw" title="Create an agent and send a job from localhost" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div lang="en"><p class="video-caption">Create an agent and send a job from localhost</p></div>
+            <div lang="es" hidden><p class="video-caption">Crear un agente y enviar un trabajo desde localhost</p></div>
+          </div>
+          <div class="video-item">
+            <div class="video-frame">
+              <iframe src="https://www.youtube.com/embed/b4SJeHf2nR0" title="Create a key, tunnel with ngrok, and send a job from a remote host" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div lang="en"><p class="video-caption">Create a key, tunnel with ngrok, and send a job from a remote host to a local agent</p></div>
+            <div lang="es" hidden><p class="video-caption">Crear una key, un túnel con ngrok, y enviar un trabajo desde un host remoto a un agente local</p></div>
+          </div>
+        </div>
+      </section>
 
       <section id="requirements">
         <div lang="en">
